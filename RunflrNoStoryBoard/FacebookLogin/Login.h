@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface Login : UIViewController
+- (IBAction)loginButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
+- (IBAction)popAnterior:(id)sender;
 
 @end

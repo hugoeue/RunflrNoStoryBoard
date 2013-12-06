@@ -7,6 +7,7 @@
 //
 
 #import "Login.h"
+#import "AppDelegate.h"
 
 @interface Login ()
 
@@ -27,6 +28,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if (![FBSession activeSession].isOpen) {
+        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+    }else
+    {
+        [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)popAnterior:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +45,101 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)loginButton:(id)sender
+{
+    if (![FBSession activeSession].isOpen) {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    if (appDelegate.session.state != FBSessionStateCreated) {
+        // Create a new, logged out session.
+        appDelegate.session = [[FBSession alloc] init];
+        
+    }
+    [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                     FBSessionState status,
+                                                     NSError *error) {
+        
+        
+        
+        [FBSession setActiveSession:session];
+        [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+            if (!error) {
+                
+                [NSThread detachNewThreadSelector:@selector(upUser:) toTarget:self withObject:user];
+                
+            }
+        }];
+        
+       [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+    }];
+    }else{
+        [self facebookLoginLogout];
+        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+    }
+}
+
+- (void)upUser:(NSDictionary<FBGraphUser> *)user
+{
+    NSString *userId = user.id;
+    NSString *userName = user.name;
+    NSString *userEmail = [user objectForKey:@"email"];
+    
+    NSLog(@"USERID: %@", userId);
+    NSLog(@"USER: %@", userName);
+    NSLog(@"mail: %@", userEmail);
+    
+    if (![Globals user]) {
+        [Globals setUser:[[User alloc] init]];
+    }
+    
+   
+             
+             //             NSLog(@"USER DATA:::%@  -  %@", user.id, user.name);
+             
+             [Globals user].email = [user objectForKey:@"email"];
+             
+             [Globals user].faceId = user.id;
+             [Globals user].name = user.name;
+             
+             //[self showFaceStuff];
+        
+        
+        
+        
+  
+
+    
+    //    NSString *getData = [NSString stringWithFormat:@"&rest_id=%d&favSend=%d", [Globals restaurant].dbId, favSend];
+    
+    NSString *host = [Globals hostWithFile:@"xml_up_face.php" andGetData:@""];
+    
+    NSLog(@"HOSTFAV: %@", host);
+    NSURL *url = [NSURL URLWithString:host];
+    
+    [NSURLRequest requestWithURL:url];
+    
+    NSError *error;
+    NSString *str = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    
+    //    NSLog(@"%@", str);
+    if (error) {
+        
+    }
+    
+}
+
+- (void)facebookLoginLogout
+{
+    if ([FBSession activeSession].isOpen) {
+        [[FBSession activeSession] closeAndClearTokenInformation];
+       
+    } else {
+       
+    }
+    
+    
+}
+
 
 @end

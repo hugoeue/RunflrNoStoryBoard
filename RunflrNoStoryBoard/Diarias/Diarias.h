@@ -10,4 +10,6 @@
 
 @interface Diarias : UIViewController
 
+- (IBAction)clickBack:(id)sender;
+
 @end

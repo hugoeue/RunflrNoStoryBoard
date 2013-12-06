@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Resultados : UIViewController
+@interface Resultados : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *labelResultado;
+@property (weak, nonatomic) IBOutlet UILabel *labelTipo;
+
+-(void)setResultado:(NSString *)resultado;
+-(void)setTipo:(NSString *)tip;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableRestaurantes;
 
 @end

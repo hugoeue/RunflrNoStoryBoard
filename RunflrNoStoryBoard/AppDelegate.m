@@ -7,12 +7,112 @@
 //
 
 #import "AppDelegate.h"
+#import "MainPage.h"
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+@synthesize window = _window;
+@synthesize revealSideViewController = _revealSideViewController;
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    // attempt to extract a token from the url
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:self.session];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
+    
+    
     // Override point for customization after application launch.
+    
+    // LANG STUFF
+    [Language createLanguage];
+    
+    
+    NSString *language;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    language = [defaults stringForKey:@"language"];
+    
+    
+    if (!language) {
+        language = [[NSLocale preferredLanguages] objectAtIndex:0];
+        language = [language substringToIndex:2];
+        
+        if (![language isEqualToString:@"pt"] && ![language isEqualToString:@"en"] && ![language isEqualToString:@"es"] && ![language isEqualToString:@"fr"])
+        {
+            language = @"pt"; // VALOR POR DEFEITO
+        }
+    }
+    
+    [Globals setLang:language];
+    
+    
+    //FACEBOOK STUFF
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    if (!appDelegate.session.isOpen) {
+        // create a fresh session object
+        appDelegate.session = [[FBSession alloc] init];
+        
+        // if we don't have a cached token, a call to open here would cause UX for login to
+        // occur; we don't want that to happen unless the user clicks the login button, and so
+        // we check here to make sure we have a token before calling open
+        if (appDelegate.session.state == FBSessionStateCreatedTokenLoaded) {
+            // even though we had a cached token, we need to login to make the session usable
+            [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                             FBSessionState status,
+                                                             NSError *error) {
+                // we recurse here, in order to update buttons and labels
+                //[[[UIAlertView alloc] initWithTitle:@"OK" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+                //  [self uo];
+            }];
+        }
+    }
+    
+    
+    // CONFIG STUFF
+    
+    NSDate *currentDate = [NSDate date];
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:currentDate]; // Get necessary date components
+    
+    //    NSLog(@":::::%d:::", [components weekday]);
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+
+    
+    
+    
+    
+    self.window = PP_AUTORELEASE([[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]);
+    
+    MainPage *main = [[MainPage alloc] initWithNibName:@"MainPage" bundle:nil];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
+    _revealSideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
+    
+    
+    // esta linha de codigo serve apenas para desligar as sombras
+    [_revealSideViewController setOptions:PPRevealSideOptionsNone];
+    
+    _revealSideViewController.delegate = self;
+    
+    self.window.rootViewController = _revealSideViewController;
+    
+    // Uncomment if you want to test (yeah that's not pretty) the PPReveal deallocating
+    //[self performSelector:@selector(unloadRevealFromMemory) withObject:nil afterDelay:3.0];
+    
+    PP_RELEASE(main);
+    PP_RELEASE(nav);
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							
@@ -36,11 +136,20 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [FBAppCall handleDidBecomeActiveWithSession:self.session];
+    [FBSession setActiveSession:self.session];
+    
+    [FBSettings publishInstall:[FBSession defaultAppID]];
+    NSLog(@"### FB SDK VERSION : %@", [[FBRequestConnection class] performSelector:@selector(userAgent)]);
+    
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [FBSession.activeSession close];
 }
-
 @end

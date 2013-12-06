@@ -13,4 +13,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "PPRevealSideViewController.h"
+    #import "Language.h"
+    #import "Globals.h"
+    #import "Option.h"
+    #import "Cuisine.h"
 #endif

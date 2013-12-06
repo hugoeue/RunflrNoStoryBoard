@@ -347,7 +347,10 @@ static NSMutableArray *_cuisines = nil;
 
 + (NSString *)hostWithFile:(NSString *)file andGetData:(NSString *)getData
 {
-    NSMutableString *host = [NSMutableString stringWithString:@"http://cms.citychef.pt/data/"];
+    
+    
+    //NSMutableString *host = [NSMutableString stringWithString:@"http://cms.citychef.pt/data/"];
+    NSMutableString *host = [NSMutableString stringWithString:@"http://192.168.0.101/Rundlr_Package/rundlrweb/data/"];
     
     [host appendString:file];
     [host appendString:@"?api_key=RrNDLR20_13_h3ld3r"];
