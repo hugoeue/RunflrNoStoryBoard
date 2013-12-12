@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 #import "MainPage.h"
+#import "RootViewController.h"
+#import "PaperFoldNavigationController.h"
+#import "DemoRootViewController.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize revealSideViewController = _revealSideViewController;
+//@synthesize revealSideViewController = _revealSideViewController;
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -88,7 +91,7 @@
 
     
     
-    
+     // cenas pp_reveal
     
     self.window = PP_AUTORELEASE([[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]);
     
@@ -114,6 +117,50 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+     
+    
+    
+    // primeiro teste paperfold
+    /*
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    MainPage *contentViewController = [MainPage new];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
+    PaperFoldNavigationController *paperFoldNavController = [[PaperFoldNavigationController alloc] initWithRootViewController:navController];
+    
+    _menuRef = [MenuRefugio new];
+    
+    [paperFoldNavController setTopViewControllerC:_menuRef width:0.9];
+    [self.window setRootViewController:paperFoldNavController];
+    */
+    
+    
+    /*
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    DemoRootViewController *paper = [[DemoRootViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:paper];
+    [navController setNavigationBarHidden:YES];
+    [self.window setRootViewController:navController];
+    
+    return YES;
+*/
+    
+    
+    
+    
+    
+    return YES;
+
+
+
+
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

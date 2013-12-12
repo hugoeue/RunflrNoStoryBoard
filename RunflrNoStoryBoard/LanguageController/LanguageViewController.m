@@ -28,8 +28,27 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setSelectedLanguageImage];
+     [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
 
 }
+
+-(void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
+{
+    if ([view isKindOfClass:[UILabel class]])
+    {
+        UILabel *lbl = (UILabel *)view;
+        [lbl setFont:[UIFont fontWithName:fontFamily size:[[lbl font] pointSize]]];
+    }
+    
+    if (isSubViews)
+    {
+        for (UIView *sview in view.subviews)
+        {
+            [self setFontFamily:fontFamily forView:sview andSubViews:YES];
+        }
+    }
+}
+
 
 -(void)setSelectedLanguageImage
 {

@@ -12,5 +12,10 @@
 - (IBAction)loginButton:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
 - (IBAction)popAnterior:(id)sender;
+- (IBAction)clickLoginRundlr:(id)sender;
+- (IBAction)clickRegistoRundlr:(id)sender;
+
+
+
 
 @end

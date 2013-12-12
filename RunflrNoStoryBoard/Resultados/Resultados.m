@@ -10,6 +10,7 @@
 #import "SearchParser.h"
 #import "Diarias.h"
 #import "TableCell.h"
+#import "UserParser.h"
 
 @interface Resultados ()
 {
@@ -76,11 +77,57 @@
          for (Restaurant *rest in [Globals user].favs) {
              NSLog(@"rest fav name %@", rest.name);
          }
+        
+        
+        
+         [self performSelectorOnMainThread:@selector(ChamarFavoritos) withObject:nil waitUntilDone:NO];
+        
          
-        [self.tableRestaurantes reloadData];
+        //[self.tableRestaurantes reloadData];
     }else
         [self preperarPesquisa];
     [self changeFont:self.view];
+}
+
+
+-(void)ChamarFavoritos
+{
+    UserParser *userParser = [[UserParser alloc] initXMLParser];
+    
+    NSString *host = nil;
+    
+    //if (self.isOther) {
+    //  host = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_user.php?is_me=0&user_id=%d&face_id=%@", self.otherUserDbId, self.otherUserFaceId];
+    //} else {
+    host = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_user.php?is_me=1&user_id=%d&face_id=%@", [Globals user].dbId, [Globals user].faceId];
+    //}
+    NSLog(@"host: %@", host);
+    
+    NSURL *url = [[NSURL alloc] initWithString: host];
+    NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
+    [nsXmlParser setDelegate:userParser];
+    
+    BOOL success = [nsXmlParser parse];
+    
+    
+    if (success) {
+        [self performSelectorOnMainThread:@selector(startUpContainers2) withObject:nil waitUntilDone:NO];
+        
+    } else {
+        [self performSelectorOnMainThread:@selector(noConnect2) withObject:nil waitUntilDone:NO];
+        
+    }
+
+}
+
+
+-(void)noConnect2{
+    NSLog(@"DEu erro a ir buscar os favoritos");
+}
+
+-(void)startUpContainers2
+{
+    [self.tableRestaurantes reloadData];
 }
 
 - (void)didReceiveMemoryWarning

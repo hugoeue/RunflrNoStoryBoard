@@ -16,12 +16,13 @@
 #import "HTAutocompleteManager.h"
 #import "AppDelegate.h"
 #import "UserParser.h"
+#import "Login.h"
 
 
 @interface MainPage ()
 {
     
-    
+    bool showFacebook;
     NSString * tipo;
     
     BOOL isTiming;
@@ -65,9 +66,14 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     
-   // [self loadUser];
-    [self loadUser];
+   // if(showFacebook == NO)
+    //{
+        [self loadUser];
+        showFacebook = YES;
+   
+//}
 }
+
 
 - (void)viewDidLoad
 {
@@ -113,12 +119,13 @@
     
 
    // [self makeLogin];
-    
+    //[self loadUser];
    
     
         
 
 }
+
 
 
 
@@ -185,7 +192,12 @@
 
 - (IBAction)pushNav:(id)sender {
     //[self ChamarPesquisa];
-      [self makeLogin];
+      //[self makeLogin];
+    
+    // tenho de chamar o controlador de login
+    
+   [self chamarLogin];
+    
 }
 
 -(void)ChamarPesquisa
@@ -358,12 +370,23 @@
     }
 }
 
+-(void)chamarLogin{
+    Login *log = [Login new];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
+    
+    [self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    
     if(alertView == alert){
         if (buttonIndex == 1) {
-            [self makeLogin];
+            //[self makeLogin];
+            
+            [self chamarLogin];
+            
         }else{
             // nao faz nada
         }
@@ -384,6 +407,8 @@
     NSLog(@"fazer login");
     __block NSString *msgtxt;
     if ([FBSession activeSession].isOpen) {
+        
+        [self loadFaceImage];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
              
@@ -402,32 +427,34 @@
              [Globals user].faceId = user.id;
              [Globals user].name = user.name;
              
-           
-             UserParser *userParser = [[UserParser alloc] initXMLParser];
+//           
+//             UserParser *userParser = [[UserParser alloc] initXMLParser];
+//             
+//             NSString *host = nil;
+//             
+//             //if (self.isOther) {
+//             //  host = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_user.php?is_me=0&user_id=%d&face_id=%@", self.otherUserDbId, self.otherUserFaceId];
+//             //} else {
+//             host = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_user.php?is_me=1&user_id=%d&face_id=%@", [Globals user].dbId, [Globals user].faceId];
+//             //}
+//             NSLog(@"host: %@", host);
+//             
+//             NSURL *url = [[NSURL alloc] initWithString: host];
+//             NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
+//             [nsXmlParser setDelegate:userParser];
+//             
+//             BOOL success = [nsXmlParser parse];
+//             
+//             
+//             if (success) {
+//                 [self performSelectorOnMainThread:@selector(startUpContainers2) withObject:nil waitUntilDone:NO];
+//                 
+//             } else {
+//                 [self performSelectorOnMainThread:@selector(noConnect2) withObject:nil waitUntilDone:NO];
+//                 
+//             }
              
-             NSString *host = nil;
-             
-             //if (self.isOther) {
-             //  host = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_user.php?is_me=0&user_id=%d&face_id=%@", self.otherUserDbId, self.otherUserFaceId];
-             //} else {
-             host = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_user.php?is_me=1&user_id=%d&face_id=%@", [Globals user].dbId, [Globals user].faceId];
-             //}
-             NSLog(@"host: %@", host);
-             
-             NSURL *url = [[NSURL alloc] initWithString: host];
-             NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
-             [nsXmlParser setDelegate:userParser];
-             
-             BOOL success = [nsXmlParser parse];
-             
-             
-             if (success) {
-                 [self performSelectorOnMainThread:@selector(startUpContainers2) withObject:nil waitUntilDone:NO];
-                 
-             } else {
-                 [self performSelectorOnMainThread:@selector(noConnect2) withObject:nil waitUntilDone:NO];
-                 
-             }
+             [self startUpContainers2];
 
                 }];
     }

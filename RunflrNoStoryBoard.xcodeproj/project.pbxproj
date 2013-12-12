@@ -85,6 +85,8 @@
 		BA54BC2F18511089006446D6 /* Tira_grande.png in Resources */ = {isa = PBXBuildFile; fileRef = BA54BC1918511089006446D6 /* Tira_grande.png */; };
 		BA54BC3018511089006446D6 /* TIRAPEQUENA.png in Resources */ = {isa = PBXBuildFile; fileRef = BA54BC1A18511089006446D6 /* TIRAPEQUENA.png */; };
 		BA54BC3118511089006446D6 /* utilizador_redondo.png in Resources */ = {isa = PBXBuildFile; fileRef = BA54BC1B18511089006446D6 /* utilizador_redondo.png */; };
+		BA889B4D1859CA7E00C473D3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA889B4B1859CA7E00C473D3 /* RootViewController.m */; };
+		BA889B4E1859CA7E00C473D3 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA889B4C1859CA7E00C473D3 /* RootViewController.xib */; };
 		BA93FD97184D3C3F004001E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FD96184D3C3F004001E4 /* Foundation.framework */; };
 		BA93FD99184D3C3F004001E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FD98184D3C3F004001E4 /* CoreGraphics.framework */; };
 		BA93FD9B184D3C3F004001E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FD9A184D3C3F004001E4 /* UIKit.framework */; };
@@ -103,6 +105,21 @@
 		BA93FDD2184D3CFC004001E4 /* MainPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA93FDD0184D3CFC004001E4 /* MainPage.xib */; };
 		BA93FDD4184D3D48004001E4 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BA93FDD3184D3D48004001E4 /* 3.jpg */; };
 		BA93FDD6184D3FF3004001E4 /* ios-wallpaper-10.png in Resources */ = {isa = PBXBuildFile; fileRef = BA93FDD5184D3FF3004001E4 /* ios-wallpaper-10.png */; };
+		BA9BB01E1859CF1D009ED843 /* FacingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0111859CF1D009ED843 /* FacingView.m */; };
+		BA9BB01F1859CF1D009ED843 /* FoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0131859CF1D009ED843 /* FoldView.m */; };
+		BA9BB0201859CF1D009ED843 /* MultiFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0151859CF1D009ED843 /* MultiFoldView.m */; };
+		BA9BB0211859CF1D009ED843 /* PaperFoldNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0181859CF1D009ED843 /* PaperFoldNavigationController.m */; };
+		BA9BB0221859CF1D009ED843 /* PaperFoldResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB0191859CF1D009ED843 /* PaperFoldResources.bundle */; };
+		BA9BB0231859CF1D009ED843 /* PaperFoldSwipeHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB01B1859CF1D009ED843 /* PaperFoldSwipeHintView.m */; };
+		BA9BB0241859CF1D009ED843 /* PaperFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB01D1859CF1D009ED843 /* PaperFoldView.m */; };
+		BA9BB02B1859CF54009ED843 /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0261859CF54009ED843 /* ShadowView.m */; };
+		BA9BB02C1859CF54009ED843 /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0281859CF54009ED843 /* TouchThroughUIView.m */; };
+		BA9BB02D1859CF54009ED843 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB02A1859CF54009ED843 /* UIView+Screenshot.m */; };
+		BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB02F1859DEBA009ED843 /* DemoRootViewController.m */; };
+		BA9BB0341859FCE3009ED843 /* FormularioRegistoContaRundlr.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB0321859FCE3009ED843 /* FormularioRegistoContaRundlr.m */; };
+		BA9BB0351859FCE3009ED843 /* FormularioRegistoContaRundlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB0331859FCE3009ED843 /* FormularioRegistoContaRundlr.xib */; };
+		BA9BB03B185A047B009ED843 /* LoginRundlr.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB039185A047B009ED843 /* LoginRundlr.m */; };
+		BA9BB03C185A047B009ED843 /* LoginRundlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB03A185A047B009ED843 /* LoginRundlr.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +244,9 @@
 		BA54BC1918511089006446D6 /* Tira_grande.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tira_grande.png; sourceTree = "<group>"; };
 		BA54BC1A18511089006446D6 /* TIRAPEQUENA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TIRAPEQUENA.png; sourceTree = "<group>"; };
 		BA54BC1B18511089006446D6 /* utilizador_redondo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = utilizador_redondo.png; sourceTree = "<group>"; };
+		BA889B4A1859CA7E00C473D3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = RootViewController/RootViewController.h; sourceTree = "<group>"; };
+		BA889B4B1859CA7E00C473D3 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = RootViewController/RootViewController.m; sourceTree = "<group>"; };
+		BA889B4C1859CA7E00C473D3 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = RootViewController/RootViewController.xib; sourceTree = "<group>"; };
 		BA93FD93184D3C3F004001E4 /* RunflrNoStoryBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RunflrNoStoryBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA93FD96184D3C3F004001E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BA93FD98184D3C3F004001E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -252,6 +272,34 @@
 		BA93FDD0184D3CFC004001E4 /* MainPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainPage.xib; path = MainPage/MainPage.xib; sourceTree = "<group>"; };
 		BA93FDD3184D3D48004001E4 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3.jpg; path = ../Rundler/3.jpg; sourceTree = "<group>"; };
 		BA93FDD5184D3FF3004001E4 /* ios-wallpaper-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ios-wallpaper-10.png"; path = "../../../Downloads/ios-wallpaper-10.png"; sourceTree = "<group>"; };
+		BA9BB0101859CF1D009ED843 /* FacingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacingView.h; sourceTree = "<group>"; };
+		BA9BB0111859CF1D009ED843 /* FacingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacingView.m; sourceTree = "<group>"; };
+		BA9BB0121859CF1D009ED843 /* FoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldView.h; sourceTree = "<group>"; };
+		BA9BB0131859CF1D009ED843 /* FoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldView.m; sourceTree = "<group>"; };
+		BA9BB0141859CF1D009ED843 /* MultiFoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiFoldView.h; sourceTree = "<group>"; };
+		BA9BB0151859CF1D009ED843 /* MultiFoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiFoldView.m; sourceTree = "<group>"; };
+		BA9BB0161859CF1D009ED843 /* PaperFoldConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldConstants.h; sourceTree = "<group>"; };
+		BA9BB0171859CF1D009ED843 /* PaperFoldNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldNavigationController.h; sourceTree = "<group>"; };
+		BA9BB0181859CF1D009ED843 /* PaperFoldNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldNavigationController.m; sourceTree = "<group>"; };
+		BA9BB0191859CF1D009ED843 /* PaperFoldResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PaperFoldResources.bundle; sourceTree = "<group>"; };
+		BA9BB01A1859CF1D009ED843 /* PaperFoldSwipeHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldSwipeHintView.h; sourceTree = "<group>"; };
+		BA9BB01B1859CF1D009ED843 /* PaperFoldSwipeHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldSwipeHintView.m; sourceTree = "<group>"; };
+		BA9BB01C1859CF1D009ED843 /* PaperFoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldView.h; sourceTree = "<group>"; };
+		BA9BB01D1859CF1D009ED843 /* PaperFoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldView.m; sourceTree = "<group>"; };
+		BA9BB0251859CF54009ED843 /* ShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowView.h; sourceTree = "<group>"; };
+		BA9BB0261859CF54009ED843 /* ShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowView.m; sourceTree = "<group>"; };
+		BA9BB0271859CF54009ED843 /* TouchThroughUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchThroughUIView.h; sourceTree = "<group>"; };
+		BA9BB0281859CF54009ED843 /* TouchThroughUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchThroughUIView.m; sourceTree = "<group>"; };
+		BA9BB0291859CF54009ED843 /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
+		BA9BB02A1859CF54009ED843 /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
+		BA9BB02E1859DEBA009ED843 /* DemoRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoRootViewController.h; sourceTree = "<group>"; };
+		BA9BB02F1859DEBA009ED843 /* DemoRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoRootViewController.m; sourceTree = "<group>"; };
+		BA9BB0311859FCE3009ED843 /* FormularioRegistoContaRundlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormularioRegistoContaRundlr.h; path = FormRegisto/FormularioRegistoContaRundlr.h; sourceTree = "<group>"; };
+		BA9BB0321859FCE3009ED843 /* FormularioRegistoContaRundlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormularioRegistoContaRundlr.m; path = FormRegisto/FormularioRegistoContaRundlr.m; sourceTree = "<group>"; };
+		BA9BB0331859FCE3009ED843 /* FormularioRegistoContaRundlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormularioRegistoContaRundlr.xib; path = FormRegisto/FormularioRegistoContaRundlr.xib; sourceTree = "<group>"; };
+		BA9BB038185A047B009ED843 /* LoginRundlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRundlr.h; path = NovoLogin/LoginRundlr.h; sourceTree = "<group>"; };
+		BA9BB039185A047B009ED843 /* LoginRundlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginRundlr.m; path = NovoLogin/LoginRundlr.m; sourceTree = "<group>"; };
+		BA9BB03A185A047B009ED843 /* LoginRundlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginRundlr.xib; path = NovoLogin/LoginRundlr.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +356,7 @@
 		BA0B9678184E644100182E0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA889B491859CA5600C473D3 /* RootViewcontroller */,
 				BA51C6291853D36E0080BD9F /* Tabelas */,
 				BA93FDCE184D3CFC004001E4 /* MainPage.h */,
 				BA93FDCF184D3CFC004001E4 /* MainPage.m */,
@@ -327,6 +376,8 @@
 				BA51C602185364160080BD9F /* LanguageViewController.h */,
 				BA51C603185364160080BD9F /* LanguageViewController.m */,
 				BA51C604185364160080BD9F /* LanguageViewController.xib */,
+				BA9BB037185A0457009ED843 /* NovoLogin */,
+				BA9BB036185A0005009ED843 /* Formulario */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -473,9 +524,49 @@
 			name = icons;
 			sourceTree = "<group>";
 		};
+		BA889B2F1859C52D00C473D3 /* PapperFold */ = {
+			isa = PBXGroup;
+			children = (
+				BA9BB0101859CF1D009ED843 /* FacingView.h */,
+				BA9BB0111859CF1D009ED843 /* FacingView.m */,
+				BA9BB0121859CF1D009ED843 /* FoldView.h */,
+				BA9BB0131859CF1D009ED843 /* FoldView.m */,
+				BA9BB0141859CF1D009ED843 /* MultiFoldView.h */,
+				BA9BB0151859CF1D009ED843 /* MultiFoldView.m */,
+				BA9BB0161859CF1D009ED843 /* PaperFoldConstants.h */,
+				BA9BB0171859CF1D009ED843 /* PaperFoldNavigationController.h */,
+				BA9BB0181859CF1D009ED843 /* PaperFoldNavigationController.m */,
+				BA9BB0191859CF1D009ED843 /* PaperFoldResources.bundle */,
+				BA9BB01A1859CF1D009ED843 /* PaperFoldSwipeHintView.h */,
+				BA9BB01B1859CF1D009ED843 /* PaperFoldSwipeHintView.m */,
+				BA9BB01C1859CF1D009ED843 /* PaperFoldView.h */,
+				BA9BB01D1859CF1D009ED843 /* PaperFoldView.m */,
+				BA9BB0251859CF54009ED843 /* ShadowView.h */,
+				BA9BB0261859CF54009ED843 /* ShadowView.m */,
+				BA9BB0271859CF54009ED843 /* TouchThroughUIView.h */,
+				BA9BB0281859CF54009ED843 /* TouchThroughUIView.m */,
+				BA9BB0291859CF54009ED843 /* UIView+Screenshot.h */,
+				BA9BB02A1859CF54009ED843 /* UIView+Screenshot.m */,
+				BA9BB02E1859DEBA009ED843 /* DemoRootViewController.h */,
+				BA9BB02F1859DEBA009ED843 /* DemoRootViewController.m */,
+			);
+			name = PapperFold;
+			sourceTree = "<group>";
+		};
+		BA889B491859CA5600C473D3 /* RootViewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				BA889B4A1859CA7E00C473D3 /* RootViewController.h */,
+				BA889B4B1859CA7E00C473D3 /* RootViewController.m */,
+				BA889B4C1859CA7E00C473D3 /* RootViewController.xib */,
+			);
+			name = RootViewcontroller;
+			sourceTree = "<group>";
+		};
 		BA93FD8A184D3C3F004001E4 = {
 			isa = PBXGroup;
 			children = (
+				BA889B2F1859C52D00C473D3 /* PapperFold */,
 				BA51C60818537E820080BD9F /* webServiceJson */,
 				BA51C5F8185334970080BD9F /* AutoComplete */,
 				BA54BBF818510153006446D6 /* imgsFinal */,
@@ -565,6 +656,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BA9BB036185A0005009ED843 /* Formulario */ = {
+			isa = PBXGroup;
+			children = (
+				BA9BB0311859FCE3009ED843 /* FormularioRegistoContaRundlr.h */,
+				BA9BB0321859FCE3009ED843 /* FormularioRegistoContaRundlr.m */,
+				BA9BB0331859FCE3009ED843 /* FormularioRegistoContaRundlr.xib */,
+			);
+			name = Formulario;
+			sourceTree = "<group>";
+		};
+		BA9BB037185A0457009ED843 /* NovoLogin */ = {
+			isa = PBXGroup;
+			children = (
+				BA9BB038185A047B009ED843 /* LoginRundlr.h */,
+				BA9BB039185A047B009ED843 /* LoginRundlr.m */,
+				BA9BB03A185A047B009ED843 /* LoginRundlr.xib */,
+			);
+			name = NovoLogin;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -647,6 +758,7 @@
 				BA93FDB2184D3C3F004001E4 /* Images.xcassets in Resources */,
 				BA54BC041851103E006446D6 /* madeira.png in Resources */,
 				BA54BC2018511089006446D6 /* caixa_gera_dia.png in Resources */,
+				BA889B4E1859CA7E00C473D3 /* RootViewController.xib in Resources */,
 				BA54BC1D18511089006446D6 /* back.png in Resources */,
 				BA54BC2718511089006446D6 /* noselect.png in Resources */,
 				BA02E8DA184F68C2006A611B /* Diarias.xib in Resources */,
@@ -672,6 +784,7 @@
 				BA54BC001851103E006446D6 /* fundo_pequeno.png in Resources */,
 				BA0B967D184E648600182E0A /* Resultados.xib in Resources */,
 				BA54BC2A18511089006446D6 /* quadrado.png in Resources */,
+				BA9BB0221859CF1D009ED843 /* PaperFoldResources.bundle in Resources */,
 				BA54BC2118511089006446D6 /* caixa_texto.png in Resources */,
 				BA51C6221853BCE80080BD9F /* MenuDoDia.xib in Resources */,
 				BA51C62E1853D4FC0080BD9F /* MenuGeral.xib in Resources */,
@@ -679,6 +792,7 @@
 				BA54BC2818511089006446D6 /* panela_grande.png in Resources */,
 				BA54BC3018511089006446D6 /* TIRAPEQUENA.png in Resources */,
 				BA54BC1F18511089006446D6 /* caixa login.png in Resources */,
+				BA9BB0351859FCE3009ED843 /* FormularioRegistoContaRundlr.xib in Resources */,
 				BA54BC2418511089006446D6 /* lupa.png in Resources */,
 				BA54BC3118511089006446D6 /* utilizador_redondo.png in Resources */,
 				BA02E8E1184FAC96006A611B /* Login.xib in Resources */,
@@ -686,6 +800,7 @@
 				BA54BC2B18511089006446D6 /* select.png in Resources */,
 				BA54BBFF1851103E006446D6 /* fundo_grande.png in Resources */,
 				BA54BC2218511089006446D6 /* facebook.png in Resources */,
+				BA9BB03C185A047B009ED843 /* LoginRundlr.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,8 +820,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA07F0FA18548E1D00591C6F /* Recent.m in Sources */,
+				BA889B4D1859CA7E00C473D3 /* RootViewController.m in Sources */,
 				BA51C6311853D6480080BD9F /* Tipo.m in Sources */,
 				BA51C62D1853D4FC0080BD9F /* MenuGeral.m in Sources */,
+				BA9BB0341859FCE3009ED843 /* FormularioRegistoContaRundlr.m in Sources */,
 				BA51C601185339500080BD9F /* HTAutocompleteTextField.m in Sources */,
 				BA0B9676184E62F700182E0A /* PPRevealSideViewController.m in Sources */,
 				BA51C61418539B150080BD9F /* CommentsParser.m in Sources */,
@@ -715,22 +832,31 @@
 				BA51C60E18539A340080BD9F /* MenuParser.m in Sources */,
 				BA51C61D18539F3E0080BD9F /* DayParser.m in Sources */,
 				BA0B9690184E8A3D00182E0A /* City.m in Sources */,
+				BA9BB02D1859CF54009ED843 /* UIView+Screenshot.m in Sources */,
 				BA51C60B18537E9E0080BD9F /* WebServiceSender.m in Sources */,
 				BA02E8D2184F4DB6006A611B /* Option.m in Sources */,
 				BA0B968D184E89D400182E0A /* Language.m in Sources */,
 				BA0B9693184E8A7700182E0A /* Restaurant.m in Sources */,
+				BA9BB02C1859CF54009ED843 /* TouchThroughUIView.m in Sources */,
 				BA0B9686184E889B00182E0A /* CitiesParser.m in Sources */,
 				BA93FDD1184D3CFC004001E4 /* MainPage.m in Sources */,
+				BA9BB02B1859CF54009ED843 /* ShadowView.m in Sources */,
 				BA93FDA7184D3C3F004001E4 /* AppDelegate.m in Sources */,
 				BA51C61A18539BDA0080BD9F /* Comments.m in Sources */,
 				BA0B9696184E8A9600182E0A /* User.m in Sources */,
+				BA9BB03B185A047B009ED843 /* LoginRundlr.m in Sources */,
+				BA9BB0201859CF1D009ED843 /* MultiFoldView.m in Sources */,
+				BA9BB0241859CF1D009ED843 /* PaperFoldView.m in Sources */,
+				BA9BB0231859CF1D009ED843 /* PaperFoldSwipeHintView.m in Sources */,
 				BA93FDAD184D3C3F004001E4 /* MasterViewController.m in Sources */,
+				BA9BB0211859CF1D009ED843 /* PaperFoldNavigationController.m in Sources */,
 				BA93FDA3184D3C3F004001E4 /* main.m in Sources */,
 				BA0B9681184E665D00182E0A /* MenuRefugio.m in Sources */,
 				BA02E8CF184F4BCF006A611B /* SearchParser.m in Sources */,
 				BA07F0F718548C9E00591C6F /* UserParser.m in Sources */,
 				BA0B9689184E88F700182E0A /* Globals.m in Sources */,
 				BA51C61718539BAA0080BD9F /* Menu.m in Sources */,
+				BA9BB01E1859CF1D009ED843 /* FacingView.m in Sources */,
 				BA02E8E0184FAC96006A611B /* Login.m in Sources */,
 				BA51C5FB185335470080BD9F /* HTAutocompleteManager.m in Sources */,
 				BA02E8D9184F68C2006A611B /* Diarias.m in Sources */,
@@ -738,7 +864,9 @@
 				BA51C600185339500080BD9F /* HTEmailAutocompleteTextField.m in Sources */,
 				BA93FDB0184D3C3F004001E4 /* DetailViewController.m in Sources */,
 				BA51C6211853BCE80080BD9F /* MenuDoDia.m in Sources */,
+				BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */,
 				BA02E8D5184F4DFB006A611B /* Cuisine.m in Sources */,
+				BA9BB01F1859CF1D009ED843 /* FoldView.m in Sources */,
 				BA51C605185364160080BD9F /* LanguageViewController.m in Sources */,
 				BA0B9699184E8BFD00182E0A /* FeaturedParser.m in Sources */,
 			);
@@ -870,8 +998,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RunflrNoStoryBoard/RunflrNoStoryBoard-Prefix.pch";
 				INFOPLIST_FILE = "RunflrNoStoryBoard/RunflrNoStoryBoard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -893,8 +1023,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RunflrNoStoryBoard/RunflrNoStoryBoard-Prefix.pch";
 				INFOPLIST_FILE = "RunflrNoStoryBoard/RunflrNoStoryBoard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};

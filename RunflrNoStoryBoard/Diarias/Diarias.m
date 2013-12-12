@@ -19,6 +19,8 @@
 @interface Diarias (){
     Restaurant * restaurante;
     WebServiceSender *webser;
+    WebServiceSender *webser2;
+
     MenuDoDia * menuDia;
     MenuGeral * menuG;
 }
@@ -41,12 +43,31 @@
     [super viewDidLoad];
     [self setUp];
     
-    webser = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_tipo_menu_dia.php" method:@"devolve_tipo_menu_dia" tag:1];
+    webser = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_tipo_menu.php" method:@"devolve_tipo_menu_dia" tag:1];
     webser.delegate = self;
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[Globals lang] forKey:@"lang"];
+    
+    NSString * numeroRestaurante = [NSString stringWithFormat:@"%d", restaurante.dbId];
+    NSString * numeroTipo = [NSString stringWithFormat:@"%d", 1];
+    
+    
+    [dict setObject:numeroRestaurante forKey:@"rest_id"];
+    [dict setObject:numeroTipo forKey:@"tipo_id"];
+
     [webser sendDict:dict];
+    
+    
+    webser2 = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_menu_dia.php" method:@"devolve_tipo_menu_dia" tag:2];
+    webser2.delegate = self;
+    
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:numeroRestaurante forKey:@"rest_id"];
+    [dict setObject:numeroTipo forKey:@"tipo_id"];
+    
+    [webser2 sendDict:dict];
+    
     
     ///////////////
     
@@ -101,6 +122,7 @@
              NSLog(@"dias descriçao: %@ ",vitie.description);
              NSLog(@"dias extra: %@ ",vitie.extra);
              NSLog(@"dias tipo menu: %@ ",vitie.tipo);
+             NSLog(@"dias tipo menu: %@ ",vitie.tipod);
              
          }
         
@@ -145,7 +167,7 @@
         {
             case 1:
             {
-                NSLog(@"resultado do  %@", result.description);
+                NSLog(@"resultado da tania xml_tipo_menu.php  %@", result.description);
                 
                 NSMutableArray * array = [NSMutableArray new];
                 
@@ -160,6 +182,12 @@
                 menuG.dataSource = array;
                 //menuG.view.frame = self.container.frame;
                 [menuG.tableView reloadData];
+                break;
+            }
+            case 2:
+            {
+                NSLog(@"resultado da tania xml_menu_dia.php  %@", result.description);
+
                 break;
             }
                 

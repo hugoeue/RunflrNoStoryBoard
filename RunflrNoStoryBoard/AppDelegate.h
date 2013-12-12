@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "MenuRefugio.h"
 
 
 
@@ -17,6 +17,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) PPRevealSideViewController *revealSideViewController;
 @property (strong, nonatomic) FBSession *session;
+
+@property (nonatomic, strong) MenuRefugio *menuRef;
 
 
 @end
