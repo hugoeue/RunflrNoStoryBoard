@@ -9,6 +9,7 @@
 #import "Resultados.h"
 #import "SearchParser.h"
 #import "Diarias.h"
+#import "TableCell.h"
 
 @interface Resultados ()
 {
@@ -68,7 +69,18 @@
     self.labelTipo.text = tipo;
     [self.labelTipo setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:30]];
     
-    [self preperarPesquisa];
+    if ([tipo isEqualToString:@"Favoritos"]) {
+        //
+        
+        
+         for (Restaurant *rest in [Globals user].favs) {
+             NSLog(@"rest fav name %@", rest.name);
+         }
+         
+        [self.tableRestaurantes reloadData];
+    }else
+        [self preperarPesquisa];
+    [self changeFont:self.view];
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,14 +139,16 @@
     NSMutableString *host;
     
     if ([tipo isEqualToString:@"Restaurants"]) {
-        getData = [NSString stringWithFormat:@"&search=%@&city_id=%@&rest_name=%@", [@"" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"17" , result];
+        getData = [NSString stringWithFormat:@"&search=%@&city_id=%@&rest_name=%@", [@"" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"17" , [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         host = [NSMutableString stringWithString:[Globals hostWithFile:@"search_restaurante.php" andGetData:getData]];
     }
     else
     {
-        getData = [NSString stringWithFormat:@"&search=%@&city_id=%@&rest_name=%@", [@"" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"17" , result];
+        getData = [NSString stringWithFormat:@"&search=%@&city_id=%@&rest_name=%@", [@"" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"17" , [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         host = [NSMutableString stringWithString:[Globals hostWithFile:@"search_cidades.php" andGetData:getData]];
     }
+    
+    
     
    
     
@@ -283,10 +297,11 @@
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (!doneSearch)
-        return 0;
+    //if (!doneSearch)
+     //   return 0;
     
-   
+   if ([tipo isEqualToString:@"Favoritos"])
+       return [Globals user].favs.count;
         
         return [[Globals searchResult] count];
         
@@ -308,44 +323,43 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
+        return 55;
     
-    
-    if (tableView == self.tableRestaurantes) {
-        Restaurant *rest = (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
-        
-        
-        if (rest.recommendedResultText.length > 0) {
-            return 75;
-        } else {
-            return 54;
-        }
-        
-    } else { // OPTIONS ANS CUISINES
-        return 40;
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Restaurant *rest;
     
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MyIdentifier"];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    Restaurant *rest = (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = rest.name;
-    /*
-    cell.detailTextLabel.text = [item objectForKey:@"secondaryTitleKey"];
-    NSString *path = [[NSBundle mainBundle] pathForResource:[item objectForKey:@"imageKey"] ofType:@"png"];
-    UIImage *theImage = [UIImage imageWithContentsOfFile:path];
-    cell.imageView.image = theImage;
-     */
-    return cell;
+    if ([tipo isEqualToString:@"Favoritos"])
+    {
+        rest = [[Globals user].favs objectAtIndex:indexPath.row];
         
-        //return [self ResultsTableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    else{
+        rest= (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
+    }
+    
+
+    
+    static NSString *simpleTableIdentifier = @"TableCell";
+    
+    TableCell *cell = (TableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (cell == nil)
+    {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TableCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    
+    
+    cell.labeTitulo.font = [UIFont fontWithName:@"DKCrayonCrumble" size:30];
+    
+    cell.ThumbnailSeta.image = [UIImage imageNamed:@"seta.png"];
+    cell.labeTitulo.text = [NSString stringWithFormat:@"%@", rest.name];
+    
+    return cell;
+
         
     
 }
@@ -356,36 +370,27 @@
         
         [self ResultsTableView:tableView didSelectRowAtIndexPath:indexPath];
         
-    }
+}
 
 #pragma mark - RESULTS TABLE DELEGATE METHODS
 
-- (UITableViewCell *)ResultsTableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell;
-    
-    
-    Restaurant *rest = (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
-    
-    
-    cell = [tv dequeueReusableCellWithIdentifier:@"ResultCell"];
-    
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ResultCell"];
-    }
-    
-    cell.detailTextLabel.text = rest.name;
-    cell.detailTextLabel.textColor = [UIColor blackColor];
-    
-    
-        return cell;
-    
-}
 
 - (void)ResultsTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    int dbId = ((Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row]).dbId;
+    Restaurant *rest;
+    
+    if ([tipo isEqualToString:@"Favoritos"])
+    {
+        rest = [[Globals user].favs objectAtIndex:indexPath.row];
+        
+    }
+    else{
+        rest= (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
+    }
+
+    
+    int dbId = rest.dbId;
     
     [Globals setRestaurantId:dbId];
     
@@ -395,8 +400,18 @@
     //[self performSegueWithIdentifier:@"resultsToRestaurant" sender:nil];
     
     Diarias *c = [[Diarias alloc] init];
+    
+    
+    [c loadRestaurant:rest];
+    
     [self.navigationController pushViewController:c animated:YES];
     PP_RELEASE(c);
+    
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [cell.textLabel setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:26]];
+    cell.backgroundColor = [UIColor clearColor];
     
 }
 
@@ -405,7 +420,18 @@
 {
    // [self showClock];
 }
-
+-(void)changeFont:(UIView *) view{
+    for (id View in [view subviews]) {
+        if ([View isKindOfClass:[UILabel class]]) {
+            [View setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:26]];
+            //view.textColor = [UIColor blueColor];
+            [View setBackgroundColor:[UIColor clearColor]];
+        }
+        if ([View isKindOfClass:[UIView class]]) {
+            [self changeFont:View];
+        }
+    }
+}
 
 
 

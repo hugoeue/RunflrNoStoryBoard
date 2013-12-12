@@ -103,29 +103,6 @@
              [Globals user].name = user.name;
              
              //[self showFaceStuff];
-        
-        
-        
-        
-  
-
-    
-    //    NSString *getData = [NSString stringWithFormat:@"&rest_id=%d&favSend=%d", [Globals restaurant].dbId, favSend];
-    
-    NSString *host = [Globals hostWithFile:@"xml_up_face.php" andGetData:@""];
-    
-    NSLog(@"HOSTFAV: %@", host);
-    NSURL *url = [NSURL URLWithString:host];
-    
-    [NSURLRequest requestWithURL:url];
-    
-    NSError *error;
-    NSString *str = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
-    
-    //    NSLog(@"%@", str);
-    if (error) {
-        
-    }
     
 }
 

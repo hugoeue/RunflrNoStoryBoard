@@ -43,6 +43,7 @@ static NSMutableArray *_cuisines = nil;
 
 + (void)setLang:(NSString *)lang
 {
+    
     _lang = lang;
 }
 
@@ -350,7 +351,7 @@ static NSMutableArray *_cuisines = nil;
     
     
     //NSMutableString *host = [NSMutableString stringWithString:@"http://cms.citychef.pt/data/"];
-    NSMutableString *host = [NSMutableString stringWithString:@"http://192.168.0.101/Rundlr_Package/rundlrweb/data/"];
+    NSMutableString *host = [NSMutableString stringWithString:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/"];
     
     [host appendString:file];
     [host appendString:@"?api_key=RrNDLR20_13_h3ld3r"];
@@ -358,6 +359,8 @@ static NSMutableArray *_cuisines = nil;
     [host appendFormat:@"&user_id=%d", [Globals user].dbId];
     [host appendFormat:@"&user_face=%@", [Globals user].faceId];
     [host appendString:getData];
+    
+    NSLog(@"merdas do url======> %@" ,host);
     
     return [NSString stringWithString:host];
 }

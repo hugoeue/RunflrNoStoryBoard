@@ -16,5 +16,6 @@
 -(void)setTipo:(NSString *)tip;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableRestaurantes;
+@property (weak, nonatomic) IBOutlet UILabel *labelResultados;
 
 @end

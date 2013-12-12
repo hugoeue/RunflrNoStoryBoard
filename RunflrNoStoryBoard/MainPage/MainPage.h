@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "HTAutocompleteTextField.h"
 
 @interface MainPage : UIViewController <UITextFieldDelegate,CLLocationManagerDelegate>
 {
@@ -23,7 +24,20 @@
 - (IBAction)ClickCitie:(id)sender;
 - (IBAction)ClickRestaurant:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UITextField *texfFieldPesquisa;
 
+@property (unsafe_unretained, nonatomic) IBOutlet HTAutocompleteTextField *texfFieldPesquisa;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imgSelectcidate;
+@property (weak, nonatomic) IBOutlet UIImageView *imgSetectRest;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelRestaurante;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageFacebook;
+
+
+- (IBAction)clickFav:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *labelUsername;
+@property (weak, nonatomic) IBOutlet UILabel *labelCidade;
+@property (weak, nonatomic) IBOutlet UILabel *labelOsMeusMenus;
 
 @end

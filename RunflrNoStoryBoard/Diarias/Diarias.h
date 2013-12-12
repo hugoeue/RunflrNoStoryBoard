@@ -11,5 +11,16 @@
 @interface Diarias : UIViewController
 
 - (IBAction)clickBack:(id)sender;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segControl;
+@property (weak, nonatomic) IBOutlet UILabel *labelTitleRestaurnat;
+@property (weak, nonatomic) IBOutlet UILabel *labelLocalisacao;
+
+
+-(void)loadRestaurant:(Restaurant *)rest;
+
+- (IBAction)selecteSegControl:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *container;
+- (IBAction)clickAddFavorito:(id)sender;
 
 @end

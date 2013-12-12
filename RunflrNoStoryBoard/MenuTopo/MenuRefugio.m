@@ -8,6 +8,7 @@
 
 #import "MenuRefugio.h"
 #import "Login.h"
+#import "LanguageViewController.h"
 
 @interface MenuRefugio ()
 
@@ -29,6 +30,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = YES;
+    [self changeFont:self.view];
+}
+
+
+-(void)changeFont:(UIView *) view{
+    for (id View in [view subviews]) {
+        if ([View isKindOfClass:[UILabel class]]) {
+            [View setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:32]];
+            //view.textColor = [UIColor blueColor];
+            [View setBackgroundColor:[UIColor clearColor]];
+        }
+        if ([View isKindOfClass:[UIView class]]) {
+            [self changeFont:View];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -42,5 +58,10 @@
     Login *c = [[Login alloc] init];
     [self.navigationController pushViewController:c animated:YES];
     PP_RELEASE(c);
+}
+
+- (IBAction)buttonLingua:(id)sender {
+    LanguageViewController *linguas =[LanguageViewController new];
+    [self.revealSideViewController presentViewController:linguas animated:YES completion:nil];
 }
 @end
