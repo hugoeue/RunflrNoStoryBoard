@@ -11,6 +11,8 @@
 @interface User : NSObject
 
 @property (nonatomic) int dbId;
+// para saber qual o o tipo de login utilisado
+@property (strong, nonatomic) NSString *loginType;
 @property (strong, nonatomic) NSString *faceId;
 @property (nonatomic) BOOL isFace;
 @property (nonatomic) BOOL isPublish;

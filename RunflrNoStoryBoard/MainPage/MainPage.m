@@ -68,12 +68,48 @@
     
    // if(showFacebook == NO)
     //{
+    
+//    if([[Globals user].loginType isEqualToString:@"facebook"])
+//    {
+//        [self loadUser];
+//    }else if([[Globals user].loginType isEqualToString:@"guru"])
+//    {
+//        [self loadGuruImage];
+//    }
+    
+    
+    
+    
+    
+    NSLog(@"Tipo de login realisado %@",[Globals user].loginType);
+    
+    if([[Globals user].loginType isEqualToString:@"facebook"])
+    {
         [self loadUser];
-        showFacebook = YES;
+    }
+    else if([[Globals user].loginType isEqualToString:@"guru"])
+    {
+         [self loadGuruImage];
+    }
+    else if ([FBSession activeSession].isOpen && ![Globals user]){
+        [self loadUser];
+    }
    
 //}
 }
 
+- (void)loadGuruImage
+{
+    
+    self.imageFacebook.image = [UIImage imageNamed:@"transferir.jpeg"];
+    self.imageFacebook.layer.cornerRadius = self.imageFacebook.frame.size.height/2;
+    self.imageFacebook.clipsToBounds = YES;
+    self.imageFacebook.layer.borderWidth = 1.0f;
+    self.imageFacebook.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.buttonGo.alpha = 0;
+    self.labelUsername.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
+    self.labelUsername.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
+}
 
 - (void)viewDidLoad
 {
@@ -357,17 +393,24 @@
 }
 
 - (IBAction)clickFav:(id)sender {
-     //[self loadUser];
     
-    if (![FBSession activeSession].isOpen) {
-        alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
-        [alert show];
+    NSLog(@"Tipo de login realisado %@",[Globals user].loginType);
+    
+    if([[Globals user].loginType isEqualToString:@"facebook"])
+    {
+          [self ChamarFavoritos];
     }
-    else{
-        // abrir favoritos
-        //[self loadUser];
+    else if([[Globals user].loginType isEqualToString:@"guru"])
+    {
+          [self ChamarFavoritos];
+    }
+    else if (![Globals user]){
+        // tenho de por esta cena no viewdidappear
+            alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+            [alert show];
+    }else{
         [self ChamarFavoritos];
-    }
+        }
 }
 
 -(void)chamarLogin{
@@ -395,8 +438,6 @@
     {
         exit(0);
     }
-    
-    
     
 }
 
@@ -426,33 +467,8 @@
              
              [Globals user].faceId = user.id;
              [Globals user].name = user.name;
-             
-//           
-//             UserParser *userParser = [[UserParser alloc] initXMLParser];
-//             
-//             NSString *host = nil;
-//             
-//             //if (self.isOther) {
-//             //  host = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_user.php?is_me=0&user_id=%d&face_id=%@", self.otherUserDbId, self.otherUserFaceId];
-//             //} else {
-//             host = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_user.php?is_me=1&user_id=%d&face_id=%@", [Globals user].dbId, [Globals user].faceId];
-//             //}
-//             NSLog(@"host: %@", host);
-//             
-//             NSURL *url = [[NSURL alloc] initWithString: host];
-//             NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
-//             [nsXmlParser setDelegate:userParser];
-//             
-//             BOOL success = [nsXmlParser parse];
-//             
-//             
-//             if (success) {
-//                 [self performSelectorOnMainThread:@selector(startUpContainers2) withObject:nil waitUntilDone:NO];
-//                 
-//             } else {
-//                 [self performSelectorOnMainThread:@selector(noConnect2) withObject:nil waitUntilDone:NO];
-//                 
-//             }
+             [Globals user].loginType = @"facebook";
+
              
              [self startUpContainers2];
 
@@ -485,6 +501,7 @@
     
     [Globals user].faceId = user.id;
     [Globals user].name = user.name;
+    [Globals user].loginType = @"facebook";
     
     //[self showFaceStuff];
     //[self loadUser];

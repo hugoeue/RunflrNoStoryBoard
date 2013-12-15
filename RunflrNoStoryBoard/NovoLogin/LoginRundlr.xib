@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginRundlr">
             <connections>
                 <outlet property="textFieldPassword" destination="Qp4-Of-QJD" id="aDI-IS-xBf"/>
+                <outlet property="textFieldemail" destination="gFi-7Z-L7X" id="wRe-Hu-qQm"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -27,6 +28,16 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wb0-27-foV">
+                    <rect key="frame" x="137" y="169" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Login">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clickSubmeter:" destination="-1" eventType="touchUpInside" id="AY8-UP-kBy"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

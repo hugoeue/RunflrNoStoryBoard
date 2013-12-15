@@ -28,7 +28,13 @@
 
 - (id)initXMLParser {
     if (self = [super init]) {
-        currentUser = [[User alloc] init];
+        if(![Globals user])
+        {
+            currentUser = [[User alloc] init];
+        }else
+        {
+            currentUser = [Globals user];
+        }
         
         currentUser.following = [[NSMutableArray alloc] init];
         currentUser.followers = [[NSMutableArray alloc] init];

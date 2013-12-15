@@ -17,6 +17,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *textNome;
+@property (weak, nonatomic) IBOutlet UITextField *textUltimoNome;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pickerSexo;
 @property (weak, nonatomic) IBOutlet UITextField *textCidade;
 @property (weak, nonatomic) IBOutlet UITextField *textEmail;

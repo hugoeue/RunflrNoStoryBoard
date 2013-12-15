@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginRundlr : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *textFieldemail;
+
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPassword;
+- (IBAction)clickSubmeter:(id)sender;
 
 @end

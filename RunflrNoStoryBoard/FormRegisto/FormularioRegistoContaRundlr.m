@@ -8,6 +8,7 @@
 
 #import "FormularioRegistoContaRundlr.h"
 #import "WebServiceSender.h"
+#import "User.h"
 
 @interface FormularioRegistoContaRundlr ()
 {
@@ -30,15 +31,20 @@
 
 -(void)enviarFormulario
 {
-    enviaForm = [[WebServiceSender alloc] initWithUrl:@"" method:@"" tag:1];
+    enviaForm = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_login.php" method:@"" tag:1];
     enviaForm.delegate = self;
     
     NSMutableDictionary * dict = [NSMutableDictionary new];
     
-    [dict setObject:self.textNome.text forKey:@"nome"];
-    [dict setObject:self.textEmail.text forKey:@"email"];
-    [dict setObject:self.textCidade.text forKey:@"cidade"];
-    [dict setObject:self.textPassword.text forKey:@"password"];
+    
+//    $email=$body['email'];
+//    $cidade=$body['cidade'];
+//    $genero=$body['genero'];
+//    $data_nasc=$body['data_nasc'];
+//    $password=$body['password'];
+//    $facebookId=$body['face'];
+    
+    
     
 //    NSDate *date =  self.pickerDataNascimento.date;
 //    
@@ -58,7 +64,21 @@
         sexo = @"mulher";
     }
     
-    [dict setObject:sexo forKey:@"sexo"];
+    NSString * faceID = @"1";
+    
+    [dict setObject:sexo forKey:@"genero"];
+    [dict setObject:self.textNome.text forKey:@"primnome"];
+    [dict setObject:self.textUltimoNome.text forKey:@"segnome"];
+    [dict setObject:self.textEmail.text forKey:@"email"];
+    [dict setObject:self.textCidade.text forKey:@"cidade"];
+    [dict setObject:self.textPassword.text forKey:@"password"];
+    
+    if([Globals user].faceId){
+        [dict setObject:[Globals user].faceId forKey:@"face"];
+    }else
+    {
+        [dict setObject:faceID forKey:@"face"];
+    }
     
     [enviaForm sendDict:dict];
     
@@ -74,7 +94,27 @@
         {
             case 1:
             {
-                NSLog(@"resultado da tania  %@", result.description);
+                NSLog(@"resultado da tania no registo =>%@", result.description);
+                
+                //resp = "Successfully inserted 1 row";
+                if([[result objectForKey:@"resp"] isEqualToString:@"Successfully inserted 1 row"])
+                {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sucesso" message:@"Resgisto realizado com sucesso" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                    
+                    
+                    User *regUser = [User new];
+                    regUser.dbId = [[result objectForKey:@"userid"] integerValue];
+                    regUser.name = [result objectForKey:@"pnome"];
+                    regUser.email = [result objectForKey:@"email"];
+                    regUser.loginType = @"guru";
+                    
+                    
+                    [Globals setUser:regUser];
+                    
+                }else{
+                    
+                }
                 
                
                 break;
@@ -101,11 +141,6 @@
         
         [currentBt setTitle:title forState:UIControlStateNormal];
     } else {
-        if(numUp) {
-            
-            
-            numUp = NO;
-        }
         
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             CGRect pickerFrame = _dateView.frame;
@@ -170,6 +205,8 @@
 
 
 - (void)addDate:(UIBarButtonItem *)_sender {
+    
+    
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect pickerFrame = _dateView.frame;
         pickerFrame.origin.y += 256;
@@ -212,6 +249,27 @@
 }
 
 - (IBAction)clickEnviarForm:(id)sender {
-    [self enviarFormulario];
+    NSString  *possoenviar = @"";
+    
+    NSString *emailid = self.textEmail.text;
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    BOOL myStringMatchesRegEx=[emailTest evaluateWithObject:emailid];
+    if (!myStringMatchesRegEx ) {
+        possoenviar = @"Email invalido";
+    }
+    
+    if(![self.textPassword.text isEqualToString:self.textPassword2.text])
+    {
+        possoenviar =[NSString stringWithFormat:@"%@ Password tem de ser igual",possoenviar];
+    }
+    if (possoenviar.length ==0 )
+    {
+        [self enviarFormulario];
+    }else{
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:possoenviar delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
 }
 @end

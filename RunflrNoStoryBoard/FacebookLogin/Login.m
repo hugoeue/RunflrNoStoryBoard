@@ -118,6 +118,7 @@
              
              [Globals user].faceId = user.id;
              [Globals user].name = user.name;
+             [Globals user].loginType = @"facebook";
     
     
      [self dismissViewControllerAnimated:NO completion:nil];

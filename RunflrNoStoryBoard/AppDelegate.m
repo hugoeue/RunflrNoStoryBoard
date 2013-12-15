@@ -28,6 +28,17 @@
 {
     
     
+    NSDictionary *mutableRetrievedDictionary = [[NSUserDefaults new] objectForKey:@"login"];
+    
+    if(mutableRetrievedDictionary){
+        User *regUser = [User new];
+        regUser.dbId = [[mutableRetrievedDictionary objectForKey:@"userid"] integerValue];
+        regUser.name = [mutableRetrievedDictionary objectForKey:@"pnome"];
+        regUser.email = [mutableRetrievedDictionary objectForKey:@"email"];
+        regUser.loginType = @"guru";
+        [Globals setUser:regUser];
+    }
+    
     // Override point for customization after application launch.
     
     // LANG STUFF

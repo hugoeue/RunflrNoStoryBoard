@@ -38,6 +38,7 @@
 		BA0B9693184E8A7700182E0A /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9692184E8A7700182E0A /* Restaurant.m */; };
 		BA0B9696184E8A9600182E0A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9695184E8A9600182E0A /* User.m */; };
 		BA0B9699184E8BFD00182E0A /* FeaturedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9698184E8BFD00182E0A /* FeaturedParser.m */; };
+		BA18C8B3185B32FF00DCC74B /* transferir.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BA18C8B2185B32FF00DCC74B /* transferir.jpeg */; };
 		BA51C5FB185335470080BD9F /* HTAutocompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA51C5FA185335470080BD9F /* HTAutocompleteManager.m */; };
 		BA51C600185339500080BD9F /* HTEmailAutocompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BA51C5FC185339500080BD9F /* HTEmailAutocompleteTextField.m */; };
 		BA51C601185339500080BD9F /* HTAutocompleteTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = BA51C5FE185339500080BD9F /* HTAutocompleteTextField.m */; };
@@ -182,6 +183,7 @@
 		BA0B9695184E8A9600182E0A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		BA0B9697184E8BFD00182E0A /* FeaturedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedParser.h; sourceTree = "<group>"; };
 		BA0B9698184E8BFD00182E0A /* FeaturedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedParser.m; sourceTree = "<group>"; };
+		BA18C8B2185B32FF00DCC74B /* transferir.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transferir.jpeg; sourceTree = "<group>"; };
 		BA51C5F9185335470080BD9F /* HTAutocompleteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTAutocompleteManager.h; sourceTree = "<group>"; };
 		BA51C5FA185335470080BD9F /* HTAutocompleteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTAutocompleteManager.m; sourceTree = "<group>"; };
 		BA51C5FC185339500080BD9F /* HTEmailAutocompleteTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTEmailAutocompleteTextField.m; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 		BA0B9677184E635900182E0A /* imgsTemp */ = {
 			isa = PBXGroup;
 			children = (
+				BA18C8B2185B32FF00DCC74B /* transferir.jpeg */,
 				BA93FDD5184D3FF3004001E4 /* ios-wallpaper-10.png */,
 				BA93FDD3184D3D48004001E4 /* 3.jpg */,
 			);
@@ -764,6 +767,7 @@
 				BA02E8DA184F68C2006A611B /* Diarias.xib in Resources */,
 				BA54BC2918511089006446D6 /* QUADRADO SUBMETER.png in Resources */,
 				BA54BC2618511089006446D6 /* menurefugio.png in Resources */,
+				BA18C8B3185B32FF00DCC74B /* transferir.jpeg in Resources */,
 				BA02E8DC184FA060006A611B /* DK Crayon Crumble.ttf in Resources */,
 				BA93FDD2184D3CFC004001E4 /* MainPage.xib in Resources */,
 				BA93FDA1184D3C3F004001E4 /* InfoPlist.strings in Resources */,

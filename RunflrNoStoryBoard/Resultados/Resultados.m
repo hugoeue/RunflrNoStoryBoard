@@ -11,6 +11,8 @@
 #import "Diarias.h"
 #import "TableCell.h"
 #import "UserParser.h"
+#import "WebServiceSender.h"
+#import "Restaurant.h"
 
 @interface Resultados ()
 {
@@ -34,6 +36,8 @@
     
     BOOL isTimeFilter;
     NSString *timeFilter;
+    
+    WebServiceSender *favWeb;
 
 }
 
@@ -71,26 +75,92 @@
     [self.labelTipo setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:30]];
     
     if ([tipo isEqualToString:@"Favoritos"]) {
-        //
+//        //
+//        
+//        
+//         for (Restaurant *rest in [Globals user].favs) {
+//             NSLog(@"rest fav name %@", rest.name);
+//         }
+//        
+//        
+//        
+//         [self performSelectorOnMainThread:@selector(ChamarFavoritos) withObject:nil waitUntilDone:NO];
+//        
+//         
+//        //[self.tableRestaurantes reloadData];
         
         
-         for (Restaurant *rest in [Globals user].favs) {
-             NSLog(@"rest fav name %@", rest.name);
-         }
+        favWeb = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_fav.php" method:@"" tag:1];
+        favWeb.delegate = self;
+        
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+        
+//        $user_id=$body['user_id'];
+//        $face_id=$body['face_id'];
+        
+        if([Globals user].faceId)
+        {
+            [dict setObject: [Globals user].faceId forKey:@"face_id"];
+            [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+        }else
+        {
+            [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
+            [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+        }
+            
+        [favWeb sendDict:dict];
         
         
         
-         [self performSelectorOnMainThread:@selector(ChamarFavoritos) withObject:nil waitUntilDone:NO];
-        
-         
-        //[self.tableRestaurantes reloadData];
     }else
         [self preperarPesquisa];
     [self changeFont:self.view];
 }
 
+-(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
+    
+    
+    if (!error)
+    {
+        int tag=[WebServiceSender getTagFromWebServiceSenderDict:result];
+        switch (tag)
+        {
+            case 1:
+            {
+                NSLog(@"resultado dalista de favoritos =>%@", result.description);
+                
+//                resp =     (
+//                            {
+//                                id = 152;
+//                                nome = "Pimenta Moscada";
+//                            },
+                [Globals user].favs = [NSMutableArray new];
+                for (NSMutableDictionary *rest in [result objectForKey:@"resp"]) {
+                    Restaurant *restaurante = [Restaurant new];
+                    restaurante.name = [rest objectForKey:@"nome"];
+                    restaurante.dbId = [[rest objectForKey:@"id"] integerValue];
+                    
+                    
+                    [[Globals user].favs addObject:restaurante];
+                }
+                
+                [self.tableRestaurantes reloadData];
+                break;
+            }
+                
+        }
+    }else
+    {
+        NSLog(@"error webserviceSender %@",error);
+        
+    }
+    
+    
+}
 
--(void)ChamarFavoritos
+
+
+-(void)ChamarFavoritosXML
 {
     UserParser *userParser = [[UserParser alloc] initXMLParser];
     
