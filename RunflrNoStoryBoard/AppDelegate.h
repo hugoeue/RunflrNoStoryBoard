@@ -20,5 +20,7 @@
 
 @property (nonatomic, strong) MenuRefugio *menuRef;
 
+@property (nonatomic, strong) UIView *topView;
+
 
 @end

@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSString *city;
 @property (strong, nonatomic) NSString *parish;
 @property (strong, nonatomic) NSString *price;
+@property ( nonatomic) BOOL destaque;
 @property (nonatomic) int priceId;
 
 @property (nonatomic) int phone;

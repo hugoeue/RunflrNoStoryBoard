@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "HTAutocompleteTextField.h"
+#import "RFQuiltLayout.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface MainPage : UIViewController <UITextFieldDelegate,CLLocationManagerDelegate>
+@interface MainPage : UIViewController <UITextFieldDelegate,CLLocationManagerDelegate, RFQuiltLayoutDelegate, UIScrollViewDelegate>
 {
-    CLLocationManager *clManager;
+    CLLocationManager *locationManager;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *imageHeader;
 
@@ -23,6 +25,8 @@
 
 - (IBAction)ClickCitie:(id)sender;
 - (IBAction)ClickRestaurant:(id)sender;
+- (IBAction)clickPesquisa:(id)sender;
+
 
 
 @property (unsafe_unretained, nonatomic) IBOutlet HTAutocompleteTextField *texfFieldPesquisa;
@@ -39,5 +43,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelUsername;
 @property (weak, nonatomic) IBOutlet UILabel *labelCidade;
 @property (weak, nonatomic) IBOutlet UILabel *labelOsMeusMenus;
+
+
+@property (nonatomic, assign) id delegate;
+
+
+// para a colecçao
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic) NSMutableArray* numbers;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+// transparencia negra
+
+@property (weak, nonatomic) IBOutlet UIView *uiviewTransparent;
+
 
 @end

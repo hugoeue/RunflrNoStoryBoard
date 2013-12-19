@@ -184,7 +184,7 @@
 	line.alpha = 0;
 	self.rightDividerLine = line;
     
-    self.enableRightFoldDragging = YES;
+    //self.enableRightFoldDragging = YES;
 }
 
 // this method is deprecated
@@ -212,8 +212,9 @@
 	line.alpha = 0;
 	self.topDividerLine = line;
     
-    self.enableTopFoldDragging = YES;
+    //self.enableTopFoldDragging = NO;
 }
+
 
 - (void)onContentViewPanned:(UIPanGestureRecognizer*)gesture
 {
@@ -816,6 +817,8 @@
 								 animated:(BOOL)animated
 							 completion:(void (^)())completion
 {
+    //_timerStepDuration = 0.02;
+    
 	self.completionBlock = completion;
 	[self setPaperFoldState:state animated:animated];
 }

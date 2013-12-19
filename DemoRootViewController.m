@@ -34,6 +34,9 @@
 #import "DemoRootViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "UIView+Screenshot.h"
+#import "LanguageViewController.h"
+#import "PaginaPessoal.h"
+#import "Login.h"
 
 @implementation DemoRootViewController
 
@@ -45,22 +48,34 @@
         _paperFoldView = [[PaperFoldView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,[self.view bounds].size.height)];
         [_paperFoldView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
         [self.view addSubview:_paperFoldView];
+        [_paperFoldView setTimerStepDuration:0.02f];
+        [_paperFoldView setEnableTopFoldDragging:NO];
+       
         
         
         
-        _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0,0,240,[self.view bounds].size.height)];
+        _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
         [_paperFoldView setRightFoldContentView:_mapView foldCount:3 pullFactor:0.9];
         
-        _centerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,[self.view bounds].size.height)];
-        [_centerTableView setRowHeight:120];
-        [_paperFoldView setCenterContentView:_centerTableView];
-        [_centerTableView setDelegate:self];
-        [_centerTableView setDataSource:self];
+//        _centerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,[self.view bounds].size.height)];
+//        [_centerTableView setRowHeight:120];
+//        [_paperFoldView setCenterContentView:_centerTableView];
+//        [_centerTableView setDelegate:self];
+//        [_centerTableView setDataSource:self];
         
-        _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,150,[self.view bounds].size.height)];
-        [_leftTableView setRowHeight:100];
-        [_leftTableView setDataSource:self];
-        [_paperFoldView setLeftFoldContentView:_leftTableView foldCount:3 pullFactor:0.9];
+        _main = [MainPage new];
+        
+       
+        
+        //_paperFoldView.useOptimizedScreenshot = NO;
+         _main.delegate = self;
+        _nav = [[UINavigationController alloc] initWithRootViewController:_main];
+        [_paperFoldView setCenterContentView:_nav.view];
+        
+        
+        
+
+        
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(-1,0,1,[self.view bounds].size.height)];
         [_paperFoldView.contentView addSubview:line];
@@ -82,21 +97,28 @@
         //[_paperFoldView setEnableRightFoldDragging:NO];
         
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,300)];
-        [_topView setBackgroundColor:[UIColor whiteColor]];
-        UILabel *topLabel = [[UILabel alloc] initWithFrame:_topView.frame];
-        [topLabel setText:@"A"];
-        [topLabel setBackgroundColor:[UIColor clearColor]];
-        [topLabel setFont:[UIFont boldSystemFontOfSize:300]];
-        [topLabel setTextAlignment:UITextAlignmentCenter];
-        [_topView addSubview:topLabel];
+        
+       
+        
+        _menu = [MenuRefugio new];
+        _menu.delegate = self;
+        
+        [_topView addSubview:_menu.view];
         
         ShadowView *topShadowView = [[ShadowView alloc] initWithFrame:CGRectMake(0,_topView.frame.size.height-5,_topView.frame.size.width,5) foldDirection:FoldDirectionVertical];
         [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
         [_topView addSubview:topShadowView];
         
-        [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:5 topViewPullFactor:0.9];
+        [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:3 topViewPullFactor:0.9];
         
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,160)];
+        _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
+        [_leftTableView setRowHeight:100];
+        //[_leftTableView setDataSource:self];
+        [_paperFoldView setLeftFoldContentView:_leftTableView foldCount:3 pullFactor:0.9];
+
+        
+        
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,0.2)];
         UILabel *bottomLabel = [[UILabel alloc] initWithFrame:_bottomView.frame];
         [bottomLabel setText:@"A"];
         [bottomLabel setFont:[UIFont boldSystemFontOfSize:150]];
@@ -116,65 +138,94 @@
     return self;
 }
 
+-(void)chamarLigua{
+    LanguageViewController *linguas =[LanguageViewController new];
+    linguas.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+     [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+         [self presentTLModalViewController:linguas animated:YES completion:^{
+             
+         }];
+
+     }];
+    
+    
+}
+
+-(void)chamarPaginaPessoal{
+    if([Globals user]){
+        
+        PaginaPessoal *pagPessoal = [PaginaPessoal new];
+        //pagPessoal.delegate = self.delegate;
+        //[self.navigationController pushViewController:pagPessoal animated:YES];
+        pagPessoal.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        //[self presentViewController:pagPessoal animated:YES completion:nil];
+        
+        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+            [self presentTLModalViewController:pagPessoal animated:YES completion:^{
+                
+            }];
+            
+        }];
+    
+    }else
+    {
+        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[Login new] ];
+            
+            [self presentTLModalViewController:nav animated:YES completion:^{
+                
+            }];
+            
+        }];
+
+        
+    }
+    
+    
+    
+}
+
+-(void)chamarTopo{
+    
+    if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
+    {
+        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+    }
+    else
+        [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded animated:YES completion:nil];
+}
+
+
+- (void) presentTLModalViewController:(UIViewController *)pDestinationController animated:(BOOL)pAnimated completion:(void (^)(void))completion {
+    if (pAnimated) {
+        [CATransaction begin];
+        
+        CATransition *transition = [CATransition animation];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFade;
+        transition.duration = 0.5f;
+        transition.fillMode = kCAFillModeForwards;
+        transition.removedOnCompletion = YES;
+        
+        [[UIApplication sharedApplication].keyWindow.layer addAnimation:transition forKey:@"transition"];
+        
+        [self presentViewController:pDestinationController animated:NO completion:completion];
+        
+        [CATransaction commit];
+    } else {
+        [self presentViewController:pDestinationController animated:NO completion:completion];
+    }
+}
+
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 
-#pragma table view
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (tableView==self.leftTableView) return 10;
-    else return 3;
-}
-
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *identifier = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-    }
-    if (tableView==self.leftTableView)
-    {
-        [cell.textLabel setText:[NSString stringWithFormat:@"%i", indexPath.row]];
-    }
-    else
-    {
-        if (indexPath.row==0) [cell.textLabel setText:@"<-- unfold left view"];
-        else if (indexPath.row==1)[cell.textLabel setText:@"unfold right view -->"];
-        else if (indexPath.row==2)[cell.textLabel setText:@"--> restore <--"];
-    }
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView==self.centerTableView)
-    {
-        NSLog(@"did select");
-        if (indexPath.row==0)
-        {
-            // unfold left view
-            [self.paperFoldView setPaperFoldState:PaperFoldStateLeftUnfolded];
-        }
-        else if (indexPath.row==1)
-        {
-            // unfold right view
-            [self.paperFoldView setPaperFoldState:PaperFoldStateRightUnfolded];
-        }
-        else if (indexPath.row==2)
-        {
-            // restore to center
-            [self.paperFoldView setPaperFoldState:PaperFoldStateDefault];
-        }
-    }
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 #pragma mark paper fold delegate
 

@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "UserParser.h"
 #import "Login.h"
+#import "WebServiceSender.h"
 
 
 @interface MainPage ()
@@ -32,13 +33,222 @@
     UIAlertView *alert;
     UIAlertView *alertBoo;
     UIAlertView *alertBoo2;
+    
+    WebServiceSender * recomendados;
+    
+    NSMutableArray * restaurantesRecomendados;
+    
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
 
 @end
 
+int num = 0;
+
 @implementation MainPage
+
+
+-(void)lerRecomendados
+{
+    if (!recomendados) {
+     
+        recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados2.php" method:@"" tag:1];
+        recomendados.delegate = self;
+    
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+
+    NSString * latitude = @"41.3869715";
+    NSString * longitude = @"-8.3214086";
+    
+        [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.latitude] forKey:@"lat"];
+        [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.longitude] forKey:@"lon"];
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
+
+    
+        [recomendados sendDict:dict];
+    }
+    
+}
+
+-(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
+    
+    
+    if (!error)
+    {
+        int tag=[WebServiceSender getTagFromWebServiceSenderDict:result];
+        switch (tag)
+        {
+            case 1:
+            {
+                NSLog(@"resultado dalista dos recomendados =>%@", result.description);
+                
+                
+              
+                
+             
+               
+               // distancia emtre 2 pontos;
+               // CLLocationDistance distance = [aCLLocationA distanceFromLocation:aCLLocationB];
+                
+                NSString * lat = [result objectForKey:@"lat"];
+                NSString * lon = [result objectForKey:@"lon"];
+                
+                CLLocation * localOriginal = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
+                
+                restaurantesRecomendados = [NSMutableArray new];
+               
+                for(NSMutableDictionary * dict in [result objectForKey:@"res"]){
+                    Restaurant * rest = [Restaurant new];
+                    
+                
+                    //NSString *dist = [dict objectForKey:@"dist"];
+                    NSString * restName = [dict objectForKey:@"nome"];
+                    NSString * resId = [dict objectForKey:@"id"];
+                    NSString * lati = [dict objectForKey:@"lat"];
+                    NSString * longi = [dict objectForKey:@"lon"];
+                  
+                    if([[dict objectForKey:@"pag"] isEqualToString:@"sim"])
+                    {
+                        rest.destaque = YES;
+                    }else
+                    {
+                        rest.destaque = NO;
+                    }
+                    
+                    
+                    CLLocation * localRest = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:[longi doubleValue]];
+                    
+                    
+                    //NSLog(@"distancia em metros=> %f m rest => %@" , distancia,restName);
+                    CLLocationDistance distance = [localOriginal distanceFromLocation:localRest];
+                    
+                   // NSLog(@"distancia calculada pelo ios em metros %f de %@", distance,restName);
+                    
+                    rest.lat =[lati doubleValue];
+                    rest.lon =[longi doubleValue];
+                    rest.name = restName;
+                    rest.dbId = [resId integerValue];
+                    
+                    [restaurantesRecomendados addObject:rest];
+                }
+                
+                if (restaurantesRecomendados.count>0) {
+                    [self ordenarPorPagos:restaurantesRecomendados];
+                }
+                
+                
+                
+                
+                
+                
+                
+                //
+                break;
+            }
+                
+        }
+    }else
+    {
+        NSLog(@"error webserviceSender %@",error);
+        
+    }
+    
+    
+}
+
+-(void)ordenarPorPagos:(NSMutableArray *)array
+{
+    
+    
+    // ok tenho de ter 2 arrays de restaurantes para pagos e para nao pagos
+    NSMutableArray * arrayPagos = [NSMutableArray new];
+    NSMutableArray * arrayNaoPagos = [NSMutableArray new];
+    
+
+    NSMutableArray * maisPerto = [NSMutableArray new];
+    
+    for (Restaurant * rest in array) {
+        if(rest.destaque)
+        {
+            [arrayPagos addObject:rest];
+        }
+        else
+        {
+            [arrayNaoPagos addObject:rest];
+        }
+    }
+    
+
+    NSLog(@"total de restaurantes pagos %d", arrayPagos.count);
+    for (int i = 0 ; i< arrayPagos.count ;i++)
+    {
+        //Restaurant * rest1 = [arrayPagos objectAtIndex:i];
+     
+        if (i<1 && arrayNaoPagos.count>3) {
+            [arrayPagos insertObject:[arrayNaoPagos objectAtIndex:i] atIndex:i];
+            [arrayNaoPagos removeObjectAtIndex:i];
+        }
+        
+         //NSLog(@"total %hhd %@", ((Restaurant *)[arrayPagos objectAtIndex:i]).destaque , ((Restaurant *)[arrayPagos objectAtIndex:i]).name);
+        
+        if (i>=9) {
+            [arrayPagos removeObjectAtIndex:i];
+        }
+    }
+    
+    
+    // isto é para adicionar os nao pagos no fim
+    if(arrayPagos.count<12)
+    {
+        int i = 1;
+        while (arrayPagos.count<12) {
+            [arrayPagos insertObject:[arrayNaoPagos objectAtIndex:0] atIndex:arrayPagos.count];
+            [arrayNaoPagos removeObjectAtIndex:0];
+            i++;
+        }
+    }
+    
+   
+ 
+    [maisPerto setArray:arrayPagos];
+    
+    NSLog(@"total de restaurantes %d", maisPerto.count);
+    
+    
+    for (int i = 0 ; i< arrayPagos.count ;i++)
+    {
+     
+        NSLog(@"na collection %hhd %@", ((Restaurant *)[arrayPagos objectAtIndex:i]).destaque , ((Restaurant *)[arrayPagos objectAtIndex:i]).name);
+       
+    }
+
+    
+    restaurantesRecomendados = maisPerto;
+    
+    
+    // para a colecçao
+    self.numbers = [@[] mutableCopy];
+    for(; num<restaurantesRecomendados.count; num++)
+    {
+        [self.numbers addObject:@(num)];
+    }
+    
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    
+    RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
+    layout.direction = UICollectionViewScrollDirectionVertical;
+    layout.blockPixels = CGSizeMake(155, 100);
+
+    
+    
+    [self.collectionView reloadData];
+    
+    
+    
+}
 
 
 
@@ -51,37 +261,36 @@
     return self;
 }
 
+
 -(void)viewWillAppear:(BOOL)animated{
-    self.labelRestaurante.text = [Language textForIndex:@"Restaurante"];
-    self.labelCidade.text = [Language textForIndex:@"Cidade"];
-    self.labelOsMeusMenus.text = [Language textForIndex:@"Meus_menus"];
-    
-    //if (![Globals user]) {
-    
-    //}
-    
+     [super viewWillAppear:YES];
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+    [super viewWillDisappear:animated];
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
     
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+}
+
+
 -(void)viewDidAppear:(BOOL)animated
 {
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+
     
-   // if(showFacebook == NO)
-    //{
-    
-//    if([[Globals user].loginType isEqualToString:@"facebook"])
-//    {
-//        [self loadUser];
-//    }else if([[Globals user].loginType isEqualToString:@"guru"])
-//    {
-//        [self loadGuruImage];
-//    }
-    
-    
-    
-    
-    
-    NSLog(@"Tipo de login realisado %@",[Globals user].loginType);
+    NSLog(@"Tipo de login realisado main page did appear %@",[Globals user].loginType);
     
     if([[Globals user].loginType isEqualToString:@"facebook"])
     {
@@ -93,9 +302,22 @@
     }
     else if ([FBSession activeSession].isOpen && ![Globals user]){
         [self loadUser];
+    }else{
+        [self loadButtonLogin];
     }
-   
-//}
+  
+}
+
+-(void)loadButtonLogin
+{
+    self.imageFacebook.image = [UIImage imageNamed:@"QUADRADO SUBMETER.png"];
+    self.imageFacebook.layer.cornerRadius = self.imageFacebook.frame.size.height/2;
+    self.imageFacebook.clipsToBounds = YES;
+    self.imageFacebook.layer.borderWidth = 0.0f;
+    self.imageFacebook.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.buttonGo.alpha = 1;
+    self.labelUsername.text =@"";
+    
 }
 
 - (void)loadGuruImage
@@ -115,6 +337,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self gps];
+    
+    
     self.navigationController.navigationBarHidden = YES;
     
     
@@ -125,14 +351,14 @@
     [self.buttonCities setSelected:YES];
     tipo = @"Cities";
     
-    [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
+    //[self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
     
-    self.buttonRestaurant.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:20];
-    self.buttonCities.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:20];
-    self.buttonGo.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:18];
-    self.texfFieldPesquisa.font = [UIFont fontWithName:@"DKCrayonCrumble" size:18];
+//    self.buttonRestaurant.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:20];
+//    self.buttonCities.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:20];
+//    self.buttonGo.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:18];
+//    self.texfFieldPesquisa.font = [UIFont fontWithName:@"DKCrayonCrumble" size:32];
     
-    [NSThread detachNewThreadSelector:@selector(loadCities) toTarget:self withObject:nil];
+// [NSThread detachNewThreadSelector:@selector(loadCities) toTarget:self withObject:nil];
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -151,15 +377,127 @@
     
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [self.view addGestureRecognizer:singleTap];
-    
+    [self.scrollView addGestureRecognizer:singleTap];
+    self.delegate = self;
 
    // [self makeLogin];
     //[self loadUser];
    
+    //self.scrollView.contentOffset = CGPointMake( 0, 90);
     
-        
+    
+  
+    [self gps];
 
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    NSLog(@" scrolloffset %f",scrollView.contentOffset.y);
+//    CGFloat numero = scrollView.contentOffset.y *-1;
+//    CGFloat alpha = numero/(numero /0.5f)   ;
+    
+    CGFloat alpha;
+    if (scrollView.contentOffset.y!=0)
+        alpha =0.7;
+    else
+        alpha = 0;
+        
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.uiviewTransparent setAlpha:alpha];
+    }];
+        
+    
+
+}
+
+
+-(void)gps
+{
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    //locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [locationManager startUpdatingLocation];
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    // tem de chamar aqui o webservice
+    [self lerRecomendados];
+    [locationManager stopUpdatingLocation];
+}
+
+
+
+
+
+// cenas da colecçao
+
+- (UIColor*) colorForNumber:(NSNumber*)num {
+    return [UIColor colorWithHue:((19 * num.intValue) % 255)/255.f saturation:1.f brightness:1.f alpha:1.f];
+}
+
+#pragma mark - UICollectionView Datasource
+
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
+    return self.numbers.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
+    cell.clipsToBounds = YES;
+    
+    UILabel* label = (id)[cell viewWithTag:5];
+    if(!label) label = [[UILabel alloc] initWithFrame:CGRectMake(0, cell.frame.size.height/2, cell.frame.size.width, cell.frame.size.height/2)];
+    label.tag = 5;
+    label.textColor = [UIColor blackColor];
+    //label.text = [NSString stringWithFormat:@"%@", self.numbers[indexPath.row]];
+    
+    Restaurant * restaurante=  [restaurantesRecomendados objectAtIndex:indexPath.row];
+    
+    label.text = [NSString stringWithFormat:@"%@", restaurante.name];
+    label.backgroundColor = [UIColor clearColor];
+    [cell addSubview:label];
+    
+    return cell;
+    
+}
+
+#pragma mark collection view cell paddings
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return 10.0;
+}
+
+#pragma mark – RFQuiltLayoutDelegate
+
+- (CGSize) blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.row >= self.numbers.count)
+        NSLog(@"Asking for index paths of non-existant cells!! %d from %d cells", indexPath.row, self.numbers.count);
+    
+
+    
+    // alterado plo Hugo
+    if (indexPath.row % 2 == 0)
+        return CGSizeMake(1, 2.0f);
+    else if (indexPath.row % 3 == 0)
+        return CGSizeMake(1, 3.0f);
+    else
+        return CGSizeMake(2, 2.0f);
+    
+    return CGSizeMake(1, 1);
+}
+
+- (UIEdgeInsets)insetsForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return UIEdgeInsetsMake(10, 5, 0, 5);
 }
 
 
@@ -174,6 +512,7 @@
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender
 {
+     [self.scrollView setContentOffset:CGPointMake( 0,0) animated:YES];
     [self.texfFieldPesquisa resignFirstResponder];
 }
 
@@ -247,12 +586,23 @@
 
 - (IBAction)pushMenu:(id)sender {
     
-    MenuRefugio *t = [[MenuRefugio alloc] init];
-    UINavigationController *n = [[UINavigationController alloc] initWithRootViewController:t];
-    [self.revealSideViewController pushViewController:n onDirection:PPRevealSideDirectionTop withOffset:t.view.frame.size.height animated:YES];
-    PP_RELEASE(t);
-    PP_RELEASE(n);
+//    MenuRefugio *t = [[MenuRefugio alloc] init];
+//    t.delegate = self;
+//    //UINavigationController *n = [[UINavigationController alloc] initWithRootViewController:t];
+//    
+//    [self.revealSideViewController pushViewController:t onDirection:PPRevealSideDirectionTop withOffset:t.view.frame.size.height animated:YES];
+//    PP_RELEASE(t);
+//    //PP_RELEASE(n);
+    [self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
+    [self.delegate performSelector:@selector(chamarTopo) ];
 
+}
+
+
+// para poder chamar o centro ao fim de alguma coisa
+-(void)callCenter
+{
+    [self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionNone animated:YES];
 }
 
 - (IBAction)ClickCitie:(id)sender {
@@ -275,6 +625,12 @@
     self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeRest;
     
     tipo = @"Restaurants";
+}
+
+- (IBAction)clickPesquisa:(id)sender {
+
+    
+    [self.scrollView setContentOffset:CGPointMake( 0, -90) animated:YES];
 }
 
 
@@ -394,7 +750,7 @@
 
 - (IBAction)clickFav:(id)sender {
     
-    NSLog(@"Tipo de login realisado %@",[Globals user].loginType);
+    NSLog(@"Tipo de login realisado mainpage click fav%@",[Globals user].loginType);
     
     if([[Globals user].loginType isEqualToString:@"facebook"])
     {
@@ -417,7 +773,8 @@
     Login *log = [Login new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
     
-    [self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+    //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:nil];
 
 }
 
@@ -543,6 +900,10 @@
 
 -(void)ChamarFavoritos
 {
+    
+    
+    NSLog(@"chamar navigation com os favoritos");
+    
     Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
     [c setResultado:self.texfFieldPesquisa.text];
     [c setTipo:@"Favoritos"];

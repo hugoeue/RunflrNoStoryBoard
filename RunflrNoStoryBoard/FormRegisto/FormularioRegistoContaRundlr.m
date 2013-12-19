@@ -239,6 +239,7 @@
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender
 {
     [self.view resignFirstResponder];
+    
 }
 
 

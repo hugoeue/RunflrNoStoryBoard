@@ -35,10 +35,18 @@
 #import <UIKit/UIKit.h>
 #import "PaperFoldView.h"
 #import <MapKit/MapKit.h>
+#import "MainPage.h"
+#import "MenuRefugio.h"
 
 @interface DemoRootViewController : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, PaperFoldViewDelegate>
 @property (nonatomic, strong) PaperFoldView *paperFoldView;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITableView *leftTableView, *centerTableView;
 @property (nonatomic, strong) UIView *topView, *bottomView;
+
+@property (nonatomic ,strong) MainPage *main;
+@property (nonatomic, strong) MenuRefugio *menu;
+
+@property (nonatomic, strong) UINavigationController * nav;
+
 @end

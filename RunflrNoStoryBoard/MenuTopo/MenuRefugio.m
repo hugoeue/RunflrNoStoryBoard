@@ -9,6 +9,8 @@
 #import "MenuRefugio.h"
 #import "Login.h"
 #import "LanguageViewController.h"
+#import "PaginaPessoal.h"
+#import "PaperFoldView.h"
 
 @interface MenuRefugio ()
 
@@ -29,10 +31,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationController.navigationBarHidden = YES;
+    
     [self changeFont:self.view];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = YES;
+}
 
 -(void)changeFont:(UIView *) view{
     for (id View in [view subviews]) {
@@ -61,7 +67,32 @@
 }
 
 - (IBAction)buttonLingua:(id)sender {
-    LanguageViewController *linguas =[LanguageViewController new];
-    [self.revealSideViewController presentViewController:linguas animated:YES completion:nil];
+//    LanguageViewController *linguas =[LanguageViewController new];
+//    linguas.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    //[self.revealSideViewController presentViewController:linguas animated:YES completion:nil];
+    
+    [self.delegate performSelector:@selector(chamarLigua) ];
+    
 }
+
+- (IBAction)buttonPaginaPessoal:(id)sender {
+    
+//    if([Globals user]){
+//    
+//        PaginaPessoal *pagPessoal = [PaginaPessoal new];
+//        pagPessoal.delegate = self.delegate;
+//        //[self.navigationController pushViewController:pagPessoal animated:YES];
+//        pagPessoal.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        [self presentViewController:pagPessoal animated:YES completion:nil];
+//    }else
+//    {
+//        [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[Login new]] animated:YES completion:nil];
+//    }
+    
+    [self.delegate performSelector:@selector(chamarPaginaPessoal) ];
+    
+}
+
+
+
 @end

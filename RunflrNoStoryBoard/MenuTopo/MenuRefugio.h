@@ -11,6 +11,12 @@
 @interface MenuRefugio : UIViewController
 - (IBAction)buttonFacebookLogin:(id)sender;
 - (IBAction)buttonLingua:(id)sender;
+- (IBAction)buttonPaginaPessoal:(id)sender;
+
+
+
 @property (weak, nonatomic) IBOutlet UILabel *labelLingua;
+
+@property (nonatomic, assign) id delegate;
 
 @end

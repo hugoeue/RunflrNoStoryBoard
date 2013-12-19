@@ -30,6 +30,8 @@
         [_rootViewController.view setFrame:CGRectMake(0,0,[self.view bounds].size.width,[self.view bounds].size.height)];
         [_rootViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
         [_paperFoldView setCenterContentView:_rootViewController.view];
+        
+               
     }
     return self;
 }
@@ -50,17 +52,26 @@
     [self.paperFoldView setLeftFoldContentView:self.leftViewController.view foldCount:3 pullFactor:0.9];
 }
 
-- (void)setTopViewControllerC:(UIViewController *)topViewController width:(float)width
+- (void)setTopViewController:(UIViewController *)topViewController
 {
     _topViewController = topViewController;
     
-    //[self.topViewController.view setFrame:CGRectMake(0,0,width,[self.view bounds].size.height)];
-    //[self.paperFoldView setLeftFoldContentView:self.leftViewController.view foldCount:3 pullFactor:0.9];
+    [self.topViewController.view setFrame:CGRectMake(0,0,320,300)];
     [self.paperFoldView setTopFoldContentView:self.topViewController.view topViewFoldCount:3 topViewPullFactor:0.9];
+    
+ 
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+
 
 - (void)paperFoldView:(id)paperFoldView didFoldAutomatically:(BOOL)automated toState:(PaperFoldState)paperFoldState
 {
+    
+    NSLog(@"did transition to state %i automated %i", paperFoldState, automated);
     if (paperFoldState==PaperFoldStateDefault)
     {
         if (self.leftViewController) {
@@ -92,18 +103,8 @@
         [self.rightViewController viewWillAppear:YES];
         [self.rightViewController viewDidAppear:YES];
     }
-#warning isto ainda esta mal
-    else if (paperFoldState==PaperFoldStateTopUnfolded)
-    {
-        [self.rootViewController viewWillDisappear:YES];
-        [self.rootViewController viewDidDisappear:YES];
-        
-        [self.topViewController viewWillAppear:YES];
-        [self.topViewController viewDidAppear:YES];
-        
-        
-    }
-
 }
+
+
 
 @end
