@@ -12,7 +12,7 @@
 #import "RFQuiltLayout.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface MainPage : UIViewController <UITextFieldDelegate,CLLocationManagerDelegate, RFQuiltLayoutDelegate, UIScrollViewDelegate>
+@interface MainPage : UIViewController <UITextFieldDelegate,CLLocationManagerDelegate, RFQuiltLayoutDelegate, UIScrollViewDelegate, UICollectionViewDelegate>
 {
     CLLocationManager *locationManager;
 }
@@ -56,6 +56,7 @@
 // transparencia negra
 
 @property (weak, nonatomic) IBOutlet UIView *uiviewTransparent;
+@property (weak, nonatomic) IBOutlet UIImageView *imageBico;
 
 
 @end

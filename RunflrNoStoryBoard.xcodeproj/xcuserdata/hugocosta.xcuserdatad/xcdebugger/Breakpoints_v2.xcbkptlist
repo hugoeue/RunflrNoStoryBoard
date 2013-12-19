@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409137742.772399"
+            timestampString = "409169370.758402"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "740"
-            endingLineNumber = "740"
+            startingLineNumber = "972"
+            endingLineNumber = "972"
             landmarkName = "-makeLogin"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409137742.772399"
+            timestampString = "409169370.758402"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "867"
-            endingLineNumber = "867"
+            startingLineNumber = "1099"
+            endingLineNumber = "1099"
             landmarkName = "-upUser:"
             landmarkType = "5">
          </BreakpointContent>
@@ -233,12 +233,12 @@
                   symbolName = "-[FormularioRegistoContaRundlr addDate:]"
                   moduleName = "RunflrNoStoryBoard"
                   urlString = "file:///Users/hugocosta/Documents/cenas%20xcode/RunflrNoStoryBoard/RunflrNoStoryBoard/FormRegisto/FormularioRegistoContaRundlr.m"
-                  timestampString = "409137387.938963"
+                  timestampString = "409169579.30998"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
                   endingLineNumber = "210"
-                  offsetFromSymbolStart = "96">
+                  offsetFromSymbolStart = "82">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -247,12 +247,12 @@
                   symbolName = "__40-[FormularioRegistoContaRundlr addDate:]_block_invoke"
                   moduleName = "RunflrNoStoryBoard"
                   urlString = "file:///Users/hugocosta/Documents/cenas%20xcode/RunflrNoStoryBoard/RunflrNoStoryBoard/FormRegisto/FormularioRegistoContaRundlr.m"
-                  timestampString = "409137387.939084"
+                  timestampString = "409169579.3101"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "210"
                   endingLineNumber = "210"
-                  offsetFromSymbolStart = "34">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409072300.088136"
+            timestampString = "409159267.018741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "-ordenarPorPagos:"
             landmarkType = "5">
          </BreakpointContent>
@@ -328,27 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409072300.088136"
+            timestampString = "409159267.018741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "-ordenarPorPagos:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409072433.56219"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
             landmarkName = "-ordenarPorPagos:"
             landmarkType = "5">
          </BreakpointContent>
@@ -392,28 +376,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409088421.380351"
+            timestampString = "409159267.018741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "-viewWillDisappear:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
-            timestampString = "409137742.772399"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "636"
-            endingLineNumber = "636"
-            landmarkName = "-clickPesquisa:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

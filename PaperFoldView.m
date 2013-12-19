@@ -79,10 +79,10 @@
     [_contentView setBackgroundColor:[UIColor whiteColor]];
     [_contentView setAutoresizesSubviews:YES];
     
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onContentViewPanned:)];
-	panGestureRecognizer.delegate = self;
-    [_contentView addGestureRecognizer:panGestureRecognizer];
-    [panGestureRecognizer setDelegate:self];
+    self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onContentViewPanned:)];
+	self.panGestureRecognizer.delegate = self;
+    [_contentView addGestureRecognizer:self.panGestureRecognizer];
+    [self.panGestureRecognizer setDelegate:self];
     
     _state = PaperFoldStateDefault;
     _lastState = _state;
@@ -184,7 +184,7 @@
 	line.alpha = 0;
 	self.rightDividerLine = line;
     
-    //self.enableRightFoldDragging = YES;
+    self.enableRightFoldDragging = YES;
 }
 
 // this method is deprecated
@@ -212,9 +212,8 @@
 	line.alpha = 0;
 	self.topDividerLine = line;
     
-    //self.enableTopFoldDragging = NO;
+    self.enableTopFoldDragging = NO;
 }
-
 
 - (void)onContentViewPanned:(UIPanGestureRecognizer*)gesture
 {
@@ -817,8 +816,6 @@
 								 animated:(BOOL)animated
 							 completion:(void (^)())completion
 {
-    //_timerStepDuration = 0.02;
-    
 	self.completionBlock = completion;
 	[self setPaperFoldState:state animated:animated];
 }
@@ -843,6 +840,12 @@
 {
     [self setShowDividerLines:NO animated:YES];
 	
+    if (state == PaperFoldStateBottomUnfolded || state == PaperFoldStateTopUnfolded) {
+        [self.contentView removeGestureRecognizer:self.panGestureRecognizer];
+    } else if (state == PaperFoldStateDefault) {
+        [self.contentView addGestureRecognizer:self.panGestureRecognizer];
+    }
+    
     // we prefer executing the completion block, otherwise we notify the delegate
     if (self.completionBlock != nil) {
         self.completionBlock();
