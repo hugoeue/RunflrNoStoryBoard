@@ -50,12 +50,15 @@
         [self.view addSubview:_paperFoldView];
         [_paperFoldView setTimerStepDuration:0.02f];
         [_paperFoldView setEnableTopFoldDragging:NO];
-       
+        [_paperFoldView setEnableBottomFoldDragging:NO];
+        [_paperFoldView setEnableHorizontalEdgeDragging:NO];
+        [_paperFoldView setEnableRightFoldDragging:NO];
+        [_paperFoldView setEnableLeftFoldDragging:NO];
         
         
         
         _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
-        [_paperFoldView setRightFoldContentView:_mapView foldCount:3 pullFactor:0.9];
+        //[_paperFoldView setRightFoldContentView:_mapView foldCount:3 pullFactor:0.9];
         
 //        _centerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,[self.view bounds].size.height)];
 //        [_centerTableView setRowHeight:120];
@@ -114,7 +117,7 @@
         _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
         [_leftTableView setRowHeight:100];
         //[_leftTableView setDataSource:self];
-        [_paperFoldView setLeftFoldContentView:_leftTableView foldCount:3 pullFactor:0.9];
+        //[_paperFoldView setLeftFoldContentView:_leftTableView foldCount:3 pullFactor:0.9];
 
         
         

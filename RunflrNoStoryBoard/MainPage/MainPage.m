@@ -378,7 +378,6 @@ int num = 0;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.scrollView addGestureRecognizer:singleTap];
-    self.delegate = self;
 
    // [self makeLogin];
     //[self loadUser];
@@ -396,6 +395,9 @@ int num = 0;
 //    CGFloat numero = scrollView.contentOffset.y *-1;
 //    CGFloat alpha = numero/(numero /0.5f)   ;
     
+    
+    if (self.scrollView == scrollView) {
+    
     CGFloat alpha;
     if (scrollView.contentOffset.y!=0)
         alpha =0.7;
@@ -406,7 +408,8 @@ int num = 0;
         [self.uiviewTransparent setAlpha:alpha];
     }];
         
-    
+        
+    }
 
 }
 
@@ -577,6 +580,8 @@ int num = 0;
 
 -(void)ChamarPesquisa
 {
+    
+    
     Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
     [c setResultado:self.texfFieldPesquisa.text];
     [c setTipo:tipo];
@@ -593,7 +598,7 @@ int num = 0;
 //    [self.revealSideViewController pushViewController:t onDirection:PPRevealSideDirectionTop withOffset:t.view.frame.size.height animated:YES];
 //    PP_RELEASE(t);
 //    //PP_RELEASE(n);
-    [self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
+    //[self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
     [self.delegate performSelector:@selector(chamarTopo) ];
 
 }
@@ -629,8 +634,10 @@ int num = 0;
 
 - (IBAction)clickPesquisa:(id)sender {
 
-    
-    [self.scrollView setContentOffset:CGPointMake( 0, -90) animated:YES];
+    if(self.scrollView.contentOffset.y == 0)
+        [self.scrollView setContentOffset:CGPointMake( 0, -90) animated:YES];
+    else
+        [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
 }
 
 
