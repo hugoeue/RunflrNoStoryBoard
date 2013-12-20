@@ -153,12 +153,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    
     [self.window makeKeyAndVisible];
     
     DemoRootViewController *paper = [[DemoRootViewController alloc] init];
     //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:paper];
     //[navController setNavigationBarHidden:YES];
     [self.window setRootViewController:paper];
+    
+    
     
     return YES;
 

@@ -39,6 +39,11 @@
 		BA0B9696184E8A9600182E0A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9695184E8A9600182E0A /* User.m */; };
 		BA0B9699184E8BFD00182E0A /* FeaturedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9698184E8BFD00182E0A /* FeaturedParser.m */; };
 		BA18C8B3185B32FF00DCC74B /* transferir.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BA18C8B2185B32FF00DCC74B /* transferir.jpeg */; };
+		BA2C6DAE1864A6A3008F8DF2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */; };
+		BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB41864A861008F8DF2 /* 58x58-1.png */; };
+		BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */; };
+		BA2C6DB91864A94B008F8DF2 /* 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB81864A94B008F8DF2 /* 120x120.png */; };
+		BA2C6DBD1864ADE8008F8DF2 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DBC1864ADE8008F8DF2 /* Images-2.xcassets */; };
 		BA2E8E69185EF82700CA31AF /* PaginaPessoal.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2E8E67185EF82700CA31AF /* PaginaPessoal.m */; };
 		BA2E8E6A185EF82700CA31AF /* PaginaPessoal.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA2E8E68185EF82700CA31AF /* PaginaPessoal.xib */; };
 		BA2E8E6D185F49FD00CA31AF /* PaperFoldNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2E8E6C185F49FD00CA31AF /* PaperFoldNavigationController.m */; };
@@ -168,7 +173,6 @@
 		BA93FDA7184D3C3F004001E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FDA6184D3C3F004001E4 /* AppDelegate.m */; };
 		BA93FDAD184D3C3F004001E4 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FDAC184D3C3F004001E4 /* MasterViewController.m */; };
 		BA93FDB0184D3C3F004001E4 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FDAF184D3C3F004001E4 /* DetailViewController.m */; };
-		BA93FDB2184D3C3F004001E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA93FDB1184D3C3F004001E4 /* Images.xcassets */; };
 		BA93FDB9184D3C3F004001E4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FDB8184D3C3F004001E4 /* XCTest.framework */; };
 		BA93FDBA184D3C3F004001E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FD96184D3C3F004001E4 /* Foundation.framework */; };
 		BA93FDBB184D3C3F004001E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FD9A184D3C3F004001E4 /* UIKit.framework */; };
@@ -248,6 +252,12 @@
 		BA0B9697184E8BFD00182E0A /* FeaturedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedParser.h; sourceTree = "<group>"; };
 		BA0B9698184E8BFD00182E0A /* FeaturedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedParser.m; sourceTree = "<group>"; };
 		BA18C8B2185B32FF00DCC74B /* transferir.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transferir.jpeg; sourceTree = "<group>"; };
+		BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BA2C6DB41864A861008F8DF2 /* 58x58-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "58x58-1.png"; sourceTree = "<group>"; };
+		BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80x80-1.png"; sourceTree = "<group>"; };
+		BA2C6DB81864A94B008F8DF2 /* 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120x120.png; sourceTree = "<group>"; };
+		BA2C6DBB1864AAD3008F8DF2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		BA2C6DBC1864ADE8008F8DF2 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		BA2E8E66185EF82700CA31AF /* PaginaPessoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PaginaPessoal.h; path = PaginaPessoal/PaginaPessoal.h; sourceTree = "<group>"; };
 		BA2E8E67185EF82700CA31AF /* PaginaPessoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PaginaPessoal.m; path = PaginaPessoal/PaginaPessoal.m; sourceTree = "<group>"; };
 		BA2E8E68185EF82700CA31AF /* PaginaPessoal.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PaginaPessoal.xib; path = PaginaPessoal/PaginaPessoal.xib; sourceTree = "<group>"; };
@@ -412,7 +422,6 @@
 		BA93FDAC184D3C3F004001E4 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		BA93FDAE184D3C3F004001E4 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		BA93FDAF184D3C3F004001E4 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		BA93FDB1184D3C3F004001E4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA93FDB7184D3C3F004001E4 /* RunflrNoStoryBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunflrNoStoryBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA93FDB8184D3C3F004001E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BA93FDC0184D3C3F004001E4 /* RunflrNoStoryBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RunflrNoStoryBoardTests-Info.plist"; sourceTree = "<group>"; };
@@ -571,6 +580,23 @@
 				BA0B9692184E8A7700182E0A /* Restaurant.m */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		BA2C6D8E18644E61008F8DF2 /* CachedLib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CachedLib;
+			sourceTree = "<group>";
+		};
+		BA2C6DAC1864A5F5008F8DF2 /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				BA2C6DB81864A94B008F8DF2 /* 120x120.png */,
+				BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */,
+				BA2C6DB41864A861008F8DF2 /* 58x58-1.png */,
+			);
+			name = "App Icons";
 			sourceTree = "<group>";
 		};
 		BA2E8E65185EF7F600CA31AF /* Pagina Pessoal */ = {
@@ -799,6 +825,9 @@
 		BA93FD8A184D3C3F004001E4 = {
 			isa = PBXGroup;
 			children = (
+				BA2C6DBB1864AAD3008F8DF2 /* Default@2x.png */,
+				BA2C6DAC1864A5F5008F8DF2 /* App Icons */,
+				BA2C6D8E18644E61008F8DF2 /* CachedLib */,
 				BA324BC6186308CD001688CC /* FXimage */,
 				BA371E9C18607AE900B2353E /* Colleccao */,
 				BA889B2F1859C52D00C473D3 /* PapperFold */,
@@ -856,7 +885,8 @@
 				BA93FDAC184D3C3F004001E4 /* MasterViewController.m */,
 				BA93FDAE184D3C3F004001E4 /* DetailViewController.h */,
 				BA93FDAF184D3C3F004001E4 /* DetailViewController.m */,
-				BA93FDB1184D3C3F004001E4 /* Images.xcassets */,
+				BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */,
+				BA2C6DBC1864ADE8008F8DF2 /* Images-2.xcassets */,
 				BA93FD9D184D3C3F004001E4 /* Supporting Files */,
 			);
 			path = RunflrNoStoryBoard;
@@ -990,10 +1020,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA2C6DBD1864ADE8008F8DF2 /* Images-2.xcassets in Resources */,
+				BA2C6DAE1864A6A3008F8DF2 /* Images.xcassets in Resources */,
 				BA65F16718623FAC00BF914A /* transferir.jpeg in Resources */,
 				BA65F15518623FAC00BF914A /* on_click_lmenu.png in Resources */,
 				BA65F14318623FAC00BF914A /* fundo_pequeno.png in Resources */,
-				BA93FDB2184D3C3F004001E4 /* Images.xcassets in Resources */,
 				BA65F14E18623FAC00BF914A /* lousa.png in Resources */,
 				BA54BC041851103E006446D6 /* madeira.png in Resources */,
 				BA54BC2018511089006446D6 /* caixa_gera_dia.png in Resources */,
@@ -1050,6 +1081,7 @@
 				BA0B967D184E648600182E0A /* Resultados.xib in Resources */,
 				BA32BD5F1861E9230019B69F /* 1.png in Resources */,
 				BA65F13E18623FAC00BF914A /* face_icon.png in Resources */,
+				BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */,
 				BA54BC2A18511089006446D6 /* quadrado.png in Resources */,
 				BA65F15118623FAC00BF914A /* mais.png in Resources */,
 				BA65F15D18623FAC00BF914A /* select.png in Resources */,
@@ -1064,6 +1096,7 @@
 				BA65F14918623FAC00BF914A /* ligar_restarante.png in Resources */,
 				BA65F15918623FAC00BF914A /* QUADRADO SUBMETER.png in Resources */,
 				BA54BC1C18511089006446D6 /* back_foto_utili.png in Resources */,
+				BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */,
 				BA54BC2818511089006446D6 /* panela_grande.png in Resources */,
 				BA65F15E18623FAC00BF914A /* seta_BACK.png in Resources */,
 				BA65F13F18623FAC00BF914A /* facebook_tira.png in Resources */,
@@ -1080,6 +1113,7 @@
 				BA9BB0351859FCE3009ED843 /* FormularioRegistoContaRundlr.xib in Resources */,
 				BA65F13418623FAC00BF914A /* back_foto_utili.png in Resources */,
 				BA54BC2418511089006446D6 /* lupa.png in Resources */,
+				BA2C6DB91864A94B008F8DF2 /* 120x120.png in Resources */,
 				BA54BC3118511089006446D6 /* utilizador_redondo.png in Resources */,
 				BA2E8E6A185EF82700CA31AF /* PaginaPessoal.xib in Resources */,
 				BA65F13A18623FAC00BF914A /* caixa login.png in Resources */,

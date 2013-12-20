@@ -77,7 +77,12 @@
         
         
         
-
+        
+        
+//        UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0,320, 20)];
+//        view.backgroundColor=[UIColor blackColor];
+//        [self.view addSubview:view];
+    
         
         
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(-1,0,1,[self.view bounds].size.height)];
@@ -193,10 +198,13 @@
     
     if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
     {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
     }
-    else
+    else{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded animated:YES completion:nil];
+    }
 }
 
 
