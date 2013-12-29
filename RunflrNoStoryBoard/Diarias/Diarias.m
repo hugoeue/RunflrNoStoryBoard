@@ -14,15 +14,19 @@
 #import "MenuDoDia.h"
 #import "MenuGeral.h"
 #import "Tipo.h"
+#import <MapKit/MapKit.h>
+#import "CollectionGuru.h"
 
 
 @interface Diarias (){
     Restaurant * restaurante;
     WebServiceSender *webser;
-    WebServiceSender *webser2;
 
     MenuDoDia * menuDia;
     MenuGeral * menuG;
+    
+    CollectionGuru *colececaoFavoritos;
+    NSMutableArray *cartoes;
 }
 
 @end
@@ -41,121 +45,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setUp];
+   
+    self.labelTitleRestaurnat.text = restaurante.name;
+    self.labelLocalisacao.text = restaurante.address;
+    self.labelCosinhas.text = restaurante.cuisinesResultText;
     
-    webser = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_tipo_menu.php" method:@"devolve_tipo_menu_dia" tag:1];
+    self.imagemRestaurante.asynchronous = YES;
+     [self.imagemRestaurante setImageWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString ]]];
+    
+    webser = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_m_rest.php" method:@"" tag:1];
     webser.delegate = self;
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[Globals lang] forKey:@"lang"];
     
     NSString * numeroRestaurante = [NSString stringWithFormat:@"%d", restaurante.dbId];
-    NSString * numeroTipo = [NSString stringWithFormat:@"%d", 1];
+   
     
     
     [dict setObject:numeroRestaurante forKey:@"rest_id"];
-    [dict setObject:numeroTipo forKey:@"tipo_id"];
 
     [webser sendDict:dict];
     
     
-    webser2 = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_menu_dia.php" method:@"devolve_tipo_menu_dia" tag:2];
-    webser2.delegate = self;
-    
-    [dict setObject:[Globals lang] forKey:@"lang"];
-    [dict setObject:numeroRestaurante forKey:@"rest_id"];
-    [dict setObject:numeroTipo forKey:@"tipo_id"];
-    
-    [webser2 sendDict:dict];
-    
-    
     ///////////////
-    
-    [self loadMenu];
+
   
-    [self changeFont:self.view];
     
-    self.labelLocalisacao.text=restaurante.description;
-    
-}
-
-
--(void)changeFont:(UIView *) view{
-    for (id View in [view subviews]) {
-        if ([View isKindOfClass:[UILabel class]]) {
-            [View setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:26]];
-            //view.textColor = [UIColor blueColor];
-            [View setBackgroundColor:[UIColor clearColor]];
-        }
-        if ([View isKindOfClass:[UIView class]]) {
-            [self changeFont:View];
-        }
-    }
-}
-
-- (void)loadMenu
-{
-
-    MenuParser *menuParser = [[MenuParser alloc] initXMLParser];
-    
-    //  NSString *hostM = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_menu.php?rest_id=%d", [Globals restaurantId]];
-    
-    NSString *getDataM = [NSString stringWithFormat:@"&rest_id=%d", restaurante.dbId];
-    NSString *hostM = [Globals hostWithFile:@"xml_menu.php" andGetData:getDataM];
-    
-    NSURL *urlM = [[NSURL alloc] initWithString: hostM];
-    NSXMLParser *nsXmlParserM = [[NSXMLParser alloc] initWithContentsOfURL: urlM];
-    [nsXmlParserM setDelegate:menuParser];
-    
-    //[nsXmlParserM parse];
-    
-    
-    BOOL success = [nsXmlParserM parse];
-    
-    if (success) {
-        [self performSelectorOnMainThread:@selector(startUpContainers) withObject:nil waitUntilDone:NO];
-        
-        
-        
-         for (Menu * vitie in [Globals days]) {
-             NSLog(@"dias prato: %@ ",vitie.dish);
-             NSLog(@"dias descriçao: %@ ",vitie.description);
-             NSLog(@"dias extra: %@ ",vitie.extra);
-             NSLog(@"dias tipo menu: %@ ",vitie.tipo);
-             NSLog(@"dias tipo menu: %@ ",vitie.tipod);
-             
-         }
-        
-        for (Menu * vitie in [Globals choices]) {
-            NSLog(@"escolhas name: %@ ",vitie.dish);
-        }
-        
-        
-    } else {
-        [self performSelectorOnMainThread:@selector(noConnect) withObject:nil waitUntilDone:NO];
-    }
+       
 }
 
 
 
-- (void)startUpContainers{
-   
-    if(!menuDia){
-        menuDia = [MenuDoDia new];
-        [self.container addSubview:menuDia.view];
-    }
 
-    
-}
-
--(void)noConnect
-{
-
-}
-
--(void)setUp{
-    self.labelTitleRestaurnat.text = restaurante.name;
-}
 
 -(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
     
@@ -167,34 +89,79 @@
         {
             case 1:
             {
-                NSLog(@"resultado da tania xml_tipo_menu.php  %@", result.description);
+                NSLog(@"resultado da tania para todos os cartoes  %@", result.description);
                 
-                NSMutableArray * array = [NSMutableArray new];
+//                res =     (
+//                           {
+//                               descricao = "O melhor prato de inverno do nosso chefe";
+//                               destaque = 0;
+//                               "dia_id" = 4;
+//                               "height_i" = "";
+//                               imagem = "";
+//                               "menu_esp_id" = "";
+//                               nome = "Recomenda\U00e7\U00e3o do chefe";
+//                               "nome_cat" = "";
+//                               "rest_id" = 4;
+//                               tipo = "menu_dia";
+//                               "width_i" = "";
+//                           },
+
+                cartoes = [NSMutableArray new];
                 
-                for (NSMutableDictionary *dick in [result objectForKey:@"res"]) {
-                    Tipo * t = [Tipo new];
-                    t.tipoName =  [dick objectForKey:@"description"];
-                    t.tipoId =  [dick objectForKey:@"id"];
-                    [array addObject:t];
+                for(NSMutableDictionary * dict in [result objectForKey:@"res"]){
+                    Restaurant * rest = [Restaurant new];
+                    
+                    
+                    //NSString *dist = [dict objectForKey:@"dist"];
+                    NSString * restName = [dict objectForKey:@"nome"];
+                    NSString * resId = [dict objectForKey:@"rest_id"];
+                    NSString * imagem = [dict objectForKey:@"imagem"];
+                    NSString * alturaI = [dict objectForKey:@"height_i"];
+                    NSString * larguraI = [dict objectForKey:@"width_i"];
+                    
+                    
+                    
+                    
+                    
+                    rest.cuisinesResultText = [dict objectForKey:@"descricao"];
+                    
+                    
+                    //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
+                    
+                    rest.address = @"";
+                    
+                    rest.name = restName;
+                    rest.dbId = [resId integerValue];
+                    if(alturaI != [NSNull new] && [alturaI floatValue]>0)
+                        rest.tamanhoImagem =  CGSizeMake([larguraI floatValue], [alturaI floatValue]);
+                    
+                    rest.featuredImageString = imagem;
+                    //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
+                    
+                    [cartoes addObject:rest];
                 }
                 
-                menuG = [MenuGeral new];
-                menuG.dataSource = array;
-                //menuG.view.frame = self.container.frame;
-                [menuG.tableView reloadData];
-                break;
-            }
-            case 2:
-            {
-                NSLog(@"resultado da tania xml_menu_dia.php  %@", result.description);
+                
+                
+                colececaoFavoritos = [CollectionGuru new];
+                //colececaoFavoritos.delegate = self;
+                
+                [colececaoFavoritos CarregarRestaurantes:cartoes];
+                 colececaoFavoritos.view.frame = self.container.frame;
+                
+                [self.view addSubview:colececaoFavoritos.view];
+                
+                
 
+                
+                
                 break;
             }
                 
         }
     }else
     {
-        NSLog(@"error paulo %@",error);
+        NSLog(@"error Tanita foofa %@",error);
         
     }
     
@@ -262,5 +229,36 @@
     }
 
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if(buttonIndex == 0)//OK button pressed
+    {
+        //do something
+    }
+    else if(buttonIndex == 1)//Annul button pressed.
+    {
+        CLLocationCoordinate2D loc;
+        loc.latitude = restaurante.lat ;
+        loc.longitude = restaurante.lon;
+        
+        MKPlacemark* place = [[MKPlacemark alloc] initWithCoordinate: loc addressDictionary: nil];
+        MKMapItem* destination = [[MKMapItem alloc] initWithPlacemark: place];
+        destination.name =restaurante.name;
+        NSArray* items = [[NSArray alloc] initWithObjects: destination, nil];
+        NSDictionary* options = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 MKLaunchOptionsDirectionsModeDriving,
+                                 MKLaunchOptionsDirectionsModeKey, nil];
+        [MKMapItem openMapsWithItems: items launchOptions: options];
+
+    }
+}
  
+- (IBAction)chamarMapa:(id)sender {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Direcções" message:@"Deseja ver as direções para este restaurante?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+    
+    [alert show];
+    
+    }
 @end

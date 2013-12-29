@@ -19,6 +19,8 @@
 #import "Login.h"
 #import "WebServiceSender.h"
 #import "FXImageView.h"
+#import "CollectionGuru.h"
+#import "Diarias.h"
 
 
 @interface MainPage ()
@@ -36,8 +38,12 @@
     UIAlertView *alertBoo2;
     
     WebServiceSender * recomendados;
+    WebServiceSender *favWeb;
     
     NSMutableArray * restaurantesRecomendados;
+    
+    CollectionGuru * colececaoRecomendados;
+    CollectionGuru * colececaoFavoritos;
     
 }
 
@@ -52,9 +58,9 @@ int num = 0;
 
 -(void)lerRecomendados
 {
-    if (!recomendados) {
+   // if (!recomendados) {
      
-        recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados2.php" method:@"" tag:1];
+        recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados3.php" method:@"" tag:1];
         recomendados.delegate = self;
     
         NSMutableDictionary * dict = [NSMutableDictionary new];
@@ -70,7 +76,7 @@ int num = 0;
 
     
         [recomendados sendDict:dict];
-    }
+    //}
     
 }
 
@@ -126,7 +132,7 @@ int num = 0;
                     NSString * imagem = [dict objectForKey:@"imagem"];
                     NSString * alturaI = [dict objectForKey:@"height_i"];
                     NSString * larguraI = [dict objectForKey:@"width_i"];
-                    NSString * freguesia = [dict objectForKey:@"freg_nome"];
+                    NSString * freguesia = [dict objectForKey:@"cidade"];
                   
                     if([[dict objectForKey:@"pag"] isEqualToString:@"sim"])
                     {
@@ -169,6 +175,7 @@ int num = 0;
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
                     
                     [restaurantesRecomendados addObject:rest];
+                    [colececaoFavoritos removeFromParentViewController];
                 }
                 
                 if (restaurantesRecomendados.count>0) {
@@ -177,6 +184,69 @@ int num = 0;
                 
  
                 //
+                break;
+            }
+            case 2:
+            {
+                NSLog(@"resultado dalista dos favoritos =>%@", result.description);
+                
+                
+                
+                restaurantesRecomendados = [NSMutableArray new];
+                
+                for(NSMutableDictionary * dict in [result objectForKey:@"resp"]){
+                    Restaurant * rest = [Restaurant new];
+                    
+                    
+                    //NSString *dist = [dict objectForKey:@"dist"];
+                    NSString * restName = [dict objectForKey:@"nome"];
+                    NSString * resId = [dict objectForKey:@"id"];
+                    NSString * lati = [dict objectForKey:@"lat"];
+                    NSString * longi = [dict objectForKey:@"lon"];
+                    NSString * imagem = [dict objectForKey:@"imagem"];
+                    NSString * alturaI = [dict objectForKey:@"height_i"];
+                    NSString * larguraI = [dict objectForKey:@"width_i"];
+                    NSString * freguesia = [dict objectForKey:@"cidade"];
+                    
+                    
+                    
+                    
+                    
+                    
+                    rest.cuisinesResultText = @"";
+                    for (NSMutableDictionary *cosinhas in [dict objectForKey:@"cozinhas"])
+                    {
+                        rest.cuisinesResultText =[NSString stringWithFormat:@"%@, %@",[cosinhas objectForKey:@"cozinhas_nome"],rest.cuisinesResultText] ;
+                    }
+                    
+                    //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
+                    
+                    rest.address = freguesia;
+                    
+                    rest.lat =[lati doubleValue];
+                    rest.lon =[longi doubleValue];
+                    rest.name = restName;
+                    rest.dbId = [resId integerValue];
+                    if(alturaI != [NSNull new] && [alturaI floatValue]>0)
+                        rest.tamanhoImagem =  CGSizeMake([larguraI floatValue], [alturaI floatValue]);
+                    
+                    rest.featuredImageString = imagem;
+                    //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
+                    
+                    [restaurantesRecomendados addObject:rest];
+                }
+                
+                
+                
+                colececaoFavoritos = [CollectionGuru new];
+                colececaoFavoritos.delegate = self;
+                
+                [colececaoFavoritos CarregarRestaurantes:restaurantesRecomendados];
+                // colececaoRecomendados.view.frame = CGRectMake(0, 130, 320, 438);
+                
+                [self.viewContainer addSubview:colececaoFavoritos.view];
+                [colececaoRecomendados removeFromParentViewController];
+                
                 break;
             }
                 
@@ -260,25 +330,29 @@ int num = 0;
     restaurantesRecomendados = maisPerto;
     
     
-    // para a colecçao
-    self.numbers = [@[] mutableCopy];
-    for(; num<restaurantesRecomendados.count; num++)
-    {
-        [self.numbers addObject:@(num)];
-    }
+    colececaoRecomendados = [CollectionGuru new];
+    colececaoRecomendados.delegate = self;
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+    [colececaoRecomendados CarregarRestaurantes:restaurantesRecomendados];
+   // colececaoRecomendados.view.frame = CGRectMake(0, 130, 320, 438);
+   
+    [self.viewContainer addSubview:colececaoRecomendados.view];
     
-    RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
-    layout.direction = UICollectionViewScrollDirectionVertical;
-    layout.blockPixels = CGSizeMake(155, 50);
 
     
     
-    [self.collectionView reloadData];
     
+}
+
+-(void)chamarRestaurante:(Restaurant *)rest
+{
+    // chamar restaurante
+    NSLog(@"restaurante chamado chamase %@", rest.name);
     
+    Diarias * details = [Diarias new];
+    [details loadRestaurant:rest];
     
+    [self.navigationController pushViewController:details animated:YES];
 }
 
 
@@ -391,7 +465,7 @@ int num = 0;
 //    self.buttonGo.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:18];
 //    self.texfFieldPesquisa.font = [UIFont fontWithName:@"DKCrayonCrumble" size:32];
     
-    [NSThread detachNewThreadSelector:@selector(loadCities) toTarget:self withObject:nil];
+//    [NSThread detachNewThreadSelector:@selector(loadCities) toTarget:self withObject:nil];
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -411,7 +485,7 @@ int num = 0;
     
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [self.scrollView addGestureRecognizer:singleTap];
+    [self.topView addGestureRecognizer:singleTap];
 
    // [self makeLogin];
     //[self loadUser];
@@ -476,406 +550,6 @@ int num = 0;
     [locationManager stopUpdatingLocation];
 }
 
-
-
-
-
-// cenas da colecçao
-
-- (UIColor*) colorForNumber:(NSNumber*)num {
-    return [UIColor colorWithHue:((19 * num.intValue) % 255)/255.f saturation:1.f brightness:1.f alpha:1.f];
-}
-
-#pragma mark - UICollectionView Datasource
-
-- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section {
-    return self.numbers.count;
-}
-
--(CGFloat)getNumberOffLinesTitle:(NSString *)titulo{
-
-    // criar aqui o cenas para saber a altura
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 155, 100)];
-    label.numberOfLines = 4;
-    label.textColor = [UIColor blackColor];
-
-    NSMutableAttributedString *ass;
-    
-    ass = [[NSMutableAttributedString alloc] initWithString: titulo];
-    
-    [ass addAttribute:NSKernAttributeName
-                value:[NSNumber numberWithFloat:0.8]
-                range:NSMakeRange(0, [titulo length]) ];
-    
-    [ass addAttribute:NSFontAttributeName
-                value:[UIFont fontWithName:@"HelveticaNeue" size:20]
-                range:NSMakeRange(0, [titulo length]) ];
-    
-    label.attributedText = ass;
-    
-    
-    
-    CGSize labelSize = [label.text sizeWithFont:label.font
-                                constrainedToSize:label.frame.size
-                                    lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat labelHeight = labelSize.height;
-    //NSLog(@"labelHeight = %f", labelHeight);
-    return  labelHeight;
-}
-
--(CGFloat)getHeightOffRestaurant:(Restaurant *)rest{
-    
-    // criar aqui o cenas para saber a altura
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 145, 60)];
-    label.numberOfLines = 4;
-    label.textColor = [UIColor blackColor];
-    
-    NSMutableAttributedString *ass;
-    
-    ass = [[NSMutableAttributedString alloc] initWithString: rest.name];
-    
-    [ass addAttribute:NSKernAttributeName
-                value:[NSNumber numberWithFloat:0.8]
-                range:NSMakeRange(0, [rest.name length]) ];
-    
-    [ass addAttribute:NSFontAttributeName
-                value:[UIFont fontWithName:@"HelveticaNeue" size:16]
-                range:NSMakeRange(0, [rest.name length]) ];
-    
-    label.attributedText = ass;
-    
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 145, 60)];
-    label2.numberOfLines = 4;
-    label2.textColor = [UIColor blackColor];
-    
-    NSMutableAttributedString *ass2;
-    
-    ass2 = [[NSMutableAttributedString alloc] initWithString: rest.cuisinesResultText];
-    
-    [ass2 addAttribute:NSKernAttributeName
-                value:[NSNumber numberWithFloat:0.8]
-                range:NSMakeRange(0, [rest.cuisinesResultText length]) ];
-    
-    [ass2 addAttribute:NSFontAttributeName
-                value:[UIFont fontWithName:@"HelveticaNeue" size:16]
-                range:NSMakeRange(0, [rest.cuisinesResultText length]) ];
-    
-    label2.attributedText = ass;
-
-    
-    
-    
-    
-    
-    CGSize labelSize = [label.text sizeWithFont:label.font
-                              constrainedToSize:label.frame.size
-                                  lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat labelHeight = labelSize.height;
-    
-    
-    
-    CGSize labelSize2 = [label.text sizeWithFont:label2.font
-                              constrainedToSize:label2.frame.size
-                                  lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat labelHeight2 = labelSize2.height;
-    //NSLog(@"labelHeight = %f", labelHeight);
-    if (rest.tamanhoImagem.height > 0) {
-        return  labelHeight + [self tamanhoDaImagemCorrecto:rest.tamanhoImagem ] + labelHeight2 +100;
-    }
-    else{
-        return  labelHeight*0.8 + labelHeight2*1.3  +100;
-    }
-    
-}
-
-
--(CGFloat)tamanhoDaImagemCorrecto:(CGSize)tamanho
-{
-    CGFloat altura = 0;
-    
-    if(tamanho.height){
-
-    
-    CGFloat percentagem = (tamanho.height*145) /tamanho.width;
-
-    
-    altura = percentagem;
-        
-        
-    }
-    
-    return altura;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    Restaurant * restaurante=  [restaurantesRecomendados objectAtIndex:indexPath.row];
-
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-
-    
-//    cell.frame = CGRectMake(cell.frame.origin.x,
-//                            cell.frame.origin.y,
-//                            cell.frame.size.width,
-//                            1000);
-    
-        //cell.backgroundColor = [self colorForNumber:self.numbers[indexPath.row]];
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.clipsToBounds = YES;
-        
-        cell.layer.masksToBounds = NO;
-        cell.layer.cornerRadius = 0; // if you like rounded corners
-        cell.layer.shadowOffset = CGSizeMake(3, 1);
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, cell.frame.size.width-4, cell.frame.size.height-1)].CGPath;
-        cell.layer.shadowRadius = 1;
-        
-        cell.layer.shadowOpacity = 1.0;
-        
-    
-        
-    [self imprimirDistancia:restaurante ];
-    
-        
-        
-        FXImageView * imagem = (id)[cell viewWithTag:6];
-        if(!imagem)
-            imagem = [FXImageView new];
-    
-        imagem.backgroundColor = [UIColor grayColor];
-    
-        imagem.tag = 6;
-        ///imagens_rest/sem_imagem.png
-        
-        // helvetica-new 28 titulo
-        // hekvetica-light 18 tipo de cosinha
-        
-        imagem.asynchronous = YES;
-        [imagem setImageWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString ]]];
-        //[imagem setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height*0.7f)];
-    
-        [imagem setFrame:CGRectMake(0, 0, cell.frame.size.width, [self tamanhoDaImagemCorrecto:restaurante.tamanhoImagem])];
-        
-        imagem.contentMode = UIViewContentModeScaleAspectFill;
-    
-        imagem.clipsToBounds = YES;
-        
-        
-        NSLog(@"cosinhas %@", restaurante.cuisinesResultText);
-    
-    
-    
-    UILabel* label = (id)[cell viewWithTag:5];
-    if(!label){
-        label = [[UILabel alloc]init];
-    }
-    
-    
-    //label.frame = CGRectMake(10,cell.frame.size.height*0.7f-20, cell.frame.size.width -15, cell.frame.size.height*0.3f);
-    label.frame = CGRectMake(10,imagem.frame.size.height+5 , cell.frame.size.width -15, [self getNumberOffLinesTitle:restaurante.name]);
-    label.numberOfLines = 4;
-    label.tag = 5;
-    label.textColor = [UIColor blackColor];
-  
-    
-    
-    UILabel* label2 = (id)[cell viewWithTag:7];
-    if(!label2){
-        label2 = [UILabel new];
-        label2.tag = 7;
-        
-    }
-    
-    NSMutableAttributedString *ass;
-    
-    
-    
-    ass = [[NSMutableAttributedString alloc] initWithString: restaurante.name];
-    
-    [ass addAttribute:NSKernAttributeName
-                value:[NSNumber numberWithFloat:0.3]
-                range:NSMakeRange(0, [restaurante.name length]) ];
-    
-    [ass addAttribute:NSFontAttributeName
-                value:[UIFont fontWithName:@"HelveticaNeue" size:16]
-                range:NSMakeRange(0, [restaurante.name length]) ];
-    
-    label.attributedText = ass;
-   
-    
-    
-    label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, label.frame.origin.y+label.frame.size.height +7, cell.frame.size.width -20, 40)];
-    
-    label2.numberOfLines = 3;
-    label2.textColor = [UIColor colorWithRed:101.0f/255.0f green:101.0f/255.0f blue:101.0f/255.0f alpha:1];
-    
-    
-    
-  
-    
-    NSMutableAttributedString *ass2;
-    
-    
-    ass2 = [[NSMutableAttributedString alloc] initWithString: restaurante.cuisinesResultText];
-    
-    [ass2 addAttribute:NSKernAttributeName
-                 value:[NSNumber numberWithFloat:0.3]
-                 range:NSMakeRange(0, [restaurante.cuisinesResultText length]) ];
-    
-    [ass2 addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:@"HelveticaNeue" size:10]
-                 range:NSMakeRange(0, [restaurante.cuisinesResultText length]) ];
-    
-    label2.attributedText = ass2;
-
-    
-    
-    UILabel* label3 = (id)[cell viewWithTag:8];
-    if(!label3){
-        label3 = [UILabel new];
-        label3.tag = 8;
-        
-    }
-
-    
-    label3 = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.frame.size.height-20, cell.frame.size.width -20, 20)];
-    
-    label3.numberOfLines = 3;
-    label3.textColor = [UIColor colorWithRed:101.0f/255.0f green:101.0f/255.0f blue:101.0f/255.0f alpha:1];
-    
-    
-    NSMutableAttributedString *ass3;
-    
-    NSString * distancia =[self imprimirDistancia:restaurante];
-    
-    ass3 = [[NSMutableAttributedString alloc] initWithString:distancia];
-    
-    [ass3 addAttribute:NSKernAttributeName
-                 value:[NSNumber numberWithFloat:0.3]
-                 range:NSMakeRange(0, [distancia length]) ];
-    
-    [ass3 addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:@"HelveticaNeue" size:10]
-                 range:NSMakeRange(0, [distancia length]) ];
-    
-    label3.attributedText = ass3;
-
-    
-    
-    
-    ///////// label 4
-    
-    UILabel* label4 = (id)[cell viewWithTag:9];
-    if(!label4){
-        label4 = [UILabel new];
-        label4.tag = 9;
-        
-    }
-    
-    
-    label4 = [[UILabel alloc] initWithFrame:CGRectMake(10, label.frame.origin.y+label.frame.size.height -0, cell.frame.size.width -15, 10)];
-    
-    label4.numberOfLines = 1;
-    label4.textColor = [UIColor colorWithRed:101.0f/255.0f green:101.0f/255.0f blue:101.0f/255.0f alpha:1];
-    
-    
-    NSMutableAttributedString *ass4;
-    
-    
-    ass4 = [[NSMutableAttributedString alloc] initWithString:restaurante.address];
-    
-    [ass4 addAttribute:NSKernAttributeName
-                 value:[NSNumber numberWithFloat:0.3]
-                 range:NSMakeRange(0, [restaurante.address length]) ];
-    
-    [ass4 addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:@"HelveticaNeue" size:10]
-                 range:NSMakeRange(0, [restaurante.address length]) ];
-    
-    label4.attributedText = ass4;
-
-    
-    
-    
-    
-    NSArray *viewsToRemove = [cell subviews];
-    for (UIView *v in viewsToRemove) {
-        [v removeFromSuperview];
-    }
-    
-        //label.text = [NSString stringWithFormat:@"%@", restaurante.name];
-        label.backgroundColor = [UIColor clearColor];
-        [cell addSubview:label];
-    
-    
-   
-    
-        [cell addSubview:label2];
-        [cell addSubview:label3];
-        [cell addSubview:label4];
-        [cell addSubview:imagem];
-        
-        
-        
-
-        return cell;
-    
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-   //selectedPhotoIndex = indexPath.row;
-     NSLog(@"clicou em %d",indexPath.row);
-}
-
-
-
-#pragma mark collection view cell paddings
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    
-    return 10.0;
-}
-
-#pragma mark – RFQuiltLayoutDelegate
-
-- (CGSize) blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CGFloat altura = 0;
-    
-    if(indexPath.row >= restaurantesRecomendados.count)
-        NSLog(@"Asking for index paths of non-existant cells!! %d from %d cells", indexPath.row, self.numbers.count);
-    
-
-    // temos de ver a label do gajo e segundo o numero de linhas tenho de  por maior ou nao a celula
-     Restaurant * restaurante=  [restaurantesRecomendados objectAtIndex:indexPath.row];
-    
-    
-    altura = [self getHeightOffRestaurant:restaurante];
-    
-
-
-    
-    
-    int altura1 = (int) altura /50;
-    
-    if((altura1-(altura /50))>0)
-    {
-        altura1 = altura1+1;
-    }
-
-    return CGSizeMake(1, altura1);
-    
-   
-}
-
-- (UIEdgeInsets)insetsForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return UIEdgeInsetsMake(10, 5, 0, 5);
-}
 
 
 
@@ -1313,11 +987,33 @@ int num = 0;
     
     NSLog(@"chamar navigation com os favoritos");
     
-    Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
-    [c setResultado:self.texfFieldPesquisa.text];
-    [c setTipo:@"Favoritos"];
-    [self.navigationController pushViewController:c animated:YES];
-    PP_RELEASE(c);
+//    Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
+//    [c setResultado:self.texfFieldPesquisa.text];
+//    [c setTipo:@"Favoritos"];
+//    [self.navigationController pushViewController:c animated:YES];
+//    PP_RELEASE(c);
+    
+    favWeb = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_fav.php" method:@"" tag:2];
+    favWeb.delegate = self;
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    
+    //        $user_id=$body['user_id'];
+    //        $face_id=$body['face_id'];
+    
+    if([Globals user].faceId)
+    {
+        [dict setObject: [Globals user].faceId forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+    }else
+    {
+        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+    }
+    
+    [favWeb sendDict:dict];
+
+    
 }
 
 
@@ -1338,4 +1034,7 @@ int num = 0;
 
 
 
+- (IBAction)clickRecomendados:(id)sender {
+    [self lerRecomendados];
+}
 @end

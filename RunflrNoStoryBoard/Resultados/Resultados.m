@@ -13,6 +13,7 @@
 #import "UserParser.h"
 #import "WebServiceSender.h"
 #import "Restaurant.h"
+#import "CollectionGuru.h"
 
 @interface Resultados ()
 {
@@ -37,7 +38,9 @@
     BOOL isTimeFilter;
     NSString *timeFilter;
     
-    WebServiceSender *favWeb;
+    WebServiceSender *webResultado;
+    NSMutableArray *restaurantes;
+    CollectionGuru * colececao;
 
 }
 
@@ -71,81 +74,82 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.labelResultado.text=result;
-    self.labelTipo.text = tipo;
-    [self.labelTipo setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:30]];
+ 
+  
     
-    if ([tipo isEqualToString:@"Favoritos"]) {
-//        //
-//        
-//        
-//         for (Restaurant *rest in [Globals user].favs) {
-//             NSLog(@"rest fav name %@", rest.name);
-//         }
-//        
-//        
-//        
-//         [self performSelectorOnMainThread:@selector(ChamarFavoritos) withObject:nil waitUntilDone:NO];
-//        
-//         
-//        //[self.tableRestaurantes reloadData];
-        
-        
-        favWeb = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_fav.php" method:@"" tag:1];
-        favWeb.delegate = self;
-        
-        NSMutableDictionary * dict = [NSMutableDictionary new];
-        
-//        $user_id=$body['user_id'];
-//        $face_id=$body['face_id'];
-        
-        if([Globals user].faceId)
-        {
-            [dict setObject: [Globals user].faceId forKey:@"face_id"];
-            [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
-        }else
-        {
-            [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
-            [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
-        }
-            
-        [favWeb sendDict:dict];
-        
-        
-        
-    }else
+   
         [self preperarPesquisa];
-    [self changeFont:self.view];
+  
 }
 
--(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
+-(void)sendCompleteWithResult:(NSDictionary*)resulti withError:(NSError*)error{
     
     
     if (!error)
     {
-        int tag=[WebServiceSender getTagFromWebServiceSenderDict:result];
+        int tag=[WebServiceSender getTagFromWebServiceSenderDict:resulti];
         switch (tag)
         {
             case 1:
             {
-                NSLog(@"resultado dalista de favoritos =>%@", result.description);
+                NSLog(@"resultado da pesquisa por nome =>%@", resulti.description);
                 
-//                resp =     (
-//                            {
-//                                id = 152;
-//                                nome = "Pimenta Moscada";
-//                            },
-                [Globals user].favs = [NSMutableArray new];
-                for (NSMutableDictionary *rest in [result objectForKey:@"resp"]) {
-                    Restaurant *restaurante = [Restaurant new];
-                    restaurante.name = [rest objectForKey:@"nome"];
-                    restaurante.dbId = [[rest objectForKey:@"id"] integerValue];
+                
+                restaurantes = [NSMutableArray new];
+                
+                for(NSMutableDictionary * dict in [resulti objectForKey:@"res"]){
+                    Restaurant * rest = [Restaurant new];
                     
                     
-                    [[Globals user].favs addObject:restaurante];
+                    //NSString *dist = [dict objectForKey:@"dist"];
+                    NSString * restName = [dict objectForKey:@"nome"];
+                    NSString * resId = [dict objectForKey:@"id"];
+                    NSString * lati = [dict objectForKey:@"lat"];
+                    NSString * longi = [dict objectForKey:@"lon"];
+                    NSString * imagem = [dict objectForKey:@"imagem"];
+                    NSString * alturaI = [dict objectForKey:@"height_i"];
+                    NSString * larguraI = [dict objectForKey:@"width_i"];
+                    NSString * freguesia = [dict objectForKey:@"cidade"];
+                    
+                    
+                    
+                    
+                    
+                    
+                    rest.cuisinesResultText = @"";
+                    for (NSMutableDictionary *cosinhas in [dict objectForKey:@"cozinhas"])
+                    {
+                        rest.cuisinesResultText =[NSString stringWithFormat:@"%@, %@",[cosinhas objectForKey:@"cozinhas_nome"],rest.cuisinesResultText] ;
+                    }
+                    
+                    //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
+                    
+                    rest.address = freguesia;
+                    
+                    rest.lat =[lati doubleValue];
+                    rest.lon =[longi doubleValue];
+                    rest.name = restName;
+                    rest.dbId = [resId integerValue];
+                    if(alturaI != [NSNull new] && [alturaI floatValue]>0)
+                        rest.tamanhoImagem =  CGSizeMake([larguraI floatValue], [alturaI floatValue]);
+                    
+                    rest.featuredImageString = imagem;
+                    //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
+                    
+                    [restaurantes addObject:rest];
                 }
                 
-                [self.tableRestaurantes reloadData];
-                break;
+                
+                
+                colececao = [CollectionGuru new];
+                
+                [colececao CarregarRestaurantes:restaurantes];
+                 colececao.view.frame = self.viewContainer.frame;
+                
+                [self.view addSubview:colececao.view];
+                
+                
+                                break;
             }
                 
         }
@@ -160,45 +164,9 @@
 
 
 
--(void)ChamarFavoritosXML
-{
-    UserParser *userParser = [[UserParser alloc] initXMLParser];
-    
-    NSString *host = nil;
-    
-    //if (self.isOther) {
-    //  host = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_user.php?is_me=0&user_id=%d&face_id=%@", self.otherUserDbId, self.otherUserFaceId];
-    //} else {
-    host = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_user.php?is_me=1&user_id=%d&face_id=%@", [Globals user].dbId, [Globals user].faceId];
-    //}
-    NSLog(@"host: %@", host);
-    
-    NSURL *url = [[NSURL alloc] initWithString: host];
-    NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
-    [nsXmlParser setDelegate:userParser];
-    
-    BOOL success = [nsXmlParser parse];
-    
-    
-    if (success) {
-        [self performSelectorOnMainThread:@selector(startUpContainers2) withObject:nil waitUntilDone:NO];
-        
-    } else {
-        [self performSelectorOnMainThread:@selector(noConnect2) withObject:nil waitUntilDone:NO];
-        
-    }
-
-}
 
 
--(void)noConnect2{
-    NSLog(@"DEu erro a ir buscar os favoritos");
-}
 
--(void)startUpContainers2
-{
-    [self.tableRestaurantes reloadData];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -212,349 +180,37 @@
 }
 
 
-- (void)startFilters
-{
-    isFiltered = NO;
-    
-    orderPop = YES;
-    filter1 = NO;
-    filter2 = NO;
-    filter3 = NO;
-    price1 = NO;
-    price2 = NO;
-    price3 = NO;
-    price4 = NO;
-    
-    isTimeFilter = NO;
-    
-    // para limpar tabelas
-    //[self cleanCuisines];
-    //[self cleanOptions];
-    
-    NSDate *date = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
-    
-    timeFilter= [formatter stringFromDate:date];
-    
-    
-}
 
 
 -(void)preperarPesquisa
 {
     doneSearch = NO;
     
-    
-    // LETS CREATE THE HOST URL STRING
-    int cityId = [Globals cityId];
-    if ([Globals otherCityId] != 0) {
-        cityId = [Globals otherCityId];
-    }
-    
-     NSString *getData;
-    NSMutableString *host;
+ 
     
     if ([tipo isEqualToString:@"Restaurants"]) {
-        getData = [NSString stringWithFormat:@"&search=%@&city_id=%@&rest_name=%@", [@"" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"17" , [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        host = [NSMutableString stringWithString:[Globals hostWithFile:@"search_restaurante.php" andGetData:getData]];
+        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome.php" method:@"" tag:1];
+        webResultado.delegate = self;
+        
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+//        
+//        $body['lang'];
+//        $body['nomeparte'];
+        
+        [dict setObject:result forKey:@"nomeparte"];
+        [dict setObject:[Globals lang] forKey:@"lang"];
+        
+        [webResultado sendDict:dict];
     }
     else
     {
-        getData = [NSString stringWithFormat:@"&search=%@&city_id=%@&rest_name=%@", [@"" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"17" , [result stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        host = [NSMutableString stringWithString:[Globals hostWithFile:@"search_cidades.php" andGetData:getData]];
+        
     }
     
     
     
    
-    
-    
-    if (orderPop) {
-        [host appendString:@"&order=pop"];
-    } else {
-        [host appendString:@"&order=vote"];
-    }
-    
-    if (filter1) {
-        [host appendString:@"&filter1=1"];
-    } else {
-        [host appendString:@"&filter1=0"];
-    }
-    
-    if (filter2) {
-        [host appendString:@"&filter2=1"];
-    } else {
-        [host appendString:@"&filter2=0"];
-    }
-    
-    if (filter3) {
-        [host appendString:@"&filter3=1"];
-    } else {
-        [host appendString:@"&filter3=0"];
-    }
-    
-    for (Cuisine *cuis in [Globals cuisines]) {
-        if (cuis.selected) {
-            [host appendFormat:@"&cuisineid[]=%d", cuis.dbId];
-        }
-    }
-    
-    if (price1) {
-        [host appendString:@"&price1=1"];
-    } else {
-        [host appendString:@"&price1=0"];
-    }
-    
-    if (price2) {
-        [host appendString:@"&price2=1"];
-    } else {
-        [host appendString:@"&price2=0"];
-    }
-    
-    if (price3) {
-        [host appendString:@"&price3=1"];
-    } else {
-        [host appendString:@"&price3=0"];
-    }
-    
-    if (price4) {
-        [host appendString:@"&price4=1"];
-    } else {
-        [host appendString:@"&price4=0"];
-    }
-    
-    for (Option *opt in [Globals options]) {
-        if (opt.selected) {
-            [host appendFormat:@"&optionid[]=%d", opt.dbId];
-        }
-    }
-    
-    if (isTimeFilter) {
-        [host appendString:@"&timefilter="];
-        [host appendString:timeFilter];
-    }
-    
-    // STRING DONE
-    
-    NSLog(@"HOST STRING: %@", host);
-    
-    [NSThread detachNewThreadSelector:@selector(loadSearch:) toTarget:self withObject:host];
-
 }
-
-#pragma mark - THREADED PARSERS
-
-- (void)loadSearch:(NSMutableString *)host
-{
-    SearchParser *searchParser = [[SearchParser alloc] initXMLParser];
-    
-    NSURL *url = [[NSURL alloc] initWithString: host];
-    NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
-    [nsXmlParser setDelegate:searchParser];
-    
-    BOOL success = [nsXmlParser parse];
-    
-    if (success) {
-        
-        doneSearch = YES;
-        /*
-        for (Restaurant *rest in [Globals searchResult]) {
-            NSLog(@"rest name %@", rest.name);
-        }
-        */
-        [self performSelectorOnMainThread:@selector(doneSearch) withObject:nil waitUntilDone:NO];
-        
-        
-    } else {
-        
-        NSError *error = [nsXmlParser parserError];
-        
-        NSLog(@"erro get restaurantes %@", error.description);
-        
-        [self performSelectorOnMainThread:@selector(noConnect) withObject:nil waitUntilDone:NO];
-    }
-    
-    
-}
-
-- (void)doneSearch
-{
-    doneSearch = YES;
-    
-    [self.tableRestaurantes reloadData];
-    if (isFirst) {
-        isFirst = NO;
-      //  [self.optionsTable reloadData];
-       // [self.cuisinesTable reloadData];
-    }
-    
-    if ([Globals searchResult].count > 0) {
-       // [self.labelNotice removeFromSuperview];
-    }
-    
-   // [self.loadingView hideAlert];
-    
-}
-
-- (void)noConnect
-{
-    
-    UIAlertView *alertBoo = [[UIAlertView alloc]
-                             initWithTitle:[Language textForIndex:@"GlobalComErrorTitle"]
-                             message:[Language textForIndex:@"GlobalComErrorText"]
-                             delegate:self
-                             cancelButtonTitle:@"OK"
-                             otherButtonTitles:nil];
-    
-    [alertBoo show];
-}
-
-#pragma mark - UITableView Delegaates
-
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
-{
-    //if (!doneSearch)
-     //   return 0;
-    
-   if ([tipo isEqualToString:@"Favoritos"])
-       return [Globals user].favs.count;
-        
-        return [[Globals searchResult] count];
-        
-        
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
-{
-    if (tableView == self.tableRestaurantes) {
-        
-        return 1;
-        
-    }
-    
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-{
-    
-        return 55;
-    
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Restaurant *rest;
-    
-    if ([tipo isEqualToString:@"Favoritos"])
-    {
-        rest = [[Globals user].favs objectAtIndex:indexPath.row];
-        
-    }
-    else{
-        rest= (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
-    }
-    
-
-    
-    static NSString *simpleTableIdentifier = @"TableCell";
-    
-    TableCell *cell = (TableCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TableCell" owner:self options:nil];
-        cell = [nib objectAtIndex:0];
-    }
-    
-    
-    
-    cell.labeTitulo.font = [UIFont fontWithName:@"DKCrayonCrumble" size:30];
-    
-    cell.ThumbnailSeta.image = [UIImage imageNamed:@"seta.png"];
-    cell.labeTitulo.text = [NSString stringWithFormat:@"%@", rest.name];
-    
-    return cell;
-
-        
-    
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-   
-        
-        [self ResultsTableView:tableView didSelectRowAtIndexPath:indexPath];
-        
-}
-
-#pragma mark - RESULTS TABLE DELEGATE METHODS
-
-
-- (void)ResultsTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    Restaurant *rest;
-    
-    if ([tipo isEqualToString:@"Favoritos"])
-    {
-        rest = [[Globals user].favs objectAtIndex:indexPath.row];
-        
-    }
-    else{
-        rest= (Restaurant *)[[Globals searchResult] objectAtIndex:indexPath.row];
-    }
-
-    
-    int dbId = rest.dbId;
-    
-    [Globals setRestaurantId:dbId];
-    
-    
-    
-    // faz cenas para abrir menu do dia
-    //[self performSegueWithIdentifier:@"resultsToRestaurant" sender:nil];
-    
-    Diarias *c = [[Diarias alloc] init];
-    
-    
-    [c loadRestaurant:rest];
-    
-    [self.navigationController pushViewController:c animated:YES];
-    PP_RELEASE(c);
-    
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [cell.textLabel setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:26]];
-    cell.backgroundColor = [UIColor clearColor];
-    
-}
-
-
-- (void)showClock:(id)sender
-{
-   // [self showClock];
-}
--(void)changeFont:(UIView *) view{
-    for (id View in [view subviews]) {
-        if ([View isKindOfClass:[UILabel class]]) {
-            [View setFont:[UIFont fontWithName:@"DKCrayonCrumble" size:26]];
-            //view.textColor = [UIColor blueColor];
-            [View setBackgroundColor:[UIColor clearColor]];
-        }
-        if ([View isKindOfClass:[UIView class]]) {
-            [self changeFont:View];
-        }
-    }
-}
-
-
-
-
-
-
 
 
 

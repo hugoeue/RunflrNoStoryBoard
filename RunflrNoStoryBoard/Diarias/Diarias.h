@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FXImageView.h"
 
 @interface Diarias : UIViewController
 
@@ -22,5 +23,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *container;
 - (IBAction)clickAddFavorito:(id)sender;
+@property (weak, nonatomic) IBOutlet FXImageView *imagemRestaurante;
+- (IBAction)chamarMapa:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *labelCosinhas;
 
 @end

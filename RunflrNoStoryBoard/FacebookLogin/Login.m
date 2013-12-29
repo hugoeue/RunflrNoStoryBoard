@@ -11,8 +11,11 @@
 #import "UserParser.h"
 #import "LoginRundlr.h"
 #import "FormularioRegistoContaRundlr.h"
+#import "WebServiceSender.h"
 
-@interface Login ()
+@interface Login (){
+     WebServiceSender * webservi;
+}
 
 @end
 
@@ -37,11 +40,22 @@
     {
         [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
     }
+    self.navigationController.navigationBarHidden = YES;
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    [self.view addGestureRecognizer:singleTap];
 }
 
+- (void)handleSingleTap:(UITapGestureRecognizer *)sender
+{
+    [self.textFieldPassword resignFirstResponder];
+    [self.textFieldemail resignFirstResponder];
+}
+
+
 - (IBAction)popAnterior:(id)sender {
-    //[self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clickLoginRundlr:(id)sender {
@@ -89,10 +103,13 @@
         }];
         
        [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
     }else{
         [self facebookLoginLogout];
         [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
     }
 }
 
@@ -122,6 +139,7 @@
     
     
      [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
              
 //    UserParser *userParser = [[UserParser alloc] initXMLParser];
 //    
@@ -156,7 +174,8 @@
 -(void)startUpContainers2
 {
     NSLog(@"Consegui fazer o parser do user");
-    [self dismissViewControllerAnimated:YES completion:nil];
+   // [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 -(void)noConnect2
@@ -170,6 +189,7 @@
 {
     if ([FBSession activeSession].isOpen) {
         [[FBSession activeSession] closeAndClearTokenInformation];
+        [self.navigationController popToRootViewControllerAnimated:YES];
        
     } else {
        
@@ -177,6 +197,78 @@
     
     
 }
+
+
+- (IBAction)clickSubmeter:(id)sender {
+    
+    webservi = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_login_confirm.php" method:@"" tag:1];
+    webservi.delegate = self;
+    
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:self.textFieldemail.text forKey:@"email"];
+    [dict setObject:self.textFieldPassword.text forKey:@"password"];
+    
+    [webservi sendDict:dict];
+    
+}
+
+
+-(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
+    
+    
+    if (!error)
+    {
+        int tag=[WebServiceSender getTagFromWebServiceSenderDict:result];
+        switch (tag)
+        {
+            case 1:
+            {
+                NSLog(@"resultado da tania no Login =>%@", result.description);
+                
+                //resp = "Successfully inserted 1 row";
+                
+                if([[result objectForKey:@"resp"] isEqualToString:@"SUCESSO"]){
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sucesso" message:@"Login realizado com sucesso" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                    
+                    
+                    User *regUser = [User new];
+                    regUser.dbId = [[result objectForKey:@"userid"] integerValue];
+                    regUser.name = [result objectForKey:@"pnome"];
+                    regUser.email = [result objectForKey:@"email"];
+                    regUser.loginType = @"guru";
+                    
+                    
+                    [Globals setUser:regUser];
+                    
+                    NSDictionary * paraDefaults  = [[NSDictionary alloc] initWithDictionary:result];
+                    
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:paraDefaults forKey:@"login"];
+                    [defaults synchronize];
+                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }else{
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:[result objectForKey:@"resp"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alert show];
+                }
+                
+                
+                
+                break;
+            }
+                
+        }
+    }else
+    {
+        NSLog(@"error paulo %@",error);
+        
+    }
+    
+    
+}
+
 
 
 @end

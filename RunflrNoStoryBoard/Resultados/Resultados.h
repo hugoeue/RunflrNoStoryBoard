@@ -10,12 +10,12 @@
 
 @interface Resultados : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labelResultado;
-@property (weak, nonatomic) IBOutlet UILabel *labelTipo;
+
 
 -(void)setResultado:(NSString *)resultado;
 -(void)setTipo:(NSString *)tip;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableRestaurantes;
-@property (weak, nonatomic) IBOutlet UILabel *labelResultados;
+@property (weak, nonatomic) IBOutlet UIView *viewContainer;
+
 
 @end

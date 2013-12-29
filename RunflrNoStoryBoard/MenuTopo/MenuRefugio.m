@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self changeFont:self.view];
+    //[self changeFont:self.view];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -95,4 +95,11 @@
 
 
 
+- (IBAction)clickInicio:(id)sender {
+    [self.delegate performSelector:@selector(chamarTopo) withObject:nil];
+}
+
+- (IBAction)clickDefenicoes:(id)sender {
+    [self.delegate performSelector:@selector(chamarDefenicoes) withObject:nil];
+}
 @end

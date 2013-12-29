@@ -18,5 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelLingua;
 
 @property (nonatomic, assign) id delegate;
+- (IBAction)clickInicio:(id)sender;
+- (IBAction)clickDefenicoes:(id)sender;
+
 
 @end

@@ -51,12 +51,20 @@
 // para a colecçao
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) NSMutableArray* numbers;
+
+// scrollview para cenas
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 // transparencia negra
 
 @property (weak, nonatomic) IBOutlet UIView *uiviewTransparent;
 @property (weak, nonatomic) IBOutlet UIImageView *imageBico;
+
+@property (weak, nonatomic) IBOutlet UIView *viewContainer;
+
+@property (weak, nonatomic) IBOutlet UIView *topView;
+
+- (IBAction)clickRecomendados:(id)sender;
 
 
 @end

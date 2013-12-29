@@ -46,14 +46,18 @@
     
     
     
-//    NSDate *date =  self.pickerDataNascimento.date;
-//    
-//    NSString *dateString = [NSDateFormatter localizedStringFromDate:date
-//                                                          dateStyle:NSDateFormatterShortStyle
-//                                                          timeStyle:NSDateFormatterFullStyle];
-//    NSLog(@"%@",dateString);
-//    
-//    [dict setObject:dateString forKey:@"datanascimaneto"];
+    NSDate *date =  self.datePicker.date;
+    
+    
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *dateString = [formatter stringFromDate:date];
+    
+    NSLog(@"a data de nascimento => %@",dateString);
+    
+    [dict setObject:dateString forKey:@"data_nasc"];
     
     NSString * sexo;
     if(self.pickerSexo.selectedSegmentIndex == 0)
@@ -164,7 +168,7 @@
     // Do any additional setup after loading the view from its nib.
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    [self.view addGestureRecognizer:singleTap];
+    //[self.view addGestureRecognizer:singleTap];
   
     
     float sizeOfContent = 700;
@@ -185,8 +189,8 @@
     [_dateView addSubview:dateToolbar];
     
     UIBarButtonItem *doneDateBt = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(addDate:)];
-    UIBarButtonItem *flexDateSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    dateToolbar.items = [[NSArray alloc] initWithObjects:flexDateSpace, doneDateBt, nil];
+    //UIBarButtonItem *flexDateSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:@selector(addDate:)];
+    dateToolbar.items = [[NSArray alloc] initWithObjects: doneDateBt, nil];
     
     
     _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 40, 320, 216)];
@@ -272,5 +276,8 @@
         [alert show];
     }
     
+}
+- (IBAction)Voltar:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

@@ -37,6 +37,7 @@
 #import "LanguageViewController.h"
 #import "PaginaPessoal.h"
 #import "Login.h"
+#import "Defenicoes.h"
 
 @implementation DemoRootViewController
 
@@ -117,7 +118,7 @@
         [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
         [_topView addSubview:topShadowView];
         
-        [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:3 topViewPullFactor:0.9];
+        [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:4 topViewPullFactor:0.9];
         
         _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
         [_leftTableView setRowHeight:100];
@@ -150,13 +151,19 @@
     LanguageViewController *linguas =[LanguageViewController new];
     linguas.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
-     [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-         [self presentTLModalViewController:linguas animated:YES completion:^{
-             
-         }];
-
-     }];
+//     [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//         [self presentTLModalViewController:linguas animated:YES completion:^{
+//             
+//         }];
+//
+//     }];
     
+    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+        
+        
+        [_main.navigationController pushViewController:linguas animated:YES];
+        
+    }];
     
 }
 
@@ -170,22 +177,38 @@
         //[self presentViewController:pagPessoal animated:YES completion:nil];
         
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-            [self presentTLModalViewController:pagPessoal animated:YES completion:^{
-                
-            }];
+            
+            
+            [_main.navigationController pushViewController:pagPessoal animated:YES];
             
         }];
+        
+        
+//        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//            [self presentTLModalViewController:pagPessoal animated:YES completion:^{
+//                
+//            }];
+//            
+//        }];
     
     }else
     {
+        
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[Login new] ];
-            
-            [self presentTLModalViewController:nav animated:YES completion:^{
-                
-            }];
+           
+            [_main.navigationController pushViewController:[Login new] animated:YES];
             
         }];
+        
+        
+//        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[Login new] ];
+//            
+//            [self presentTLModalViewController:nav animated:YES completion:^{
+//                
+//            }];
+//            
+//        }];
 
         
     }
@@ -194,15 +217,31 @@
     
 }
 
+-(void)chamarDefenicoes{
+    Defenicoes * def = [Defenicoes new];
+    
+  
+    
+    
+    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+        
+       
+        [_main.navigationController pushViewController:def animated:YES];
+        
+    }];
+    
+  
+}
+
 -(void)chamarTopo{
     
     if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
     {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+       // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
     }
     else{
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+      //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded animated:YES completion:nil];
     }
 }

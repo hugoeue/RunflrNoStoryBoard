@@ -28,7 +28,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setSelectedLanguageImage];
-     [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
+    // [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
+    self.scrollview.contentSize = CGSizeMake(320, 409);
 
 }
 
@@ -53,22 +54,22 @@
 -(void)setSelectedLanguageImage
 {
     if (![[Globals lang] isEqualToString:@"pt"]) {
-        [self.imgPT setImage:[UIImage imageNamed:@"noselect.png"]];
+        [self.imgPT setImage:[UIImage imageNamed:@"botao_no_select.png"]];
     }
     if (![[Globals lang] isEqualToString:@"en"]) {
-        [self.imgEN setImage:[UIImage imageNamed:@"noselect.png"]];
+        [self.imgEN setImage:[UIImage imageNamed:@"botao_no_select.png"]];
     }
     if (![[Globals lang] isEqualToString:@"fr"]) {
-        [self.imgFR setImage:[UIImage imageNamed:@"noselect.png"]];
+        [self.imgFR setImage:[UIImage imageNamed:@"botao_no_select.png"]];
     }
     if (![[Globals lang] isEqualToString:@"es"]) {
-        [self.imgES setImage:[UIImage imageNamed:@"noselect.png"]];
+        [self.imgES setImage:[UIImage imageNamed:@"botao_no_select.png"]];
     }
     if (![[Globals lang] isEqualToString:@"de"]) {
-        [self.imgDE setImage:[UIImage imageNamed:@"noselect.png"]];
+        [self.imgDE setImage:[UIImage imageNamed:@"botao_no_select.png"]];
     }
     if (![[Globals lang] isEqualToString:@"it"]) {
-        [self.imgIT setImage:[UIImage imageNamed:@"noselect.png"]];
+        [self.imgIT setImage:[UIImage imageNamed:@"botao_no_select.png"]];
     }
     
     NSLog(@"lingua no globals %@", [Globals lang]);
@@ -90,8 +91,8 @@
 
 - (IBAction)closeClick:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)ptClick:(id)sender
@@ -103,6 +104,7 @@
     [Globals setLang:@"pt"];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)deClick:(id)sender {
@@ -113,6 +115,7 @@
     [Globals setLang:@"de"];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)itClick:(id)sender {
@@ -123,6 +126,7 @@
     [Globals setLang:@"it"];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)enClick:(id)sender
@@ -134,6 +138,7 @@
     [Globals setLang:@"en"];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -147,6 +152,7 @@
     [Globals setLang:@"es"];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -160,6 +166,7 @@
     [Globals setLang:@"fr"];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

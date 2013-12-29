@@ -27,5 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgDE;
 @property (weak, nonatomic) IBOutlet UIImageView *imgIT;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
 @end

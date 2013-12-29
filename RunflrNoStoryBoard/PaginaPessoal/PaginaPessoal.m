@@ -34,17 +34,34 @@
     //self.navigationController.navigationBarHidden = NO;
     
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString* notifications = [defaults objectForKey:@"notifications"];
+    NSString* newsletter = [defaults objectForKey:@"newsletter"];
     
     
-    // como exemplo
-    /*
-    if (![FBSession activeSession].isOpen) {
-        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
-    }else
+    if(notifications )
     {
-        [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+        if ([notifications isEqualToString:@"YES"]) {
+            [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_select.png"]];
+        }
+        
+        else
+        {
+            [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+        }
     }
-     */
+    if(newsletter){
+        if( [newsletter isEqualToString:@"YES"])
+        {
+            [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
+        }else
+        {
+            [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+        }
+    }
+    
+    //[defaults synchronize];
+
 
 
 }
@@ -74,7 +91,7 @@
 
 - (void)loadGuruImage
 {
-    [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+    [self.buttonLogin setTitle:@"Conectado" forState:UIControlStateNormal];
     self.imgUser.image = [UIImage imageNamed:@"transferir.jpeg"];
     self.imgUser.layer.cornerRadius = self.imgUser.frame.size.height/2;
     self.imgUser.clipsToBounds = YES;
@@ -87,7 +104,7 @@
 - (void)loadFaceImage
 {
     
-    [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+    [self.buttonLogin setTitle:@"Conectado" forState:UIControlStateNormal];
     NSString *str = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture", [Globals user].faceId];
     
     
@@ -105,7 +122,7 @@
     self.imgUser.layer.cornerRadius = self.imgUser.frame.size.height/2;
     self.imgUser.clipsToBounds = YES;
     self.imgUser.layer.borderWidth = 1.0f;
-    self.imgUser.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.imgUser.layer.borderColor = [UIColor blackColor].CGColor;
    
     self.labelName.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
     self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
@@ -134,7 +151,7 @@
         [self.delegate performSelector:@selector(callCenter)];
     }];
 
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
     //[self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionNone animated:YES];
 }
 
@@ -170,6 +187,47 @@
 
 
 - (IBAction)clickBack:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
+
+- (IBAction)clickReceberNotifacoes:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+
+     NSString* notifications = [defaults objectForKey:@"notifications"];
+    if(notifications && [notifications isEqualToString:@"YES"])
+    {
+        // muda a imagem do boneco
+        // muda os defaults para outra cena
+        [defaults setObject:@"NO" forKey:@"notifications"];
+        [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+    }else
+    {
+        [defaults setObject:@"YES" forKey:@"notifications"];
+        [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_select.png"]];
+    }
+    [defaults synchronize];
+}
+
+- (IBAction)clickReceberNewsletter:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSString* newsletter = [defaults objectForKey:@"newsletter"];
+    if(newsletter && [newsletter isEqualToString:@"YES"])
+    {
+        // muda a imagem do boneco
+        // muda os defaults para outra cena
+        [defaults setObject:@"NO" forKey:@"newsletter"];
+        [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+    }else{
+        //botao_no_select
+        [defaults setObject:@"YES" forKey:@"newsletter"];
+        [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
+    }
+    [defaults synchronize];
+
 }
 @end

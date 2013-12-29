@@ -16,6 +16,9 @@
     int datePickerIndicator;
 }
 
+- (IBAction)Voltar:(id)sender;
+
+
 @property (weak, nonatomic) IBOutlet UITextField *textNome;
 @property (weak, nonatomic) IBOutlet UITextField *textUltimoNome;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *pickerSexo;

@@ -16,6 +16,9 @@
 - (IBAction)clickRegistoRundlr:(id)sender;
 
 
+@property (weak, nonatomic) IBOutlet UITextField *textFieldemail;
 
+@property (weak, nonatomic) IBOutlet UITextField *textFieldPassword;
+- (IBAction)clickSubmeter:(id)sender;
 
 @end
