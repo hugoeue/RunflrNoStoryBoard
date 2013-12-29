@@ -38,6 +38,12 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
+    
+    
+    self.labelDfenicoes.text =[Language textForIndex:@"Definicoes"];
+    self.labelLingua.text = [Language textForIndex:@"Idioma"];
+    self.labelMinhaCont.text = [Language textForIndex:@"A_minha_conta"];
+    
 }
 
 -(void)changeFont:(UIView *) view{

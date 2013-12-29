@@ -6,6 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Defenicoes">
             <connections>
+                <outlet property="labelDefeniçoes" destination="Kaj-3Q-KEg" id="dLI-V9-4xS"/>
+                <outlet property="labelPolitica" destination="6wq-co-Ee4" id="Bie-2F-jl9"/>
+                <outlet property="labelSobre" destination="tQI-O5-qK8" id="XuD-ct-rSV"/>
+                <outlet property="labelTermos" destination="cQ6-sN-PFz" id="C9u-u6-3um"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

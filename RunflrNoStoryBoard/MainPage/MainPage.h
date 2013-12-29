@@ -66,5 +66,7 @@
 
 - (IBAction)clickRecomendados:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *viewRecomendamos;
+@property (weak, nonatomic) IBOutlet UIView *viewFavoritos;
 
 @end

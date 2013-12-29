@@ -15,7 +15,11 @@
 
 
 
+
 @property (weak, nonatomic) IBOutlet UILabel *labelLingua;
+@property (weak, nonatomic) IBOutlet UILabel *labelDfenicoes;
+@property (weak, nonatomic) IBOutlet UILabel *labelMinhaCont;
+@property (weak, nonatomic) IBOutlet UILabel *labelInicio;
 
 @property (nonatomic, assign) id delegate;
 - (IBAction)clickInicio:(id)sender;

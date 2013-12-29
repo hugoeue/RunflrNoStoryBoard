@@ -369,8 +369,13 @@ int num = 0;
 
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:YES];
+    
+     self.labelCidade.text =[Language textForIndex:@"Cidade"];
+    self.labelRestaurante.text =[Language textForIndex:@"Restaurante"];
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
@@ -985,6 +990,20 @@ int num = 0;
 {
     
     
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.viewFavoritos setBackgroundColor:[UIColor darkGrayColor]];
+        [self.viewRecomendamos setBackgroundColor:[UIColor blackColor]];
+        [self.viewRecomendamos setFrame:CGRectMake(self.viewRecomendamos.frame.origin.x,
+                                                self.viewRecomendamos.frame.origin.y,
+                                                140,
+                                                self.viewRecomendamos.frame.size.height)];
+        
+    }];
+    
+    
+
+
+
     NSLog(@"chamar navigation com os favoritos");
     
 //    Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
@@ -1035,6 +1054,16 @@ int num = 0;
 
 
 - (IBAction)clickRecomendados:(id)sender {
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.viewFavoritos setBackgroundColor:[UIColor blackColor]];
+        [self.viewRecomendamos setBackgroundColor:[UIColor darkGrayColor]];
+        [self.viewRecomendamos setFrame:CGRectMake(self.viewRecomendamos.frame.origin.x,
+                                                self.viewRecomendamos.frame.origin.y,
+                                                180,
+                                                self.viewRecomendamos.frame.size.height)];
+        
+    }];
+    
     [self lerRecomendados];
 }
 @end

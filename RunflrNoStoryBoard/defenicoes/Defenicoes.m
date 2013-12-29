@@ -30,6 +30,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = YES;
+    
+    self.labelDefeniçoes.text =[Language textForIndex:@"Definicoes"]; 
+    self.labelPolitica.text =[Language textForIndex:@"Politica_privacidade"];
+    self.labelSobre.text =[Language textForIndex:@"Sobre_Menu_Guru"];
+    self.labelTermos.text =[Language textForIndex:@"Termos_condicoes"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +49,7 @@
 
 - (IBAction)clicksobreGuru:(id)sender {
     SobreMenuGuru * termos = [SobreMenuGuru new];
-    termos.titulo = @"Sobre o menu guru";
+    termos.titulo = [Language textForIndex:@"Sobre_Menu_Guru"];
     
     if ([[Globals lang] isEqualToString:@"pt"]) {
         NSLog(@"lingua em pt");
@@ -70,7 +75,8 @@
 }
 - (IBAction)clickTermos:(id)sender {
     SobreMenuGuru * termos = [SobreMenuGuru new];
-    termos.titulo = @"Termos & condições";
+    termos.titulo = [Language textForIndex:@"Termos_condicoes"];
+
     
     if ([[Globals lang] isEqualToString:@"pt"]) {
         NSLog(@"lingua em pt");
@@ -92,7 +98,7 @@
 
 - (IBAction)clickPolitica:(id)sender {
     SobreMenuGuru * termos = [SobreMenuGuru new];
-    termos.titulo = @"Política de privacidade";
+    termos.titulo = [Language textForIndex:@"Politica_privacidade"];
     
     if ([[Globals lang] isEqualToString:@"pt"]) {
         NSLog(@"lingua em pt");

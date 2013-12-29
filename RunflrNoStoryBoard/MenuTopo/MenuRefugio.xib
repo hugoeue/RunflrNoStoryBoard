@@ -6,7 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuRefugio">
             <connections>
+                <outlet property="labelDfenicoes" destination="GaH-9A-ZMC" id="23p-Rx-lwd"/>
+                <outlet property="labelInicio" destination="CQd-hm-zBC" id="tCF-ql-0pS"/>
                 <outlet property="labelLingua" destination="QBa-A0-6mZ" id="Gr0-w3-H8l"/>
+                <outlet property="labelMinhaCont" destination="lkt-hX-yO3" id="2TZ-N0-VNw"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
