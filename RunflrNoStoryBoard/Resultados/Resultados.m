@@ -87,11 +87,11 @@
     
     if (!error)
     {
-        int tag=[WebServiceSender getTagFromWebServiceSenderDict:resulti];
-        switch (tag)
-        {
-            case 1:
-            {
+//        int tag=[WebServiceSender getTagFromWebServiceSenderDict:resulti];
+//        switch (tag)
+//        {
+//            case 1:
+//            {
                 NSLog(@"resultado da pesquisa por nome =>%@", resulti.description);
                 
                 
@@ -149,10 +149,10 @@
                 [self.view addSubview:colececao.view];
                 
                 
-                                break;
-            }
-                
-        }
+//                                break;
+//            }
+//                
+//        }
     }else
     {
         NSLog(@"error webserviceSender %@",error);
@@ -204,7 +204,18 @@
     }
     else
     {
+        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome.php" method:@"" tag:2];
+        webResultado.delegate = self;
         
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+        //
+        //        $body['lang'];
+        //        $body['nomeparte'];
+        
+        [dict setObject:result forKey:@"nomeparte"];
+        [dict setObject:[Globals lang] forKey:@"lang"];
+        
+        [webResultado sendDict:dict];
     }
     
     

@@ -38,7 +38,9 @@
     UIAlertView *alertBoo2;
     
     WebServiceSender * recomendados;
-    WebServiceSender *favWeb;
+    WebServiceSender * favWeb;
+    WebServiceSender * rests;
+    WebServiceSender * cits;
     
     NSMutableArray * restaurantesRecomendados;
     
@@ -247,6 +249,67 @@ int num = 0;
                 [self.viewContainer addSubview:colececaoFavoritos.view];
                 [colececaoRecomendados removeFromParentViewController];
                 
+                break;
+            }
+            case 3:
+            {
+                NSLog(@"cidades existentes %@", result);
+                
+                NSMutableArray *array =[NSMutableArray new];
+                for (NSMutableDictionary *dict in [result objectForKey:@"resp"]) {
+                    City * cit = [City new];
+                    cit.name = [dict objectForKey:@"nome"];
+                    //cit.dbId = [dict objectForKey:@"id"];
+                    [array addObject:cit];
+                }
+                [Globals setCities:array];
+                
+                NSLog(@"success loaded cities");
+                
+                /*
+                 for (City * vitie in [Globals cities]) {
+                 NSLog(@"Citie name: %@ ",vitie.name);
+                 }
+                 */
+                
+                [HTAutocompleteTextField setDefaultAutocompleteDataSource:[HTAutocompleteManager sharedManager]];
+                
+                
+                //self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+                
+                self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
+
+                
+                break;
+            }
+            case 4:
+            {
+                NSLog(@"restaurantes existentes %@", result);
+                
+                NSMutableArray *array =[NSMutableArray new];
+                for (NSMutableDictionary *dict in [result objectForKey:@"resp"]) {
+                    Restaurant * rest = [Restaurant new];
+                    rest.name = [dict objectForKey:@"nome"];
+                    //cit.dbId = [dict objectForKey:@"id"];
+                    [array addObject:rest];
+                }
+                [Globals setSearchResult:array];
+                
+                NSLog(@"success loaded cities");
+                
+                /*
+                 for (City * vitie in [Globals cities]) {
+                 NSLog(@"Citie name: %@ ",vitie.name);
+                 }
+                 */
+                
+                [HTAutocompleteTextField setDefaultAutocompleteDataSource:[HTAutocompleteManager sharedManager]];
+                
+                
+                //self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+                
+                self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
+            
                 break;
             }
                 
@@ -462,15 +525,7 @@ int num = 0;
     
     [self.buttonCities setSelected:YES];
     tipo = @"Cities";
-    
-    //[self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
-    
-//    self.buttonRestaurant.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:20];
-//    self.buttonCities.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:20];
-//    self.buttonGo.titleLabel.font = [UIFont fontWithName:@"DKCrayonCrumble" size:18];
-//    self.texfFieldPesquisa.font = [UIFont fontWithName:@"DKCrayonCrumble" size:32];
-    
-//    [NSThread detachNewThreadSelector:@selector(loadCities) toTarget:self withObject:nil];
+
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -498,11 +553,45 @@ int num = 0;
     //self.scrollView.contentOffset = CGPointMake( 0, 90);
     
     
-  
+    [self carragarCidades];
+    [self carregaRestaurantes];
     [self gps];
     self.collectionView.delegate = self;
     
 
+}
+
+-(void)carregaRestaurantes
+{
+    cits = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_search_rest.php" method:@"" tag:4];
+    cits.delegate = self;
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    //
+    //        $body['lang'];
+    //        $body['nomeparte'];
+    
+    
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    
+    [cits sendDict:dict];
+    
+}
+
+-(void)carragarCidades
+{
+    rests = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_search_cities.php" method:@"" tag:3];
+    rests.delegate = self;
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    //
+    //        $body['lang'];
+    //        $body['nomeparte'];
+    
+    
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    
+    [rests sendDict:dict];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
