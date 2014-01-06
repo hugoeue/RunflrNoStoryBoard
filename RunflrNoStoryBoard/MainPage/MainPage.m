@@ -30,6 +30,7 @@
     NSString * tipo;
     
     BOOL isTiming;
+    BOOL isFavOpen;
     
     NSTimer *timer;
     
@@ -135,6 +136,9 @@ int num = 0;
                     NSString * alturaI = [dict objectForKey:@"height_i"];
                     NSString * larguraI = [dict objectForKey:@"width_i"];
                     NSString * freguesia = [dict objectForKey:@"cidade"];
+                    
+                    NSString * telefone = [dict objectForKey:@"telefone"];
+                    rest.phone =[telefone doubleValue];
                   
                     if([[dict objectForKey:@"pag"] isEqualToString:@"sim"])
                     {
@@ -162,7 +166,9 @@ int num = 0;
                         rest.cuisinesResultText =[NSString stringWithFormat:@"%@, %@",[cosinhas objectForKey:@"cozinhas_nome"],rest.cuisinesResultText] ;
                     }
                     
-                    //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
+                    if ( [rest.cuisinesResultText length] > 0)
+                        rest.cuisinesResultText = [rest.cuisinesResultText substringToIndex:[rest.cuisinesResultText length] - 2];
+
                     
                     rest.address = freguesia;
                     
@@ -182,6 +188,7 @@ int num = 0;
                 
                 if (restaurantesRecomendados.count>0) {
                     [self ordenarPorPagos:restaurantesRecomendados];
+                    isFavOpen = NO;
                 }
                 
  
@@ -210,7 +217,8 @@ int num = 0;
                     NSString * larguraI = [dict objectForKey:@"width_i"];
                     NSString * freguesia = [dict objectForKey:@"cidade"];
                     
-                    
+                    NSString * telefone = [dict objectForKey:@"telefone"];
+                    rest.phone =[telefone doubleValue];
                     
                     
                     
@@ -221,8 +229,10 @@ int num = 0;
                         rest.cuisinesResultText =[NSString stringWithFormat:@"%@, %@",[cosinhas objectForKey:@"cozinhas_nome"],rest.cuisinesResultText] ;
                     }
                     
-                    //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
+                    if ( [rest.cuisinesResultText length] > 0)
+                        rest.cuisinesResultText = [rest.cuisinesResultText substringToIndex:[rest.cuisinesResultText length] - 2];
                     
+
                     rest.address = freguesia;
                     
                     rest.lat =[lati doubleValue];
@@ -436,6 +446,15 @@ int num = 0;
      self.labelCidade.text =[Language textForIndex:@"Cidade"];
     self.labelRestaurante.text =[Language textForIndex:@"Restaurante"];
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+    
+    // tenho de fazer um if para recarregar as cenas na coleçao
+    if (isFavOpen)
+    {
+        [self ChamarFavoritos];
+    }
+    else{
+        // senao ainda nao faz nada
+    }
 }
 
 
@@ -1077,7 +1096,7 @@ int num = 0;
 
 -(void)ChamarFavoritos
 {
-    
+    isFavOpen = YES;
     
     [UIView animateWithDuration:0.5 animations:^{
         [self.viewFavoritos setBackgroundColor:[UIColor darkGrayColor]];

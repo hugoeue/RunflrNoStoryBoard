@@ -55,7 +55,7 @@
 
 - (IBAction)popAnterior:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    //[self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clickLoginRundlr:(id)sender {
@@ -138,7 +138,7 @@
              [Globals user].loginType = @"facebook";
     
     
-     [self dismissViewControllerAnimated:NO completion:nil];
+     [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
              
 //    UserParser *userParser = [[UserParser alloc] initXMLParser];

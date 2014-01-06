@@ -39,6 +39,8 @@
 		BA0B9696184E8A9600182E0A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9695184E8A9600182E0A /* User.m */; };
 		BA0B9699184E8BFD00182E0A /* FeaturedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9698184E8BFD00182E0A /* FeaturedParser.m */; };
 		BA18C8B3185B32FF00DCC74B /* transferir.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BA18C8B2185B32FF00DCC74B /* transferir.jpeg */; };
+		BA1D88D01878523E006AB77A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1D88CE1878523E006AB77A /* Menus.m */; };
+		BA1D88D11878523E006AB77A /* Menus.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1D88CF1878523E006AB77A /* Menus.xib */; };
 		BA2C6DAE1864A6A3008F8DF2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */; };
 		BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB41864A861008F8DF2 /* 58x58-1.png */; };
 		BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */; };
@@ -264,6 +266,9 @@
 		BA0B9697184E8BFD00182E0A /* FeaturedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedParser.h; sourceTree = "<group>"; };
 		BA0B9698184E8BFD00182E0A /* FeaturedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedParser.m; sourceTree = "<group>"; };
 		BA18C8B2185B32FF00DCC74B /* transferir.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transferir.jpeg; sourceTree = "<group>"; };
+		BA1D88CD1878523E006AB77A /* Menus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menus.h; path = menus/Menus.h; sourceTree = "<group>"; };
+		BA1D88CE1878523E006AB77A /* Menus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menus.m; path = menus/Menus.m; sourceTree = "<group>"; };
+		BA1D88CF1878523E006AB77A /* Menus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Menus.xib; path = menus/Menus.xib; sourceTree = "<group>"; };
 		BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA2C6DB41864A861008F8DF2 /* 58x58-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "58x58-1.png"; sourceTree = "<group>"; };
 		BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80x80-1.png"; sourceTree = "<group>"; };
@@ -530,6 +535,7 @@
 		BA0B9678184E644100182E0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA1D88CC187851F9006AB77A /* Tabela */,
 				BA4F59CA186DD14E00AB2C41 /* CollectionController */,
 				BA2E8E65185EF7F600CA31AF /* Pagina Pessoal */,
 				BA889B491859CA5600C473D3 /* RootViewcontroller */,
@@ -612,6 +618,16 @@
 				BA0B9692184E8A7700182E0A /* Restaurant.m */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		BA1D88CC187851F9006AB77A /* Tabela */ = {
+			isa = PBXGroup;
+			children = (
+				BA1D88CD1878523E006AB77A /* Menus.h */,
+				BA1D88CE1878523E006AB77A /* Menus.m */,
+				BA1D88CF1878523E006AB77A /* Menus.xib */,
+			);
+			name = Tabela;
 			sourceTree = "<group>";
 		};
 		BA2C6D8E18644E61008F8DF2 /* CachedLib */ = {
@@ -1172,6 +1188,7 @@
 				BA65F15E18623FAC00BF914A /* seta_BACK.png in Resources */,
 				BA5CBF95186B46CD0022A5CF /* Defenicoes.xib in Resources */,
 				BA53085618709A6C00540691 /* Termos e condiçõesPT.txt in Resources */,
+				BA1D88D11878523E006AB77A /* Menus.xib in Resources */,
 				BA65F13F18623FAC00BF914A /* facebook_tira.png in Resources */,
 				BA65F13218623FAC00BF914A /* 3.png in Resources */,
 				BA65F14718623FAC00BF914A /* icon_criar.png in Resources */,
@@ -1253,6 +1270,7 @@
 				BA93FDD1184D3CFC004001E4 /* MainPage.m in Sources */,
 				BA93FDA7184D3C3F004001E4 /* AppDelegate.m in Sources */,
 				BA51C61A18539BDA0080BD9F /* Comments.m in Sources */,
+				BA1D88D01878523E006AB77A /* Menus.m in Sources */,
 				BA53084F1870954300540691 /* FeedBack.m in Sources */,
 				BA324BCC18630ADB001688CC /* UIImage+FX.m in Sources */,
 				BA0B9696184E8A9600182E0A /* User.m in Sources */,
@@ -1343,6 +1361,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1382,6 +1401,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;

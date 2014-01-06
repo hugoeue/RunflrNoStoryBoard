@@ -33,6 +33,11 @@
     return self;
 }
 
+-(void)dealloc
+{
+    NSLog(@"dealloc da porra da colecçao");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

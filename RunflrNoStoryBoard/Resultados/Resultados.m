@@ -110,8 +110,7 @@
                     NSString * alturaI = [dict objectForKey:@"height_i"];
                     NSString * larguraI = [dict objectForKey:@"width_i"];
                     NSString * freguesia = [dict objectForKey:@"cidade"];
-                    
-                    
+                    NSString * telefone = [dict objectForKey:@"telefone"];
                     
                     
                     
@@ -125,7 +124,7 @@
                     //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
                     
                     rest.address = freguesia;
-                    
+                    rest.phone =[telefone doubleValue];
                     rest.lat =[lati doubleValue];
                     rest.lon =[longi doubleValue];
                     rest.name = restName;
@@ -142,7 +141,8 @@
                 
                 
                 colececao = [CollectionGuru new];
-                
+                colececao.delegate = self;
+        
                 [colececao CarregarRestaurantes:restaurantes];
                  colececao.view.frame = self.viewContainer.frame;
                 
@@ -221,6 +221,18 @@
     
     
    
+}
+
+
+-(void)chamarRestaurante:(Restaurant *)rest
+{
+    // chamar restaurante
+    NSLog(@"restaurante chamado chamase %@", rest.name);
+    
+    Diarias * details = [Diarias new];
+    [details loadRestaurant:rest];
+    
+    [self.navigationController pushViewController:details animated:YES];
 }
 
 

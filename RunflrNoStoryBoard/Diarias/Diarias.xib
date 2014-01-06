@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Diarias">
             <connections>
+                <outlet property="buttonSeguir" destination="G3v-GW-FGA" id="JkI-KT-OaX"/>
                 <outlet property="container" destination="elr-FP-D6U" id="qnF-Yr-vcd"/>
                 <outlet property="imagemRestaurante" destination="cr0-hn-eln" id="1wj-OJ-Rnf"/>
                 <outlet property="labelCosinhas" destination="PO2-Jn-Nme" id="rkt-XS-ZvQ"/>
@@ -75,7 +76,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G3v-GW-FGA">
                     <rect key="frame" x="5" y="185" width="208" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Seguir" backgroundImage="nao_seguir.png">
+                    <state key="normal" title="Adicionar favorito" backgroundImage="nao_seguir.png">
                         <color key="titleColor" red="1" green="0.059260627122448506" blue="0.047730627705215967" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -90,6 +91,9 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="clickLigar:" destination="-1" eventType="touchUpInside" id="htO-id-rxo"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>

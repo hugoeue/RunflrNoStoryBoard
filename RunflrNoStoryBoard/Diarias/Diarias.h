@@ -27,4 +27,8 @@
 - (IBAction)chamarMapa:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *labelCosinhas;
 
+
+@property (weak, nonatomic) IBOutlet UIButton *buttonSeguir;
+- (IBAction)clickLigar:(id)sender;
+
 @end
