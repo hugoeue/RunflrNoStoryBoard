@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>rundlr</string>
+	<string>Menu Guru</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -38,7 +38,7 @@
 	<key>FacebookAppID</key>
 	<string>619399271450515</string>
 	<key>FacebookDisplayName</key>
-	<string>Rundlr</string>
+	<string>Menu Guru</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

@@ -319,7 +319,7 @@ static HTAutocompleteManager *sharedManager;
                 stringToCompare = stringFromReference;
             }
             
-            if ([stringToCompare hasPrefix:stringToLookFor])
+            if (stringToLookFor && [stringToCompare hasPrefix:stringToLookFor])
             {
                 return [stringFromReference stringByReplacingCharactersInRange:[stringToCompare rangeOfString:stringToLookFor] withString:@""];
             }

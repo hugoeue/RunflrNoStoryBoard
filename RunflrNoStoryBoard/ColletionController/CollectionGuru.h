@@ -11,9 +11,10 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface CollectionGuru : UIViewController <RFQuiltLayoutDelegate,UICollectionViewDelegate>{
-    CLLocationManager *locationManager;
+   
 }
 
+@property CLLocationManager *locationManager;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) NSMutableArray* numbers;
 
@@ -22,5 +23,7 @@
 -(void)CarregarRestaurantes:(NSMutableArray *)restaurantesC;
 
 @property (nonatomic, assign) id delegate;
+
+@property BOOL mostrarGPS;
 
 @end

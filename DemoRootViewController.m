@@ -118,7 +118,7 @@
         [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
         [_topView addSubview:topShadowView];
         
-        [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:4 topViewPullFactor:0.9];
+        [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:2 topViewPullFactor:0.9];
         
         _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
         [_leftTableView setRowHeight:100];
@@ -239,10 +239,14 @@
     {
        // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+        [_main.buttonPesquisa setUserInteractionEnabled:YES];
+      
     }
     else{
       //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded animated:YES completion:nil];
+        [_main.buttonPesquisa setUserInteractionEnabled:NO];
+        
     }
 }
 

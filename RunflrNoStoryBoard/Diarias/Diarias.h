@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "FXImageView.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface Diarias : UIViewController
+
+@property CLLocationManager * locationManager;
 
 - (IBAction)clickBack:(id)sender;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segControl;
@@ -30,5 +33,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonSeguir;
 - (IBAction)clickLigar:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelDistancia;
+
 
 @end

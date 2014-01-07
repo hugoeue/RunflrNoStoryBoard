@@ -14,6 +14,7 @@
 #import "WebServiceSender.h"
 #import "Restaurant.h"
 #import "CollectionGuru.h"
+#import "SemDados.h"
 
 @interface Resultados ()
 {
@@ -49,6 +50,14 @@
 @end
 
 @implementation Resultados
+@synthesize locationManager;
+
+-(void)dealloc
+{
+    if (webResultado) {
+        [webResultado cancel];
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,12 +82,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.labelResultado.text=result;
- 
-  
+    NSString *txt = result;
     
-   
-        [self preperarPesquisa];
+    if(result.length>0)
+        txt = [txt stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[txt substringToIndex:1] uppercaseString]];
+    
+    self.labelResultado.text=txt;
+ 
+    [self preperarPesquisa];
   
 }
 
@@ -109,9 +120,9 @@
                     NSString * imagem = [dict objectForKey:@"imagem"];
                     NSString * alturaI = [dict objectForKey:@"height_i"];
                     NSString * larguraI = [dict objectForKey:@"width_i"];
-                    NSString * freguesia = [dict objectForKey:@"cidade"];
                     NSString * telefone = [dict objectForKey:@"telefone"];
-                    
+                    NSString * cidade = [dict objectForKey:@"cidade"];
+                    NSString * freguesia = [dict objectForKey:@"freg_nome"];
                     
                     
                     
@@ -121,9 +132,12 @@
                         rest.cuisinesResultText =[NSString stringWithFormat:@"%@, %@",[cosinhas objectForKey:@"cozinhas_nome"],rest.cuisinesResultText] ;
                     }
                     
+                    if ( [rest.cuisinesResultText length] > 0)
+                        rest.cuisinesResultText = [rest.cuisinesResultText substringToIndex:[rest.cuisinesResultText length] - 2];
                     //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
                     
                     rest.address = freguesia;
+                    rest.city = cidade;
                     rest.phone =[telefone doubleValue];
                     rest.lat =[lati doubleValue];
                     rest.lon =[longi doubleValue];
@@ -138,17 +152,33 @@
                     [restaurantes addObject:rest];
                 }
                 
-                
-                
+        if(restaurantes.count>0){
+            
                 colececao = [CollectionGuru new];
                 colececao.delegate = self;
+                colececao.locationManager = locationManager;
         
                 [colececao CarregarRestaurantes:restaurantes];
                  colececao.view.frame = self.viewContainer.frame;
                 
                 [self.view addSubview:colececao.view];
                 
-                
+        }else{
+            // quando vem com 0 restaurantes recomendados
+            SemDados * vazio = [SemDados new];
+            vazio.view.frame = CGRectMake(0,
+                                          0,
+                                          self.viewContainer.frame.size.width,
+                                          self.viewContainer.frame.size.height);
+            [self.viewContainer addSubview:vazio.view];
+            vazio.imagem.image = [UIImage imageNamed:@"cry-50.png"];
+            vazio.labelTitulo.text = @"Não encontrado";
+            vazio.labelMenssagem.text = @"";
+            vazio.labelDescricao.text = @"Não conseguimos encontrar nenhum resultado, por favor tente com outra palavra chave. ";
+
+
+        }
+        
 //                                break;
 //            }
 //                
@@ -230,6 +260,7 @@
     NSLog(@"restaurante chamado chamase %@", rest.name);
     
     Diarias * details = [Diarias new];
+    details.locationManager = locationManager;
     [details loadRestaurant:rest];
     
     [self.navigationController pushViewController:details animated:YES];

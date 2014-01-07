@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/Resultados/Resultados.m"
-            timestampString = "410553725.911081"
+            filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
+            timestampString = "410803574.893544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "-sendCompleteWithResult:withError:"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "-chamarRestaurante:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

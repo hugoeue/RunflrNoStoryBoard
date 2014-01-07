@@ -19,6 +19,8 @@
 #import "Login.h"
 #import "Menus.h"
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
 
 @interface Diarias (){
     Restaurant * restaurante;
@@ -37,8 +39,25 @@
 
 @implementation Diarias
 
+@synthesize locationManager;
+
 -(void)dealloc{
     NSLog(@"objecto foi deallocado");
+    
+//    WebServiceSender *webser;
+//    WebServiceSender *addRemoveFav;
+//    WebServiceSender *verifica;
+    
+    if(webser)
+        [webser cancel];
+    if ( addRemoveFav )
+        [addRemoveFav cancel];
+    if (verifica)
+        [verifica cancel];
+    
+    webser = nil;
+    addRemoveFav = nil;
+    verifica = nil;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,12 +69,29 @@
     return self;
 }
 
+- (void) moveAllSubviewsDown{
+    float barHeight = -40.0;
+    for (UIView *view in self.view.subviews) {
+        
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + barHeight, view.frame.size.width, view.frame.size.height - barHeight);
+        } else {
+            view.frame = CGRectMake(view.frame.origin.x, view.frame.origin.y + barHeight, view.frame.size.width, view.frame.size.height);
+        }
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+
+
+    
+    self.labelDistancia.text = [self imprimirDistancia:restaurante];
    
     self.labelTitleRestaurnat.text = restaurante.name;
-    self.labelLocalisacao.text = restaurante.address;
+    self.labelLocalisacao.text = [NSString stringWithFormat:@"%@ - %@",restaurante.city ,restaurante.address];
     self.labelCosinhas.text = restaurante.cuisinesResultText;
     
     self.imagemRestaurante.asynchronous = YES;
@@ -205,7 +241,7 @@
                
                     colececaoFavoritos = [CollectionGuru new];
                 colececaoFavoritos.delegate = self;
-                
+                    colececaoFavoritos.mostrarGPS = NO;
                 
                  colececaoFavoritos.view.frame = self.container.frame;
                 
@@ -227,6 +263,8 @@
                     [alert show];
                     [self.buttonSeguir setTitle:@"Remover dos favoritos" forState:UIControlStateNormal];
                     restaurante.fav = 0;
+                    [self.buttonSeguir setEnabled:YES];
+                    
                 }
                 
                 if ([[result objectForKey:@"res"] isEqualToString:@"eliminado com sucesso"]) {
@@ -234,6 +272,7 @@
                     [alert show];
                     [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
                     restaurante.fav = 1;
+                    [self.buttonSeguir setEnabled:YES];
                 }
                 
                 // tenho de fazer cenas com os botoes
@@ -267,6 +306,31 @@
     
     
 }
+
+-(NSString *)imprimirDistancia:(Restaurant *)rest
+{
+ 
+        
+        if (locationManager.location.coordinate.latitude!=0) {
+            CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
+            CLLocation * localActual = [[CLLocation alloc] initWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude];
+            
+            CLLocationDistance distance = [localActual distanceFromLocation:localRest];
+            //NSLog(@"distancia calculada  %f de %@", distance,rest.name);
+            
+            if (distance>1000) {
+                return [NSString stringWithFormat:@"%.2f Km",distance/1000];
+            }
+            
+            
+            return [NSString stringWithFormat:@"%.0f m",distance];
+        }else
+        {
+            return @"Ative GPS";
+        }
+    
+}
+
 
 -(void)chamarRestaurante:(Restaurant *)rest
 {
@@ -312,13 +376,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-
-
-
-
 - (IBAction)clickAddFavorito:(id)sender {
-    
+    [self.buttonSeguir setEnabled:NO];
 //    json_cratefav.php
 //    serve para apagar ou criar favoritos
 //    $body['user_id'];

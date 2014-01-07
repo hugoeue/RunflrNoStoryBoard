@@ -9,14 +9,77 @@
 #import "PaginaPessoal.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Login.h"
+#import "WebServiceSender.h"
 
 @interface PaginaPessoal ()
+{
+    WebServiceSender * notif;
+}
 
 @property (strong, nonatomic) NSCache *imageCache;
 
 @end
 
 @implementation PaginaPessoal
+
+-(void)receberNotifi:(NSString *)recebe
+{
+    notif = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_add_rem_not.php" method:@"" tag:1];
+    notif.delegate = self;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * token = [defaults objectForKey:@"token"];
+   
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:token forKey:@"not"];
+    
+    if(recebe )
+    {
+        if ([recebe isEqualToString:@"YES"]) {
+            [dict setObject:@"0" forKey:@"favSend"];
+        }
+        
+        else
+        {
+            [dict setObject:@"1" forKey:@"favSend"];
+        }
+    }
+
+    
+    
+    
+    [notif sendDict:dict];
+    
+    
+}
+
+-(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
+    
+    
+    if (!error)
+    {
+        int tag=[WebServiceSender getTagFromWebServiceSenderDict:result];
+        switch (tag)
+        {
+            case 1:
+            {
+                NSLog(@"resultado do envio do token =>%@", result.description);
+                
+                break;
+            }
+                
+                
+        }
+    }else
+    {
+        NSLog(@"error webserviceSender %@",error);
+        
+    }
+    
+    
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +100,10 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString* notifications = [defaults objectForKey:@"notifications"];
     NSString* newsletter = [defaults objectForKey:@"newsletter"];
+    
+    
+   
+
     
     
     if(notifications )
@@ -204,11 +271,15 @@
         // muda os defaults para outra cena
         [defaults setObject:@"NO" forKey:@"notifications"];
         [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+         [self receberNotifi:notifications];
     }else
     {
         [defaults setObject:@"YES" forKey:@"notifications"];
         [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_select.png"]];
+         [self receberNotifi:notifications];
     }
+   
+   
     [defaults synchronize];
 }
 

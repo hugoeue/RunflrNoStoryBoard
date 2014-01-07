@@ -24,6 +24,12 @@
 		BA02E8DC184FA060006A611B /* DK Crayon Crumble.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA02E8DB184FA060006A611B /* DK Crayon Crumble.ttf */; };
 		BA02E8E0184FAC96006A611B /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = BA02E8DE184FAC96006A611B /* Login.m */; };
 		BA02E8E1184FAC96006A611B /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA02E8DF184FAC96006A611B /* Login.xib */; };
+		BA05ABC7187AD01000AA2057 /* SemDados.m in Sources */ = {isa = PBXBuildFile; fileRef = BA05ABC5187AD01000AA2057 /* SemDados.m */; };
+		BA05ABC8187AD01000AA2057 /* SemDados.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABC6187AD01000AA2057 /* SemDados.xib */; };
+		BA05ABCA187B053300AA2057 /* compas-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABC9187B053300AA2057 /* compas-50.png */; };
+		BA05ABCC187B060300AA2057 /* star-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABCB187B060300AA2057 /* star-50.png */; };
+		BA05ABCE187B1B6200AA2057 /* confused-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABCD187B1B6200AA2057 /* confused-50.png */; };
+		BA05ABD0187B1B7300AA2057 /* cry-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABCF187B1B7300AA2057 /* cry-50.png */; };
 		BA07F0F718548C9E00591C6F /* UserParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA07F0F618548C9E00591C6F /* UserParser.m */; };
 		BA07F0FA18548E1D00591C6F /* Recent.m in Sources */ = {isa = PBXBuildFile; fileRef = BA07F0F918548E1D00591C6F /* Recent.m */; };
 		BA0B9676184E62F700182E0A /* PPRevealSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9675184E62F700182E0A /* PPRevealSideViewController.m */; };
@@ -39,6 +45,9 @@
 		BA0B9696184E8A9600182E0A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9695184E8A9600182E0A /* User.m */; };
 		BA0B9699184E8BFD00182E0A /* FeaturedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B9698184E8BFD00182E0A /* FeaturedParser.m */; };
 		BA18C8B3185B32FF00DCC74B /* transferir.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BA18C8B2185B32FF00DCC74B /* transferir.jpeg */; };
+		BA1AD5F4187C303E00B79548 /* iphone_4_00000.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1AD5F3187C303E00B79548 /* iphone_4_00000.png */; };
+		BA1AD5F6187C466600B79548 /* compas-25.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1AD5F5187C466600B79548 /* compas-25.png */; };
+		BA1AD5F8187C491000B79548 /* compas-25_white.png in Resources */ = {isa = PBXBuildFile; fileRef = BA1AD5F7187C491000B79548 /* compas-25_white.png */; };
 		BA1D88D01878523E006AB77A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1D88CE1878523E006AB77A /* Menus.m */; };
 		BA1D88D11878523E006AB77A /* Menus.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1D88CF1878523E006AB77A /* Menus.xib */; };
 		BA2C6DAE1864A6A3008F8DF2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */; };
@@ -178,6 +187,7 @@
 		BA65F16518623FAC00BF914A /* trespontos.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65F12D18623FAC00BF914A /* trespontos.png */; };
 		BA65F16618623FAC00BF914A /* utilizador_redondo.png in Resources */ = {isa = PBXBuildFile; fileRef = BA65F12E18623FAC00BF914A /* utilizador_redondo.png */; };
 		BA65F16718623FAC00BF914A /* transferir.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = BA65F12F18623FAC00BF914A /* transferir.jpeg */; };
+		BA7A9413187C1B05001ECB4A /* Default-568h@2x..png in Resources */ = {isa = PBXBuildFile; fileRef = BA7A9412187C1B05001ECB4A /* Default-568h@2x..png */; };
 		BA889B4D1859CA7E00C473D3 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA889B4B1859CA7E00C473D3 /* RootViewController.m */; };
 		BA889B4E1859CA7E00C473D3 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA889B4C1859CA7E00C473D3 /* RootViewController.xib */; };
 		BA93FD97184D3C3F004001E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA93FD96184D3C3F004001E4 /* Foundation.framework */; };
@@ -239,6 +249,13 @@
 		BA02E8DD184FAC96006A611B /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Login.h; path = FacebookLogin/Login.h; sourceTree = "<group>"; };
 		BA02E8DE184FAC96006A611B /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Login.m; path = FacebookLogin/Login.m; sourceTree = "<group>"; };
 		BA02E8DF184FAC96006A611B /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Login.xib; path = FacebookLogin/Login.xib; sourceTree = "<group>"; };
+		BA05ABC4187AD01000AA2057 /* SemDados.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SemDados.h; path = "Controlador Vazio/SemDados.h"; sourceTree = "<group>"; };
+		BA05ABC5187AD01000AA2057 /* SemDados.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SemDados.m; path = "Controlador Vazio/SemDados.m"; sourceTree = "<group>"; };
+		BA05ABC6187AD01000AA2057 /* SemDados.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SemDados.xib; path = "Controlador Vazio/SemDados.xib"; sourceTree = "<group>"; };
+		BA05ABC9187B053300AA2057 /* compas-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compas-50.png"; sourceTree = "<group>"; };
+		BA05ABCB187B060300AA2057 /* star-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star-50.png"; sourceTree = "<group>"; };
+		BA05ABCD187B1B6200AA2057 /* confused-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "confused-50.png"; sourceTree = "<group>"; };
+		BA05ABCF187B1B7300AA2057 /* cry-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cry-50.png"; sourceTree = "<group>"; };
 		BA07F0F518548C9E00591C6F /* UserParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserParser.h; sourceTree = "<group>"; };
 		BA07F0F618548C9E00591C6F /* UserParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserParser.m; sourceTree = "<group>"; };
 		BA07F0F818548E1D00591C6F /* Recent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recent.h; sourceTree = "<group>"; };
@@ -266,6 +283,9 @@
 		BA0B9697184E8BFD00182E0A /* FeaturedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturedParser.h; sourceTree = "<group>"; };
 		BA0B9698184E8BFD00182E0A /* FeaturedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturedParser.m; sourceTree = "<group>"; };
 		BA18C8B2185B32FF00DCC74B /* transferir.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transferir.jpeg; sourceTree = "<group>"; };
+		BA1AD5F3187C303E00B79548 /* iphone_4_00000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone_4_00000.png; sourceTree = "<group>"; };
+		BA1AD5F5187C466600B79548 /* compas-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compas-25.png"; sourceTree = "<group>"; };
+		BA1AD5F7187C491000B79548 /* compas-25_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "compas-25_white.png"; sourceTree = "<group>"; };
 		BA1D88CD1878523E006AB77A /* Menus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menus.h; path = menus/Menus.h; sourceTree = "<group>"; };
 		BA1D88CE1878523E006AB77A /* Menus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menus.m; path = menus/Menus.m; sourceTree = "<group>"; };
 		BA1D88CF1878523E006AB77A /* Menus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Menus.xib; path = menus/Menus.xib; sourceTree = "<group>"; };
@@ -439,6 +459,7 @@
 		BA65F12D18623FAC00BF914A /* trespontos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trespontos.png; sourceTree = "<group>"; };
 		BA65F12E18623FAC00BF914A /* utilizador_redondo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = utilizador_redondo.png; sourceTree = "<group>"; };
 		BA65F12F18623FAC00BF914A /* transferir.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = transferir.jpeg; sourceTree = "<group>"; };
+		BA7A9412187C1B05001ECB4A /* Default-568h@2x..png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x..png"; sourceTree = "<group>"; };
 		BA889B4A1859CA7E00C473D3 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = RootViewController/RootViewController.h; sourceTree = "<group>"; };
 		BA889B4B1859CA7E00C473D3 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = RootViewController/RootViewController.m; sourceTree = "<group>"; };
 		BA889B4C1859CA7E00C473D3 /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RootViewController.xib; path = RootViewController/RootViewController.xib; sourceTree = "<group>"; };
@@ -452,10 +473,10 @@
 		BA93FDA4184D3C3F004001E4 /* RunflrNoStoryBoard-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RunflrNoStoryBoard-Prefix.pch"; sourceTree = "<group>"; };
 		BA93FDA5184D3C3F004001E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BA93FDA6184D3C3F004001E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BA93FDAB184D3C3F004001E4 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		BA93FDAC184D3C3F004001E4 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		BA93FDAE184D3C3F004001E4 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		BA93FDAF184D3C3F004001E4 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		BA93FDAB184D3C3F004001E4 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MasterViewController.h; path = RunflrNoStoryBoard/MasterViewController.h; sourceTree = "<group>"; };
+		BA93FDAC184D3C3F004001E4 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MasterViewController.m; path = RunflrNoStoryBoard/MasterViewController.m; sourceTree = "<group>"; };
+		BA93FDAE184D3C3F004001E4 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = RunflrNoStoryBoard/DetailViewController.h; sourceTree = "<group>"; };
+		BA93FDAF184D3C3F004001E4 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = RunflrNoStoryBoard/DetailViewController.m; sourceTree = "<group>"; };
 		BA93FDB7184D3C3F004001E4 /* RunflrNoStoryBoardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunflrNoStoryBoardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA93FDB8184D3C3F004001E4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BA93FDC0184D3C3F004001E4 /* RunflrNoStoryBoardTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RunflrNoStoryBoardTests-Info.plist"; sourceTree = "<group>"; };
@@ -512,6 +533,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA05ABC2187ACF4100AA2057 /* talvez lixo */ = {
+			isa = PBXGroup;
+			children = (
+				BA93FDAE184D3C3F004001E4 /* DetailViewController.h */,
+				BA93FDAF184D3C3F004001E4 /* DetailViewController.m */,
+				BA93FDAB184D3C3F004001E4 /* MasterViewController.h */,
+				BA93FDAC184D3C3F004001E4 /* MasterViewController.m */,
+			);
+			name = "talvez lixo";
+			sourceTree = "<group>";
+		};
+		BA05ABC3187ACFE600AA2057 /* Sem dados */ = {
+			isa = PBXGroup;
+			children = (
+				BA05ABC4187AD01000AA2057 /* SemDados.h */,
+				BA05ABC5187AD01000AA2057 /* SemDados.m */,
+				BA05ABC6187AD01000AA2057 /* SemDados.xib */,
+			);
+			name = "Sem dados";
+			sourceTree = "<group>";
+		};
 		BA0B9673184E62E100182E0A /* PPRevealSideviewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +577,7 @@
 		BA0B9678184E644100182E0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA05ABC3187ACFE600AA2057 /* Sem dados */,
 				BA1D88CC187851F9006AB77A /* Tabela */,
 				BA4F59CA186DD14E00AB2C41 /* CollectionController */,
 				BA2E8E65185EF7F600CA31AF /* Pagina Pessoal */,
@@ -770,6 +813,12 @@
 		BA54BBF818510153006446D6 /* imgsFinal */ = {
 			isa = PBXGroup;
 			children = (
+				BA1AD5F7187C491000B79548 /* compas-25_white.png */,
+				BA1AD5F5187C466600B79548 /* compas-25.png */,
+				BA05ABCF187B1B7300AA2057 /* cry-50.png */,
+				BA05ABCD187B1B6200AA2057 /* confused-50.png */,
+				BA05ABCB187B060300AA2057 /* star-50.png */,
+				BA05ABC9187B053300AA2057 /* compas-50.png */,
 				BA5CBF96186B4D820022A5CF /* seta.png */,
 				BA65F0F818623FAC00BF914A /* 1.png */,
 				BA65F0F918623FAC00BF914A /* 2.png */,
@@ -909,7 +958,10 @@
 		BA93FD8A184D3C3F004001E4 = {
 			isa = PBXGroup;
 			children = (
+				BA05ABC2187ACF4100AA2057 /* talvez lixo */,
 				BA2C6DBB1864AAD3008F8DF2 /* Default@2x.png */,
+				BA7A9412187C1B05001ECB4A /* Default-568h@2x..png */,
+				BA1AD5F3187C303E00B79548 /* iphone_4_00000.png */,
 				BA2C6DAC1864A5F5008F8DF2 /* App Icons */,
 				BA2C6D8E18644E61008F8DF2 /* CachedLib */,
 				BA324BC6186308CD001688CC /* FXimage */,
@@ -967,10 +1019,6 @@
 				BA0B9673184E62E100182E0A /* PPRevealSideviewController */,
 				BA93FDA5184D3C3F004001E4 /* AppDelegate.h */,
 				BA93FDA6184D3C3F004001E4 /* AppDelegate.m */,
-				BA93FDAB184D3C3F004001E4 /* MasterViewController.h */,
-				BA93FDAC184D3C3F004001E4 /* MasterViewController.m */,
-				BA93FDAE184D3C3F004001E4 /* DetailViewController.h */,
-				BA93FDAF184D3C3F004001E4 /* DetailViewController.m */,
 				BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */,
 				BA2C6DBC1864ADE8008F8DF2 /* Images-2.xcassets */,
 				BA93FD9D184D3C3F004001E4 /* Supporting Files */,
@@ -1110,9 +1158,11 @@
 				BA2C6DAE1864A6A3008F8DF2 /* Images.xcassets in Resources */,
 				BA65F16718623FAC00BF914A /* transferir.jpeg in Resources */,
 				BA65F15518623FAC00BF914A /* on_click_lmenu.png in Resources */,
+				BA05ABCC187B060300AA2057 /* star-50.png in Resources */,
 				BA65F14318623FAC00BF914A /* fundo_pequeno.png in Resources */,
 				BA65F14E18623FAC00BF914A /* lousa.png in Resources */,
 				BA54BC041851103E006446D6 /* madeira.png in Resources */,
+				BA05ABCA187B053300AA2057 /* compas-50.png in Resources */,
 				BA54BC2018511089006446D6 /* caixa_gera_dia.png in Resources */,
 				BA65F14818623FAC00BF914A /* imagens_gu.png in Resources */,
 				BA53085418709A6C00540691 /* Política de privacidadePT.txt in Resources */,
@@ -1122,12 +1172,15 @@
 				BA54BC1D18511089006446D6 /* back.png in Resources */,
 				BA65F14018623FAC00BF914A /* facebook.png in Resources */,
 				BA65F16518623FAC00BF914A /* trespontos.png in Resources */,
+				BA05ABC8187AD01000AA2057 /* SemDados.xib in Resources */,
 				BA65F13718623FAC00BF914A /* bico_restaurante.png in Resources */,
 				BA65F13018623FAC00BF914A /* 1.png in Resources */,
 				BA65F14A18623FAC00BF914A /* login_2.png in Resources */,
 				BA65F15818623FAC00BF914A /* point_mapa.png in Resources */,
+				BA1AD5F6187C466600B79548 /* compas-25.png in Resources */,
 				BA65F15418623FAC00BF914A /* noselect.png in Resources */,
 				BA54BC2718511089006446D6 /* noselect.png in Resources */,
+				BA05ABD0187B1B7300AA2057 /* cry-50.png in Resources */,
 				BA65F14218623FAC00BF914A /* fundo_grande.png in Resources */,
 				BA65F15B18623FAC00BF914A /* retroceder.png in Resources */,
 				BA53085B18709C6600540691 /* Privacy Policy.txt in Resources */,
@@ -1138,6 +1191,7 @@
 				BA02E8DC184FA060006A611B /* DK Crayon Crumble.ttf in Resources */,
 				BA93FDD2184D3CFC004001E4 /* MainPage.xib in Resources */,
 				BA65F14B18623FAC00BF914A /* login.png in Resources */,
+				BA05ABCE187B1B6200AA2057 /* confused-50.png in Resources */,
 				BA65F14C18623FAC00BF914A /* LogoGuru.png in Resources */,
 				BA93FDA1184D3C3F004001E4 /* InfoPlist.strings in Resources */,
 				BA65F16218623FAC00BF914A /* Tira_grande.png in Resources */,
@@ -1171,6 +1225,7 @@
 				BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */,
 				BA54BC2A18511089006446D6 /* quadrado.png in Resources */,
 				BA65F15118623FAC00BF914A /* mais.png in Resources */,
+				BA1AD5F8187C491000B79548 /* compas-25_white.png in Resources */,
 				BA65F15D18623FAC00BF914A /* select.png in Resources */,
 				BA9BB0221859CF1D009ED843 /* PaperFoldResources.bundle in Resources */,
 				BA54BC2118511089006446D6 /* caixa_texto.png in Resources */,
@@ -1178,6 +1233,7 @@
 				BA51C6221853BCE80080BD9F /* MenuDoDia.xib in Resources */,
 				BA51C62E1853D4FC0080BD9F /* MenuGeral.xib in Resources */,
 				BA371E9B1860713700B2353E /* LogoGuru.png in Resources */,
+				BA1AD5F4187C303E00B79548 /* iphone_4_00000.png in Resources */,
 				BA65F13818623FAC00BF914A /* botao_no_select.png in Resources */,
 				BA32BD601861E9230019B69F /* 2.png in Resources */,
 				BA65F14918623FAC00BF914A /* ligar_restarante.png in Resources */,
@@ -1185,6 +1241,7 @@
 				BA54BC1C18511089006446D6 /* back_foto_utili.png in Resources */,
 				BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */,
 				BA54BC2818511089006446D6 /* panela_grande.png in Resources */,
+				BA7A9413187C1B05001ECB4A /* Default-568h@2x..png in Resources */,
 				BA65F15E18623FAC00BF914A /* seta_BACK.png in Resources */,
 				BA5CBF95186B46CD0022A5CF /* Defenicoes.xib in Resources */,
 				BA53085618709A6C00540691 /* Termos e condiçõesPT.txt in Resources */,
@@ -1301,6 +1358,7 @@
 				BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */,
 				BA02E8D5184F4DFB006A611B /* Cuisine.m in Sources */,
 				BA51C605185364160080BD9F /* LanguageViewController.m in Sources */,
+				BA05ABC7187AD01000AA2057 /* SemDados.m in Sources */,
 				BA324BBE1862FAD0001688CC /* ShadowView.m in Sources */,
 				BA0B9699184E8BFD00182E0A /* FeaturedParser.m in Sources */,
 			);
@@ -1423,7 +1481,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1434,7 +1492,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RunflrNoStoryBoard/RunflrNoStoryBoard-Prefix.pch";
 				INFOPLIST_FILE = "RunflrNoStoryBoard/RunflrNoStoryBoard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1448,7 +1506,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1459,7 +1517,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RunflrNoStoryBoard/RunflrNoStoryBoard-Prefix.pch";
 				INFOPLIST_FILE = "RunflrNoStoryBoard/RunflrNoStoryBoard-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

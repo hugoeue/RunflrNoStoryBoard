@@ -21,6 +21,9 @@
 #import "FXImageView.h"
 #import "CollectionGuru.h"
 #import "Diarias.h"
+#import "SemDados.h"
+
+
 
 
 @interface MainPage ()
@@ -48,6 +51,8 @@
     CollectionGuru * colececaoRecomendados;
     CollectionGuru * colececaoFavoritos;
     
+    SemDados * vazio;
+    
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
@@ -68,14 +73,14 @@ int num = 0;
     
         NSMutableDictionary * dict = [NSMutableDictionary new];
 
-    NSString * latitude = @"41.3869715";
-    NSString * longitude = @"-8.3214086";
+   // NSString * latitude = @"41.3869715";
+   // NSString * longitude = @"-8.3214086";
     
         [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.latitude] forKey:@"lat"];
         [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.longitude] forKey:@"lon"];
         
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
+        //[dict setObject:latitude forKey:@"lat"];
+        //[dict setObject:longitude forKey:@"lon"];
 
     
         [recomendados sendDict:dict];
@@ -85,18 +90,25 @@ int num = 0;
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
-    CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
-    CLLocation * localActual = [[CLLocation alloc] initWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude];
-    
-    CLLocationDistance distance = [localActual distanceFromLocation:localRest];
-    //NSLog(@"distancia calculada  %f de %@", distance,rest.name);
-    
-    if (distance>1000) {
-        return [NSString stringWithFormat:@"%.2f Km",distance/1000];
+    if (locationManager) {
+        CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
+        CLLocation * localActual = [[CLLocation alloc] initWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude];
+        
+        CLLocationDistance distance = [localActual distanceFromLocation:localRest];
+        //NSLog(@"distancia calculada  %f de %@", distance,rest.name);
+        
+        if (distance>1000) {
+            return [NSString stringWithFormat:@"%.2f Km",distance/1000];
+        }
+        
+        
+        return [NSString stringWithFormat:@"%.0f m",distance];
+    }else
+    {
+        return @"sem GPS";
     }
     
-
-    return [NSString stringWithFormat:@"%.0f m",distance];
+   
 }
 
 -(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
@@ -111,7 +123,7 @@ int num = 0;
             {
                 NSLog(@"resultado dalista dos recomendados =>%@", result.description);
                 
-
+                if(![[result objectForKey:@"resp"] isEqualToString:@"sem geolocalizacao"]){
                
                // distancia emtre 2 pontos;
                // CLLocationDistance distance = [aCLLocationA distanceFromLocation:aCLLocationB];
@@ -135,7 +147,9 @@ int num = 0;
                     NSString * imagem = [dict objectForKey:@"imagem"];
                     NSString * alturaI = [dict objectForKey:@"height_i"];
                     NSString * larguraI = [dict objectForKey:@"width_i"];
-                    NSString * freguesia = [dict objectForKey:@"cidade"];
+                    NSString * cidade = [dict objectForKey:@"cidade"];
+                    NSString * freguesia = [dict objectForKey:@"freg_nome"];
+
                     
                     NSString * telefone = [dict objectForKey:@"telefone"];
                     rest.phone =[telefone doubleValue];
@@ -154,9 +168,7 @@ int num = 0;
                     
                   
                     
-                    CLLocationDistance distance = [localOriginal distanceFromLocation:localRest];
-                    
-                    
+                    //CLLocationDistance distance = [localOriginal distanceFromLocation:localRest];
                     
                     
                   
@@ -171,6 +183,7 @@ int num = 0;
 
                     
                     rest.address = freguesia;
+                    rest.city = cidade;
                     
                     rest.lat =[lati doubleValue];
                     rest.lon =[longi doubleValue];
@@ -183,14 +196,40 @@ int num = 0;
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
                     
                     [restaurantesRecomendados addObject:rest];
+                    [vazio removeFromParentViewController];
                     [colececaoFavoritos removeFromParentViewController];
                 }
                 
                 if (restaurantesRecomendados.count>0) {
                     [self ordenarPorPagos:restaurantesRecomendados];
                     isFavOpen = NO;
+                }else
+                {
+                    // quando vem com 0 restaurantes recomendados
+                    vazio = [SemDados new];
+                    vazio.view.frame = CGRectMake(0,
+                                                  0,
+                                                  self.viewContainer.frame.size.width,
+                                                  self.viewContainer.frame.size.height);
+                    vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
+                    [self.viewContainer addSubview:vazio.view];
+                    
                 }
-                
+                }else
+                {
+                    // quando o servidor responde que recebeu geolocalização com coordenadas erradas...
+                    [colececaoRecomendados removeFromParentViewController];
+                    [colececaoFavoritos removeFromParentViewController];
+                    vazio = [SemDados new];
+                    vazio.view.frame = CGRectMake(0,
+                                                  0,
+                                                  self.viewContainer.frame.size.width,
+                                                  self.viewContainer.frame.size.height);
+                    vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
+                    [self.viewContainer addSubview:vazio.view];
+                    
+                    
+                }
  
                 //
                 break;
@@ -215,7 +254,8 @@ int num = 0;
                     NSString * imagem = [dict objectForKey:@"imagem"];
                     NSString * alturaI = [dict objectForKey:@"height_i"];
                     NSString * larguraI = [dict objectForKey:@"width_i"];
-                    NSString * freguesia = [dict objectForKey:@"cidade"];
+                    NSString * cidade = [dict objectForKey:@"cidade"];
+                    NSString * freguesia = [dict objectForKey:@"freg_nome"];
                     
                     NSString * telefone = [dict objectForKey:@"telefone"];
                     rest.phone =[telefone doubleValue];
@@ -234,6 +274,7 @@ int num = 0;
                     
 
                     rest.address = freguesia;
+                    rest.city = cidade;
                     
                     rest.lat =[lati doubleValue];
                     rest.lon =[longi doubleValue];
@@ -248,22 +289,41 @@ int num = 0;
                     [restaurantesRecomendados addObject:rest];
                 }
                 
+                if(restaurantesRecomendados.count ==0)
+                {
+                    vazio = [SemDados new];
+                    vazio.view.frame = CGRectMake(0,
+                                                  0,
+                                                  self.viewContainer.frame.size.width,
+                                                  self.viewContainer.frame.size.height);
+                    [self.viewContainer addSubview:vazio.view];
+                    vazio.imagem.image = [UIImage imageNamed:@"star-50.png"];
+                    vazio.labelTitulo.text = @"Sem favoritos";
+                    vazio.labelMenssagem.text = @"adicione restaurantes a sua lista de favoritos";
+                    vazio.labelDescricao.text = @"";
+
+                }else
+                {
                 
+                    colececaoFavoritos = [CollectionGuru new];
+                    colececaoFavoritos.delegate = self;
+                    colececaoFavoritos.locationManager = locationManager;
                 
-                colececaoFavoritos = [CollectionGuru new];
-                colececaoFavoritos.delegate = self;
-                
-                [colececaoFavoritos CarregarRestaurantes:restaurantesRecomendados];
+                    [colececaoFavoritos CarregarRestaurantes:restaurantesRecomendados];
                 // colececaoRecomendados.view.frame = CGRectMake(0, 130, 320, 438);
                 
-                [self.viewContainer addSubview:colececaoFavoritos.view];
-                [colececaoRecomendados removeFromParentViewController];
+                    [self.viewContainer addSubview:colececaoFavoritos.view];
+                    [vazio removeFromParentViewController];
+                    [colececaoRecomendados removeFromParentViewController];
+                }
+                
+                
                 
                 break;
             }
             case 3:
             {
-                NSLog(@"cidades existentes %@", result);
+               // NSLog(@"cidades existentes %@", result);
                 
                 NSMutableArray *array =[NSMutableArray new];
                 for (NSMutableDictionary *dict in [result objectForKey:@"resp"]) {
@@ -294,7 +354,7 @@ int num = 0;
             }
             case 4:
             {
-                NSLog(@"restaurantes existentes %@", result);
+               // NSLog(@"restaurantes existentes %@", result);
                 
                 NSMutableArray *array =[NSMutableArray new];
                 for (NSMutableDictionary *dict in [result objectForKey:@"resp"]) {
@@ -395,7 +455,7 @@ int num = 0;
     for (int i = 0 ; i< arrayPagos.count ;i++)
     {
      
-        NSLog(@"na collection %hhd %@", ((Restaurant *)[arrayPagos objectAtIndex:i]).destaque , ((Restaurant *)[arrayPagos objectAtIndex:i]).name);
+       // NSLog(@"na collection %hhd %@", ((Restaurant *)[arrayPagos objectAtIndex:i]).destaque , ((Restaurant *)[arrayPagos objectAtIndex:i]).name);
        
     }
 
@@ -405,6 +465,7 @@ int num = 0;
     
     colececaoRecomendados = [CollectionGuru new];
     colececaoRecomendados.delegate = self;
+    colececaoRecomendados.locationManager = locationManager;
     
     [colececaoRecomendados CarregarRestaurantes:restaurantesRecomendados];
    // colececaoRecomendados.view.frame = CGRectMake(0, 130, 320, 438);
@@ -420,9 +481,10 @@ int num = 0;
 -(void)chamarRestaurante:(Restaurant *)rest
 {
     // chamar restaurante
-    NSLog(@"restaurante chamado chamase %@", rest.name);
+   // NSLog(@"restaurante chamado chamase %@", rest.name);
     
     Diarias * details = [Diarias new];
+    details.locationManager = locationManager;
     [details loadRestaurant:rest];
     
     [self.navigationController pushViewController:details animated:YES];
@@ -443,6 +505,8 @@ int num = 0;
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:YES];
     
+   
+     [self.buttonPesquisa setUserInteractionEnabled:YES];
      self.labelCidade.text =[Language textForIndex:@"Cidade"];
     self.labelRestaurante.text =[Language textForIndex:@"Restaurante"];
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
@@ -463,6 +527,7 @@ int num = 0;
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
     [super viewWillDisappear:animated];
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+     [colececaoFavoritos removeFromParentViewController];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -475,6 +540,8 @@ int num = 0;
 {
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
 }
+
+
 
 
 -(void)viewDidAppear:(BOOL)animated
@@ -512,6 +579,8 @@ int num = 0;
     
 }
 
+
+
 - (void)loadGuruImage
 {
     
@@ -530,7 +599,8 @@ int num = 0;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self gps];
+
+
     
     
     
@@ -574,7 +644,14 @@ int num = 0;
     
     [self carragarCidades];
     [self carregaRestaurantes];
-    [self gps];
+    
+    
+        [self gps];
+    
+ 
+    
+   
+    
     self.collectionView.delegate = self;
     
 
@@ -664,6 +741,42 @@ int num = 0;
 }
 
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+   
+    
+    if ([error domain] == kCLErrorDomain) {
+        
+        // We handle CoreLocation-related errors here
+        switch ([error code]) {
+                // "Don't Allow" on two successive app launches is the same as saying "never allow". The user
+                // can reset this for all apps by going to Settings > General > Reset > Reset Location Warnings.
+            case kCLErrorDenied:
+            {
+                vazio = [SemDados new];
+                vazio.view.frame = CGRectMake(0,
+                                              0,
+                                              self.viewContainer.frame.size.width,
+                                              self.viewContainer.frame.size.height);
+                
+                vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
+                [self.viewContainer addSubview:vazio.view];
+                [colececaoRecomendados removeFromParentViewController];
+                [colececaoFavoritos removeFromParentViewController];
+                
+                break;
+            }
+                
+            case kCLErrorLocationUnknown:
+                
+            default:
+                break;
+        }
+    } else {
+        // We handle all non-CoreLocation errors here
+    }
+}
+
+
 
 
 
@@ -741,10 +854,17 @@ int num = 0;
 
 -(void)ChamarPesquisa
 {
-    
+    // bug
     
     Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
-    [c setResultado:self.texfFieldPesquisa.text];
+    
+    if(self.texfFieldPesquisa.text)
+    
+        [c setResultado:self.texfFieldPesquisa.text];
+    else
+        [c setResultado:@""];
+    
+    c.locationManager = locationManager;
     [c setTipo:tipo];
     [self.navigationController pushViewController:c animated:YES];
     PP_RELEASE(c);
@@ -760,8 +880,13 @@ int num = 0;
 //    PP_RELEASE(t);
 //    //PP_RELEASE(n);
     //[self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
-    [self.delegate performSelector:@selector(chamarTopo) ];
+    if (self.delegate)
+    
+        [self.delegate performSelector:@selector(chamarTopo) ];
 
+    [self.texfFieldPesquisa resignFirstResponder];
+  
+        [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
 }
 
 
@@ -823,6 +948,8 @@ int num = 0;
 
 - (IBAction)clickPesquisa:(id)sender {
 
+    
+    
     if(self.scrollView.contentOffset.y == 0)
         [self.scrollView setContentOffset:CGPointMake( 0, -90) animated:YES];
     else

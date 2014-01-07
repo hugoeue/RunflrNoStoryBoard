@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+
 
 @interface Resultados : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labelResultado;
 
 
+
+@property CLLocationManager * locationManager;
 -(void)setResultado:(NSString *)resultado;
 -(void)setTipo:(NSString *)tip;
 

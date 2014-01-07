@@ -21,13 +21,14 @@
 
 @implementation CollectionGuru
 
-@synthesize restaurantes;
+@synthesize restaurantes,locationManager,mostrarGPS;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        mostrarGPS = YES;
         
     }
     return self;
@@ -59,24 +60,30 @@
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
-    
-    
-    CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
-    CLLocation * localActual = [[CLLocation alloc] initWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude];
-    
-    CLLocationDistance distance = [localActual distanceFromLocation:localRest];
-    //NSLog(@"distancia calculada  %f de %@", distance,rest.name);
-    
-    if (distance>1000) {
-        return [NSString stringWithFormat:@"%.2f Km",distance/1000];
-    }
-    
-    if(rest.lat)
-    
-    return [NSString stringWithFormat:@"%.0f m",distance];
-    
-    else
+    if (mostrarGPS)
+  
+    if (locationManager.location.coordinate.latitude!=0) {
+        CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
+        CLLocation * localActual = [[CLLocation alloc] initWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude];
+        
+        CLLocationDistance distance = [localActual distanceFromLocation:localRest];
+        //NSLog(@"distancia calculada  %f de %@", distance,rest.name);
+        
+        if(distance>1000*100)
+            return [NSString stringWithFormat:@"%.0f Km",distance/1000];
+        if (distance>1000) {
+            return [NSString stringWithFormat:@"%.3f Km",distance/1000];
+        }
+        
+        
+        
+        return [NSString stringWithFormat:@"%.0f m",distance];
+    }else
+    {
+        return @"Ative geolocalização";
+    }else
         return @"";
+    
 }
 
 // cenas da colecçao
@@ -97,7 +104,7 @@
     // criar aqui o cenas para saber a altura
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 155, 100)];
-    label.numberOfLines = 4;
+    label.numberOfLines = 2;
     label.textColor = [UIColor blackColor];
     
     NSMutableAttributedString *ass;
@@ -120,7 +127,10 @@
                               constrainedToSize:label.frame.size
                                   lineBreakMode:UILineBreakModeWordWrap];
     CGFloat labelHeight = labelSize.height;
-    //NSLog(@"labelHeight = %f", labelHeight);
+    NSLog(@"labelHeight = %f", labelHeight);
+    if (labelHeight>60) {
+        return 45;
+    }
     return  labelHeight;
 }
 
@@ -129,7 +139,7 @@
     // criar aqui o cenas para saber a altura
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 145, 60)];
-    label.numberOfLines = 4;
+    label.numberOfLines = 2;
     label.textColor = [UIColor blackColor];
     
     NSMutableAttributedString *ass;
@@ -147,7 +157,7 @@
     label.attributedText = ass;
     
     UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 145, 60)];
-    label2.numberOfLines = 4;
+    label2.numberOfLines = 2;
     label2.textColor = [UIColor blackColor];
     
     NSMutableAttributedString *ass2;
@@ -185,12 +195,12 @@
         labelHeight2 = 40;
     }
     
-    NSLog(@"labelHeight = %f", labelHeight);
+   // NSLog(@"labelHeight = %f", labelHeight);
     if (rest.tamanhoImagem.height > 0) {
-        return  labelHeight + [self tamanhoDaImagemCorrecto:rest.tamanhoImagem ] + labelHeight2 +100;
+        return  labelHeight + [self tamanhoDaImagemCorrecto:rest.tamanhoImagem ] + labelHeight2 +80;
     }
     else{
-        return  labelHeight*0.8 + labelHeight2*1.3  +100;
+        return  labelHeight*0.8 + labelHeight2*1.3  +80;
     }
     
 }
@@ -241,6 +251,8 @@
     
     
     
+    
+    
     [self imprimirDistancia:restaurante ];
     
     
@@ -268,7 +280,18 @@
     imagem.clipsToBounds = YES;
     
     
-    NSLog(@"cosinhas %@", restaurante.cuisinesResultText);
+    FXImageView * imagem2 = (id)[cell viewWithTag:12];
+    if(!imagem2)
+        imagem2 = [FXImageView new];
+
+    imagem2.tag = 12;
+   
+    
+    imagem2.asynchronous = YES;
+    
+    imagem2.image = [UIImage imageNamed:@"compas-25.png"];
+    
+    //NSLog(@"cosinhas %@", restaurante.cuisinesResultText);
     
     
     
@@ -280,7 +303,7 @@
     
     //label.frame = CGRectMake(10,cell.frame.size.height*0.7f-20, cell.frame.size.width -15, cell.frame.size.height*0.3f);
     label.frame = CGRectMake(10,imagem.frame.size.height+5 , cell.frame.size.width -15, [self getNumberOffLinesTitle:restaurante.name]);
-    label.numberOfLines = 4;
+    label.numberOfLines = 2;
     label.tag = 5;
     label.textColor = [UIColor blackColor];
     
@@ -308,10 +331,12 @@
                 range:NSMakeRange(0, [restaurante.name length]) ];
     
     label.attributedText = ass;
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 8./16;
     
     
-    
-    label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, label.frame.origin.y+label.frame.size.height +7, cell.frame.size.width -20, 40)];
+    label2 = [[UILabel alloc] initWithFrame:CGRectMake(10, label.frame.origin.y+label.frame.size.height +7, cell.frame.size.width -20,
+                                                       cell.frame.size.height-20 - (label.frame.origin.y+label.frame.size.height +7))];
     
     label2.numberOfLines = 4;
     label2.textColor = [UIColor colorWithRed:101.0f/255.0f green:101.0f/255.0f blue:101.0f/255.0f alpha:1];
@@ -334,7 +359,8 @@
                  range:NSMakeRange(0, [restaurante.cuisinesResultText length]) ];
     
     label2.attributedText = ass2;
-    
+    //label2.backgroundColor = [UIColor greenColor];
+    label2.clipsToBounds = NO;
     
     
     UILabel* label3 = (id)[cell viewWithTag:8];
@@ -345,7 +371,7 @@
     }
     
     
-    label3 = [[UILabel alloc] initWithFrame:CGRectMake(10, cell.frame.size.height-20, cell.frame.size.width -20, 20)];
+    label3 = [[UILabel alloc] initWithFrame:CGRectMake(30, cell.frame.size.height-20, cell.frame.size.width -30, 20)];
     
     label3.numberOfLines = 3;
     label3.textColor = [UIColor colorWithRed:101.0f/255.0f green:101.0f/255.0f blue:101.0f/255.0f alpha:1];
@@ -362,10 +388,13 @@
                  range:NSMakeRange(0, [distancia length]) ];
     
     [ass3 addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:@"HelveticaNeue" size:10]
+                 value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:10]
                  range:NSMakeRange(0, [distancia length]) ];
     
     label3.attributedText = ass3;
+    
+    
+    [imagem2 setFrame: CGRectMake(10, cell.frame.size.height-18, 15, 15)];
     
     
     
@@ -389,18 +418,18 @@
     NSMutableAttributedString *ass4;
     
     
-    ass4 = [[NSMutableAttributedString alloc] initWithString:restaurante.address];
+    ass4 = [[NSMutableAttributedString alloc] initWithString:restaurante.city];
     
     [ass4 addAttribute:NSKernAttributeName
                  value:[NSNumber numberWithFloat:0.3]
-                 range:NSMakeRange(0, [restaurante.address length]) ];
+                 range:NSMakeRange(0, [restaurante.city length]) ];
     
     [ass4 addAttribute:NSFontAttributeName
                  value:[UIFont fontWithName:@"HelveticaNeue" size:10]
-                 range:NSMakeRange(0, [restaurante.address length]) ];
+                 range:NSMakeRange(0, [restaurante.city length]) ];
     
     label4.attributedText = ass4;
-    
+    //label.clipsToBounds = NO;
     
     
     
@@ -422,6 +451,8 @@
     [cell addSubview:label4];
     [cell addSubview:imagem];
     
+    
+    [cell addSubview:imagem2];
     
     
     

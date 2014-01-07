@@ -11,8 +11,12 @@
 #import "RootViewController.h"
 #import "PaperFoldNavigationController.h"
 #import "DemoRootViewController.h"
+#import "WebServiceSender.h"
 
-@implementation AppDelegate
+@implementation AppDelegate{
+
+    WebServiceSender * pushNotification;
+}
 
 @synthesize window = _window;
 //@synthesize revealSideViewController = _revealSideViewController;
@@ -99,9 +103,7 @@
     
     //    NSLog(@":::::%d:::", [components weekday]);
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
 
     
     
@@ -213,7 +215,81 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
 	NSLog(@"My token is: %@", deviceToken);
+    
+    // ainda tenho de tirar os espaços da string
+    NSString * myString = deviceToken.description;
+    
+    NSString * newString = [myString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    newString = [newString stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    newString = [newString stringByReplacingOccurrencesOfString:@">" withString:@""];
+    
+    NSLog(@"%@xx",newString);
+    
+    pushNotification = [[WebServiceSender alloc]initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_add_rem_not.php" method:@"" tag:1];
+    pushNotification.delegate = self;
+    
+    
+    // favsend é para adicionar ou nao o token a lista de tokens e o favsend é o token
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:newString forKey:@"not"];
+    [dict setObject:@"1" forKey:@"favSend"];
+    
+    
+    
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:newString forKey:@"token"];
+    [defaults synchronize];
+    
+    
+    NSString* notifications = [defaults objectForKey:@"notifications"];
+    if(!notifications)
+    {
+        [pushNotification sendDict:dict];
+    }
+
 }
+
+-(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
+    
+    
+    if (!error)
+    {
+        int tag=[WebServiceSender getTagFromWebServiceSenderDict:result];
+        switch (tag)
+        {
+            case 1:
+            {
+                NSLog(@"resultado do envio do token =>%@", result.description);
+                
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                [defaults setObject:@"YES" forKey:@"notifications"];
+                [defaults synchronize];
+                
+                break;
+            }
+         
+                
+        }
+    }else
+    {
+        NSLog(@"error webserviceSender %@",error);
+        // se contem duplicado é porque ja existe na bd
+        NSString *string = error.description;
+        if ([string rangeOfString:@"bla"].location == NSNotFound) {
+            NSLog(@"string does not contain bla");
+        } else {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"YES" forKey:@"notifications"];
+            [defaults synchronize];
+        }
+        
+    }
+    
+    
+}
+
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
