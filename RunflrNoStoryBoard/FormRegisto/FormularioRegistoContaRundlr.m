@@ -171,15 +171,16 @@
     //[self.view addGestureRecognizer:singleTap];
   
     
-    float sizeOfContent = 700;
-    UIView *lLast = [self.scroolView.subviews lastObject];
-    NSInteger wd = lLast.frame.origin.y;
-    NSInteger ht = lLast.frame.size.height;
-    
-    sizeOfContent = wd+ht;
+//    float sizeOfContent = 700;
+//    UIView *lLast = [self.scroolView.subviews lastObject];
+//    NSInteger wd = lLast.frame.origin.y;
+//    NSInteger ht = lLast.frame.size.height;
+//    
+//    sizeOfContent = wd+ht;
     
     self.scroolView.contentSize = CGSizeMake(self.scroolView.frame.size.width, 1000);
 
+    
     
     self.dateView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 256)];
     [self.view addSubview:_dateView];
@@ -203,7 +204,7 @@
     
     [_dateView addSubview:_datePicker];
 
-    
+    [self.scroolView setContentOffset:CGPointMake(0, 20) animated:YES];
 }
 
 

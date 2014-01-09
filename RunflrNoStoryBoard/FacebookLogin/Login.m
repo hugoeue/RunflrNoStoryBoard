@@ -13,8 +13,10 @@
 #import "FormularioRegistoContaRundlr.h"
 #import "WebServiceSender.h"
 
-@interface Login (){
-     WebServiceSender * webservi;
+@interface Login ()
+{
+    WebServiceSender * webservi;
+    WebServiceSender * recuperarPass;
 }
 
 @end
@@ -35,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if (![FBSession activeSession].isOpen) {
-        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+        [self.buttonLogin setTitle:@"Login com facebook" forState:UIControlStateNormal];
     }else
     {
         [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
@@ -107,7 +109,7 @@
     }];
     }else{
         [self facebookLoginLogout];
-        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+        [self.buttonLogin setTitle:@"Login com facebook" forState:UIControlStateNormal];
         [self.navigationController popToRootViewControllerAnimated:YES];
         
     }
@@ -141,31 +143,7 @@
      [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
              
-//    UserParser *userParser = [[UserParser alloc] initXMLParser];
-//    
-//    NSString *host = nil;
-//    
-//    //if (self.isOther) {
-//    //  host = [NSString stringWithFormat:@"http://cms.citychef.pt/data/xml_user.php?is_me=0&user_id=%d&face_id=%@", self.otherUserDbId, self.otherUserFaceId];
-//    //} else {
-//    host = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/xml_user.php?is_me=1&user_id=%d&face_id=%@", [Globals user].dbId, [Globals user].faceId];
-//    //}
-//    NSLog(@"host: %@", host);
-//    
-//    NSURL *url = [[NSURL alloc] initWithString: host];
-//    NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
-//    [nsXmlParser setDelegate:userParser];
-//    
-//    BOOL success = [nsXmlParser parse];
-//    
-//    
-//    if (success) {
-//        [self performSelectorOnMainThread:@selector(startUpContainers2) withObject:nil waitUntilDone:NO];
-//        
-//    } else {
-//        [self performSelectorOnMainThread:@selector(noConnect2) withObject:nil waitUntilDone:NO];
-//        
-//    }
+
 
     
 }
@@ -210,6 +188,32 @@
     
     [webservi sendDict:dict];
     
+}
+
+- (IBAction)clickRecuperarPass:(id)sender {
+   
+    if(self.textFieldemail.text.length>0)
+    {
+        [self recuperarPass];
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Campo vazio" message:@"o campo do email deve estar preenchido para poder recuperar a password" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+}
+
+-(void)recuperarPass
+{
+    recuperarPass = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recuperar_pass.php" method:@"" tag:2];
+    recuperarPass.delegate = self;
+    
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setObject:self.textFieldemail.text forKey:@"email"];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    
+    [recuperarPass sendDict:dict];
 }
 
 
@@ -258,11 +262,19 @@
                 
                 break;
             }
+            case 2:
+            {
+                NSLog(@"Resultado recuperar password %@",result.description);
+                
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Recuperação de password" message:[result objectForKey:@"envio"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                [alert show];
+                break;
+            }
                 
         }
     }else
     {
-        NSLog(@"error paulo %@",error);
+        NSLog(@"error tanita %@",error);
         
     }
     

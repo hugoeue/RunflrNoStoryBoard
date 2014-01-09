@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaginaPessoal : UIViewController
+@interface PaginaPessoal :  UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imgUser;
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 - (IBAction)clickLoginLogout:(id)sender;
@@ -24,5 +24,14 @@
 
 - (IBAction)clickReceberNewsletter:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *botaoSelectNews;
+@property (weak, nonatomic) IBOutlet UIImageView *butaoSelectJuntar;
+
+- (IBAction)clickBuscarImagem:(id)sender;
+
+@property UIImagePickerController *picker;
+@property UIImageView * selectedImage;
+
+- (IBAction)clickJuntarContas:(id)sender;
+
 
 @end

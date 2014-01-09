@@ -71,6 +71,8 @@
         
         if(distance>1000*100)
             return [NSString stringWithFormat:@"%.0f Km",distance/1000];
+        if(distance>1000*10)
+            return [NSString stringWithFormat:@"%.1f Km",distance/1000];
         if (distance>1000) {
             return [NSString stringWithFormat:@"%.3f Km",distance/1000];
         }
@@ -127,7 +129,7 @@
                               constrainedToSize:label.frame.size
                                   lineBreakMode:UILineBreakModeWordWrap];
     CGFloat labelHeight = labelSize.height;
-    NSLog(@"labelHeight = %f", labelHeight);
+    //NSLog(@"labelHeight = %f", labelHeight);
     if (labelHeight>60) {
         return 45;
     }
@@ -253,7 +255,7 @@
     
     
     
-    [self imprimirDistancia:restaurante ];
+   // [self imprimirDistancia:restaurante ];
     
     
     
@@ -451,8 +453,10 @@
     [cell addSubview:label4];
     [cell addSubview:imagem];
     
-    
-    [cell addSubview:imagem2];
+    if (distancia.length!=0) {
+        [cell addSubview:imagem2];
+    }
+        
     
     
     

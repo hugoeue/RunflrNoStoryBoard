@@ -8,6 +8,10 @@
 
 #import "Menus.h"
 #import "WebServiceSender.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 
 #define FONT_SIZE_TITULO 20.0f
 #define FONT_SIZE 16.0f
@@ -19,6 +23,7 @@
 @interface Menus ()
 {
     WebServiceSender * envio;
+    SLComposeViewController *mySLComposerSheet;
 }
 
 @end
@@ -103,6 +108,11 @@
     
 }
 
+-(void)partilhar:(NSString *)partilha
+{
+        [self.buttonPartilhar setAlpha:[partilha doubleValue]];
+}
+
 
 -(void)sendCompleteWithResult:(NSDictionary*)result withError:(NSError*)error{
     
@@ -118,6 +128,7 @@
                 
                 NSString *text = [[result objectForKey:@"res"]objectForKey:@"nome"];
                 NSString *text2 = [[result objectForKey:@"res"]objectForKey:@"descricao"];
+                [self partilhar:[[result objectForKey:@"res"]objectForKey:@"partilhar"]];
                 
                 [self adicionarCenasAoHeader:text :text2];
                 
@@ -144,10 +155,11 @@
             case 2:
             {
                 NSLog(@"resultado ementa  %@", result.description);
+                
                 for (NSMutableDictionary * resp in [result objectForKey:@"res"] ) {
                     NSString *text = [resp objectForKey:@"nome"];
                     NSString *text2 = [resp objectForKey:@"descricao"];
-                    
+                    [self partilhar:[resp objectForKey:@"partilhar"]];
                     [self adicionarCenasAoHeader:text :text2];
                 }
 
@@ -168,6 +180,11 @@
             case 3:
             {
                 NSLog(@"resultado especial  %@", result.description);
+                
+            
+                    [self partilhar:[[[result objectForKey:@"resp"] objectForKey:@"res"] objectForKey:@"partilhar"]];
+               
+
                 
                 NSString *text = [[[result objectForKey:@"resp"] objectForKey:@"res"]objectForKey:@"nome"];
                 NSString *text2 = [[[result objectForKey:@"resp"] objectForKey:@"res"]objectForKey:@"descricao"];
@@ -282,8 +299,8 @@
     return height + height2 + (CELL_CONTENT_MARGIN * 2);
 }
 
-- (void)viewDidLoad {
-    
+-(void)viewWillAppear:(BOOL)animated
+{
     self.imageMenu.asynchronous = YES;
     [self.imageMenu setImageWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString ]]];
     
@@ -312,6 +329,11 @@
         [self menuEspecial];
     }
 
+}
+
+- (void)viewDidLoad {
+    
+ 
     
 }
 
@@ -460,5 +482,47 @@
 
 - (IBAction)close:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)clickPartilhar:(id)sender {
+    
+    // tenho de verificar se é para twitter ou facebook
+    // usar uma alert daquelas que vem de baixo
+
+    [self postImageToFB];
+}
+
+- (void) postImageToFB
+{
+  //  if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) //check if Facebook Account is linked
+    {
+        mySLComposerSheet = [[SLComposeViewController alloc] init]; //initiate the Social Controller
+        mySLComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook]; //Tell him with what social plattform to use it, e.g. facebook or twitter
+        [mySLComposerSheet setInitialText:[NSString stringWithFormat:@"Vejam o cartao %@", restaurante.name]]; //the message you want to post
+        
+        NSURL *imageurl = [NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString]];
+        
+        NSData *imagedata = [[NSData alloc]initWithContentsOfURL:imageurl];
+        
+        UIImage *image = [UIImage imageWithData: imagedata];
+        
+        [mySLComposerSheet addImage:image]; //an image you could post
+        //for more instance methodes, go here:https://developer.apple.com/library/ios/#documentation/NetworkingInternet/Reference/SLComposeViewController_Class/Reference/Reference.html#//apple_ref/doc/uid/TP40012205
+        [self presentViewController:mySLComposerSheet animated:YES completion:nil];
+    }
+    [mySLComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+        NSString *output;
+        switch (result) {
+            case SLComposeViewControllerResultCancelled:
+                output = @"Action Cancelled";
+                break;
+            case SLComposeViewControllerResultDone:
+                output = @"Post Successfull";
+                break;
+            default:
+                break;
+        } //check if everything worked properly. Give out a message on the state.
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook" message:output delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }];
 }
 @end

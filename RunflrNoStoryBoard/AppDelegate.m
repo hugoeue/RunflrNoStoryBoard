@@ -13,6 +13,9 @@
 #import "DemoRootViewController.h"
 #import "WebServiceSender.h"
 
+// framework para pushnotifications
+//#import <Parse/Parse.h>
+
 @implementation AppDelegate{
 
     WebServiceSender * pushNotification;
@@ -30,6 +33,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
+   // textar depois para ver se fixe
+//    [Parse setApplicationId:@"qlIHP5gTMBtaOoSCngSVxM4FNnvZXL4bMiByGf5A"
+//                  clientKey:@"ANZduM6U9J51038UI83rM0STWdZ0Aje2GtFi4emw"];
+//    
+//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+//    [testObject setObject:@"bar" forKey:@"foo"];
+//    [testObject save];
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
@@ -214,6 +224,12 @@
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
+//    testar depois para ver se é fixe
+//    // Store the deviceToken in the current installation and save it to Parse.
+//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//    [currentInstallation setDeviceTokenFromData:deviceToken];
+//    [currentInstallation saveInBackground];
+    
 	NSLog(@"My token is: %@", deviceToken);
     
     // ainda tenho de tirar os espaços da string
@@ -288,6 +304,15 @@
     }
     
     
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+   
+    
+    NSLog(@"notificação recebida %@", userInfo);
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Notificação" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"  ] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 

@@ -35,14 +35,19 @@
     //[self changeFont:self.view];
 }
 
+-(void)carregarLingua
+{
+    self.labelDfenicoes.text =[Language textForIndex:@"Definicoes"];
+    self.labelLingua.text = [Language textForIndex:@"Idioma"];
+    self.labelMinhaCont.text = [Language textForIndex:@"A_minha_conta"];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = YES;
     
+    [self carregarLingua];
     
-    self.labelDfenicoes.text =[Language textForIndex:@"Definicoes"];
-    self.labelLingua.text = [Language textForIndex:@"Idioma"];
-    self.labelMinhaCont.text = [Language textForIndex:@"A_minha_conta"];
     
 }
 

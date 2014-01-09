@@ -9,11 +9,13 @@
 #import "PaginaPessoal.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "Login.h"
+#import "AppDelegate.h"
 #import "WebServiceSender.h"
 
 @interface PaginaPessoal ()
 {
     WebServiceSender * notif;
+    WebServiceSender * juntarContas;
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
@@ -21,6 +23,20 @@
 @end
 
 @implementation PaginaPessoal
+
+@synthesize picker;
+
+-(void)dealloc
+{
+    if (notif) {
+        [notif cancel];
+    }
+    if (juntarContas)
+        [juntarContas cancel];
+    
+    notif = nil;
+    juntarContas = nil;
+}
 
 -(void)receberNotifi:(NSString *)recebe
 {
@@ -31,8 +47,15 @@
     NSString * token = [defaults objectForKey:@"token"];
    
     
+    
+    
+    
     NSMutableDictionary * dict = [NSMutableDictionary new];
-    [dict setObject:token forKey:@"not"];
+    // validaçao apenas para o simulador... este nao suporta pushupnotifications
+    if(token != nil)
+        [dict setObject:token forKey:@"not"];
+    else
+        [dict setObject:@"token vindo do simulador" forKey:@"not"];
     
     if(recebe )
     {
@@ -66,6 +89,21 @@
             {
                 NSLog(@"resultado do envio do token =>%@", result.description);
                 
+                break;
+            }
+            case 2:
+            {
+                NSLog(@"resultado do juntar contas =>%@", result.description);
+                
+                if([[result objectForKey:@"resesc"] isEqualToString:@"Finalizado"])
+                {
+                    [self.butaoSelectJuntar setImage:[UIImage imageNamed:@"botao_select.png"]];
+                }else
+                {
+                    [self.butaoSelectJuntar setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+                }
+                [Globals user].faceId = nil;
+                 [Globals user].loginType = @"guru";
                 break;
             }
                 
@@ -102,7 +140,10 @@
     NSString* newsletter = [defaults objectForKey:@"newsletter"];
     
     
-   
+   if([Globals user].faceId )
+   {
+       [self.butaoSelectJuntar setImage:[UIImage imageNamed:@"botao_select.png"]];
+   }
 
     
     
@@ -165,7 +206,7 @@
     self.imgUser.layer.borderWidth = 1.0f;
     self.imgUser.layer.borderColor = [UIColor whiteColor].CGColor;
     self.labelName.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
-    self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
+    //self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
 }
 
 - (void)loadFaceImage
@@ -192,7 +233,7 @@
     self.imgUser.layer.borderColor = [UIColor blackColor].CGColor;
    
     self.labelName.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
-    self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
+    //self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
 }
 
 
@@ -224,32 +265,38 @@
 
 - (IBAction)clickLoginLogout:(id)sender {
     
-    if([[Globals user].loginType isEqualToString:@"facebook"])
-    {
-         [[FBSession activeSession] closeAndClearTokenInformation];
-        [self limparRegistosDefaults];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"deseja desconectar?" delegate:self cancelButtonTitle:@"nao" otherButtonTitles:@"sim", nil];
+    alert.tag = 1;
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag ==1) {
+        
+        if(buttonIndex == 0)//nao
+        {
+            //do something
+        }
+        else if(buttonIndex == 1)//sim
+        {
+            [self loginLogou];
+        }
+        
     }
-    else if([[Globals user].loginType isEqualToString:@"guru"])
-    {
-        [self limparRegistosDefaults];
-    }
-    else if ([FBSession activeSession].isOpen && ![Globals user]){
-         [[FBSession activeSession] closeAndClearTokenInformation];
+}
+
+
+
+
+-(void)loginLogou
+{
+   
+        [[FBSession activeSession] closeAndClearTokenInformation];
         
         [self limparRegistosDefaults];
-    }
-//    else
-//    {
-//        // se nao entrar em nenhuma das condeiçoes anteriores tem de abrir o cenas de login
-//        
-//            Login *log = [Login new];
-//        
-//        
-//            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:log] animated:YES completion:nil];
-//        
-//    }
-
     
+
 }
 
 
@@ -301,4 +348,161 @@
     [defaults synchronize];
 
 }
+- (IBAction)clickBuscarImagem:(id)sender {
+    picker = [[UIImagePickerController alloc] init];
+    
+    picker.delegate = self;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        
+    {
+        
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+    } else
+    
+    {
+        
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+    }
+    
+    [self presentViewController:picker animated:YES completion:nil];
+
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *) Picker {
+    
+    [Picker  dismissViewControllerAnimated:YES completion:nil];
+    
+   
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *) Picker
+
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage * pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImageView * controller = [UIImageView new];
+    controller.frame = CGRectMake(10, 10, 100, 100);
+    self.imgUser.image = pickedImage;
+    //[self.view addSubview:controller];
+    
+}
+
+
+
+
+- (IBAction)clickJuntarContas:(id)sender {
+    
+    [self facebookLoginLogout];
+    
+    if (![FBSession activeSession].isOpen) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.session.state != FBSessionStateCreated) {
+            // Create a new, logged out session.
+            // quando acaba de fazer lgogin
+            appDelegate.session = [[FBSession alloc] init];
+            
+        }
+        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                         FBSessionState status,
+                                                         NSError *error) {
+            
+            
+            
+            [FBSession setActiveSession:session];
+            [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+                if (!error) {
+                    
+                    //[NSThread detachNewThreadSelector:@selector(upUser:) toTarget:self withObject:user];
+                    [self upUser:user];
+                }
+            }];
+            
+            [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+           // [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }else{
+        
+        // quando faz logout
+        [self facebookLoginLogout];
+//        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
+
+}
+
+
+- (void)facebookLoginLogout
+{
+    if ([FBSession activeSession].isOpen) {
+        [[FBSession activeSession] closeAndClearTokenInformation];
+       // [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    } else {
+        
+    }
+    
+    
+}
+
+- (void)upUser:(NSDictionary<FBGraphUser> *)user
+{
+    NSString *userId = user.id;
+    NSString *userName = user.name;
+    NSString *userEmail = [user objectForKey:@"email"];
+    
+    NSLog(@"USERID: %@", userId);
+    NSLog(@"USER: %@", userName);
+    NSLog(@"mail: %@", userEmail);
+    NSLog(@"birtday: %@", user.birthday);
+    
+    if (![Globals user]) {
+        [Globals setUser:[[User alloc] init]];
+    }
+    
+    
+    
+    //             NSLog(@"USER DATA:::%@  -  %@", user.id, user.name);
+    
+    [Globals user].email = [user objectForKey:@"email"];
+    
+    [Globals user].faceId = user.id;
+    [Globals user].name = user.name;
+    [Globals user].loginType = @"facebook";
+    
+    //[self showFaceStuff];
+    //[self loadUser];
+    //[self loadFaceImage];
+    
+    
+        
+    juntarContas = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_juntar_contas.php" method:@"" tag:2];
+    juntarContas.delegate = self;
+    
+ 
+    
+    
+    NSString * userID = [NSString stringWithFormat:@"%d",[Globals user].dbId];
+    
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+   
+    [dict setObject:[Globals user].faceId forKey:@"face_id"];
+    [dict setObject:userID forKey:@"user_id"];
+    
+    
+    
+    
+    [juntarContas sendDict:dict];
+
+    
+}
+
 @end

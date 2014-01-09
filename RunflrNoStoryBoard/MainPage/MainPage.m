@@ -73,14 +73,12 @@ int num = 0;
     
         NSMutableDictionary * dict = [NSMutableDictionary new];
 
-   // NSString * latitude = @"41.3869715";
-   // NSString * longitude = @"-8.3214086";
+
     
         [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.latitude] forKey:@"lat"];
         [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.longitude] forKey:@"lon"];
         
-        //[dict setObject:latitude forKey:@"lat"];
-        //[dict setObject:longitude forKey:@"lon"];
+ 
 
     
         [recomendados sendDict:dict];
@@ -261,7 +259,14 @@ int num = 0;
                     rest.phone =[telefone doubleValue];
                     
                     
-                    
+                    if([[dict objectForKey:@"pag"] isEqualToString:@"1"])
+                    {
+                        rest.destaque = YES;
+                    }else
+                    {
+                        rest.destaque = NO;
+                    }
+
                     
                     rest.cuisinesResultText = @"";
                     for (NSMutableDictionary *cosinhas in [dict objectForKey:@"cozinhas"])
@@ -281,7 +286,8 @@ int num = 0;
                     rest.name = restName;
                     rest.dbId = [resId integerValue];
                     if(alturaI != [NSNull new] && [alturaI floatValue]>0)
-                        rest.tamanhoImagem =  CGSizeMake([larguraI floatValue], [alturaI floatValue]);
+                        
+                    rest.tamanhoImagem =  CGSizeMake([larguraI floatValue], [alturaI floatValue]);
                     
                     rest.featuredImageString = imagem;
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
@@ -367,7 +373,7 @@ int num = 0;
                 
                 NSLog(@"success loaded cities");
                 
-                /*
+                 /*
                  for (City * vitie in [Globals cities]) {
                  NSLog(@"Citie name: %@ ",vitie.name);
                  }
@@ -812,27 +818,7 @@ int num = 0;
 
 - (void)loadFaceImage
 {
-    NSString *str = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture", [Globals user].faceId];
-    
-    
-    UIImage *image1 = [self.imageCache objectForKey:str];
-    
-    
-    if (!image1) {
-        NSData* data1 = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:str]];
-        image1 = [UIImage imageWithData:data1];
-        if (image1)
-            [self.imageCache setObject:image1 forKey:str];
-    }
-    
-    self.imageFacebook.image = image1;
-    self.imageFacebook.layer.cornerRadius = self.imageFacebook.frame.size.height/2;
-    self.imageFacebook.clipsToBounds = YES;
-    self.imageFacebook.layer.borderWidth = 1.0f;
-    self.imageFacebook.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.buttonGo.alpha = 0;
-    self.labelUsername.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
-    self.labelUsername.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
+  
 }
 
 
@@ -970,53 +956,6 @@ int num = 0;
 
 #pragma mark - THREADED PARSERS
 
-- (void)loadCities
-{
-    CitiesParser *citiesParser = [[CitiesParser alloc] initXMLParser];
-    
-    //    NSString *host = @"http://cms.citychef.pt/data/xml_cities.php";
-    
-    NSString *host = [Globals hostWithFile:@"xml_cities.php" andGetData:@""];
-    NSLog(@"HOST NEW:%@", host);
-    
-    NSURL *url = [[NSURL alloc] initWithString: host];
-    NSXMLParser *nsXmlParser = [[NSXMLParser alloc] initWithContentsOfURL: url];
-    [nsXmlParser setDelegate:citiesParser];
-    
-    BOOL success = [nsXmlParser parse];
-    
-    
-    if (success) {
-        
-       // [settingsVC refreshCities];
-        
-        //[self performSelectorOnMainThread:@selector(findNearest) withObject:nil waitUntilDone:NO];
-        
-        NSLog(@"success loaded cities");
-        
-        /*
-        for (City * vitie in [Globals cities]) {
-            NSLog(@"Citie name: %@ ",vitie.name);
-        }
-        */
-        
-        [HTAutocompleteTextField setDefaultAutocompleteDataSource:[HTAutocompleteManager sharedManager]];
-        
-        
-        //self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
-        
-        self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
-        
-    } else {
-        
-        NSError *error = [nsXmlParser parserError];
-        
-        NSLog(@"erro get restaurantes %@", error.description);
-        
-        [self performSelectorOnMainThread:@selector(noConnect) withObject:nil waitUntilDone:NO];
-        
-    }
-}
 
 
 
@@ -1034,10 +973,7 @@ int num = 0;
 }
 
 
-- (void)findNearest
-{
 
-}
 
 
 -(void)makeLogin
@@ -1254,6 +1190,8 @@ int num = 0;
     
     //        $user_id=$body['user_id'];
     //        $face_id=$body['face_id'];
+    
+    User * cenas = [Globals user];
     
     if([Globals user].faceId)
     {

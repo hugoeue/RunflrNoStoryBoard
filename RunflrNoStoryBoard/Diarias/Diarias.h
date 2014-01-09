@@ -10,6 +10,7 @@
 #import "FXImageView.h"
 #import <CoreLocation/CoreLocation.h>
 
+
 @interface Diarias : UIViewController
 
 @property CLLocationManager * locationManager;
@@ -35,6 +36,8 @@
 - (IBAction)clickLigar:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *labelDistancia;
+
+
 
 
 @end

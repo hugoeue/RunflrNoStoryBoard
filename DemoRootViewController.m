@@ -240,12 +240,14 @@
        // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
         [_main.buttonPesquisa setUserInteractionEnabled:YES];
+       
       
     }
     else{
       //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded animated:YES completion:nil];
         [_main.buttonPesquisa setUserInteractionEnabled:NO];
+         [_menu carregarLingua];
         
     }
 }

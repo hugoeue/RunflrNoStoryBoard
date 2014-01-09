@@ -18,6 +18,7 @@
 #import "CollectionGuru.h"
 #import "Login.h"
 #import "Menus.h"
+#import "SemDados.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -33,6 +34,13 @@
     
     CollectionGuru *colececaoFavoritos;
     NSMutableArray *cartoes;
+    
+    SemDados *vazio;
+    
+    BOOL diaria;
+    BOOL especial;
+    BOOL ementa;
+    
 }
 
 @end
@@ -86,6 +94,8 @@
     [super viewDidLoad];
     
 
+    // se o restaurante estiver em destaque fica como vem do servidor
+    // senão vamos por lixo para preencher o que falta
 
     
     self.labelDistancia.text = [self imprimirDistancia:restaurante];
@@ -185,20 +195,7 @@
             {
                 NSLog(@"resultado da tania para todos os cartoes  %@", result.description);
                 
-//                res =     (
-//                           {
-//                               descricao = "O melhor prato de inverno do nosso chefe";
-//                               destaque = 0;
-//                               "dia_id" = 4;
-//                               "height_i" = "";
-//                               imagem = "";
-//                               "menu_esp_id" = "";
-//                               nome = "Recomenda\U00e7\U00e3o do chefe";
-//                               "nome_cat" = "";
-//                               "rest_id" = 4;
-//                               tipo = "menu_dia";
-//                               "width_i" = "";
-//                           },
+
 
                 cartoes = [NSMutableArray new];
                 
@@ -223,7 +220,7 @@
                     rest.chef = [dict objectForKey:@"menu_esp_id"];
                     rest.featuredImageString = [dict objectForKey:@"imagem"];
                     
-                    rest.address = @"";
+                    rest.city = @"";
                     
                     rest.name = restName;
                     rest.dbId = [resId integerValue];
@@ -232,24 +229,87 @@
                     
                     rest.featuredImageString = imagem;
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
-                    
+                    if ([[dict objectForKey:@"tipo"] isEqualToString:@"menu_especial"]) {
+                        especial = YES;
+                    }
+                    if ([[dict objectForKey:@"tipo"] isEqualToString:@"menu_ementa"]) {
+                        ementa = YES;
+                    }
+                    if ([[dict objectForKey:@"tipo"] isEqualToString:@"menu_dia"]) {
+                        diaria = YES;
+                    }
+                   
                     [cartoes addObject:rest];
                 }
                 
                 
-                if (!colececaoFavoritos){
+                if(cartoes.count != 0)
+                {
+                    if (!colececaoFavoritos){
                
-                    colececaoFavoritos = [CollectionGuru new];
-                colececaoFavoritos.delegate = self;
-                    colececaoFavoritos.mostrarGPS = NO;
+                        colececaoFavoritos = [CollectionGuru new];
+                        colececaoFavoritos.delegate = self;
+                        colececaoFavoritos.mostrarGPS = NO;
                 
-                 colececaoFavoritos.view.frame = self.container.frame;
+                        colececaoFavoritos.view.frame = self.container.frame;
                 
-                [self.view addSubview:colececaoFavoritos.view];
+                        [self.view addSubview:colececaoFavoritos.view];
+                    }
+                
+                    
+                    
+                    // quando faltam cartoes ele faz coisas aqui
+                    
+                    
+                    if (!restaurante.destaque)
+                    {
+                        if (!diaria)
+                        {
+                            Restaurant * restDummy = [Restaurant new];
+                            restDummy.name = @"Menu Destaque";
+                            restDummy.dbId = -1;
+                            restDummy.cuisinesResultText = @"descriçao Destaque dummy";
+                            restDummy.city = @"";
+                            [cartoes addObject:restDummy];
+
+                        }
+                        if (!ementa)
+                        {
+                            Restaurant * restDummy = [Restaurant new];
+                            restDummy.name = @"Ementa";
+                            restDummy.dbId = -2;
+                            restDummy.cuisinesResultText = @"descriçao Ementa dummy";
+                            restDummy.city = @"";
+                            [cartoes addObject:restDummy];
+                        }
+                        if (!especial)
+                        {
+                            Restaurant * restDummy = [Restaurant new];
+                            restDummy.name = @"Especial";
+                            restDummy.dbId = -3;
+                            restDummy.cuisinesResultText = @"descriçao Especial dummy";
+                            restDummy.city = @"";
+                            [cartoes addObject:restDummy];
+                        }
+
+                    }
+                    [colececaoFavoritos CarregarRestaurantes:cartoes];
+                    [colececaoFavoritos.collectionView reloadData];
+                    
+                }else
+                {
+                    
+                    vazio = [SemDados new];
+                    vazio.view.frame = CGRectMake(0,
+                                                  0,
+                                                  self.container.frame.size.width,
+                                                  self.container.frame.size.height);
+                    [self.container addSubview:vazio.view];
+                    vazio.imagem.image = [UIImage imageNamed:@"cry-50.png"];
+                    vazio.labelTitulo.text = @"Sem cartões";
+                    vazio.labelMenssagem.text = @"mostra o teu interesse";
+                    vazio.labelDescricao.text = @"Clica para mostrares o teu interesse";
                 }
-                
-                [colececaoFavoritos CarregarRestaurantes:cartoes];
-                [colececaoFavoritos.collectionView reloadData];
                 
                 break;
             }
@@ -309,7 +369,7 @@
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
- 
+
         
         if (locationManager.location.coordinate.latitude!=0) {
             CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
@@ -318,18 +378,23 @@
             CLLocationDistance distance = [localActual distanceFromLocation:localRest];
             //NSLog(@"distancia calculada  %f de %@", distance,rest.name);
             
+            if(distance>1000*100)
+                return [NSString stringWithFormat:@"%.0f Km",distance/1000];
+            if(distance>1000*10)
+                return [NSString stringWithFormat:@"%.1f Km",distance/1000];
             if (distance>1000) {
-                return [NSString stringWithFormat:@"%.2f Km",distance/1000];
+                return [NSString stringWithFormat:@"%.3f Km",distance/1000];
             }
+            
             
             
             return [NSString stringWithFormat:@"%.0f m",distance];
         }else
         {
-            return @"Ative GPS";
-        }
-    
+            return @"Ative geolocalização";
+        }    
 }
+
 
 
 -(void)chamarRestaurante:(Restaurant *)rest
@@ -339,11 +404,18 @@
  
     Menus * menu = [Menus new];
    
-
-    menu.restaurante = rest;
-    menu.restaurante.dbId = restaurante.dbId;
+    if(rest.dbId < 0)
+    {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Ups" message:@"este restaurante ainda nao tem estes dados partilhados" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }else
+    {
+        menu.restaurante = rest;
+        menu.restaurante.dbId = restaurante.dbId;
     
-    [self.navigationController pushViewController:menu animated:YES];
+    
+        [self.navigationController pushViewController:menu animated:YES];
+    }
 }
 
 
@@ -422,6 +494,7 @@
         alert.tag = 2 ;
         
         [alert show];
+        
 
     }
 
@@ -458,12 +531,11 @@
     {
         if(buttonIndex == 0)//OK button pressed
         {
-            //do something
+            [self.buttonSeguir setEnabled:YES];
         }
         else if(buttonIndex == 1)//Annul button pressed.
         {
-
-        [self chamarLogin];
+            [self chamarLogin];
         }
 
     }
@@ -474,7 +546,10 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:nav animated:YES completion:^{
+        [self.buttonSeguir setEnabled:YES];
+    }];
+    
     
 }
 

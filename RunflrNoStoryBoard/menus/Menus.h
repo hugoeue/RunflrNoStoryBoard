@@ -10,12 +10,14 @@
 #import "FXImageView.h"
 #import "Restaurant.h"
 
+
 @interface Menus :  UIViewController {
     IBOutlet UITableView *dataTableView;
     
     NSMutableArray *items;
     NSMutableArray *itemsTitle;
     NSMutableArray *itemsPrice;
+   
 }
 
 
@@ -28,5 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewPreco;
 @property (weak, nonatomic) IBOutlet UILabel *labelprecoAntigo;
 @property (weak, nonatomic) IBOutlet UILabel *labelPrecoNovo;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPartilhar;
+
+- (IBAction)clickPartilhar:(id)sender;
 
 @end

@@ -20,5 +20,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPassword;
 - (IBAction)clickSubmeter:(id)sender;
+- (IBAction)clickRecuperarPass:(id)sender;
 
 @end
