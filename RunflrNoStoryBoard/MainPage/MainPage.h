@@ -44,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelCidade;
 @property (weak, nonatomic) IBOutlet UILabel *labelOsMeusMenus;
 
+@property (weak, nonatomic) IBOutlet UIView *viewPretaGrande;
 
 @property (nonatomic, assign) id delegate;
 
@@ -69,5 +70,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewRecomendamos;
 @property (weak, nonatomic) IBOutlet UIView *viewFavoritos;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPesquisa;
+@property (weak, nonatomic) IBOutlet UIButton *buttonMenu;
+
+-(void)escurecer;
 
 @end

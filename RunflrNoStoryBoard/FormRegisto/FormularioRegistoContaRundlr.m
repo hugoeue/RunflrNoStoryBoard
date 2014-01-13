@@ -37,12 +37,7 @@
     NSMutableDictionary * dict = [NSMutableDictionary new];
     
     
-//    $email=$body['email'];
-//    $cidade=$body['cidade'];
-//    $genero=$body['genero'];
-//    $data_nasc=$body['data_nasc'];
-//    $password=$body['password'];
-//    $facebookId=$body['face'];
+
     
     
     
@@ -168,7 +163,7 @@
     // Do any additional setup after loading the view from its nib.
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-    //[self.view addGestureRecognizer:singleTap];
+    [self.scroolView addGestureRecognizer:singleTap];
   
     
 //    float sizeOfContent = 700;
@@ -205,6 +200,14 @@
     [_dateView addSubview:_datePicker];
 
     [self.scroolView setContentOffset:CGPointMake(0, 20) animated:YES];
+    
+    [self.textNome setDelegate:self];
+    [self.textUltimoNome setDelegate:self];
+    [self.textCidade setDelegate:self];
+    [self.textEmail setDelegate:self];
+    [self.textPassword setDelegate:self];
+    [self.textPassword2 setDelegate:self];
+    
 }
 
 
@@ -238,13 +241,63 @@
     
     currentBt = nil;
     dateUp = NO;
+    
+    [self handleSingleTap:nil];
+    [self.textEmail becomeFirstResponder];
+    [self.scroolView setContentOffset:CGPointMake(0, 30+104) animated:YES];
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    CGFloat ponto = 30;
+    
+    if (textField == self.textNome) {
+        [textField resignFirstResponder];
+        [self.textUltimoNome becomeFirstResponder];
+        //[self.scroolView setContentOffset:CGPointMake(0, ponto+30) animated:YES];
+    }
+    else if (textField == self.textUltimoNome) {
+        [textField resignFirstResponder];
+        [self.textCidade becomeFirstResponder];
+         [self.scroolView setContentOffset:CGPointMake(0, ponto+30) animated:YES];
+    }else if (textField == self.textCidade) {
+        [textField resignFirstResponder];
+        //[self.textEmail becomeFirstResponder];
+         //[self.scroolView setContentOffset:CGPointMake(0, ponto+104) animated:YES];
+        [self checkInAction:self.dataNascimento];
+    }else if (textField == self.textEmail) {
+        [textField resignFirstResponder];
+        [self.textPassword becomeFirstResponder];
+         [self.scroolView setContentOffset:CGPointMake(0, ponto+190) animated:YES];
+    }else if (textField == self.textPassword) {
+        [textField resignFirstResponder];
+        [self.textPassword2 becomeFirstResponder];
+         [self.scroolView setContentOffset:CGPointMake(0, ponto+190) animated:YES];
+    }else if (textField == self.textPassword2) {
+        [textField resignFirstResponder];
+       // [self.textPassword2 becomeFirstResponder];
+         [self.scroolView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    
+    
+    
+    return YES;
+}
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender
 {
     [self.view resignFirstResponder];
+ 
+    [self.textNome resignFirstResponder];
+    [self.textUltimoNome resignFirstResponder];
+    [self.textCidade resignFirstResponder];
+    [self.textEmail resignFirstResponder];
+    [self.textPassword resignFirstResponder];
+    [self.textPassword2 resignFirstResponder];
     
+    [self.scroolView setContentOffset:CGPointMake(0, 0) animated:YES];
+    //[self addDate:nil];
 }
 
 
@@ -252,6 +305,9 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+
+    
 }
 
 - (IBAction)clickEnviarForm:(id)sender {

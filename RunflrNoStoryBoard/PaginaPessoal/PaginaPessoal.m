@@ -16,6 +16,7 @@
 {
     WebServiceSender * notif;
     WebServiceSender * juntarContas;
+    WebServiceSender * newsLetter;
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
@@ -104,6 +105,12 @@
                 }
                 [Globals user].faceId = nil;
                  [Globals user].loginType = @"guru";
+                break;
+            }
+            case 3:
+            {
+                NSLog(@"resultado da newsLetter =>%@", result.description);
+                
                 break;
             }
                 
@@ -436,6 +443,20 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
         
     }
 
+}
+
+- (IBAction)clickNewsLetter:(id)sender {
+    newsLetter = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_add_rem_news.php" method:@"" tag:3];
+    newsLetter.delegate = self;
+   
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals user].email forKey:@"email"];
+    [dict setObject:@"1" forKey:@"favSend"];
+    
+    
+    
+    [newsLetter sendDict:dict];
 }
 
 

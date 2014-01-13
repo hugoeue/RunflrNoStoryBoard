@@ -185,6 +185,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:self.textFieldemail.text forKey:@"email"];
     [dict setObject:self.textFieldPassword.text forKey:@"password"];
+    [dict setObject:[Globals lang] forKey:@"lang"];
     
     [webservi sendDict:dict];
     
@@ -232,7 +233,7 @@
                 //resp = "Successfully inserted 1 row";
                 
                 if([[result objectForKey:@"resp"] isEqualToString:@"SUCESSO"]){
-                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sucesso" message:@"Login realizado com sucesso" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msg"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                     [alert show];
                     
                     
@@ -254,7 +255,7 @@
                     [self dismissViewControllerAnimated:YES completion:nil];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }else{
-                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:[result objectForKey:@"resp"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msg"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                     [alert show];
                 }
                 

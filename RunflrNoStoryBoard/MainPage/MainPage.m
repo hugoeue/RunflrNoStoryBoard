@@ -64,6 +64,8 @@ int num = 0;
 @implementation MainPage
 
 
+
+
 -(void)lerRecomendados
 {
    // if (!recomendados) {
@@ -490,6 +492,7 @@ int num = 0;
    // NSLog(@"restaurante chamado chamase %@", rest.name);
     
     Diarias * details = [Diarias new];
+    details.delegate = self.delegate;
     details.locationManager = locationManager;
     [details loadRestaurant:rest];
     
@@ -856,6 +859,37 @@ int num = 0;
     PP_RELEASE(c);
 }
 
+
+-(void)escurecer
+{
+    float alpha = 0.5;
+    
+    if (self.viewPretaGrande.alpha== alpha) {
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.viewPretaGrande setAlpha:0];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x+3
+                                                 ,self.buttonMenu.frame.origin.y+3
+                                                 ,self.buttonMenu.frame.size.width-6
+                                                 ,self.buttonMenu.frame.size.height-6
+                                                 )];
+        }];
+        
+    }else
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.viewPretaGrande setAlpha:alpha];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x-3
+                                                 ,self.buttonMenu.frame.origin.y-3
+                                                 ,self.buttonMenu.frame.size.width+6
+                                                 ,self.buttonMenu.frame.size.height+6
+                                                 )];
+        }];
+        
+    }
+}
+
 - (IBAction)pushMenu:(id)sender {
     
 //    MenuRefugio *t = [[MenuRefugio alloc] init];
@@ -867,12 +901,17 @@ int num = 0;
 //    //PP_RELEASE(n);
     //[self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
     if (self.delegate)
-    
+    {
         [self.delegate performSelector:@selector(chamarTopo) ];
+        
+     
+        
+        
+    }
+    
 
     [self.texfFieldPesquisa resignFirstResponder];
-  
-        [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
+    [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
 }
 
 

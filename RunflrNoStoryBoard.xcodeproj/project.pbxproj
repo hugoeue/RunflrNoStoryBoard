@@ -29,7 +29,6 @@
 		BA0420DC187D559700ECB2AA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0420DB187D559700ECB2AA /* MobileCoreServices.framework */; };
 		BA0420DE187D55AE00ECB2AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0420DD187D55AE00ECB2AA /* StoreKit.framework */; };
 		BA0420E0187D55B900ECB2AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA0420DF187D55B900ECB2AA /* SystemConfiguration.framework */; };
-		BA0420E2187D81CD00ECB2AA /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BA0420E1187D81CD00ECB2AA /* 3.png */; };
 		BA05ABC7187AD01000AA2057 /* SemDados.m in Sources */ = {isa = PBXBuildFile; fileRef = BA05ABC5187AD01000AA2057 /* SemDados.m */; };
 		BA05ABC8187AD01000AA2057 /* SemDados.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABC6187AD01000AA2057 /* SemDados.xib */; };
 		BA05ABCA187B053300AA2057 /* compas-50.png in Resources */ = {isa = PBXBuildFile; fileRef = BA05ABC9187B053300AA2057 /* compas-50.png */; };
@@ -56,6 +55,27 @@
 		BA1D88D01878523E006AB77A /* Menus.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1D88CE1878523E006AB77A /* Menus.m */; };
 		BA1D88D11878523E006AB77A /* Menus.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1D88CF1878523E006AB77A /* Menus.xib */; };
 		BA262E4E187EF0D300CB851C /* registro.png in Resources */ = {isa = PBXBuildFile; fileRef = BA262E4D187EF0D300CB851C /* registro.png */; };
+		BA262E6F187F18F300CB851C /* MapCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E51187F18F300CB851C /* MapCell2.m */; };
+		BA262E70187F18F300CB851C /* MapCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA262E52187F18F300CB851C /* MapCell2.xib */; };
+		BA262E71187F18F300CB851C /* xq_icon_more.png in Resources */ = {isa = PBXBuildFile; fileRef = BA262E53187F18F300CB851C /* xq_icon_more.png */; };
+		BA262E72187F18F300CB851C /* xq_icon_distance.png in Resources */ = {isa = PBXBuildFile; fileRef = BA262E54187F18F300CB851C /* xq_icon_distance.png */; };
+		BA262E73187F18F300CB851C /* xq_icon_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = BA262E55187F18F300CB851C /* xq_icon_profile.png */; };
+		BA262E74187F18F300CB851C /* DetailsAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E57187F18F300CB851C /* DetailsAnnotationView.m */; };
+		BA262E75187F18F300CB851C /* CalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E59187F18F300CB851C /* CalloutAnnotation.m */; };
+		BA262E76187F18F300CB851C /* PinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E5B187F18F300CB851C /* PinAnnotation.m */; };
+		BA262E77187F18F300CB851C /* DealHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E5D187F18F300CB851C /* DealHelper.m */; };
+		BA262E78187F18F300CB851C /* UIImageView+DispatchLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E5F187F18F300CB851C /* UIImageView+DispatchLoad.m */; };
+		BA262E79187F18F300CB851C /* MapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E61187F18F300CB851C /* MapCell.m */; };
+		BA262E7A187F18F300CB851C /* MapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA262E62187F18F300CB851C /* MapCell.xib */; };
+		BA262E7B187F18F300CB851C /* DetailsAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E64187F18F300CB851C /* DetailsAnnotation.m */; };
+		BA262E7C187F18F300CB851C /* PinAnnotationG.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E66187F18F300CB851C /* PinAnnotationG.m */; };
+		BA262E7D187F18F300CB851C /* PlaceDetailVO.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E68187F18F300CB851C /* PlaceDetailVO.m */; };
+		BA262E7E187F18F300CB851C /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E6A187F18F300CB851C /* MapViewController.m */; };
+		BA262E7F187F18F300CB851C /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA262E6B187F18F300CB851C /* MapViewController.xib */; };
+		BA262E80187F18F300CB851C /* ViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA262E6D187F18F300CB851C /* ViewControllerCell.m */; };
+		BA262E81187F18F300CB851C /* ViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA262E6E187F18F300CB851C /* ViewControllerCell.xib */; };
+		BA262E84187F1C2300CB851C /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = BA262E82187F1C2300CB851C /* pin.png */; };
+		BA262E85187F1C2300CB851C /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = BA262E83187F1C2300CB851C /* pin2.png */; };
 		BA2C6DAE1864A6A3008F8DF2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */; };
 		BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB41864A861008F8DF2 /* 58x58-1.png */; };
 		BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */ = {isa = PBXBuildFile; fileRef = BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */; };
@@ -156,6 +176,8 @@
 		BA9BB0351859FCE3009ED843 /* FormularioRegistoContaRundlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB0331859FCE3009ED843 /* FormularioRegistoContaRundlr.xib */; };
 		BA9BB03B185A047B009ED843 /* LoginRundlr.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB039185A047B009ED843 /* LoginRundlr.m */; };
 		BA9BB03C185A047B009ED843 /* LoginRundlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB03A185A047B009ED843 /* LoginRundlr.xib */; };
+		BADE124E188455E10075B0E9 /* LogoGuru.png in Resources */ = {isa = PBXBuildFile; fileRef = BADE124D188455E10075B0E9 /* LogoGuru.png */; };
+		BADE125018845E230075B0E9 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BADE124F18845E230075B0E9 /* 3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,7 +219,6 @@
 		BA0420DB187D559700ECB2AA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BA0420DD187D55AE00ECB2AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BA0420DF187D55B900ECB2AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		BA0420E1187D81CD00ECB2AA /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		BA05ABC4187AD01000AA2057 /* SemDados.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SemDados.h; path = "Controlador Vazio/SemDados.h"; sourceTree = "<group>"; };
 		BA05ABC5187AD01000AA2057 /* SemDados.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SemDados.m; path = "Controlador Vazio/SemDados.m"; sourceTree = "<group>"; };
 		BA05ABC6187AD01000AA2057 /* SemDados.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SemDados.xib; path = "Controlador Vazio/SemDados.xib"; sourceTree = "<group>"; };
@@ -238,6 +259,39 @@
 		BA1D88CE1878523E006AB77A /* Menus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menus.m; path = menus/Menus.m; sourceTree = "<group>"; };
 		BA1D88CF1878523E006AB77A /* Menus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Menus.xib; path = menus/Menus.xib; sourceTree = "<group>"; };
 		BA262E4D187EF0D300CB851C /* registro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = registro.png; sourceTree = "<group>"; };
+		BA262E50187F18F300CB851C /* MapCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCell2.h; sourceTree = "<group>"; };
+		BA262E51187F18F300CB851C /* MapCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCell2.m; sourceTree = "<group>"; };
+		BA262E52187F18F300CB851C /* MapCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapCell2.xib; sourceTree = "<group>"; };
+		BA262E53187F18F300CB851C /* xq_icon_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xq_icon_more.png; sourceTree = "<group>"; };
+		BA262E54187F18F300CB851C /* xq_icon_distance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xq_icon_distance.png; sourceTree = "<group>"; };
+		BA262E55187F18F300CB851C /* xq_icon_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xq_icon_profile.png; sourceTree = "<group>"; };
+		BA262E56187F18F300CB851C /* DetailsAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsAnnotationView.h; sourceTree = "<group>"; };
+		BA262E57187F18F300CB851C /* DetailsAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsAnnotationView.m; sourceTree = "<group>"; };
+		BA262E58187F18F300CB851C /* CalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalloutAnnotation.h; sourceTree = "<group>"; };
+		BA262E59187F18F300CB851C /* CalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalloutAnnotation.m; sourceTree = "<group>"; };
+		BA262E5A187F18F300CB851C /* PinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinAnnotation.h; sourceTree = "<group>"; };
+		BA262E5B187F18F300CB851C /* PinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinAnnotation.m; sourceTree = "<group>"; };
+		BA262E5C187F18F300CB851C /* DealHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealHelper.h; sourceTree = "<group>"; };
+		BA262E5D187F18F300CB851C /* DealHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealHelper.m; sourceTree = "<group>"; };
+		BA262E5E187F18F300CB851C /* UIImageView+DispatchLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+DispatchLoad.h"; sourceTree = "<group>"; };
+		BA262E5F187F18F300CB851C /* UIImageView+DispatchLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+DispatchLoad.m"; sourceTree = "<group>"; };
+		BA262E60187F18F300CB851C /* MapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapCell.h; sourceTree = "<group>"; };
+		BA262E61187F18F300CB851C /* MapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapCell.m; sourceTree = "<group>"; };
+		BA262E62187F18F300CB851C /* MapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapCell.xib; sourceTree = "<group>"; };
+		BA262E63187F18F300CB851C /* DetailsAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsAnnotation.h; sourceTree = "<group>"; };
+		BA262E64187F18F300CB851C /* DetailsAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsAnnotation.m; sourceTree = "<group>"; };
+		BA262E65187F18F300CB851C /* PinAnnotationG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinAnnotationG.h; sourceTree = "<group>"; };
+		BA262E66187F18F300CB851C /* PinAnnotationG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinAnnotationG.m; sourceTree = "<group>"; };
+		BA262E67187F18F300CB851C /* PlaceDetailVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceDetailVO.h; sourceTree = "<group>"; };
+		BA262E68187F18F300CB851C /* PlaceDetailVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceDetailVO.m; sourceTree = "<group>"; };
+		BA262E69187F18F300CB851C /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		BA262E6A187F18F300CB851C /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		BA262E6B187F18F300CB851C /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		BA262E6C187F18F300CB851C /* ViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerCell.h; sourceTree = "<group>"; };
+		BA262E6D187F18F300CB851C /* ViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerCell.m; sourceTree = "<group>"; };
+		BA262E6E187F18F300CB851C /* ViewControllerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewControllerCell.xib; sourceTree = "<group>"; };
+		BA262E82187F1C2300CB851C /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
+		BA262E83187F1C2300CB851C /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
 		BA2C6DAD1864A6A3008F8DF2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA2C6DB41864A861008F8DF2 /* 58x58-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "58x58-1.png"; sourceTree = "<group>"; };
 		BA2C6DB61864A8C7008F8DF2 /* 80x80-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "80x80-1.png"; sourceTree = "<group>"; };
@@ -383,6 +437,8 @@
 		BA9BB038185A047B009ED843 /* LoginRundlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRundlr.h; path = NovoLogin/LoginRundlr.h; sourceTree = "<group>"; };
 		BA9BB039185A047B009ED843 /* LoginRundlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginRundlr.m; path = NovoLogin/LoginRundlr.m; sourceTree = "<group>"; };
 		BA9BB03A185A047B009ED843 /* LoginRundlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginRundlr.xib; path = NovoLogin/LoginRundlr.xib; sourceTree = "<group>"; };
+		BADE124D188455E10075B0E9 /* LogoGuru.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGuru.png; sourceTree = "<group>"; };
+		BADE124F18845E230075B0E9 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,6 +608,46 @@
 			name = Tabela;
 			sourceTree = "<group>";
 		};
+		BA262E4F187F18E900CB851C /* mapa */ = {
+			isa = PBXGroup;
+			children = (
+				BA262E82187F1C2300CB851C /* pin.png */,
+				BA262E83187F1C2300CB851C /* pin2.png */,
+				BA262E50187F18F300CB851C /* MapCell2.h */,
+				BA262E51187F18F300CB851C /* MapCell2.m */,
+				BA262E52187F18F300CB851C /* MapCell2.xib */,
+				BA262E53187F18F300CB851C /* xq_icon_more.png */,
+				BA262E54187F18F300CB851C /* xq_icon_distance.png */,
+				BA262E55187F18F300CB851C /* xq_icon_profile.png */,
+				BA262E56187F18F300CB851C /* DetailsAnnotationView.h */,
+				BA262E57187F18F300CB851C /* DetailsAnnotationView.m */,
+				BA262E58187F18F300CB851C /* CalloutAnnotation.h */,
+				BA262E59187F18F300CB851C /* CalloutAnnotation.m */,
+				BA262E5A187F18F300CB851C /* PinAnnotation.h */,
+				BA262E5B187F18F300CB851C /* PinAnnotation.m */,
+				BA262E5C187F18F300CB851C /* DealHelper.h */,
+				BA262E5D187F18F300CB851C /* DealHelper.m */,
+				BA262E5E187F18F300CB851C /* UIImageView+DispatchLoad.h */,
+				BA262E5F187F18F300CB851C /* UIImageView+DispatchLoad.m */,
+				BA262E60187F18F300CB851C /* MapCell.h */,
+				BA262E61187F18F300CB851C /* MapCell.m */,
+				BA262E62187F18F300CB851C /* MapCell.xib */,
+				BA262E63187F18F300CB851C /* DetailsAnnotation.h */,
+				BA262E64187F18F300CB851C /* DetailsAnnotation.m */,
+				BA262E65187F18F300CB851C /* PinAnnotationG.h */,
+				BA262E66187F18F300CB851C /* PinAnnotationG.m */,
+				BA262E67187F18F300CB851C /* PlaceDetailVO.h */,
+				BA262E68187F18F300CB851C /* PlaceDetailVO.m */,
+				BA262E69187F18F300CB851C /* MapViewController.h */,
+				BA262E6A187F18F300CB851C /* MapViewController.m */,
+				BA262E6B187F18F300CB851C /* MapViewController.xib */,
+				BA262E6C187F18F300CB851C /* ViewControllerCell.h */,
+				BA262E6D187F18F300CB851C /* ViewControllerCell.m */,
+				BA262E6E187F18F300CB851C /* ViewControllerCell.xib */,
+			);
+			name = mapa;
+			sourceTree = "<group>";
+		};
 		BA2C6D8E18644E61008F8DF2 /* CachedLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,8 +788,9 @@
 		BA54BBF818510153006446D6 /* imgsFinal */ = {
 			isa = PBXGroup;
 			children = (
+				BADE124F18845E230075B0E9 /* 3.png */,
+				BADE124D188455E10075B0E9 /* LogoGuru.png */,
 				BA262E4D187EF0D300CB851C /* registro.png */,
-				BA0420E1187D81CD00ECB2AA /* 3.png */,
 				BA1AD5F9187C67A700B79548 /* fade00000.png */,
 				BA1AD5F7187C491000B79548 /* compas-25_white.png */,
 				BA1AD5F5187C466600B79548 /* compas-25.png */,
@@ -770,6 +867,7 @@
 		BA93FD8A184D3C3F004001E4 = {
 			isa = PBXGroup;
 			children = (
+				BA262E4F187F18E900CB851C /* mapa */,
 				BA05ABC2187ACF4100AA2057 /* talvez lixo */,
 				BA2C6DBB1864AAD3008F8DF2 /* Default@2x.png */,
 				BA7A9412187C1B05001ECB4A /* Default-568h@2x..png */,
@@ -975,11 +1073,14 @@
 				BA65F15518623FAC00BF914A /* on_click_lmenu.png in Resources */,
 				BA05ABCC187B060300AA2057 /* star-50.png in Resources */,
 				BA05ABCA187B053300AA2057 /* compas-50.png in Resources */,
+				BA262E70187F18F300CB851C /* MapCell2.xib in Resources */,
 				BA53085418709A6C00540691 /* Política de privacidadePT.txt in Resources */,
 				BA889B4E1859CA7E00C473D3 /* RootViewController.xib in Resources */,
 				BA65F16118623FAC00BF914A /* tira_dividir_ementa_restaurante.png in Resources */,
 				BA65F16518623FAC00BF914A /* trespontos.png in Resources */,
 				BA05ABC8187AD01000AA2057 /* SemDados.xib in Resources */,
+				BA262E7F187F18F300CB851C /* MapViewController.xib in Resources */,
+				BA262E85187F1C2300CB851C /* pin2.png in Resources */,
 				BA65F13718623FAC00BF914A /* bico_restaurante.png in Resources */,
 				BA65F14A18623FAC00BF914A /* login_2.png in Resources */,
 				BA65F15818623FAC00BF914A /* point_mapa.png in Resources */,
@@ -989,21 +1090,25 @@
 				BA53085B18709C6600540691 /* Privacy Policy.txt in Resources */,
 				BA02E8DA184F68C2006A611B /* Diarias.xib in Resources */,
 				BA4F59D4186DD59400AB2C41 /* CollectionGuru.xib in Resources */,
+				BA262E72187F18F300CB851C /* xq_icon_distance.png in Resources */,
 				BA02E8DC184FA060006A611B /* DK Crayon Crumble.ttf in Resources */,
 				BA93FDD2184D3CFC004001E4 /* MainPage.xib in Resources */,
 				BA65F14B18623FAC00BF914A /* login.png in Resources */,
 				BA93FDA1184D3C3F004001E4 /* InfoPlist.strings in Resources */,
 				BA53084318708D6600540691 /* SobreMenuGuru.xib in Resources */,
+				BA262E7A187F18F300CB851C /* MapCell.xib in Resources */,
 				BA65F15218623FAC00BF914A /* menu.png in Resources */,
 				BA0B9682184E665D00182E0A /* MenuRefugio.xib in Resources */,
 				BA51C606185364160080BD9F /* LanguageViewController.xib in Resources */,
 				BA65F14118623FAC00BF914A /* fechar.png in Resources */,
+				BADE125018845E230075B0E9 /* 3.png in Resources */,
 				BA65F15C18623FAC00BF914A /* seguir_restaurante.png in Resources */,
+				BA262E84187F1C2300CB851C /* pin.png in Resources */,
 				BA65F14618623FAC00BF914A /* grande_login.png in Resources */,
 				BA51C6251853C8010080BD9F /* TableCell.xib in Resources */,
 				BA0B967D184E648600182E0A /* Resultados.xib in Resources */,
 				BA65F13E18623FAC00BF914A /* face_icon.png in Resources */,
-				BA0420E2187D81CD00ECB2AA /* 3.png in Resources */,
+				BA262E71187F18F300CB851C /* xq_icon_more.png in Resources */,
 				BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */,
 				BA1AD5F8187C491000B79548 /* compas-25_white.png in Resources */,
 				BA9BB0221859CF1D009ED843 /* PaperFoldResources.bundle in Resources */,
@@ -1014,9 +1119,11 @@
 				BA65F14918623FAC00BF914A /* ligar_restarante.png in Resources */,
 				BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */,
 				BA7A9413187C1B05001ECB4A /* Default-568h@2x..png in Resources */,
+				BA262E73187F18F300CB851C /* xq_icon_profile.png in Resources */,
 				BA262E4E187EF0D300CB851C /* registro.png in Resources */,
 				BA5CBF95186B46CD0022A5CF /* Defenicoes.xib in Resources */,
 				BA53085618709A6C00540691 /* Termos e condiçõesPT.txt in Resources */,
+				BADE124E188455E10075B0E9 /* LogoGuru.png in Resources */,
 				BA1D88D11878523E006AB77A /* Menus.xib in Resources */,
 				BA65F13F18623FAC00BF914A /* facebook_tira.png in Resources */,
 				BA65F14718623FAC00BF914A /* icon_criar.png in Resources */,
@@ -1036,6 +1143,7 @@
 				BA65F13D18623FAC00BF914A /* face_conectado.png in Resources */,
 				BA5CBF97186B4D820022A5CF /* seta.png in Resources */,
 				BA53085518709A6C00540691 /* Sobre nosPT.txt in Resources */,
+				BA262E81187F18F300CB851C /* ViewControllerCell.xib in Resources */,
 				BA9BB03C185A047B009ED843 /* LoginRundlr.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1057,10 +1165,13 @@
 			files = (
 				BA07F0FA18548E1D00591C6F /* Recent.m in Sources */,
 				BA324BC21862FAEE001688CC /* UIView+Screenshot.m in Sources */,
+				BA262E79187F18F300CB851C /* MapCell.m in Sources */,
 				BA889B4D1859CA7E00C473D3 /* RootViewController.m in Sources */,
 				BA51C6311853D6480080BD9F /* Tipo.m in Sources */,
 				BA51C62D1853D4FC0080BD9F /* MenuGeral.m in Sources */,
+				BA262E80187F18F300CB851C /* ViewControllerCell.m in Sources */,
 				BA9BB0341859FCE3009ED843 /* FormularioRegistoContaRundlr.m in Sources */,
+				BA262E77187F18F300CB851C /* DealHelper.m in Sources */,
 				BA51C601185339500080BD9F /* HTAutocompleteTextField.m in Sources */,
 				BA0B9676184E62F700182E0A /* PPRevealSideViewController.m in Sources */,
 				BA51C61418539B150080BD9F /* CommentsParser.m in Sources */,
@@ -1076,7 +1187,10 @@
 				BA4F59D3186DD59400AB2C41 /* CollectionGuru.m in Sources */,
 				BA02E8D2184F4DB6006A611B /* Option.m in Sources */,
 				BA0B968D184E89D400182E0A /* Language.m in Sources */,
+				BA262E7B187F18F300CB851C /* DetailsAnnotation.m in Sources */,
 				BA0B9693184E8A7700182E0A /* Restaurant.m in Sources */,
+				BA262E6F187F18F300CB851C /* MapCell2.m in Sources */,
+				BA262E78187F18F300CB851C /* UIImageView+DispatchLoad.m in Sources */,
 				BA0B9686184E889B00182E0A /* CitiesParser.m in Sources */,
 				BA93FDD1184D3CFC004001E4 /* MainPage.m in Sources */,
 				BA93FDA7184D3C3F004001E4 /* AppDelegate.m in Sources */,
@@ -1086,17 +1200,21 @@
 				BA324BCC18630ADB001688CC /* UIImage+FX.m in Sources */,
 				BA0B9696184E8A9600182E0A /* User.m in Sources */,
 				BA9BB03B185A047B009ED843 /* LoginRundlr.m in Sources */,
+				BA262E7C187F18F300CB851C /* PinAnnotationG.m in Sources */,
+				BA262E74187F18F300CB851C /* DetailsAnnotationView.m in Sources */,
 				BA324BC9186308D8001688CC /* FXImageView.m in Sources */,
 				BA9BB0231859CF1D009ED843 /* PaperFoldSwipeHintView.m in Sources */,
 				BA324BBA1862FAD0001688CC /* FacingView.m in Sources */,
 				BA5CBF94186B46CD0022A5CF /* Defenicoes.m in Sources */,
 				BA371E9F18607AF600B2353E /* RFQuiltLayout.m in Sources */,
+				BA262E7D187F18F300CB851C /* PlaceDetailVO.m in Sources */,
 				BA93FDAD184D3C3F004001E4 /* MasterViewController.m in Sources */,
 				BA93FDA3184D3C3F004001E4 /* main.m in Sources */,
 				BA0B9681184E665D00182E0A /* MenuRefugio.m in Sources */,
 				BA02E8CF184F4BCF006A611B /* SearchParser.m in Sources */,
 				BA07F0F718548C9E00591C6F /* UserParser.m in Sources */,
 				BA0B9689184E88F700182E0A /* Globals.m in Sources */,
+				BA262E76187F18F300CB851C /* PinAnnotation.m in Sources */,
 				BA51C61718539BAA0080BD9F /* Menu.m in Sources */,
 				BA02E8E0184FAC96006A611B /* Login.m in Sources */,
 				BA324BBC1862FAD0001688CC /* MultiFoldView.m in Sources */,
@@ -1110,6 +1228,8 @@
 				BA93FDB0184D3C3F004001E4 /* DetailViewController.m in Sources */,
 				BA51C6211853BCE80080BD9F /* MenuDoDia.m in Sources */,
 				BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */,
+				BA262E7E187F18F300CB851C /* MapViewController.m in Sources */,
+				BA262E75187F18F300CB851C /* CalloutAnnotation.m in Sources */,
 				BA02E8D5184F4DFB006A611B /* Cuisine.m in Sources */,
 				BA51C605185364160080BD9F /* LanguageViewController.m in Sources */,
 				BA05ABC7187AD01000AA2057 /* SemDados.m in Sources */,

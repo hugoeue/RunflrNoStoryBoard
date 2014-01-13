@@ -39,7 +39,52 @@
 #import "Login.h"
 #import "Defenicoes.h"
 
+
 @implementation DemoRootViewController
+
+static DemoRootViewController * demoRoot;
+
++(DemoRootViewController*)getInstance{
+    return demoRoot;
+}
+
+-(void)chamarMenu
+{
+    //[_map.view removeFromSuperview];
+    _menu = [MenuRefugio new];
+    _menu.delegate = self;
+    
+    [_topView addSubview:_menu.view];
+   
+}
+
+-(void)chamarMapa:(Restaurant *)rest
+{
+    if(!_map){
+        _map = [[MapViewController alloc] initWithHotel:rest];
+        [_paperFoldView setRightFoldContentView:_map.view foldCount:3 pullFactor:0.4];
+    }
+    // this disables dragging to unfold the left view
+    [self.paperFoldView setEnableLeftFoldDragging:YES];
+    
+    // this disables dragging to unfold the right view
+    [self.paperFoldView setEnableRightFoldDragging:YES];
+    
+    [_map setRestaurante:rest];
+    [_map viewDidLoad];
+    [self.paperFoldView setPaperFoldState:PaperFoldStateRightUnfolded animated:YES completion:nil];
+    
+}
+
+-(void)apagarMapa{
+   
+    
+    // this disables dragging to unfold the left view
+    [self.paperFoldView setEnableLeftFoldDragging:NO];
+    
+    // this disables dragging to unfold the right view
+    [self.paperFoldView setEnableRightFoldDragging:NO];
+}
 
 - (id)init
 {
@@ -58,7 +103,7 @@
         
         
         
-        _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
+        //_mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0,0,280,[self.view bounds].size.height)];
         //[_paperFoldView setRightFoldContentView:_mapView foldCount:3 pullFactor:0.9];
         
 //        _centerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,[self.view bounds].size.height)];
@@ -108,22 +153,19 @@
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0,0,[self.view bounds].size.width,300)];
         
        
+        [self chamarMenu];
+       
         
-        _menu = [MenuRefugio new];
-        _menu.delegate = self;
-        
-        [_topView addSubview:_menu.view];
-        
-        ShadowView *topShadowView = [[ShadowView alloc] initWithFrame:CGRectMake(0,_topView.frame.size.height-5,_topView.frame.size.width,5) foldDirection:FoldDirectionVertical];
-        [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
-        [_topView addSubview:topShadowView];
+        //ShadowView *topShadowView = [[ShadowView alloc] initWithFrame:CGRectMake(0,_topView.frame.size.height-5,_topView.frame.size.width,5) foldDirection:FoldDirectionVertical];
+       // [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
+       // [_topView addSubview:topShadowView];
         
         [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:2 topViewPullFactor:0.9];
         
         _leftTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,0,[self.view bounds].size.height)];
         [_leftTableView setRowHeight:100];
         //[_leftTableView setDataSource:self];
-        //[_paperFoldView setLeftFoldContentView:_leftTableView foldCount:3 pullFactor:0.9];
+        [_paperFoldView setLeftFoldContentView:_leftTableView foldCount:3 pullFactor:0.9];
 
         
         
@@ -144,6 +186,8 @@
         [_centerTableView setScrollEnabled:NO];
         //[_paperFoldView setEnableHorizontalEdgeDragging:YES];
     }
+    
+    demoRoot = self;
     return self;
 }
 
@@ -157,13 +201,15 @@
 //         }];
 //
 //     }];
-    
+    [_main escurecer];
     [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
         
         
         [_main.navigationController pushViewController:linguas animated:YES];
         
     }];
+    
+    
     
 }
 
@@ -175,11 +221,13 @@
         //[self.navigationController pushViewController:pagPessoal animated:YES];
         pagPessoal.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         //[self presentViewController:pagPessoal animated:YES completion:nil];
-        
+        [_main escurecer];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
             
             
             [_main.navigationController pushViewController:pagPessoal animated:YES];
+         
+            
             
         }];
         
@@ -193,10 +241,11 @@
     
     }else
     {
-        
+        [_main escurecer];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
            
             [_main.navigationController pushViewController:[Login new] animated:YES];
+         
             
         }];
         
@@ -222,7 +271,7 @@
     
   
     
-    
+    [_main escurecer];
     [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
         
        
@@ -234,18 +283,18 @@
 }
 
 -(void)chamarTopo{
-    
+    [_main escurecer];
     if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
     {
        // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault];
         [_main.buttonPesquisa setUserInteractionEnabled:YES];
-       
+  
       
     }
     else{
       //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-        [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded animated:YES completion:nil];
+        [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded];
         [_main.buttonPesquisa setUserInteractionEnabled:NO];
          [_menu carregarLingua];
         
@@ -288,6 +337,27 @@
 - (void)paperFoldView:(id)paperFoldView didFoldAutomatically:(BOOL)automated toState:(PaperFoldState)paperFoldState
 {
     NSLog(@"did transition to state %i automated %i", paperFoldState, automated);
+    
+    
+    
+    if(paperFoldState == PaperFoldStateDefault)
+        [self apagarMapa];
+    
+    if(paperFoldState == PaperFoldStateRightUnfolded)
+    {
+        [_main.navigationController.view setUserInteractionEnabled:NO];
+        
+    }
+    else{
+        [_main.navigationController.view setUserInteractionEnabled:YES];
+        
+        
+    }
+}
+
+-(void)chamarCentro{
+
+    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
 }
 
 @end

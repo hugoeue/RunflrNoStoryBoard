@@ -32,6 +32,7 @@
 @property UIImageView * selectedImage;
 
 - (IBAction)clickJuntarContas:(id)sender;
+- (IBAction)clickNewsLetter:(id)sender;
 
 
 @end

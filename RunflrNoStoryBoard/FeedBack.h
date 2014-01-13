@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMessageComposeViewController.h>
 
-@interface FeedBack : UIViewController
+@interface FeedBack : UIViewController <MFMessageComposeViewControllerDelegate>
+- (IBAction)clickSMS:(id)sender;
 
 @end

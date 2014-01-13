@@ -74,7 +74,7 @@
         if(distance>1000*10)
             return [NSString stringWithFormat:@"%.1f Km",distance/1000];
         if (distance>1000) {
-            return [NSString stringWithFormat:@"%.3f Km",distance/1000];
+            return [NSString stringWithFormat:@"%.1f Km",distance/1000];
         }
         
         

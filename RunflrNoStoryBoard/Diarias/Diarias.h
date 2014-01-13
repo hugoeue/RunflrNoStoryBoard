@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FXImageView.h"
 #import <CoreLocation/CoreLocation.h>
+#import <MessageUI/MessageUI.h> 
 
 
-@interface Diarias : UIViewController
+@interface Diarias : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property CLLocationManager * locationManager;
 
@@ -38,6 +39,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelDistancia;
 
 
-
+@property (nonatomic , assign) id delegate;
 
 @end

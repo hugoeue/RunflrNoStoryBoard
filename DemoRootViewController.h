@@ -37,10 +37,12 @@
 #import <MapKit/MapKit.h>
 #import "MainPage.h"
 #import "MenuRefugio.h"
+#import "MapViewController.h"
 
 @interface DemoRootViewController : UIViewController <MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate, PaperFoldViewDelegate>
 @property (nonatomic, strong) PaperFoldView *paperFoldView;
 @property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic ,strong) MapViewController *map;
 @property (nonatomic, strong) UITableView *leftTableView, *centerTableView;
 @property (nonatomic, strong) UIView *topView, *bottomView;
 
@@ -48,5 +50,10 @@
 @property (nonatomic, strong) MenuRefugio *menu;
 
 @property (nonatomic, strong) UINavigationController * nav;
+
++(DemoRootViewController*)getInstance;
+-(void)chamarMapa:(Restaurant *)rest;
+-(void)apagarMapa;
+-(void)chamarCentro;
 
 @end

@@ -661,6 +661,8 @@
     [self.leftFoldView setHidden:NO];
     [self.rightFoldView setHidden:NO];
     
+    self.paperFoldInitialPanDirection=PaperFoldInitialPanDirectionHorizontal;
+    
     CGAffineTransform transform = [self.contentView transform];
     float x = transform.tx - (transform.tx+self.rightFoldView.frame.size.width)/8;
     transform = CGAffineTransformMakeTranslation(x, 0);
@@ -671,10 +673,17 @@
         [timer invalidate];
         transform = CGAffineTransformMakeTranslation(-self.rightFoldView.frame.size.width, 0);
         [self.contentView setTransform:transform];
+        
+        if (self.lastState != PaperFoldStateRightUnfolded) {
+			[self finishForState:PaperFoldStateRightUnfolded];
+		}
     }
     
     // use the x value to animate folding
     [self animateWithContentOffset:CGPointMake(self.contentView.frame.origin.x, 0) panned:NO];
+    
+    
+ 
 }
 
 // restore contentView back to original position
@@ -949,5 +958,9 @@
 		return YES;
 	}
 }
+
+
+
+
 
 @end

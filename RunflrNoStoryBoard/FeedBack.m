@@ -8,6 +8,7 @@
 
 #import "FeedBack.h"
 
+
 @interface FeedBack ()
 
 @end
@@ -38,4 +39,26 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)clickSMS:(id)sender {
+    MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
+    if([MFMessageComposeViewController canSendText])
+    {
+        controller.body = @"Experimenta a Menu Guru... é altamente";
+        controller.recipients = [NSArray arrayWithObjects:@" ", nil];
+        controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    
+    if (result == MessageComposeResultCancelled)
+        NSLog(@"Message cancelled");
+        else if (result == MessageComposeResultSent)
+            NSLog(@"Message sent");
+            else
+                NSLog(@"Message failed");
+}
 @end

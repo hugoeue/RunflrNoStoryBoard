@@ -19,6 +19,8 @@
 #import "Login.h"
 #import "Menus.h"
 #import "SemDados.h"
+#import "MapViewController.h"
+#import "DemoRootViewController.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -40,6 +42,20 @@
     BOOL diaria;
     BOOL especial;
     BOOL ementa;
+    
+    NSString *emailTitle;
+    // Email Content
+    NSString *messageBody;
+    // To address
+    NSArray *toRecipents;
+    
+    NSString *emailTitleCart;
+    // Email Content
+    NSString *messageBodyCart;
+    // To address
+    NSArray *toRecipentsCart;
+    
+    UIAlertView * alertCartao;
     
 }
 
@@ -66,6 +82,8 @@
     webser = nil;
     addRemoveFav = nil;
     verifica = nil;
+    
+   // [[DemoRootViewController getInstance] apagarMapa];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -199,6 +217,31 @@
 
                 cartoes = [NSMutableArray new];
                 
+                
+                emailTitleCart = [[result objectForKey:@"msgdummy"] objectForKey:@"assunto"];
+                // Email Content
+                messageBodyCart = [[result objectForKey:@"msgdummy"] objectForKey:@"message"];
+                // To address
+                toRecipentsCart =  toRecipents = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
+        
+                
+               
+             
+
+                
+          //char *nameChars =(char *) [[[result objectForKey:@"msgdummy"] objectForKey:@"msgbox"] UTF8String];
+                
+                 //NSString* str2 = [NSString stringWithUTF8String:nameChars];
+                
+                NSString *utf8string = [[result objectForKey:@"msgdummy"] objectForKey:@"msgbox"];
+             
+                
+     
+                
+                alertCartao = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"titulo"] message:utf8string  delegate:nil cancelButtonTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"butaoc"] otherButtonTitles:[[result objectForKey:@"msgdummy"] objectForKey:@"butao"], nil];
+                alertCartao.tag = 4;
+
+                
                 for(NSMutableDictionary * dict in [result objectForKey:@"res"]){
                     Restaurant * rest = [Restaurant new];
                     
@@ -266,9 +309,9 @@
                         if (!diaria)
                         {
                             Restaurant * restDummy = [Restaurant new];
-                            restDummy.name = @"Menu Destaque";
+                            restDummy.name = @"Menu Diaria";
                             restDummy.dbId = -1;
-                            restDummy.cuisinesResultText = @"descriçao Destaque dummy";
+                            restDummy.cuisinesResultText = @"descriçao Diaria dummy";
                             restDummy.city = @"";
                             [cartoes addObject:restDummy];
 
@@ -318,8 +361,8 @@
                 NSLog(@"resultado adicionar favorito  %@", result.description);
                 //res = "inserido com sucesso";
                 
-                if ([[result objectForKey:@"res"] isEqualToString:@"inserido com sucesso"]) {
-                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sucesso" message:@"restaurante adicionado a lista de favoritos com sucesso" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"inserido com sucesso"]) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"res"] objectForKey:@"titulo"] message:[[result objectForKey:@"res"] objectForKey:@"msg"] delegate:nil cancelButtonTitle:[[result objectForKey:@"res"] objectForKey:@"botao"] otherButtonTitles:nil, nil];
                     [alert show];
                     [self.buttonSeguir setTitle:@"Remover dos favoritos" forState:UIControlStateNormal];
                     restaurante.fav = 0;
@@ -327,9 +370,26 @@
                     
                 }
                 
-                if ([[result objectForKey:@"res"] isEqualToString:@"eliminado com sucesso"]) {
-                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sucesso" message:@"restaurante foi removido da lista de favoritos com sucesso" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"demasiados utilizadores"]) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"res"] objectForKey:@"titulo"] message:[[result objectForKey:@"res"] objectForKey:@"msg"] delegate:self cancelButtonTitle:[[result objectForKey:@"res"] objectForKey:@"botaoc"] otherButtonTitles:[[result objectForKey:@"res"] objectForKey:@"botao"], nil];
+                    alert.tag = 3;
+                    
+                    // Email Subject
+                    emailTitle = [[result objectForKey:@"res"] objectForKey:@"assunto"];
+                    // Email Content
+                    messageBody = [[result objectForKey:@"res"] objectForKey:@"message"];
+                    // To address
+                    toRecipents = [NSArray arrayWithObject:[[result objectForKey:@"res"] objectForKey:@"email"]];
+                    
                     [alert show];
+                    [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
+                    restaurante.fav = 1;
+                    [self.buttonSeguir setEnabled:YES];
+                    
+                }
+                
+                if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"eliminado com sucesso"]) {
+                   UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"res"] objectForKey:@"titulo"] message:[[result objectForKey:@"res"] objectForKey:@"msg"] delegate:nil cancelButtonTitle:[[result objectForKey:@"res"] objectForKey:@"botao"] otherButtonTitles:nil, nil];                    [alert show];
                     [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
                     restaurante.fav = 1;
                     [self.buttonSeguir setEnabled:YES];
@@ -406,8 +466,7 @@
    
     if(rest.dbId < 0)
     {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Ups" message:@"este restaurante ainda nao tem estes dados partilhados" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alert show];
+        [alertCartao show];
     }else
     {
         menu.restaurante = rest;
@@ -456,7 +515,7 @@
 //	$body['face_id'];
 //	$body['favSend'];//se for 1 é para criar se for zero é para apagar
 //    $body['rest_id'];
-    addRemoveFav = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_cratefav.php" method:@"" tag:2];
+    addRemoveFav = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_createfav2.php" method:@"" tag:2];
     addRemoveFav.delegate = self;
     
     NSMutableDictionary * dict = [NSMutableDictionary new];
@@ -475,6 +534,9 @@
     [dict setObject:faceID forKey:@"face_id"];
     [dict setObject:add forKey:@"favSend"];
     [dict setObject:restID forKey:@"rest_id"];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:restaurante.name forKey:@"rest_nome"];
+    [dict setObject:restaurante.city forKey:@"rest_cidade"];
     
     
     
@@ -512,18 +574,8 @@
     }
     else if(buttonIndex == 1)//Annul button pressed.
     {
-        CLLocationCoordinate2D loc;
-        loc.latitude = restaurante.lat ;
-        loc.longitude = restaurante.lon;
-        
-        MKPlacemark* place = [[MKPlacemark alloc] initWithCoordinate: loc addressDictionary: nil];
-        MKMapItem* destination = [[MKMapItem alloc] initWithPlacemark: place];
-        destination.name =restaurante.name;
-        NSArray* items = [[NSArray alloc] initWithObjects: destination, nil];
-        NSDictionary* options = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 MKLaunchOptionsDirectionsModeDriving,
-                                 MKLaunchOptionsDirectionsModeKey, nil];
-        [MKMapItem openMapsWithItems: items launchOptions: options];
+
+        [[DemoRootViewController getInstance] chamarMapa:restaurante];
 
     }
         
@@ -538,7 +590,46 @@
             [self chamarLogin];
         }
 
+    }else if(alertView.tag == 3)
+    {
+        if(buttonIndex == 1)//OK button pressed
+        {
+             [self chamarEmail];
+             [self.buttonSeguir setEnabled:YES];
+        }
+        
+        
     }
+}
+
+
+
+-(void)chamarEmail
+{
+   
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+-(void)chamarEmailCart
+{
+    
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitleCart];
+    [mc setMessageBody:messageBodyCart isHTML:NO];
+    [mc setToRecipients:toRecipentsCart];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
 }
 
 -(void)chamarLogin{
@@ -553,13 +644,41 @@
     
 }
 
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
 
 - (IBAction)chamarMapa:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Direcções" message:@"Deseja ver as direções para este restaurante?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
-    alert.tag = 1 ;
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Direcções" message:@"Deseja ver as direções para este restaurante?" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+//    alert.tag = 1 ;
+//    
+//    [alert show];
     
-    [alert show];
+     //[[DemoRootViewController getInstance] chamarMapa:restaurante];
+    
+    [self.delegate performSelector:@selector(chamarMapa:) withObject:restaurante];
     
     }
 - (IBAction)clickLigar:(id)sender {

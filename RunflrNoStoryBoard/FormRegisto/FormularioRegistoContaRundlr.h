@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FormularioRegistoContaRundlr : UIViewController{
+@interface FormularioRegistoContaRundlr : UIViewController <UITextFieldDelegate>{
     UIButton *currentBt;
     BOOL dateUp, numUp;
     NSString *checkInDate;
@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textPassword2;
 @property (strong, nonatomic) UIDatePicker *datePicker;
 @property (strong, nonatomic) UIView *dateView;
+@property (weak, nonatomic) IBOutlet UIButton *dataNascimento;
 
 - (IBAction)clickEnviarForm:(id)sender;
 

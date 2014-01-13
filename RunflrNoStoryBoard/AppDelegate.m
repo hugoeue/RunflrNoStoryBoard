@@ -311,7 +311,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
    
     
     NSLog(@"notificação recebida %@", userInfo);
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Notificação" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"  ] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[[userInfo objectForKey:@"aps"] objectForKey:@"alert" ] message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"  ] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alert show];
 }
 
