@@ -184,6 +184,7 @@
    if([Globals user].faceId )
    {
        [self.butaoSelectJuntar setImage:[UIImage imageNamed:@"botao_select.png"]];
+       [self.buttonJuntarContas setEnabled:NO];
    }
 
     
@@ -319,8 +320,9 @@
         [self.delegate performSelector:@selector(callCenter)];
     }];
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
     //[self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionNone animated:YES];
+    [[DemoRootViewController getInstance] chamarOutroTopo];
 }
 
 - (IBAction)clickLoginLogout:(id)sender {

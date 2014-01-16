@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/FacebookLogin/Login.m"
-            timestampString = "411396635.414137"
+            timestampString = "411573814.613551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "-upUser:"
             landmarkType = "5">
          </BreakpointContent>
@@ -64,16 +64,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/Diarias/Diarias.m"
-            timestampString = "411565346.685285"
+            filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
+            timestampString = "411574578.889385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "-sendCompleteWithResult:withError:"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-lerRecomendados"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,29 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/Resultados/Resultados.m"
-            timestampString = "411565427.657484"
+            filePath = "RunflrNoStoryBoard/MainPage/MainPage.m"
+            timestampString = "411574578.889385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-sendCompleteWithResult:withError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/Resultados/Resultados.m"
-            timestampString = "411565428.62351"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
-            landmarkName = "-sendCompleteWithResult:withError:"
+            startingLineNumber = "1205"
+            endingLineNumber = "1205"
+            landmarkName = "-loadUser"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -116,28 +100,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/Diarias/Diarias.m"
-            timestampString = "411566146.892084"
+            timestampString = "411582653.662756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "320"
-            endingLineNumber = "320"
-            landmarkName = "-sendCompleteWithResult:withError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/Diarias/Diarias.m"
-            timestampString = "411566203.639602"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "-sendCompleteWithResult:withError:"
+            startingLineNumber = "644"
+            endingLineNumber = "644"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

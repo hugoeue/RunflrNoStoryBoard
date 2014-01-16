@@ -23,6 +23,7 @@
 #import "Diarias.h"
 #import "SemDados.h"
 #import "AnimationController.h"
+#import "DemoRootViewController.h"
 
 
 
@@ -83,7 +84,7 @@ int num = 0;
         [self lerRecomendadosLogin];
     }
     else if ([FBSession activeSession].isOpen && ![Globals user]){
-        [self lerRecomendadosLogin];
+        [self loadUser];
     }else{
         [self lerRecomendadosLogOut];
     }
@@ -112,8 +113,9 @@ int num = 0;
 
 -(void)lerRecomendadosLogin
 {
-    // if (!recomendados) {
-    
+     if (recomendados)
+         [recomendados cancel];
+         
     recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados4.php" method:@"" tag:1];
     recomendados.delegate = self;
     
@@ -678,10 +680,11 @@ int num = 0;
     
 
     animation = [AnimationController new];
-   // [animation.view setFrame:self.viewContainer.frame];
+   
+       // [animation.view setFrame:self.viewContainer.frame];
     animation.view.frame = CGRectMake(0, 0, 320, self.viewContainer.frame.size.height);
     [self.viewContainer addSubview:animation.view];
-
+     [animation.viewFundo setBackgroundColor:[UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:229.0/255.0 alpha:1]];
     
     
     
@@ -820,6 +823,7 @@ int num = 0;
     // ele passa aqui muitas vezes
     [self lerRecomendados];
     [locationManager stopUpdatingLocation];
+    
 }
 
 
@@ -902,7 +906,7 @@ int num = 0;
 
 - (IBAction)pushNav:(id)sender {
     //[self ChamarPesquisa];
-      //[self makeLogin];
+    //[self makeLogin];
     
     // tenho de chamar o controlador de login
     
@@ -1130,7 +1134,9 @@ int num = 0;
     else if (![Globals user]){
         // tenho de por esta cena no viewdidappear
             alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
-            [alert show];
+          //  [alert show];
+        
+         [self chamarLogin];
     }else{
         [self ChamarFavoritos];
         }
@@ -1141,8 +1147,10 @@ int num = 0;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
-    [self presentViewController:nav animated:YES completion:nil];
+    //[self presentViewController:nav animated:YES completion:nil];
+    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:nil];
     
+    //[self.navigationController pushViewController:log animated:YES];
 
 }
 
@@ -1194,7 +1202,7 @@ int num = 0;
              [Globals user].loginType = @"facebook";
 
              
-       
+             [self lerRecomendados ];
 
                 }];
     }
@@ -1261,6 +1269,7 @@ int num = 0;
 {
     
     [self.viewContainer addSubview:animation.view];
+    [animation.viewFundo setBackgroundColor:[UIColor blackColor]];
     isFavOpen = YES;
     
     [UIView animateWithDuration:0.5 animations:^{

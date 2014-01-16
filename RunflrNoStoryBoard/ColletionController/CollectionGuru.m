@@ -9,6 +9,7 @@
 #import "CollectionGuru.h"
 #import "Restaurant.h"
 #import "FXImageView.h"
+#import "RecipeCollectionHeaderView.h"
 
 @interface CollectionGuru ()
 {
@@ -464,6 +465,9 @@
     
 }
 
+
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     //selectedPhotoIndex = indexPath.row;
     NSLog(@"clicou em %d",indexPath.row);
@@ -473,6 +477,9 @@
         [self.delegate performSelector:@selector(chamarRestaurante:) withObject:[restaurantes objectAtIndex:indexPath.row]];
     }
 }
+
+
+
 
 
 

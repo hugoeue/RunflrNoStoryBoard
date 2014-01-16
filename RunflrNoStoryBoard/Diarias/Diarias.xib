@@ -15,6 +15,7 @@
                 <outlet property="labelLocalisacao" destination="sop-Cx-zqa" id="fSp-mo-Lnz"/>
                 <outlet property="labelTitleRestaurnat" destination="DGL-ua-fFG" id="C80-0r-b3A"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="viewButoes" destination="0FE-yj-v1C" id="L8Q-fs-SMq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,12 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="0FE-yj-v1C">
-                    <rect key="frame" x="0.0" y="177" width="320" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
-                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cr0-hn-eln" customClass="FXImageView">
                     <rect key="frame" x="0.0" y="19" width="320" height="158"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -41,7 +36,7 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="g6C-le-dMM">
-                    <rect key="frame" x="10" y="48" width="45" height="45"/>
+                    <rect key="frame" x="10" y="32" width="45" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -53,7 +48,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jjw-3L-JHJ">
-                    <rect key="frame" x="60" y="48" width="45" height="45"/>
+                    <rect key="frame" x="60" y="32" width="45" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -97,35 +92,43 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="elr-FP-D6U">
-                    <rect key="frame" x="0.0" y="218" width="320" height="350"/>
+                    <rect key="frame" x="0.0" y="178" width="320" height="390"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-20"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G3v-GW-FGA">
-                    <rect key="frame" x="10" y="185" width="203" height="30"/>
+                <view contentMode="scaleToFill" id="0FE-yj-v1C">
+                    <rect key="frame" x="0.0" y="-44" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="G3v-GW-FGA">
+                            <rect key="frame" x="8" y="7" width="203" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
+                            <state key="normal" title="Adicionar favorito" backgroundImage="nao_seguir.png">
+                                <color key="titleColor" red="1" green="0.059260627122448506" blue="0.047730627705215967" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clickAddFavorito:" destination="-1" eventType="touchUpInside" id="RUD-1s-sTM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cLc-Am-fZB">
+                            <rect key="frame" x="221" y="7" width="91" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
+                            <state key="normal" title="Ligar" backgroundImage="ligar_restarante.png">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clickLigar:" destination="-1" eventType="touchUpInside" id="htO-id-rxo"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
-                    <state key="normal" title="Adicionar favorito" backgroundImage="nao_seguir.png">
-                        <color key="titleColor" red="1" green="0.059260627122448506" blue="0.047730627705215967" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clickAddFavorito:" destination="-1" eventType="touchUpInside" id="RUD-1s-sTM"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cLc-Am-fZB">
-                    <rect key="frame" x="220" y="185" width="91" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
-                    <state key="normal" title="Ligar" backgroundImage="ligar_restarante.png">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="clickLigar:" destination="-1" eventType="touchUpInside" id="htO-id-rxo"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

@@ -24,7 +24,7 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="emW-fj-m3R">
-                    <rect key="frame" x="11" y="27" width="50" height="50"/>
+                    <rect key="frame" x="10" y="32" width="45" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>

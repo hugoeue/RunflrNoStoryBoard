@@ -249,7 +249,7 @@
                 
      
                 
-                alertCartao = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"titulo"] message:utf8string  delegate:nil cancelButtonTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"butaoc"] otherButtonTitles:[[result objectForKey:@"msgdummy"] objectForKey:@"butao"], nil];
+                alertCartao = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"titulo"] message:utf8string  delegate:self cancelButtonTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"butaoc"] otherButtonTitles:[[result objectForKey:@"msgdummy"] objectForKey:@"butao"], nil];
                 alertCartao.tag = 4;
 
                 
@@ -350,20 +350,31 @@
                     [colececaoFavoritos CarregarRestaurantes:cartoes];
                     [colececaoFavoritos.collectionView reloadData];
                     
+                    self.viewButoes.frame = CGRectMake(0, -38, 320, 44);
+                    [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
+                    [colececaoFavoritos.collectionView addSubview: self.viewButoes];
+                    
                 }else
                 {
                     
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
-                                                  0,
+                                                  38,
                                                   self.container.frame.size.width,
-                                                  self.container.frame.size.height);
+                                                  self.container.frame.size.height-38);
                     [self.container addSubview:vazio.view];
                     vazio.imagem.image = [UIImage imageNamed:@"cry-50.png"];
                     vazio.labelTitulo.text = @"Sem cartões";
                     vazio.labelMenssagem.text = @"mostra o teu interesse";
                     vazio.labelDescricao.text = @"Clica para mostrares o teu interesse";
+                    
+                    self.viewButoes.frame = CGRectMake(0, 0, 320, 44);
+                    [self.container addSubview:self.viewButoes];
                 }
+                
+               // self.viewButoes.frame = CGRectMake(0, 0, 320, 44);
+                //self.viewButoes.frame = CGRectMake(0, -44, 320, 44);
+               
                 
                 break;
             }
@@ -562,7 +573,7 @@
     [dict setObject:[Globals lang] forKey:@"lang"];
     [dict setObject:restaurante.name forKey:@"rest_nome"];
     [dict setObject:restaurante.city forKey:@"rest_cidade"];
-    
+    //[dict setObject:[Globals user].email forKey:@"email"];
     
     
     if([[Globals user].loginType isEqualToString:@"facebook"])
@@ -580,9 +591,9 @@
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
         alert.tag = 2 ;
         
-        [alert show];
+      //  [alert show];
         
-
+        [self chamarLogin];
     }
 
     
@@ -591,20 +602,22 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
     if (alertView.tag ==1) {
 
     if(buttonIndex == 0)//OK button pressed
     {
         //do something
     }
-    else if(buttonIndex == 1)//Annul button pressed.
+   if(buttonIndex == 1)//Annul button pressed.
     {
 
         [[DemoRootViewController getInstance] chamarMapa:restaurante];
 
     }
         
-    }else if(alertView.tag == 2)
+    }
+    if(alertView.tag == 2)
     {
         if(buttonIndex == 0)//OK button pressed
         {
@@ -615,7 +628,8 @@
             [self chamarLogin];
         }
 
-    }else if(alertView.tag == 3)
+    }
+    if(alertView.tag == 3)
     {
         if(buttonIndex == 1)//OK button pressed
         {
@@ -624,15 +638,12 @@
         }
         
         
-    }else if(alertView.tag == 4)
+    }
+    if(alertView.tag == 4)
     {
         if(buttonIndex == 1)//OK button pressed
         {
-            NSString *phoneNumber =[NSString stringWithFormat:@"%d",restaurante.phone]; // dynamically assigned
-            NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
-            NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
-            [[UIApplication sharedApplication] openURL:phoneURL];
-            NSLog(@"ligar para numero %@",phoneNumber);
+            [self chamarEmailCart];
 
         }
 

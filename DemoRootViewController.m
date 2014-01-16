@@ -248,14 +248,22 @@ static DemoRootViewController * demoRoot;
     
     }else
     {
-       // [_main escurecer];
-        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-           
-            [_main.navigationController pushViewController:[Login new] animated:YES];
-         
-            
-        }];
+       
+//        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//           
+//            [_main.navigationController pushViewController:[Login new] animated:YES];
+//         
+//            
+//        }];
         
+        
+        //[_main.navigationController pushViewController:[Login new] animated:NO];
+        UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:[Login new]];
+        
+        [self presentViewController:nav animated:YES completion:^{
+            [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+            [_main escurecer];
+        }];
         
 //        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
 //            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[Login new] ];

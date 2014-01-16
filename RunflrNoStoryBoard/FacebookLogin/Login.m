@@ -12,6 +12,7 @@
 #import "LoginRundlr.h"
 #import "FormularioRegistoContaRundlr.h"
 #import "WebServiceSender.h"
+#import "DemoRootViewController.h"
 
 @interface Login ()
 {
@@ -61,9 +62,11 @@
 
 -(void)close
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:NO];
    //[self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    
 }
 
 - (IBAction)clickLoginRundlr:(id)sender {

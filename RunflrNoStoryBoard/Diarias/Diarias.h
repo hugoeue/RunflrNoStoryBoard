@@ -44,4 +44,7 @@
 
 -(void)setSeguir:(BOOL) seguir;
 
+@property (weak, nonatomic) IBOutlet UIView *viewButoes;
+
+
 @end

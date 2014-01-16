@@ -10,6 +10,7 @@
                 <outlet property="botaoSelectNews" destination="dZT-4m-fFo" id="O9Z-3h-Xa7"/>
                 <outlet property="botaoSelectNoti" destination="nlH-pi-BBB" id="AGf-dM-k0Z"/>
                 <outlet property="butaoSelectJuntar" destination="gAx-U0-c7V" id="ajd-EQ-jaX"/>
+                <outlet property="buttonJuntarContas" destination="1xG-HN-xsl" id="EfA-A4-VOv"/>
                 <outlet property="buttonLogin" destination="S5p-Q8-gPz" id="2IT-E8-feo"/>
                 <outlet property="buttonMenu" destination="Ls9-qs-UKf" id="vmI-X1-vx9"/>
                 <outlet property="buttonSelecionarImagem" destination="IAB-Uq-Oxa" id="0rJ-vh-M7K"/>
@@ -26,7 +27,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="sTX-zM-iqY" customClass="FXImageView">
                     <rect key="frame" x="29" y="191" width="80" height="80"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VtI-mB-SUE">
