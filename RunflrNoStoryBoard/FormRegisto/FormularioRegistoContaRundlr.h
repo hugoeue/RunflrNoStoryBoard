@@ -18,6 +18,7 @@
 
 - (IBAction)Voltar:(id)sender;
 
+@property (nonatomic , assign) id delegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *textNome;
 @property (weak, nonatomic) IBOutlet UITextField *textUltimoNome;

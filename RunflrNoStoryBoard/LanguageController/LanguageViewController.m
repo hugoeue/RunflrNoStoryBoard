@@ -7,6 +7,7 @@
 //
 
 #import "LanguageViewController.h"
+#import "DemoRootViewController.h"
 
 @interface LanguageViewController ()
 
@@ -26,12 +27,46 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self escurecer:0];
+    [self escurecer:0.5];
+    
 	// Do any additional setup after loading the view.
     [self setSelectedLanguageImage];
     // [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
     self.scrollview.contentSize = CGSizeMake(320, 409);
 
 }
+
+-(void)escurecer:(float)time
+{
+    float alpha = 0.5;
+    
+    if (self.viewPretaGrande.alpha== alpha) {
+        [UIView animateWithDuration:time animations:^{
+            [self.viewPretaGrande setAlpha:0];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x+3
+                                                 ,self.buttonMenu.frame.origin.y+3
+                                                 ,self.buttonMenu.frame.size.width-6
+                                                 ,self.buttonMenu.frame.size.height-6
+                                                 )];
+        }];
+        
+    }else
+    {
+        [UIView animateWithDuration:time animations:^{
+            [self.viewPretaGrande setAlpha:alpha];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x-3
+                                                 ,self.buttonMenu.frame.origin.y-3
+                                                 ,self.buttonMenu.frame.size.width+6
+                                                 ,self.buttonMenu.frame.size.height+6
+                                                 )];
+        }];
+        
+    }
+}
+
 
 -(void)setFontFamily:(NSString*)fontFamily forView:(UIView*)view andSubViews:(BOOL)isSubViews
 {
@@ -92,7 +127,11 @@
 - (IBAction)closeClick:(id)sender
 {
     //[self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[DemoRootViewController getInstance] chamarOutroTopo];
+    [self escurecer:0.5];
+
 }
 
 - (IBAction)ptClick:(id)sender

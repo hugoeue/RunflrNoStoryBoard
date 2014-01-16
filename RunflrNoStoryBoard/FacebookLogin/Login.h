@@ -22,4 +22,6 @@
 - (IBAction)clickSubmeter:(id)sender;
 - (IBAction)clickRecuperarPass:(id)sender;
 
+-(void)close;
+
 @end

@@ -104,6 +104,10 @@
     
 }
 
+- (IBAction)clickMenu:(id)sender {
+    [self.delegate performSelector:@selector(chamarOutroTopo) ];
+}
+
 
 
 - (IBAction)clickInicio:(id)sender {

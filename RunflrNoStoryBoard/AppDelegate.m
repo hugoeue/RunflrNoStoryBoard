@@ -53,6 +53,7 @@
         regUser.name = [mutableRetrievedDictionary objectForKey:@"pnome"];
         regUser.email = [mutableRetrievedDictionary objectForKey:@"email"];
         regUser.loginType = @"guru";
+        regUser.photo = [mutableRetrievedDictionary objectForKey:@"imagem"];
         [Globals setUser:regUser];
     }
     
@@ -111,57 +112,10 @@
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:currentDate]; // Get necessary date components
     
-    //    NSLog(@":::::%d:::", [components weekday]);
-    
     
 
     
     
-     // cenas pp_reveal
-    /*
-    self.window = PP_AUTORELEASE([[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]);
-    
-    MainPage *main = [[MainPage alloc] initWithNibName:@"MainPage" bundle:nil];
-    
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:main];
-    _revealSideViewController = [[PPRevealSideViewController alloc] initWithRootViewController:nav];
-    
-    
-    // esta linha de codigo serve apenas para desligar as sombras
-    [_revealSideViewController setOptions:PPRevealSideOptionsNone];
-    
-    _revealSideViewController.delegate = self;
-    
-    self.window.rootViewController = _revealSideViewController;
-    
-    // Uncomment if you want to test (yeah that's not pretty) the PPReveal deallocating
-    //[self performSelector:@selector(unloadRevealFromMemory) withObject:nil afterDelay:3.0];
-    
-    PP_RELEASE(main);
-    PP_RELEASE(nav);
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
-     */
-    
-    
-    // primeiro teste paperfold
-    /*
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    
-    MainPage *contentViewController = [MainPage new];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:contentViewController];
-    PaperFoldNavigationController *paperFoldNavController = [[PaperFoldNavigationController alloc] initWithRootViewController:navController];
-    
-    _menuRef = [MenuRefugio new];
-    
-    [paperFoldNavController setTopViewControllerC:_menuRef width:0.9];
-    [self.window setRootViewController:paperFoldNavController];
-    */
     
     
  

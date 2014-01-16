@@ -11,12 +11,18 @@
 #import "Login.h"
 #import "AppDelegate.h"
 #import "WebServiceSender.h"
+#import "Base64.h"
+#import "Utils.h"
+#import "DemoRootViewController.h"
 
 @interface PaginaPessoal ()
 {
     WebServiceSender * notif;
     WebServiceSender * juntarContas;
     WebServiceSender * newsLetter;
+    WebServiceSender * enviarFoto;
+    
+    NSString * fotobase;
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
@@ -34,9 +40,15 @@
     }
     if (juntarContas)
         [juntarContas cancel];
+    if (newsLetter)
+        [newsLetter cancel];
+    if (enviarFoto)
+        [enviarFoto cancel];
     
     notif = nil;
     juntarContas = nil;
+    newsLetter = nil;
+    enviarFoto = nil;
 }
 
 -(void)receberNotifi:(NSString *)recebe
@@ -104,12 +116,34 @@
                     [self.butaoSelectJuntar setImage:[UIImage imageNamed:@"botao_no_select.png"]];
                 }
                 [Globals user].faceId = nil;
-                 [Globals user].loginType = @"guru";
+                [Globals user].loginType = @"guru";
+                [self viewDidLoad];
                 break;
             }
             case 3:
             {
                 NSLog(@"resultado da newsLetter =>%@", result.description);
+                
+                break;
+            }
+            case 4:
+            {
+                NSLog(@"resultado do envio da foto para a tania =>%@", result.description);
+                
+                
+                User *regUser = [User new];
+                regUser.dbId = [Globals user].dbId ;
+                regUser.name = [Globals user].name;
+                regUser.email = [Globals user].name;
+                regUser.photo =fotobase;
+                regUser.loginType = @"guru";
+                
+                
+                [Globals setUser:regUser];
+               
+                
+                
+               
                 
                 break;
             }
@@ -140,7 +174,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //self.navigationController.navigationBarHidden = NO;
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString* notifications = [defaults objectForKey:@"notifications"];
@@ -184,6 +218,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
+    [self escurecer:0];
+    [self escurecer:0.5];
+    
     NSLog(@"Tipo de login realisado pagina pessoal %@",[Globals user].loginType);
     
     if([[Globals user].loginType isEqualToString:@"facebook"])
@@ -207,7 +244,23 @@
 - (void)loadGuruImage
 {
     [self.buttonLogin setTitle:@"Conectado" forState:UIControlStateNormal];
-    self.imgUser.image = [UIImage imageNamed:@"transferir.jpeg"];
+    //self.imgUser.image = [UIImage imageNamed:@"transferir.jpeg"];
+    
+    
+    //NSString * imagemDoUser = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/%@",[Globals user].photo];
+    
+   
+    
+    NSString * baseImage = [Globals user].photo ;
+    
+    NSData* data = [[NSData alloc] initWithBase64Encoding:baseImage ];
+    UIImage* image = [UIImage imageWithData:data];
+
+
+    if(self.imgUser)
+        [self.imgUser setImage:image];
+    
+    //[self.imgUser setImageWithContentsOfURL:[NSURL URLWithString:imagemDoUser]];
     self.imgUser.layer.cornerRadius = self.imgUser.frame.size.height/2;
     self.imgUser.clipsToBounds = YES;
     self.imgUser.layer.borderWidth = 1.0f;
@@ -218,7 +271,7 @@
 
 - (void)loadFaceImage
 {
-    
+    [self.buttonSelecionarImagem setEnabled:NO];
     [self.buttonLogin setTitle:@"Conectado" forState:UIControlStateNormal];
     NSString *str = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture", [Globals user].faceId];
     
@@ -290,6 +343,28 @@
             [self loginLogou];
         }
         
+    }else if(alertView.tag ==2){
+        
+        
+        if(buttonIndex == 0)//nao
+        {
+            //nao faz nada
+        }
+        else if(buttonIndex == 1)//galeria
+        {
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+        else if(buttonIndex == 2)//camera
+        {
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+        
+        
+        
+        
+        
     }
 }
 
@@ -309,9 +384,40 @@
 
 - (IBAction)clickBack:(id)sender {
     //[self dismissViewControllerAnimated:YES completion:nil];
-     [self.navigationController popToRootViewControllerAnimated:YES];
+     //[self.navigationController popToRootViewControllerAnimated:YES];
+    [[DemoRootViewController getInstance] chamarOutroTopo];
+    [self escurecer:0.5];
 }
 
+-(void)escurecer:(float)time
+{
+    float alpha = 0.5;
+    
+    if (self.viewPretaGrande.alpha== alpha) {
+        [UIView animateWithDuration:time animations:^{
+            [self.viewPretaGrande setAlpha:0];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x+3
+                                                 ,self.buttonMenu.frame.origin.y+3
+                                                 ,self.buttonMenu.frame.size.width-6
+                                                 ,self.buttonMenu.frame.size.height-6
+                                                 )];
+        }];
+        
+    }else
+    {
+        [UIView animateWithDuration:time animations:^{
+            [self.viewPretaGrande setAlpha:alpha];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x-3
+                                                 ,self.buttonMenu.frame.origin.y-3
+                                                 ,self.buttonMenu.frame.size.width+6
+                                                 ,self.buttonMenu.frame.size.height+6
+                                                 )];
+        }];
+        
+    }
+}
 
 
 - (IBAction)clickReceberNotifacoes:(id)sender {
@@ -359,25 +465,28 @@
     picker = [[UIImagePickerController alloc] init];
     
     picker.delegate = self;
-    
+
+    [self mostarPopUpBuscarImagem];
+}
+
+-(void)mostarPopUpBuscarImagem
+{
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-        
     {
-        
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Escolha uma foto" message:@"" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Galeria",@"Camera", nil];
+        alert.tag = 2;
+        [alert show];
         
     } else
-    
     {
-        
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Local?" message:@"" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Galeria", nil];
+        alert.tag = 2;
+        [alert show];
         
     }
-    
-    [self presentViewController:picker animated:YES completion:nil];
 
-    
 }
+
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *) Picker {
     
@@ -391,16 +500,83 @@
 
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
+    //NSLog(@"info da imagem %@", info);
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage * pickedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImageView * controller = [UIImageView new];
     controller.frame = CGRectMake(10, 10, 100, 100);
-    self.imgUser.image = pickedImage;
+    //self.imgUser.image = pickedImage;
     //[self.view addSubview:controller];
+    
+    
+    // codigo para encode da foto por clase
+//    NSData* data = UIImageJPEGRepresentation(pickedImage, 1.0f);
+//    [Base64 initialize];
+//    NSString *strEncoded = [Base64 encode:data];
+   
+    
+    // este codigo ja parece que funciona bem
+   // NSLog(@"o resultado do encodetobase64 da foto escolhida %@", [self encodeToBase64String:pickedImage]);
+    
+    pickedImage = [Utils fixrotation:pickedImage];
+    
+    // tenho de calcular o tamanho ideal da imagem para poder fazer crop correctamente
+    
+
+    float novaLargura = 160;
+    float altura =  pickedImage.size.height / (pickedImage.size.width / novaLargura);
+    
+    CGSize newSize = CGSizeMake(novaLargura , altura);
+   
+    
+    pickedImage = [Utils imageWithImage:pickedImage scaledToSize:newSize];
+    
+    [self.imgUser setImage:pickedImage];
+    
+    [self EnviarFoto:[self encodeToBase64String:pickedImage]];
     
 }
 
+-(void)EnviarFoto:(NSString *)imageBase64
+{
+    if (!enviarFoto)
+    enviarFoto = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_foto_user.php" method:@"" tag:4];
+    enviarFoto.delegate = self;
+    
+    NSString * userId =[NSString stringWithFormat:@"%d",[Globals user].dbId];
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    
+    [dict setObject:imageBase64 forKey:@"img"];
+    [dict setObject:userId forKey:@"user_id"];
+    
+    
+    
+   
+    
+    
+    
+    [enviarFoto sendDict:dict];
+    
+    
+    // alem de gravar no globals tenho de gravar no resto dos sitios
+    
+    
+    
+       fotobase = imageBase64;
+}
 
+
+// codigo para upload das fotos
+
+// codigo apenas existente para iOS7
+- (NSString *)encodeToBase64String:(UIImage *)image
+{
+    return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+//acaba aqui o codigo para upload das fotos
 
 
 - (IBAction)clickJuntarContas:(id)sender {
@@ -432,14 +608,13 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
             }];
             
             [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
-           // [self.navigationController popToRootViewControllerAnimated:YES];
+
         }];
     }else{
         
         // quando faz logout
         [self facebookLoginLogout];
-//        [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
-//        [self.navigationController popToRootViewControllerAnimated:YES];
+
         
     }
 
@@ -496,7 +671,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     [Globals user].faceId = user.id;
     [Globals user].name = user.name;
-    [Globals user].loginType = @"facebook";
+    [Globals user].loginType = @"guru";
     
     //[self showFaceStuff];
     //[self loadUser];

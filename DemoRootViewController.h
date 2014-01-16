@@ -55,5 +55,7 @@
 -(void)chamarMapa:(Restaurant *)rest;
 -(void)apagarMapa;
 -(void)chamarCentro;
+-(void)chamarTopo;
+-(void)chamarOutroTopo;
 
 @end

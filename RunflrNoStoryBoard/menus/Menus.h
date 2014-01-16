@@ -23,6 +23,7 @@
 
 
 @property Restaurant * restaurante;
+@property Restaurant * verdadeiroRestaurante;
 
 @property (weak, nonatomic) IBOutlet FXImageView *imageMenu;
 

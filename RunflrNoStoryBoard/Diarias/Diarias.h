@@ -12,6 +12,7 @@
 #import <MessageUI/MessageUI.h> 
 
 
+
 @interface Diarias : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property CLLocationManager * locationManager;
@@ -40,5 +41,7 @@
 
 
 @property (nonatomic , assign) id delegate;
+
+-(void)setSeguir:(BOOL) seguir;
 
 @end

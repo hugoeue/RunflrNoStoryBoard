@@ -15,6 +15,8 @@
 #import "Restaurant.h"
 #import "CollectionGuru.h"
 #import "SemDados.h"
+#import "AnimationController.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface Resultados ()
 {
@@ -42,6 +44,7 @@
     WebServiceSender *webResultado;
     NSMutableArray *restaurantes;
     CollectionGuru * colececao;
+    AnimationController * animation;
 
 }
 
@@ -84,12 +87,26 @@
     // Do any additional setup after loading the view from its nib.
     NSString *txt = result;
     
+   
+    
+    animation = [AnimationController new];
+    
+    animation.view.frame = CGRectMake(0, 0, 320,self.viewContainer.frame.size.height);
+    [self.viewContainer addSubview:animation.view];
+    [animation.viewFundo setAlpha:1];
+    [animation.viewFundo setBackgroundColor:[UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:229.0/255.0 alpha:1]];
+    
     if(result.length>0)
         txt = [txt stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[txt substringToIndex:1] uppercaseString]];
     
     self.labelResultado.text=txt;
  
     [self preperarPesquisa];
+    
+    if(result.length == 0)
+    {
+        self.labelResultado.text=@"Todos";
+    }
   
 }
 
@@ -103,7 +120,7 @@
 //        {
 //            case 1:
 //            {
-                NSLog(@"resultado da pesquisa por nome =>%@", resulti.description);
+                NSLog(@"resultado da pesquisa por qualquer coisa =>%@", resulti.description);
                 
                 
                 restaurantes = [NSMutableArray new];
@@ -123,8 +140,8 @@
                     NSString * telefone = [dict objectForKey:@"telefone"];
                     NSString * cidade = [dict objectForKey:@"cidade"];
                     NSString * freguesia = [dict objectForKey:@"freg_nome"];
-                    
-                    
+                    NSNumber * seguir = [dict objectForKey:@"seguidores"];
+                    NSString * pagante = [dict objectForKey:@"pag"];
                     
                     rest.cuisinesResultText = @"";
                     for (NSMutableDictionary *cosinhas in [dict objectForKey:@"cozinhas"])
@@ -134,8 +151,22 @@
                     
                     if ( [rest.cuisinesResultText length] > 0)
                         rest.cuisinesResultText = [rest.cuisinesResultText substringToIndex:[rest.cuisinesResultText length] - 2];
-                    //rest.cuisinesResultText =[NSString stringWithFormat:@"%@\n%@",freguesia,rest.cuisinesResultText] ;
                     
+                    
+                    
+                    if ([seguir isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                        rest.isUserFav = NO;
+                    }else {
+                        rest.isUserFav = YES;
+                    }
+                    
+                    
+
+                    if([pagante isEqualToString:@"sim"])
+                        rest.destaque = YES;
+                    else
+                        rest.destaque = NO;
+                        
                     rest.address = freguesia;
                     rest.city = cidade;
                     rest.phone =[telefone doubleValue];
@@ -150,6 +181,7 @@
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
                     
                     [restaurantes addObject:rest];
+                    [animation removeFromParentViewController];
                 }
                 
         if(restaurantes.count>0){
@@ -214,18 +246,83 @@
 
 -(void)preperarPesquisa
 {
+    
+    
+    if([[Globals user].loginType isEqualToString:@"facebook"])
+    {
+        [self prepararPesquisaLogin];
+    }
+    else if([[Globals user].loginType isEqualToString:@"guru"])
+    {
+        [self prepararPesquisaLogin];
+    }
+    else if ([FBSession activeSession].isOpen && ![Globals user]){
+        [self prepararPesquisaLogin];
+    }else{
+        [self prepararPesquisaLogOut];
+    }
+
+
+}
+
+-(void)prepararPesquisaLogin
+{
     doneSearch = NO;
     
- 
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    
+    if([Globals user].faceId)
+    {
+        [dict setObject: [Globals user].faceId forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+    }else
+    {
+        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+    }
+    
+    
+
+    
+    if ([tipo isEqualToString:@"Restaurants"]) {
+        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:1];
+        webResultado.delegate = self;
+        
+        
+        [dict setObject:result forKey:@"nomeparte"];
+        [dict setObject:[Globals lang] forKey:@"lang"];
+        
+        [webResultado sendDict:dict];
+    }
+    else
+    {
+        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome2.php" method:@"" tag:2];
+        webResultado.delegate = self;
+        
+   
+        
+        
+        [dict setObject:result forKey:@"nomeparte"];
+        [dict setObject:[Globals lang] forKey:@"lang"];
+        
+        [webResultado sendDict:dict];
+    }
+
+    
+}
+
+-(void)prepararPesquisaLogOut
+{
+    doneSearch = NO;
+    
+    
     
     if ([tipo isEqualToString:@"Restaurants"]) {
         webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome.php" method:@"" tag:1];
         webResultado.delegate = self;
         
         NSMutableDictionary * dict = [NSMutableDictionary new];
-//        
-//        $body['lang'];
-//        $body['nomeparte'];
+        
         
         [dict setObject:result forKey:@"nomeparte"];
         [dict setObject:[Globals lang] forKey:@"lang"];
@@ -238,20 +335,17 @@
         webResultado.delegate = self;
         
         NSMutableDictionary * dict = [NSMutableDictionary new];
-        //
-        //        $body['lang'];
-        //        $body['nomeparte'];
+        
         
         [dict setObject:result forKey:@"nomeparte"];
         [dict setObject:[Globals lang] forKey:@"lang"];
         
         [webResultado sendDict:dict];
     }
-    
-    
-    
-   
+
 }
+
+
 
 
 -(void)chamarRestaurante:(Restaurant *)rest
@@ -260,6 +354,7 @@
     NSLog(@"restaurante chamado chamase %@", rest.name);
     
     Diarias * details = [Diarias new];
+    details.delegate = self.delegate;
     details.locationManager = locationManager;
     [details loadRestaurant:rest];
     

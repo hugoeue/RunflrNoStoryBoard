@@ -21,6 +21,8 @@
 #import "SemDados.h"
 #import "MapViewController.h"
 #import "DemoRootViewController.h"
+#import "AnimationController.h"
+
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -56,6 +58,8 @@
     NSArray *toRecipentsCart;
     
     UIAlertView * alertCartao;
+    
+    AnimationController * animation;
     
 }
 
@@ -110,6 +114,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setSeguir:restaurante.isUserFav];
+    
+    animation = [AnimationController new];
+    
+    animation.view.frame = CGRectMake(0, 0, 320,self.container.frame.size.height );
+    
+    [self.container addSubview:animation.view];
     
 
     // se o restaurante estiver em destaque fica como vem do servidor
@@ -222,7 +233,7 @@
                 // Email Content
                 messageBodyCart = [[result objectForKey:@"msgdummy"] objectForKey:@"message"];
                 // To address
-                toRecipentsCart =  toRecipents = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
+                toRecipents = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
         
                 
                
@@ -427,10 +438,23 @@
     
 }
 
+-(void)setSeguir:(BOOL) seguir
+{
+    if (!seguir) {
+        [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
+        restaurante.fav = 1;
+    }else
+    {
+        [self.buttonSeguir setTitle:@"Remover dos favoritos" forState:UIControlStateNormal];
+        restaurante.fav = 0;
+    }
+
+}
+
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
 
-        
+    
         if (locationManager.location.coordinate.latitude!=0) {
             CLLocation * localRest = [[CLLocation alloc] initWithLatitude:rest.lat longitude:rest.lon];
             CLLocation * localActual = [[CLLocation alloc] initWithLatitude:locationManager.location.coordinate.latitude longitude:locationManager.location.coordinate.longitude];
@@ -443,7 +467,7 @@
             if(distance>1000*10)
                 return [NSString stringWithFormat:@"%.1f Km",distance/1000];
             if (distance>1000) {
-                return [NSString stringWithFormat:@"%.3f Km",distance/1000];
+                return [NSString stringWithFormat:@"%.1f Km",distance/1000];
             }
             
             
@@ -469,6 +493,7 @@
         [alertCartao show];
     }else
     {
+        menu.verdadeiroRestaurante = restaurante;
         menu.restaurante = rest;
         menu.restaurante.dbId = restaurante.dbId;
     
@@ -567,7 +592,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag ==1) {
-    
+
     if(buttonIndex == 0)//OK button pressed
     {
         //do something
@@ -599,6 +624,20 @@
         }
         
         
+    }else if(alertView.tag == 4)
+    {
+        if(buttonIndex == 1)//OK button pressed
+        {
+            NSString *phoneNumber =[NSString stringWithFormat:@"%d",restaurante.phone]; // dynamically assigned
+            NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
+            NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+            [[UIApplication sharedApplication] openURL:phoneURL];
+            NSLog(@"ligar para numero %@",phoneNumber);
+
+        }
+
+        
+       
     }
 }
 
@@ -682,10 +721,15 @@
     
     }
 - (IBAction)clickLigar:(id)sender {
-    NSString *phoneNumber =[NSString stringWithFormat:@"%d",restaurante.phone]; // dynamically assigned
-    NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
-    NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
-    [[UIApplication sharedApplication] openURL:phoneURL];
-    NSLog(@"ligar para numero %@",phoneNumber);
-}
+    
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Marcar %d",restaurante.phone ] message:@"" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+    alert.tag = 4;
+    [alert show];
+    
+   }
+
+
+// cenas da rundlr
+
+
 @end

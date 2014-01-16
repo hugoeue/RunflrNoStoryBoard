@@ -11,6 +11,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
+#import "AnimationController.h"
+#import "ShareViewController.h"
+#import "Login.h"
 
 
 #define FONT_SIZE_TITULO 20.0f
@@ -24,6 +27,8 @@
 {
     WebServiceSender * envio;
     SLComposeViewController *mySLComposerSheet;
+    AnimationController *animation;
+    BOOL m_postingInProgress;
 }
 
 @end
@@ -149,6 +154,7 @@
                 [itemsPrice addObject:@""];
               
                 [dataTableView reloadData];
+                [animation.view removeFromSuperview];
                 
                 break;
             }
@@ -172,7 +178,7 @@
                 
                                
                 [dataTableView reloadData];
-
+                [animation.view removeFromSuperview];
                 
               
                 break;
@@ -206,18 +212,38 @@
                 
                 [dataTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
                 [dataTableView reloadData];
-                
-                 break;
+                [animation.view removeFromSuperview];
+                break;
         }
         }
     }else
     {
         NSLog(@"error Tanita foofa %@",error);
         
+        [self performSelector:@selector(fire) withObject:nil afterDelay:10.0 inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+        
     }
     
     
 }
+
+-(void)fire
+{
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erro de ligação" message:@"Ocurreu um erro de ligação, pfv verifique a sua conecção a internet" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    alert.tag = 1;
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (alertView.tag == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
 
 
 -(void)adicionarCenasAoHeader:(NSString *)titulo :(NSString *)descricao
@@ -301,6 +327,14 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+      [super viewDidLoad];
+    
+    animation = [AnimationController new];
+    
+    animation.view.frame = CGRectMake(0, 0, 320, dataTableView.frame.size.height);
+    
+    [dataTableView addSubview:animation.view];
+    
     self.imageMenu.asynchronous = YES;
     [self.imageMenu setImageWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString ]]];
     
@@ -310,7 +344,7 @@
     [self.viewPreco addSubview:viewUnderline];
     
     
-    [super viewDidLoad];
+  
     
     items = [[NSMutableArray alloc] init];
     itemsPrice = [[NSMutableArray alloc] init];
@@ -488,7 +522,27 @@
     // tenho de verificar se é para twitter ou facebook
     // usar uma alert daquelas que vem de baixo
 
-    [self postImageToFB];
+    
+    // este funciona mas manda pelas defeniçoes do tlm
+    //[self postImageToFB];
+    
+    // agr estou a  testar outro diferente
+    [FBSettings setLoggingBehavior:[NSSet setWithObjects:FBLoggingBehaviorFBRequests, FBLoggingBehaviorFBURLConnections, nil]];
+    
+    // nao funcionou
+    //[self postWithText:[NSString stringWithFormat:@"Vejam o cartao %@", restaurante.name] ImageName:@"foto" URL:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString] Caption:@"foto menu" Name:@"the name" andDescription:@"some descriºtion"];
+    
+    // mais outra tentativa
+//    NSURL *imageurl = [NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString]];
+//    
+//    NSData *imagedata = [[NSData alloc]initWithContentsOfURL:imageurl];
+//    
+//    UIImage *image = [UIImage imageWithData: imagedata];
+//    [self postImageToFB:image];
+    
+    // agora com cenas da rundlr
+    
+    [self shareFacebookClicked:self];
 }
 
 - (void) postImageToFB
@@ -525,4 +579,200 @@
         [alert show];
     }];
 }
+
+
+
+
+
+
+// mandar cenas para o facebook textes
+-(void) postWithText: (NSString*) message
+           ImageName: (NSString*) image
+                 URL: (NSString*) url
+             Caption: (NSString*) caption
+                Name: (NSString*) name
+      andDescription: (NSString*) description
+{
+    
+    
+    
+    
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                   url, @"link",
+                                   name, @"name",
+                                   caption, @"caption",
+                                   description, @"description",
+                                   message, @"message",
+                                   UIImagePNGRepresentation([UIImage imageNamed: image]), @"picture",
+                                   nil];
+    
+    if ([FBSession.activeSession.permissions indexOfObject:@"publish_actions"] == NSNotFound)
+    {
+        // No permissions found in session, ask for it
+        [FBSession.activeSession requestNewPublishPermissions: [NSArray arrayWithObject:@"publish_actions"]
+                                              defaultAudience: FBSessionDefaultAudienceFriends
+                                            completionHandler: ^(FBSession *session, NSError *error)
+         {
+             if (!error)
+             {
+                 // If permissions granted and not already posting then publish the story
+                 if (!m_postingInProgress)
+                 {
+                     [self postToWall: params];
+                 }
+             }
+         }];
+    }
+    else
+    {
+        // If permissions present and not already posting then publish the story
+        if (!m_postingInProgress)
+        {
+            [self postToWall: params];
+        }
+    }
+}
+
+-(void) postToWall: (NSMutableDictionary*) params
+{
+    m_postingInProgress = YES; //for not allowing multiple hits
+    
+    [FBRequestConnection startWithGraphPath:@"me/feed"
+                                 parameters:params
+                                 HTTPMethod:@"POST"
+                          completionHandler:^(FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error)
+     {
+         if (error)
+         {
+             //showing an alert for failure
+             UIAlertView *alertView = [[UIAlertView alloc]
+                                       initWithTitle:@"Post Failed"
+                                       message:error.localizedDescription
+                                       delegate:nil
+                                       cancelButtonTitle:@"OK"
+                                       otherButtonTitles:nil];
+             [alertView show];
+         }
+         m_postingInProgress = NO;
+     }];
+}
+
+
+/// mais outro codigo de testes
+- (void) postImageToFB:(UIImage*)image
+{
+    NSData* imageData = UIImageJPEGRepresentation(image, 90);
+    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    @"This is my drawing!", @"message",
+                                    imageData, @"source",
+                                    nil];
+    
+    [FBRequestConnection startWithGraphPath:@"me/photos"
+                                 parameters:params
+                                 HTTPMethod:@"POST"
+                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                              
+                          }];
+}
+
+
+// cenas da rundlr para postar no facebook
+
+
+- (IBAction)shareFacebookClicked:(id)sender
+{
+    if (![FBSession activeSession].isOpen) {
+        [self loginButton:self];
+        return;
+    }
+    
+    
+    ShareViewController *viewController = [[ShareViewController alloc]
+                                           initWithNibName:@"ShareViewController"
+                                           bundle:nil];
+    
+    //    if ([Globals restaurant].images.count > 0) {
+    //        NSString *imagePath = [[Globals restaurant].images objectAtIndex:0];
+    //        viewController.imagePath = [NSString stringWithFormat:@"http://cms.citychef.pt%@", imagePath ];
+    //    }
+    
+    viewController.imagePath = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString];
+    
+    viewController.restName = restaurante.name;
+    viewController.restAddress = restaurante.address;
+    viewController.rest = self.verdadeiroRestaurante;
+    
+    //[self presentViewController:viewController animated:YES completion:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+// minhas cenas
+- (IBAction)loginButton:(id)sender
+{
+    if (![FBSession activeSession].isOpen) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.session.state != FBSessionStateCreated) {
+            // Create a new, logged out session.
+            appDelegate.session = [[FBSession alloc] init];
+            
+        }
+        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                         FBSessionState status,
+                                                         NSError *error) {
+            
+            
+            
+            [FBSession setActiveSession:session];
+            [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+                if (!error) {
+                    
+                    [NSThread detachNewThreadSelector:@selector(upUser:) toTarget:self withObject:user];
+                    
+                }
+            }];
+            
+          
+           // [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }else{
+        //[self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
+}
+
+- (void)upUser:(NSDictionary<FBGraphUser> *)user
+{
+    NSString *userId = user.id;
+    NSString *userName = user.name;
+    NSString *userEmail = [user objectForKey:@"email"];
+    
+    NSLog(@"USERID: %@", userId);
+    NSLog(@"USER: %@", userName);
+    NSLog(@"mail: %@", userEmail);
+    
+    if (![Globals user]) {
+        [Globals setUser:[[User alloc] init]];
+    }
+    
+    
+    
+    //             NSLog(@"USER DATA:::%@  -  %@", user.id, user.name);
+    
+    [Globals user].email = [user objectForKey:@"email"];
+    
+    [Globals user].faceId = user.id;
+    [Globals user].name = user.name;
+    [Globals user].loginType = @"facebook";
+    
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    
+}
+
+
 @end

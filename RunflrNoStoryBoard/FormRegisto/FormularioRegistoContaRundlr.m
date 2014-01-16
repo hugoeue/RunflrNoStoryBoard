@@ -96,9 +96,10 @@
                 NSLog(@"resultado da tania no registo =>%@", result.description);
                 
                 //resp = "Successfully inserted 1 row";
-                if([[result objectForKey:@"resp"] isEqualToString:@"Successfully inserted 1 row"])
+                if([[result objectForKey:@"resp"] isEqualToString:@"SUCESSO"])
                 {
                     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Sucesso" message:@"Resgisto realizado com sucesso" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    alert.tag = 1;
                     [alert show];
                     
                     
@@ -111,8 +112,15 @@
                     
                     [Globals setUser:regUser];
                     
-                }else{
+                }else if([[result objectForKey:@"resp"] isEqualToString:@"INSUCESSO"]){
+                    /*
+                    $res['msg']="ja inserido";
+                    $res['titulo']="INSUCESSO titulo";
+                    */
                     
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msg"] delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alert show];
+
                 }
                 
                
@@ -310,6 +318,17 @@
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (alertView.tag == 1) {
+       // [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.delegate performSelector:@selector(close) withObject:nil];
+    }
+    
+}
+
+
 - (IBAction)clickEnviarForm:(id)sender {
     NSString  *possoenviar = @"";
     
@@ -318,8 +337,14 @@
     NSPredicate *emailTest =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     BOOL myStringMatchesRegEx=[emailTest evaluateWithObject:emailid];
     if (!myStringMatchesRegEx ) {
-        possoenviar = @"Email invalido";
+        possoenviar = @"Email invalido\n";
     }
+    
+    if(self.textPassword.text.length <5)
+    {
+        possoenviar =[NSString stringWithFormat:@"%@ Password tem de ter no minimo 6 caracteres\n",possoenviar];
+    }
+
     
     if(![self.textPassword.text isEqualToString:self.textPassword2.text])
     {
@@ -336,5 +361,7 @@
 }
 - (IBAction)Voltar:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    //[self.delegate performSelector:@selector(close) withObject:nil];
+    
 }
 @end

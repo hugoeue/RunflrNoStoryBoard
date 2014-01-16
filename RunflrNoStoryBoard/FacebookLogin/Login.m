@@ -56,13 +56,17 @@
 
 
 - (IBAction)popAnterior:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self close];
+}
+
+-(void)close
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+   //[self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clickLoginRundlr:(id)sender {
-    
-    
     LoginRundlr *login = [LoginRundlr new];
     [self.navigationController pushViewController:login animated:YES];
 }
@@ -70,6 +74,7 @@
 - (IBAction)clickRegistoRundlr:(id)sender {
     
     FormularioRegistoContaRundlr *form = [FormularioRegistoContaRundlr new];
+    form.delegate = self;
     [self.navigationController pushViewController:form animated:YES];
 }
 
@@ -241,6 +246,7 @@
                     regUser.dbId = [[result objectForKey:@"userid"] integerValue];
                     regUser.name = [result objectForKey:@"pnome"];
                     regUser.email = [result objectForKey:@"email"];
+                    regUser.photo =[result objectForKey:@"imagem"];
                     regUser.loginType = @"guru";
                     
                     

@@ -21,5 +21,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *viewContainer;
 
+@property (nonatomic , assign) id delegate;
 
 @end

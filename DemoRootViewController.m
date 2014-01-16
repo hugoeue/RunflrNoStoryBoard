@@ -100,6 +100,7 @@ static DemoRootViewController * demoRoot;
         [_paperFoldView setEnableHorizontalEdgeDragging:NO];
         [_paperFoldView setEnableRightFoldDragging:NO];
         [_paperFoldView setEnableLeftFoldDragging:NO];
+        [_paperFoldView setBackgroundColor:[UIColor blackColor]];
         
         
         
@@ -156,9 +157,9 @@ static DemoRootViewController * demoRoot;
         [self chamarMenu];
        
         
-        //ShadowView *topShadowView = [[ShadowView alloc] initWithFrame:CGRectMake(0,_topView.frame.size.height-5,_topView.frame.size.width,5) foldDirection:FoldDirectionVertical];
-       // [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
-       // [_topView addSubview:topShadowView];
+//        ShadowView *topShadowView = [[ShadowView alloc] initWithFrame:CGRectMake(0,_topView.frame.size.height-5,_topView.frame.size.width,5) foldDirection:FoldDirectionVertical];
+//        [topShadowView setColorArrays:@[[UIColor colorWithWhite:0 alpha:0.3],[UIColor clearColor]]];
+//        [_topView addSubview:topShadowView];
         
         [_paperFoldView setTopFoldContentView:_topView topViewFoldCount:2 topViewPullFactor:0.9];
         
@@ -201,15 +202,17 @@ static DemoRootViewController * demoRoot;
 //         }];
 //
 //     }];
-    [_main escurecer];
-    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-        
-        
-        [_main.navigationController pushViewController:linguas animated:YES];
-        
-    }];
+//    [_main escurecer];
+//    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//        
+//        
+//        [_main.navigationController pushViewController:linguas animated:YES];
+//        
+//    }];
     
-    
+    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+    [_main.navigationController pushViewController:linguas animated:NO];
+
     
 }
 
@@ -221,15 +224,19 @@ static DemoRootViewController * demoRoot;
         //[self.navigationController pushViewController:pagPessoal animated:YES];
         pagPessoal.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         //[self presentViewController:pagPessoal animated:YES completion:nil];
-        [_main escurecer];
-        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-            
-            
-            [_main.navigationController pushViewController:pagPessoal animated:YES];
-         
-            
-            
-        }];
+       // [_main escurecer];
+        
+        //
+//        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//            
+//            
+//            [_main.navigationController pushViewController:pagPessoal animated:YES];
+//         
+//            
+//            
+//        }];
+        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+        [_main.navigationController pushViewController:pagPessoal animated:NO];
         
         
 //        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
@@ -241,7 +248,7 @@ static DemoRootViewController * demoRoot;
     
     }else
     {
-        [_main escurecer];
+       // [_main escurecer];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
            
             [_main.navigationController pushViewController:[Login new] animated:YES];
@@ -270,34 +277,52 @@ static DemoRootViewController * demoRoot;
     Defenicoes * def = [Defenicoes new];
     
   
+    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+    [_main.navigationController pushViewController:def animated:NO];
+    //[_main escurecer];
     
-    [_main escurecer];
-    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
-        
-       
-        [_main.navigationController pushViewController:def animated:YES];
-        
-    }];
+//    [_main escurecer];
+//    [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
+//        
+//       
+//        [_main.navigationController pushViewController:def animated:YES];
+//        
+//    }];
     
   
 }
 
+-(void)chamarOutroTopo
+{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
+    {
+        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault];
+    }
+    else{
+        [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded];
+    }
+}
+
 -(void)chamarTopo{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [_main escurecer];
     if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
     {
        // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault];
         [_main.buttonPesquisa setUserInteractionEnabled:YES];
-  
+        [_main.navigationController popToRootViewControllerAnimated:NO];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
       
     }
     else{
       //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
         [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded];
         [_main.buttonPesquisa setUserInteractionEnabled:NO];
-         [_menu carregarLingua];
-        
+        [_menu carregarLingua];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
 }
 

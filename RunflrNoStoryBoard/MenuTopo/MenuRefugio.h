@@ -12,6 +12,7 @@
 - (IBAction)buttonFacebookLogin:(id)sender;
 - (IBAction)buttonLingua:(id)sender;
 - (IBAction)buttonPaginaPessoal:(id)sender;
+- (IBAction)clickMenu:(id)sender;
 
 
 

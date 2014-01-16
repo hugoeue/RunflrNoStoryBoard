@@ -243,7 +243,7 @@
     connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
     if (connection) {
         NSLog(@"%@ data sent with size '%d' bytes", url ,encodedData.length);
-        NSLog(@"url para a foofa %@ data %@", url, encodedData);
+      //  NSLog(@"url para a foofa %@ data %@", url, encodedData);
     }
 }
 

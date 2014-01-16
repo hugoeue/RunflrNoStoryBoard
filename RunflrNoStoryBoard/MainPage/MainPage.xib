@@ -262,7 +262,7 @@
     </objects>
     <resources>
         <image name="LogoGuru.png" width="285" height="84"/>
-        <image name="QUADRADO SUBMETER.png" width="13" height="31"/>
+        <image name="QUADRADO SUBMETER.png" width="82" height="82"/>
         <image name="Tira_grande.png" width="561" height="7"/>
         <image name="bico_restaurante.png" width="35" height="18"/>
         <image name="fundo_pequeno.png" width="639" height="258"/>

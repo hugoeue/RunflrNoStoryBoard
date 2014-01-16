@@ -9,6 +9,7 @@
 #import "Defenicoes.h"
 #import "SobreMenuGuru.h"
 #import "FeedBack.h"
+#import "DemoRootViewController.h"
 
 @interface Defenicoes ()
 
@@ -27,6 +28,9 @@
 
 - (void)viewDidLoad
 {
+    [self escurecer:0.0];
+    [self escurecer:0.5];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationController.navigationBarHidden = YES;
@@ -44,8 +48,46 @@
 }
 
 - (IBAction)ClickAnterior:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [[DemoRootViewController getInstance] chamarOutroTopo];
+    [self escurecer:0.5];
 }
+
+
+
+
+-(void)escurecer:(float)time
+{
+    float alpha = 0.5;
+    
+    if (self.viewPretaGrande.alpha== alpha) {
+        [UIView animateWithDuration:time animations:^{
+            [self.viewPretaGrande setAlpha:0];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x+3
+                                                 ,self.buttonMenu.frame.origin.y+3
+                                                 ,self.buttonMenu.frame.size.width-6
+                                                 ,self.buttonMenu.frame.size.height-6
+                                                 )];
+        }];
+        
+    }else
+    {
+        [UIView animateWithDuration:time animations:^{
+            [self.viewPretaGrande setAlpha:alpha];
+            
+            [self.buttonMenu setFrame:CGRectMake(self.buttonMenu.frame.origin.x-3
+                                                 ,self.buttonMenu.frame.origin.y-3
+                                                 ,self.buttonMenu.frame.size.width+6
+                                                 ,self.buttonMenu.frame.size.height+6
+                                                 )];
+        }];
+        
+    }
+}
+
+
 
 - (IBAction)clicksobreGuru:(id)sender {
     SobreMenuGuru * termos = [SobreMenuGuru new];

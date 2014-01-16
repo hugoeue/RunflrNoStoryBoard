@@ -18,5 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *labelDefeniçoes;
 
+@property (weak, nonatomic) IBOutlet UIView *viewPretaGrande;
+@property (weak, nonatomic) IBOutlet UIButton *buttonMenu;
+
 
 @end

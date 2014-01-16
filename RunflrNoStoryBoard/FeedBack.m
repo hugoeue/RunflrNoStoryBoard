@@ -7,9 +7,20 @@
 //
 
 #import "FeedBack.h"
-
+#import "WebServiceSender.h"
 
 @interface FeedBack ()
+{
+    
+    NSString *emailTitle;
+    // Email Content
+    NSString *messageBody;
+    // To address
+    NSArray *toRecipents;
+    
+    WebServiceSender * web;
+
+}
 
 @end
 
@@ -48,6 +59,56 @@
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:nil];
     }
+}
+
+-(void)chamarWebServiceOQP
+{
+    
+    web = [[WebServiceSender alloc] init];
+    web.delegate = self;
+    
+}
+
+- (IBAction)clickDisnosOQuePensas:(id)sender {
+    
+    [self chamaremail];
+}
+
+-(void)chamaremail
+{
+ NSArray *toRecipents = [NSArray arrayWithObject:@"menu@uru.come"];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:@"email title"];
+    [mc setMessageBody:@"body" isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result

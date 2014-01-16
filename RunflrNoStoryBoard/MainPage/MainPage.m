@@ -22,7 +22,7 @@
 #import "CollectionGuru.h"
 #import "Diarias.h"
 #import "SemDados.h"
-
+#import "AnimationController.h"
 
 
 
@@ -53,6 +53,7 @@
     
     SemDados * vazio;
     
+    AnimationController * animation;
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
@@ -68,25 +69,78 @@ int num = 0;
 
 -(void)lerRecomendados
 {
-   // if (!recomendados) {
-     
-        recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados3.php" method:@"" tag:1];
-        recomendados.delegate = self;
+    //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
     
-        NSMutableDictionary * dict = [NSMutableDictionary new];
-
+    
+    NSLog(@"Tipo de login realisado main page did appear %@",[Globals user].loginType);
+    
+    if([[Globals user].loginType isEqualToString:@"facebook"])
+    {
+        [self lerRecomendadosLogin];
+    }
+    else if([[Globals user].loginType isEqualToString:@"guru"])
+    {
+        [self lerRecomendadosLogin];
+    }
+    else if ([FBSession activeSession].isOpen && ![Globals user]){
+        [self lerRecomendadosLogin];
+    }else{
+        [self lerRecomendadosLogOut];
+    }
 
     
-        [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.latitude] forKey:@"lat"];
-        [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.longitude] forKey:@"lon"];
-        
- 
+}
+
+-(void)lerRecomendadosLogOut
+{
+    recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados3.php" method:@"" tag:1];
+    recomendados.delegate = self;
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    
+    
+    
+    [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.latitude] forKey:@"lat"];
+    [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.longitude] forKey:@"lon"];
+    
+    
+    
+    
+    [recomendados sendDict:dict];
+
+}
+
+-(void)lerRecomendadosLogin
+{
+    // if (!recomendados) {
+    
+    recomendados = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_recomendados4.php" method:@"" tag:1];
+    recomendados.delegate = self;
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    
+    
+    
+    [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.latitude] forKey:@"lat"];
+    [dict setObject:[NSNumber numberWithDouble:locationManager.location.coordinate.longitude] forKey:@"lon"];
+    
+    if([Globals user].faceId)
+    {
+        [dict setObject: [Globals user].faceId forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+    }else
+    {
+        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+    }
 
     
-        [recomendados sendDict:dict];
+    
+    [recomendados sendDict:dict];
     //}
     
 }
+
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
@@ -149,7 +203,7 @@ int num = 0;
                     NSString * larguraI = [dict objectForKey:@"width_i"];
                     NSString * cidade = [dict objectForKey:@"cidade"];
                     NSString * freguesia = [dict objectForKey:@"freg_nome"];
-
+                    NSNumber * seguir = [dict objectForKey:@"seguidores"];
                     
                     NSString * telefone = [dict objectForKey:@"telefone"];
                     rest.phone =[telefone doubleValue];
@@ -184,6 +238,13 @@ int num = 0;
                     
                     rest.address = freguesia;
                     rest.city = cidade;
+                    
+                    if ([seguir isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                        rest.isUserFav = NO;
+                    }else {
+                        rest.isUserFav = YES;
+                    }
+                   
                     
                     rest.lat =[lati doubleValue];
                     rest.lon =[longi doubleValue];
@@ -227,7 +288,7 @@ int num = 0;
                                                   self.viewContainer.frame.size.height);
                     vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
                     [self.viewContainer addSubview:vazio.view];
-                    
+                    [animation.view removeFromSuperview];
                     
                 }
  
@@ -294,6 +355,8 @@ int num = 0;
                     rest.featuredImageString = imagem;
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
                     
+                    rest.isUserFav = YES;
+                    
                     [restaurantesRecomendados addObject:rest];
                 }
                 
@@ -323,8 +386,9 @@ int num = 0;
                     [self.viewContainer addSubview:colececaoFavoritos.view];
                     [vazio removeFromParentViewController];
                     [colececaoRecomendados removeFromParentViewController];
+                    
                 }
-                
+                 [animation.view removeFromSuperview];
                 
                 
                 break;
@@ -492,6 +556,7 @@ int num = 0;
    // NSLog(@"restaurante chamado chamase %@", rest.name);
     
     Diarias * details = [Diarias new];
+    //[details setSeguir:rest.isUserFav];
     details.delegate = self.delegate;
     details.locationManager = locationManager;
     [details loadRestaurant:rest];
@@ -514,6 +579,7 @@ int num = 0;
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:YES];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
    
      [self.buttonPesquisa setUserInteractionEnabled:YES];
      self.labelCidade.text =[Language textForIndex:@"Cidade"];
@@ -568,9 +634,11 @@ int num = 0;
     {
          [self loadGuruImage];
     }
-    else if ([FBSession activeSession].isOpen && ![Globals user]){
+    else if ([FBSession activeSession].isOpen && ![Globals user])
+    {
         [self loadUser];
-    }else{
+    }else
+    {
         [self loadButtonLogin];
     }
   
@@ -609,6 +677,10 @@ int num = 0;
     // Do any additional setup after loading the view from its nib.
     
 
+    animation = [AnimationController new];
+   // [animation.view setFrame:self.viewContainer.frame];
+    animation.view.frame = CGRectMake(0, 0, 320, self.viewContainer.frame.size.height);
+    [self.viewContainer addSubview:animation.view];
 
     
     
@@ -655,7 +727,7 @@ int num = 0;
     [self carregaRestaurantes];
     
     
-        [self gps];
+    [self gps];
     
  
     
@@ -745,6 +817,7 @@ int num = 0;
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     // tem de chamar aqui o webservice
+    // ele passa aqui muitas vezes
     [self lerRecomendados];
     [locationManager stopUpdatingLocation];
 }
@@ -752,7 +825,6 @@ int num = 0;
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
    
-    
     if ([error domain] == kCLErrorDomain) {
         
         // We handle CoreLocation-related errors here
@@ -819,10 +891,7 @@ int num = 0;
     }
 }
 
-- (void)loadFaceImage
-{
-  
-}
+
 
 
 - (void)didReceiveMemoryWarning
@@ -854,6 +923,7 @@ int num = 0;
         [c setResultado:@""];
     
     c.locationManager = locationManager;
+    c.delegate = self.delegate;
     [c setTipo:tipo];
     [self.navigationController pushViewController:c animated:YES];
     PP_RELEASE(c);
@@ -960,12 +1030,7 @@ int num = 0;
                                                 self.imageBico.frame.size.height
                                                 )];
 
-            
         }];
-    
-    
-   
-
     
     
     tipo = @"Restaurants";
@@ -975,10 +1040,14 @@ int num = 0;
 
     
     
-    if(self.scrollView.contentOffset.y == 0)
+    if(self.scrollView.contentOffset.y == 0){
         [self.scrollView setContentOffset:CGPointMake( 0, -90) animated:YES];
-    else
+        [self.texfFieldPesquisa becomeFirstResponder];
+    }
+    else{
         [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
+        [self.texfFieldPesquisa resignFirstResponder];
+    }
 }
 
 
@@ -1073,6 +1142,7 @@ int num = 0;
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
     [self presentViewController:nav animated:YES completion:nil];
+    
 
 }
 
@@ -1104,7 +1174,6 @@ int num = 0;
     __block NSString *msgtxt;
     if ([FBSession activeSession].isOpen) {
         
-        [self loadFaceImage];
         [FBRequestConnection
          startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
              
@@ -1125,7 +1194,7 @@ int num = 0;
              [Globals user].loginType = @"facebook";
 
              
-             [self startUpContainers2];
+       
 
                 }];
     }
@@ -1158,9 +1227,7 @@ int num = 0;
     [Globals user].name = user.name;
     [Globals user].loginType = @"facebook";
     
-    //[self showFaceStuff];
-    //[self loadUser];
-    [self loadFaceImage];
+ 
 }
 
 
@@ -1188,16 +1255,12 @@ int num = 0;
 }
 
 
-- (void)startUpContainers2
-{
-    [self loadFaceImage];
-    // fax coisas aqui... yuppy
-    //[self ChamarFavoritos];
-    
-}
+
 
 -(void)ChamarFavoritos
 {
+    
+    [self.viewContainer addSubview:animation.view];
     isFavOpen = YES;
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -1210,17 +1273,8 @@ int num = 0;
         
     }];
     
-    
-
-
 
     NSLog(@"chamar navigation com os favoritos");
-    
-//    Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
-//    [c setResultado:self.texfFieldPesquisa.text];
-//    [c setTipo:@"Favoritos"];
-//    [self.navigationController pushViewController:c animated:YES];
-//    PP_RELEASE(c);
     
     favWeb = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_fav.php" method:@"" tag:2];
     favWeb.delegate = self;
@@ -1277,5 +1331,6 @@ int num = 0;
     }];
     
     [self lerRecomendados];
+     [self.viewContainer addSubview:animation.view];
 }
 @end
