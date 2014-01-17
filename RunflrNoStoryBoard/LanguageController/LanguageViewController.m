@@ -24,6 +24,21 @@
     return self;
 }
 
+
+
+-(void)carregarLingua
+{
+    self.labelIdioma.text = [Language textForIndex:@"Idioma"];
+    self.labelIngles.text = [Language textForIndex:@"Ingles"];
+    self.labelFrances.text = [Language textForIndex:@"Frances"];
+    self.labelEspanhol.text = [Language textForIndex:@"Espanhol"];
+    self.labelAlemao.text = [Language textForIndex:@"Alemao"];
+    self.labelItaliano.text = [Language textForIndex:@"Italiano"];
+    self.labelPortugues.text = [Language textForIndex:@"Portugues"];
+    
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,7 +49,19 @@
     [self setSelectedLanguageImage];
     // [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
     self.scrollview.contentSize = CGSizeMake(320, 409);
+    [self carregarLingua];
 
+}
+-(void)resetBotoes
+{
+
+    [self.imgPT setImage:[UIImage imageNamed:@"botao_select.png"]];
+    [self.imgDE setImage:[UIImage imageNamed:@"botao_select.png"]];
+    [self.imgEN setImage:[UIImage imageNamed:@"botao_select.png"]];
+    [self.imgES setImage:[UIImage imageNamed:@"botao_select.png"]];
+    [self.imgFR setImage:[UIImage imageNamed:@"botao_select.png"]];
+    [self.imgIT setImage:[UIImage imageNamed:@"botao_select.png"]];
+    
 }
 
 -(void)escurecer:(float)time
@@ -131,6 +158,8 @@
     
     [[DemoRootViewController getInstance] chamarOutroTopo];
     [self escurecer:0.5];
+    
+    
 
 }
 
@@ -141,9 +170,13 @@
     [defaults synchronize];
     
     [Globals setLang:@"pt"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    //[self escurecer:0.5];
+    [self resetBotoes];
+    [self setSelectedLanguageImage];
 }
 
 - (IBAction)deClick:(id)sender {
@@ -152,9 +185,13 @@
     [defaults synchronize];
     
     [Globals setLang:@"de"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    //[self escurecer:0.5];
+    [self resetBotoes];
+    [self setSelectedLanguageImage];
 }
 
 - (IBAction)itClick:(id)sender {
@@ -163,9 +200,13 @@
     [defaults synchronize];
     
     [Globals setLang:@"it"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    //[self escurecer:0.5];
+    [self resetBotoes];
+    [self setSelectedLanguageImage];
 }
 
 - (IBAction)enClick:(id)sender
@@ -175,9 +216,13 @@
     [defaults synchronize];
     
     [Globals setLang:@"en"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    //[self escurecer:0.5];
+    [self resetBotoes];
+    [self setSelectedLanguageImage];
 }
 
 
@@ -189,9 +234,13 @@
     [defaults synchronize];
     
     [Globals setLang:@"es"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    //[self escurecer:0.5];
+    [self resetBotoes];
+    [self setSelectedLanguageImage];
 }
 
 
@@ -203,9 +252,13 @@
     [defaults synchronize];
     
     [Globals setLang:@"fr"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
     //[self dismissModalViewControllerAnimated:YES];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
+    //[[DemoRootViewController getInstance] chamarOutroTopo];
+    //[self escurecer:0.5];
+    [self resetBotoes];
+    [self setSelectedLanguageImage];
 }
 
 

@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="buttonMenu" destination="SBn-W3-nNt" id="Odq-6O-4pH"/>
                 <outlet property="labelDefeniçoes" destination="Kaj-3Q-KEg" id="dLI-V9-4xS"/>
+                <outlet property="labelFeedBack" destination="OWy-5L-GbX" id="ISe-EW-yYz"/>
                 <outlet property="labelPolitica" destination="6wq-co-Ee4" id="Bie-2F-jl9"/>
                 <outlet property="labelSobre" destination="tQI-O5-qK8" id="XuD-ct-rSV"/>
                 <outlet property="labelTermos" destination="cQ6-sN-PFz" id="C9u-u6-3um"/>

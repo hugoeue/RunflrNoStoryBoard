@@ -261,11 +261,18 @@ int num = 0;
                     [restaurantesRecomendados addObject:rest];
                     [vazio removeFromParentViewController];
                     [colececaoFavoritos removeFromParentViewController];
+                    
                 }
                 
                 if (restaurantesRecomendados.count>0) {
                     [self ordenarPorPagos:restaurantesRecomendados];
+                    colececaoRecomendados.view.frame = CGRectMake(0, 0, self.viewContainer.frame.size.width, self.viewContainer.frame.size.height);
                     isFavOpen = NO;
+                    
+                    self.viewFavoritos.frame = CGRectMake(0, -40, 320, 40);
+                    [colececaoRecomendados.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
+                    [colececaoRecomendados.collectionView addSubview: self.viewFavoritos];
+
                 }else
                 {
                     // quando vem com 0 restaurantes recomendados
@@ -275,8 +282,13 @@ int num = 0;
                                                   self.viewContainer.frame.size.width,
                                                   self.viewContainer.frame.size.height);
                     vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
+                    vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
+                    vazio.labelMenssagem.text =[Language textForIndex:@"Obter_melhor_Menu_guru"];
+                    vazio.labelDescricao.text = [Language textForIndex:@"Texto_Activa_Geolocalizacao"];
                     [self.viewContainer addSubview:vazio.view];
                     
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
+                     [self.viewContainer addSubview:self.viewFavoritos];
                 }
                 }else
                 {
@@ -289,10 +301,17 @@ int num = 0;
                                                   self.viewContainer.frame.size.width,
                                                   self.viewContainer.frame.size.height);
                     vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
+                    vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
+                    vazio.labelMenssagem.text =[Language textForIndex:@"Obter_melhor_Menu_guru"];
+                    vazio.labelDescricao.text = [Language textForIndex:@"Texto_Activa_Geolocalizacao"];
                     [self.viewContainer addSubview:vazio.view];
                     [animation.view removeFromSuperview];
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
+                     [self.viewContainer addSubview:self.viewFavoritos];
                     
                 }
+                
+               
  
                 //
                 break;
@@ -371,9 +390,11 @@ int num = 0;
                                                   self.viewContainer.frame.size.height);
                     [self.viewContainer addSubview:vazio.view];
                     vazio.imagem.image = [UIImage imageNamed:@"star-50.png"];
-                    vazio.labelTitulo.text = @"Sem favoritos";
-                    vazio.labelMenssagem.text = @"adicione restaurantes a sua lista de favoritos";
+                    vazio.labelTitulo.text = [Language textForIndex:@"Adicione_Favoritos"];
+                    vazio.labelMenssagem.text =[Language textForIndex:@"Adicionar_lista_favoritos"];
                     vazio.labelDescricao.text = @"";
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
+                    [vazio.view addSubview:self.viewFavoritos];
 
                 }else
                 {
@@ -383,15 +404,20 @@ int num = 0;
                     colececaoFavoritos.locationManager = locationManager;
                 
                     [colececaoFavoritos CarregarRestaurantes:restaurantesRecomendados];
-                // colececaoRecomendados.view.frame = CGRectMake(0, 130, 320, 438);
+                    colececaoFavoritos.view.frame = CGRectMake(0, 0, self.viewContainer.frame.size.width, self.viewContainer.frame.size.height);
                 
                     [self.viewContainer addSubview:colececaoFavoritos.view];
                     [vazio removeFromParentViewController];
                     [colececaoRecomendados removeFromParentViewController];
+                    self.viewFavoritos.frame = CGRectMake(0, -40, 320, 40);
+                    [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
+                    [colececaoFavoritos.collectionView addSubview: self.viewFavoritos];
+
                     
                 }
                  [animation.view removeFromSuperview];
                 
+               
                 
                 break;
             }
@@ -643,6 +669,16 @@ int num = 0;
     {
         [self loadButtonLogin];
     }
+    
+    UIColor *color = [UIColor lightTextColor];
+    self.texfFieldPesquisa.attributedPlaceholder = [[NSAttributedString alloc] initWithString:[Language textForIndex:@"Pesquisar"] attributes:@{NSForegroundColorAttributeName: color}];
+    
+    [self.selectionView setTitle:[Language textForIndex:@"Recomendados"] forSegmentAtIndex:0];
+    [self.selectionView setTitle:[Language textForIndex:@"Favoritos"] forSegmentAtIndex:1];
+    //[vazio.view removeFromSuperview];
+    
+    if(!isFavOpen)
+    [self lerRecomendados];
   
 }
 
@@ -706,10 +742,9 @@ int num = 0;
     
    
     
-    UIColor *color = [UIColor lightTextColor];
-    self.texfFieldPesquisa.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Procure ..." attributes:@{NSForegroundColorAttributeName: color}];
+   
     
-    
+
     
     // Set a default data source for all instances.  Otherwise, you can specify the data source on individual text fields via the autocompleteDataSource property
     
@@ -844,9 +879,14 @@ int num = 0;
                                               self.viewContainer.frame.size.height);
                 
                 vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
+                vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
+                vazio.labelMenssagem.text =[Language textForIndex:@"Obter_melhor_Menu_guru"];
+                vazio.labelDescricao.text = [Language textForIndex:@"Texto_Activa_Geolocalizacao"];
                 [self.viewContainer addSubview:vazio.view];
                 [colececaoRecomendados removeFromParentViewController];
                 [colececaoFavoritos removeFromParentViewController];
+                
+               
                 
                 break;
             }
@@ -1341,5 +1381,40 @@ int num = 0;
     
     [self lerRecomendados];
      [self.viewContainer addSubview:animation.view];
+}
+- (IBAction)clicksegmentControl:(id)sender {
+    
+    if(self.selectionView.selectedSegmentIndex == 0)
+    {
+        [self lerRecomendados];
+        [self.viewContainer addSubview:animation.view];
+
+	}
+    
+	if(self.selectionView.selectedSegmentIndex == 1)
+    {
+        
+        NSLog(@"Tipo de login realisado mainpage click fav%@",[Globals user].loginType);
+        
+        if([[Globals user].loginType isEqualToString:@"facebook"])
+        {
+            [self ChamarFavoritos];
+        }
+        else if([[Globals user].loginType isEqualToString:@"guru"])
+        {
+            [self ChamarFavoritos];
+        }
+        else if (![Globals user]){
+            // tenho de por esta cena no viewdidappear
+            alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+            //  [alert show];
+            
+            [self chamarLogin];
+        }else{
+            [self ChamarFavoritos];
+        }
+
+	}
+    
 }
 @end

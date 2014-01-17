@@ -7,6 +7,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedBack">
             <connections>
+                <outlet property="LabelFacebook" destination="wJb-AK-heK" id="4CW-4V-brp"/>
+                <outlet property="LabelOquePensas" destination="sQ1-ll-gCs" id="oOl-LT-ydc"/>
+                <outlet property="labelClassifica" destination="nmo-Az-pov" id="R5b-g6-sVp"/>
+                <outlet property="labelEmail" destination="B5M-LF-IAN" id="HFk-IA-wAR"/>
+                <outlet property="labelPartilha" destination="pYV-5M-Bcz" id="9n6-S4-zF4"/>
+                <outlet property="labelSMS" destination="Lnh-t0-BgK" id="Wzi-2a-KZb"/>
+                <outlet property="labelTitulo" destination="K3W-uG-Svf" id="F3x-HA-7Yz"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -16,18 +23,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3.png" id="KW7-Eb-hz9">
-                    <rect key="frame" x="0.0" y="20" width="320" height="150"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sobre o menu guru" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K3W-uG-Svf">
-                    <rect key="frame" x="76" y="82" width="183" height="24"/>
+                    <rect key="frame" x="64" y="43" width="183" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rSM-Ac-Qdp">
-                    <rect key="frame" x="10" y="70" width="45" height="45"/>
+                    <rect key="frame" x="10" y="32" width="45" height="45"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" image="retroceder.png">

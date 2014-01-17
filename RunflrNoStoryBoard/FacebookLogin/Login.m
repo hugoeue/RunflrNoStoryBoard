@@ -252,6 +252,12 @@
                     regUser.photo =[result objectForKey:@"imagem"];
                     regUser.loginType = @"guru";
                     
+                    if([[result objectForKey:@"news"] isEqualToString:@"0"])
+                    
+                        regUser.isPublish = NO;
+                    else
+                        regUser.isPublish = YES;
+                    
                     
                     [Globals setUser:regUser];
                     

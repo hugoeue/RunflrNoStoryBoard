@@ -105,7 +105,7 @@
     
     if(result.length == 0)
     {
-        self.labelResultado.text=@"Todos";
+        self.labelResultado.text=[Language textForIndex:@"Todos"];
     }
   
 }

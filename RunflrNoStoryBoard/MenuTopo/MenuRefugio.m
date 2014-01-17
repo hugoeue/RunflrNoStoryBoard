@@ -37,9 +37,10 @@
 
 -(void)carregarLingua
 {
+    self.labelInicio.text = [Language textForIndex:@"Inicio"];
     self.labelDfenicoes.text =[Language textForIndex:@"Definicoes"];
     self.labelLingua.text = [Language textForIndex:@"Idioma"];
-    self.labelMinhaCont.text = [Language textForIndex:@"A_minha_conta"];
+    self.labelMinhaCont.text = [Language textForIndex:@"Minha_conta"];
 }
 
 -(void)viewDidAppear:(BOOL)animated

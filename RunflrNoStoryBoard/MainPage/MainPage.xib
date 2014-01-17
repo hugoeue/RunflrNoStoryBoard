@@ -22,6 +22,7 @@
                 <outlet property="labelRestaurante" destination="ZYU-em-Ogo" id="AHy-T7-S6b"/>
                 <outlet property="labelUsername" destination="nu5-fY-0VX" id="1hQ-5k-Mts"/>
                 <outlet property="scrollView" destination="u65-bH-R86" id="w8d-Io-5n4"/>
+                <outlet property="selectionView" destination="YEM-E2-g4z" id="r8X-Vb-I9h"/>
                 <outlet property="texfFieldPesquisa" destination="QsL-Bs-oj4" id="37N-br-wgb"/>
                 <outlet property="topView" destination="qsb-WA-67H" id="AY5-lD-1Pf"/>
                 <outlet property="uiviewTransparent" destination="ARc-0b-SaH" id="LZo-hk-0tH"/>
@@ -135,7 +136,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="4ya-wn-MWj">
-                            <rect key="frame" x="0.0" y="180" width="320" height="40"/>
+                            <rect key="frame" x="0.0" y="180" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="PX1-DE-s74">
@@ -158,7 +159,7 @@
                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="74j-Ge-1j1">
-                                    <rect key="frame" x="161" y="5" width="159" height="30"/>
+                                    <rect key="frame" x="161" y="7" width="159" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                                     <state key="normal" title="Favoritos">
@@ -169,11 +170,30 @@
                                         <action selector="clickFav:" destination="-1" eventType="touchUpInside" id="4et-Ej-yVu"/>
                                     </connections>
                                 </button>
+                                <view contentMode="scaleToFill" id="Xaw-Db-VE4">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="YEM-E2-g4z">
+                                            <rect key="frame" x="10" y="6" width="300" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Recomendados"/>
+                                                <segment title="Favoritos"/>
+                                            </segments>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <connections>
+                                                <action selector="clicksegmentControl:" destination="-1" eventType="valueChanged" id="YxL-zC-PES"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="slZ-Qr-ULw">
-                            <rect key="frame" x="0.0" y="220" width="320" height="438"/>
+                            <rect key="frame" x="0.0" y="180" width="320" height="478"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
@@ -262,7 +282,7 @@
     </objects>
     <resources>
         <image name="LogoGuru.png" width="285" height="84"/>
-        <image name="QUADRADO SUBMETER.png" width="82" height="82"/>
+        <image name="QUADRADO SUBMETER.png" width="640" height="300"/>
         <image name="Tira_grande.png" width="561" height="7"/>
         <image name="bico_restaurante.png" width="35" height="18"/>
         <image name="fundo_pequeno.png" width="639" height="258"/>

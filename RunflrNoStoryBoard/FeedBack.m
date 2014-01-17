@@ -26,6 +26,18 @@
 
 @implementation FeedBack
 
+-(void)carregarLingua
+{
+    self.labelTitulo.text = [Language textForIndex:@"Feedback"];
+    self.LabelOquePensas.text = [Language textForIndex:@"Diz_que_pensas"];
+    self.labelClassifica.text = [Language textForIndex:@"Classifica_App"];
+    self.labelPartilha.text = [Language textForIndex:@"Partilha_com_amigos"];
+    self.labelSMS.text = [Language textForIndex:@"SMS"];
+    self.labelEmail.text = [Language textForIndex:@"Email"];
+    self.LabelFacebook.text = [Language textForIndex:@"Facebook"];
+    
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,6 +51,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self carregarLingua];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +67,7 @@
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
     if([MFMessageComposeViewController canSendText])
     {
-        controller.body = @"Experimenta a Menu Guru... é altamente";
+        controller.body = [Language textForIndex:@"MsgSMS"];
         controller.recipients = [NSArray arrayWithObjects:@" ", nil];
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:nil];
@@ -79,8 +92,8 @@
  NSArray *toRecipents = [NSArray arrayWithObject:@"menu@uru.come"];
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     mc.mailComposeDelegate = self;
-    [mc setSubject:@"email title"];
-    [mc setMessageBody:@"body" isHTML:NO];
+    [mc setSubject:@""];
+    [mc setMessageBody:@"" isHTML:NO];
     [mc setToRecipients:toRecipents];
     
     // Present mail view controller on screen

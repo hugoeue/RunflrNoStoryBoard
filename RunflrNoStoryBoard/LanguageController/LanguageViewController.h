@@ -33,4 +33,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonMenu;
 
 
+// para as linguas
+@property (weak, nonatomic) IBOutlet UILabel *labelIdioma;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelIngles;
+@property (weak, nonatomic) IBOutlet UILabel *labelFrances;
+@property (weak, nonatomic) IBOutlet UILabel *labelEspanhol;
+@property (weak, nonatomic) IBOutlet UILabel *labelAlemao;
+@property (weak, nonatomic) IBOutlet UILabel *labelItaliano;
+@property (weak, nonatomic) IBOutlet UILabel *labelPortugues;
+
+
 @end

@@ -21,6 +21,7 @@
     WebServiceSender * juntarContas;
     WebServiceSender * newsLetter;
     WebServiceSender * enviarFoto;
+    WebServiceSender * popUpWeb;
     
     NSString * fotobase;
 }
@@ -44,11 +45,42 @@
         [newsLetter cancel];
     if (enviarFoto)
         [enviarFoto cancel];
+    if (popUpWeb)
+        [popUpWeb cancel];
     
     notif = nil;
     juntarContas = nil;
     newsLetter = nil;
     enviarFoto = nil;
+    popUpWeb = nil;
+}
+
+-(void)carregarLingua
+{
+    self.labelConectar.text = [Language textForIndex:@"Conectar_Facebook"];
+    self.labelNewsletter.text = [Language textForIndex:@"Receber_Newsletter"];
+    self.labelMudarFoto.text = [Language textForIndex:@"Mudar_foto"];
+    self.labelMinhaConta.text = [Language textForIndex:@"Minha_conta"];
+    self.labelReceberNotificacoes.text = [Language textForIndex:@"Receber_Notificacoes"];
+   
+}
+
+-(void)popUpWebservice:(NSString *)email
+{
+    if (popUpWeb) {
+        [popUpWeb cancel];
+    }
+    popUpWeb = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_add_newsletter_faceuser.php" method:@"" tag:5];
+    popUpWeb.delegate = self;
+    
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:[Globals user].faceId forKey:@"face_id"];
+    [dict setObject:email forKey:@"email"];
+    
+    [popUpWeb sendDict:dict];
+    
 }
 
 -(void)receberNotifi:(NSString *)recebe
@@ -124,6 +156,43 @@
             {
                 NSLog(@"resultado da newsLetter =>%@", result.description);
                 
+                // quando nao tem um email que funcione
+                if([[result objectForKey:@"res"] isEqualToString:@"ERROFace"])
+                {
+                    
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msgbox"] delegate:self cancelButtonTitle:[result objectForKey:@"botao"] otherButtonTitles:[result objectForKey:@"botaook"], nil];
+                    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+                    alert.tag = 3;
+                    [alert show];
+                }
+                
+                else
+                {
+                    
+                    if([[result objectForKey:@"res"] isEqualToString:@"eliminado com sucesso"])
+                    {
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setObject:@"YES" forKey:@"newsletter"];
+                        [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+                        [Globals user].isPublish = NO;
+                    }
+                    
+                    if([[result objectForKey:@"res"] isEqualToString:@"inserido com sucesso"])
+                    {
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
+                        [defaults setObject:@"NO" forKey:@"newsletter"];
+                        [Globals user].isPublish = YES;
+                    }
+
+                    
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msgbox"] delegate:nil cancelButtonTitle:[result objectForKey:@"botaook"] otherButtonTitles:nil, nil];
+                    
+                    
+                    [alert show];
+                }
+                
+                
                 break;
             }
             case 4:
@@ -144,6 +213,36 @@
                 
                 
                
+                
+                break;
+            }
+            case 5:
+            {
+                NSLog(@"resultado do envio do email para tania =>%@", result.description);
+                
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msgbox"] delegate:nil cancelButtonTitle:[result objectForKey:@"botaook"] otherButtonTitles:nil, nil];
+                
+                
+                [alert show];
+                
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                
+                if([[result objectForKey:@"res"] isEqualToString:@"sucesso"])
+                {
+                    [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
+                    [defaults setObject:@"NO" forKey:@"newsletter"];
+                    [Globals user].isPublish = YES;
+                }else
+                {
+                    [defaults setObject:@"YES" forKey:@"newsletter"];
+                    [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+                    [Globals user].isPublish = NO;
+
+                }
+                
+                [defaults synchronize];
+
+
                 
                 break;
             }
@@ -172,6 +271,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self carregarLingua];
     // Do any additional setup after loading the view from its nib.
     //self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -200,15 +301,15 @@
             [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_no_select.png"]];
         }
     }
-    if(newsletter){
-        if( [newsletter isEqualToString:@"YES"])
+    if([Globals user].isPublish)//{
+        //if( [newsletter isEqualToString:@"YES"])
         {
             [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
         }else
         {
             [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
         }
-    }
+    //}
     
     //[defaults synchronize];
 
@@ -238,13 +339,17 @@
     else
     {
         [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
+        
+        
     }
 
 }
 
 - (void)loadGuruImage
 {
-    [self.buttonLogin setTitle:@"Conectado" forState:UIControlStateNormal];
+    [self.buttonLogin setTitle:[Language textForIndex:@"Conectado"] forState:UIControlStateNormal];
+    
+    
     //self.imgUser.image = [UIImage imageNamed:@"transferir.jpeg"];
     
     
@@ -266,14 +371,14 @@
     self.imgUser.clipsToBounds = YES;
     self.imgUser.layer.borderWidth = 1.0f;
     self.imgUser.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.labelName.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
+    self.labelName.text =[NSString stringWithFormat:@"%@ %@",[Language textForIndex:@"Ola"],[Globals user].name] ;
     //self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
 }
 
 - (void)loadFaceImage
 {
     [self.buttonSelecionarImagem setEnabled:NO];
-    [self.buttonLogin setTitle:@"Conectado" forState:UIControlStateNormal];
+    [self.buttonLogin setTitle:[Language textForIndex:@"Conectado"] forState:UIControlStateNormal];
     NSString *str = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture", [Globals user].faceId];
     
     
@@ -293,7 +398,7 @@
     self.imgUser.layer.borderWidth = 1.0f;
     self.imgUser.layer.borderColor = [UIColor blackColor].CGColor;
    
-    self.labelName.text =[NSString stringWithFormat:@"Olá %@",[Globals user].name] ;
+    self.labelName.text =[NSString stringWithFormat:@"%@ %@",[Language textForIndex:@"Ola"],[Globals user].name] ;
     //self.labelName.font = [UIFont fontWithName:@"DKCrayonCrumble" size:22];
 }
 
@@ -316,18 +421,19 @@
     [defauts synchronize];
     [self.buttonLogin setTitle:@"Login" forState:UIControlStateNormal];
     [Globals setUser:nil];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self.delegate performSelector:@selector(callCenter)];
-    }];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        [self.delegate performSelector:@selector(callCenter)];
+//    }];
 
-    //[self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
     //[self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionNone animated:YES];
+    
     [[DemoRootViewController getInstance] chamarOutroTopo];
 }
 
 - (IBAction)clickLoginLogout:(id)sender {
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"deseja desconectar?" delegate:self cancelButtonTitle:@"nao" otherButtonTitles:@"sim", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Language textForIndex:@"Logout_titulo"] message:[Language textForIndex:@"Logout_descricao"] delegate:self cancelButtonTitle:[Language textForIndex:@"Nao"] otherButtonTitles:[Language textForIndex:@"Sim"], nil];
     alert.tag = 1;
     [alert show];
     
@@ -362,12 +468,22 @@
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
             [self presentViewController:picker animated:YES completion:nil];
         }
-        
-        
-        
-        
-        
+    }else if(alertView.tag == 3)
+    {
+        if(buttonIndex == 0)//cancelar
+        {
+            //nao faz nada
+        }
+        else if(buttonIndex == 1)//galeria
+        {
+            // aqui tem de chamar outro webservice que manda o email
+            //[alertView textFieldAtIndex:0] text];
+            //NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
+            
+            [self popUpWebservice:[[alertView textFieldAtIndex:0] text]];
+        }
     }
+    
 }
 
 
@@ -445,24 +561,7 @@
     [defaults synchronize];
 }
 
-- (IBAction)clickReceberNewsletter:(id)sender {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString* newsletter = [defaults objectForKey:@"newsletter"];
-    if(newsletter && [newsletter isEqualToString:@"YES"])
-    {
-        // muda a imagem do boneco
-        // muda os defaults para outra cena
-        [defaults setObject:@"NO" forKey:@"newsletter"];
-        [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
-    }else{
-        //botao_no_select
-        [defaults setObject:@"YES" forKey:@"newsletter"];
-        [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
-    }
-    [defaults synchronize];
 
-}
 - (IBAction)clickBuscarImagem:(id)sender {
     picker = [[UIImagePickerController alloc] init];
     
@@ -475,7 +574,7 @@
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Escolha uma foto" message:@"" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Galeria",@"Camera", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[Language textForIndex:@"Escolha_uma_foto"] message:@"" delegate:self cancelButtonTitle:[Language textForIndex:@"Cancel_imagem"] otherButtonTitles:[Language textForIndex:@"Galeria"],[Language textForIndex:@"Camera"], nil];
         alert.tag = 2;
         [alert show];
         
@@ -626,12 +725,34 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     newsLetter = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_add_rem_news.php" method:@"" tag:3];
     newsLetter.delegate = self;
    
+    NSString * publica;
+    if([Globals user].isPublish)
+        publica = @"0";
+    else
+        publica = @"1";
+    
+  
+    
+    
+    
     
     NSMutableDictionary * dict = [NSMutableDictionary new];
-    [dict setObject:[Globals user].email forKey:@"email"];
-    [dict setObject:@"1" forKey:@"favSend"];
     
+    [dict setObject:publica forKey:@"favSend"];
+
     
+    if([Globals user].faceId)
+    {
+     
+        [dict setObject: [Globals user].faceId forKey:@"user_face"];
+        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+    }else
+    {
+        
+        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"user_face"];
+        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+    }
+
     
     [newsLetter sendDict:dict];
 }

@@ -15,7 +15,12 @@
                 <outlet property="buttonMenu" destination="Ls9-qs-UKf" id="vmI-X1-vx9"/>
                 <outlet property="buttonSelecionarImagem" destination="IAB-Uq-Oxa" id="0rJ-vh-M7K"/>
                 <outlet property="imgUser" destination="sTX-zM-iqY" id="DOG-Qx-jg1"/>
+                <outlet property="labelConectar" destination="6HN-Ze-OUg" id="Gen-Ef-sc1"/>
+                <outlet property="labelMinhaConta" destination="r3M-8E-Wey" id="SCe-Wf-aos"/>
+                <outlet property="labelMudarFoto" destination="jo7-bS-iWK" id="aE7-bU-BC4"/>
                 <outlet property="labelName" destination="VtI-mB-SUE" id="3bJ-Bp-ZAG"/>
+                <outlet property="labelNewsletter" destination="gxc-RJ-8N1" id="pBy-Rl-434"/>
+                <outlet property="labelReceberNotificacoes" destination="qOS-ZR-klN" id="fI3-Mk-hr1"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="viewPretaGrande" destination="xI1-sA-OFR" id="Y5N-Ts-aNK"/>
             </connections>
@@ -144,7 +149,6 @@
                             </state>
                             <connections>
                                 <action selector="clickNewsLetter:" destination="-1" eventType="touchUpInside" id="0LV-Jf-JjX"/>
-                                <action selector="clickReceberNewsletter:" destination="-1" eventType="touchUpInside" id="Ie9-sP-dgg"/>
                             </connections>
                         </button>
                     </subviews>

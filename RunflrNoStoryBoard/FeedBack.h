@@ -14,4 +14,14 @@
 - (IBAction)clickSMS:(id)sender;
 - (IBAction)clickDisnosOQuePensas:(id)sender;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *labelTitulo;
+@property (weak, nonatomic) IBOutlet UILabel *LabelOquePensas;
+@property (weak, nonatomic) IBOutlet UILabel *labelClassifica;
+@property (weak, nonatomic) IBOutlet UILabel *labelPartilha;
+@property (weak, nonatomic) IBOutlet UILabel *labelSMS;
+@property (weak, nonatomic) IBOutlet UILabel *LabelFacebook;
+@property (weak, nonatomic) IBOutlet UILabel *labelEmail;
+
+
 @end

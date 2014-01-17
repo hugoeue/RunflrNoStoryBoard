@@ -14,6 +14,13 @@
                 <outlet property="imgFR" destination="rUn-M7-Lcm" id="keT-3H-1gq"/>
                 <outlet property="imgIT" destination="8sS-he-uSg" id="dQW-ht-8B0"/>
                 <outlet property="imgPT" destination="IWM-qp-38N" id="XgW-VC-fjk"/>
+                <outlet property="labelAlemao" destination="MMm-Ld-up1" id="vd6-xa-WRc"/>
+                <outlet property="labelEspanhol" destination="kJG-xR-pDr" id="6Ot-EQ-xvO"/>
+                <outlet property="labelFrances" destination="TpX-dd-8im" id="k9q-d1-b4y"/>
+                <outlet property="labelIdioma" destination="1Wa-C5-dHO" id="K37-SP-cd4"/>
+                <outlet property="labelIngles" destination="RNx-Iy-aF5" id="5Cl-zs-gZZ"/>
+                <outlet property="labelItaliano" destination="pTU-Ju-bVf" id="ZvV-SR-QKd"/>
+                <outlet property="labelPortugues" destination="C0O-Lt-RnG" id="xue-MU-djR"/>
                 <outlet property="scrollview" destination="QUo-hQ-i82" id="NRT-IJ-Aof"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="viewPretaGrande" destination="O6t-rG-BuJ" id="0sa-0y-SaO"/>
@@ -34,7 +41,7 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Idioma" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Wa-C5-dHO">
-                            <rect key="frame" x="65" y="41" width="183" height="21"/>
+                            <rect key="frame" x="65" y="36" width="183" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -208,7 +215,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Português" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C0O-Lt-RnG">
-                                            <rect key="frame" x="19" y="17" width="100" height="21"/>
+                                            <rect key="frame" x="19" y="17" width="126" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="highlightedColor"/>

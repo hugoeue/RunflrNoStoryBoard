@@ -39,6 +39,7 @@
     self.labelPolitica.text =[Language textForIndex:@"Politica_privacidade"];
     self.labelSobre.text =[Language textForIndex:@"Sobre_Menu_Guru"];
     self.labelTermos.text =[Language textForIndex:@"Termos_condicoes"];
+    self.labelFeedBack.text =[Language textForIndex:@"Feedback"];
 }
 
 - (void)didReceiveMemoryWarning

@@ -55,6 +55,7 @@ static DemoRootViewController * demoRoot;
     _menu.delegate = self;
     
     [_topView addSubview:_menu.view];
+    [_menu carregarLingua];
    
 }
 
@@ -261,8 +262,8 @@ static DemoRootViewController * demoRoot;
         UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:[Login new]];
         
         [self presentViewController:nav animated:YES completion:^{
-            [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
-            [_main escurecer];
+            //[self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:nil];
+            //[_main escurecer];
         }];
         
 //        [self.paperFoldView setPaperFoldState:PaperFoldStateDefault animated:YES completion:^{
@@ -303,6 +304,8 @@ static DemoRootViewController * demoRoot;
 -(void)chamarOutroTopo
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [_menu carregarLingua];
     
     if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
     {

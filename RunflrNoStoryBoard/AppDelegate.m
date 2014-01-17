@@ -54,6 +54,14 @@
         regUser.email = [mutableRetrievedDictionary objectForKey:@"email"];
         regUser.loginType = @"guru";
         regUser.photo = [mutableRetrievedDictionary objectForKey:@"imagem"];
+        
+        if([[mutableRetrievedDictionary objectForKey:@"news"] isEqualToString:@"0"])
+            
+            regUser.isPublish = NO;
+        else
+            regUser.isPublish = YES;
+        
+       
         [Globals setUser:regUser];
     }
     

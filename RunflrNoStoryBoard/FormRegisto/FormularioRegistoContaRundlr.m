@@ -103,14 +103,14 @@
                     [alert show];
                     
                     
-                    User *regUser = [User new];
-                    regUser.dbId = [[result objectForKey:@"userid"] integerValue];
-                    regUser.name = [result objectForKey:@"pnome"];
-                    regUser.email = [result objectForKey:@"email"];
-                    regUser.loginType = @"guru";
-                    
-                    
-                    [Globals setUser:regUser];
+//                    User *regUser = [User new];
+//                    regUser.dbId = [[result objectForKey:@"userid"] integerValue];
+//                    regUser.name = [result objectForKey:@"pnome"];
+//                    regUser.email = [result objectForKey:@"email"];
+//                    regUser.loginType = @"guru";
+//                    
+//                    
+//                    [Globals setUser:regUser];
                     
                 }else if([[result objectForKey:@"resp"] isEqualToString:@"INSUCESSO"]){
                     /*
@@ -322,8 +322,8 @@
 {
     
     if (alertView.tag == 1) {
-       // [self.navigationController popToRootViewControllerAnimated:YES];
-        [self.delegate performSelector:@selector(close) withObject:nil];
+        [self.navigationController popViewControllerAnimated:YES];
+       // [self.delegate performSelector:@selector(close) withObject:nil];
     }
     
 }

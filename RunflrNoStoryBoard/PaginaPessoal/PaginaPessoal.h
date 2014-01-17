@@ -46,4 +46,17 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonJuntarContas;
 
+//////////////// para a lingua
+
+@property (weak, nonatomic) IBOutlet UILabel *labelConectar;
+@property (weak, nonatomic) IBOutlet UILabel *labelNewsletter;
+@property (weak, nonatomic) IBOutlet UILabel *labelMudarFoto;
+@property (weak, nonatomic) IBOutlet UILabel *labelMinhaConta;
+@property (weak, nonatomic) IBOutlet UILabel *labelReceberNotificacoes;
+
+
+
+
+
+
 @end

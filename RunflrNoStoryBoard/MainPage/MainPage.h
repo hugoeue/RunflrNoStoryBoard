@@ -74,6 +74,8 @@
 
 -(void)escurecer;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *selectionView;
+- (IBAction)clicksegmentControl:(id)sender;
 
 
 @end
