@@ -10,9 +10,9 @@
 
 @interface Login : UIViewController
 - (IBAction)loginButton:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
+
 - (IBAction)popAnterior:(id)sender;
-- (IBAction)clickLoginRundlr:(id)sender;
+
 - (IBAction)clickRegistoRundlr:(id)sender;
 
 
@@ -23,5 +23,20 @@
 - (IBAction)clickRecuperarPass:(id)sender;
 
 -(void)close;
+
+
+
+// para as traduções
+
+@property (weak, nonatomic) IBOutlet UILabel *labelTitulo;
+@property (weak, nonatomic) IBOutlet UILabel *labelSubTitulo;
+@property (weak, nonatomic) IBOutlet UILabel *labelOu;
+@property (weak, nonatomic) IBOutlet UIButton *buttonIniciar;
+@property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
+@property (weak, nonatomic) IBOutlet UIButton *buttonRegisto;
+@property (weak, nonatomic) IBOutlet UIButton *buttonRecuperar;
+@property (weak, nonatomic) IBOutlet UITextField *fieldEmail;
+@property (weak, nonatomic) IBOutlet UITextField *fieldPass;
+
 
 @end

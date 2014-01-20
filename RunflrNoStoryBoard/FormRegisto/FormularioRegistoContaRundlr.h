@@ -34,5 +34,11 @@
 - (IBAction)clickEnviarForm:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroolView;
+@property (weak, nonatomic) IBOutlet UILabel *labelTitulo;
+
+@property (weak, nonatomic) IBOutlet UILabel *labelTermos;
+
+@property (weak, nonatomic) IBOutlet UIButton *buttonCriarRegisto;
+@property (weak, nonatomic) IBOutlet UIView *viewParaSegment;
 
 @end

@@ -43,5 +43,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelItaliano;
 @property (weak, nonatomic) IBOutlet UILabel *labelPortugues;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
 
 @end

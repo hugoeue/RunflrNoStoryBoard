@@ -233,7 +233,7 @@
                 // Email Content
                 messageBodyCart = [[result objectForKey:@"msgdummy"] objectForKey:@"message"];
                 // To address
-                toRecipents = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
+                toRecipentsCart = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
         
                 
                
@@ -364,9 +364,9 @@
                                                   self.container.frame.size.height-38);
                     [self.container addSubview:vazio.view];
                     vazio.imagem.image = [UIImage imageNamed:@"cry-50.png"];
-                    vazio.labelTitulo.text = @"Sem cartões";
-                    vazio.labelMenssagem.text = @"mostra o teu interesse";
-                    vazio.labelDescricao.text = @"Clica para mostrares o teu interesse";
+                    vazio.labelTitulo.text = [Language textForIndex:@"Procurar_menu_clique_mostre_interesse_titulo"];
+                    vazio.labelMenssagem.text = [Language textForIndex:@"Procurar_menu_clique_mostre_interesse_descr"];
+                    vazio.labelDescricao.text = @"";
                     
                     self.viewButoes.frame = CGRectMake(0, 0, 320, 44);
                     [self.container addSubview:self.viewButoes];
@@ -501,6 +501,16 @@
    
     if(rest.dbId < 0)
     {
+        if (rest.dbId == -1) {
+            messageBodyCart = [NSString stringWithFormat:@"%@ Diaria",messageBodyCart ];
+        }
+        if (rest.dbId == -2) {
+            messageBodyCart = [NSString stringWithFormat:@"%@ Ementa",messageBodyCart ];
+        }
+        if (rest.dbId == -3) {
+            messageBodyCart = [NSString stringWithFormat:@"%@ Especial",messageBodyCart ];
+        }
+        
         [alertCartao show];
     }else
     {
@@ -574,6 +584,18 @@
     [dict setObject:restaurante.name forKey:@"rest_nome"];
     [dict setObject:restaurante.city forKey:@"rest_cidade"];
     //[dict setObject:[Globals user].email forKey:@"email"];
+    
+    
+    
+    if([Globals user].faceId)
+    {
+        [dict setObject: [Globals user].faceId forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+    }else
+    {
+        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
+        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+    }
     
     
     if([[Globals user].loginType isEqualToString:@"facebook"])
@@ -730,10 +752,11 @@
     
     [self.delegate performSelector:@selector(chamarMapa:) withObject:restaurante];
     
-    }
+}
+
 - (IBAction)clickLigar:(id)sender {
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Marcar %d",restaurante.phone ] message:@"" delegate:self cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ %d",[Language textForIndex:@"Marcar"],restaurante.phone ] message:@"" delegate:self cancelButtonTitle:[Language textForIndex:@"Nao"] otherButtonTitles:[Language textForIndex:@"Sim"], nil];
     alert.tag = 4;
     [alert show];
     

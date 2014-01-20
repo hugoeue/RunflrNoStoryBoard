@@ -16,4 +16,7 @@
 @property NSString * titulo;
 @property NSString * conteudo;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
+
+
 @end

@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LanguageViewController">
             <connections>
                 <outlet property="buttonMenu" destination="Shx-IY-ksU" id="P7q-rB-Lwh"/>
+                <outlet property="imagemTopo" destination="C4Q-8T-MX2" id="Lki-xj-OAE"/>
                 <outlet property="imgDE" destination="wDI-ul-UfF" id="Apc-LL-4lz"/>
                 <outlet property="imgEN" destination="X4H-Al-3tR" id="dpZ-pS-bND"/>
                 <outlet property="imgES" destination="ehd-mq-fMd" id="Wpj-9g-9aJ"/>
@@ -36,7 +37,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3.png" id="C4Q-8T-MX2">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="159"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="172"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </imageView>
@@ -48,7 +49,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="QUo-hQ-i82">
-                            <rect key="frame" x="0.0" y="159" width="320" height="409"/>
+                            <rect key="frame" x="0.0" y="172" width="320" height="396"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" id="EFf-95-Cjz">
@@ -256,29 +257,13 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4Ld-jd-NAF">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-            <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-            <state key="normal" title="Fechar">
-                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-            </state>
-            <state key="highlighted">
-                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            </state>
-            <connections>
-                <action selector="closeClick:" destination="-1" eventType="touchUpInside" id="MT6-jH-hMc"/>
-            </connections>
-        </button>
     </objects>
     <resources>
         <image name="3.png" width="640" height="300"/>

@@ -33,16 +33,33 @@
     return self;
 }
 
+-(void)CarregarLingua
+{
+    self.labelTitulo.text = [Language textForIndex:@"Entre_titulo"];
+    self.labelSubTitulo.text = [Language textForIndex:@"Entre_registar"];
+    self.labelOu.text = [Language textForIndex:@"OU"];
+    [self.buttonIniciar setTitle:[Language textForIndex:@"Iniciar_sessao"] forState:UIControlStateNormal];
+    [self.buttonLogin setTitle:[Language textForIndex:@"Login_facebook"] forState:UIControlStateNormal];
+    [self.buttonRegisto setTitle:[Language textForIndex:@"Registar_Menu_Guru"] forState:UIControlStateNormal];
+    [self.buttonRecuperar setTitle:[Language textForIndex:@"Esqueceu_password"] forState:UIControlStateNormal];
+    [self.textFieldemail setPlaceholder:[Language textForIndex:@"Email"]];
+    [self.textFieldPassword setPlaceholder:[Language textForIndex:@"Password"]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self CarregarLingua];
+    
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
     // Do any additional setup after loading the view from its nib.
-    if (![FBSession activeSession].isOpen) {
-        [self.buttonLogin setTitle:@"Login com facebook" forState:UIControlStateNormal];
-    }else
-    {
-        [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
-    }
+//    if (![FBSession activeSession].isOpen) {
+//        [self.buttonLogin setTitle:@"Login com facebook" forState:UIControlStateNormal];
+//    }else
+//    {
+//        [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
+//    }
     self.navigationController.navigationBarHidden = YES;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
@@ -66,6 +83,9 @@
    //[self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     //[[DemoRootViewController getInstance] chamarOutroTopo];
+    
+   
+
     
 }
 
@@ -191,6 +211,12 @@
     webservi.delegate = self;
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
+    
+    if([self.textFieldemail.text length]== 0)
+        self.textFieldemail.text = @"";
+    if([self.textFieldPassword.text length]== 0)
+        self.textFieldPassword.text = @"";
+    
     [dict setObject:self.textFieldemail.text forKey:@"email"];
     [dict setObject:self.textFieldPassword.text forKey:@"password"];
     [dict setObject:[Globals lang] forKey:@"lang"];

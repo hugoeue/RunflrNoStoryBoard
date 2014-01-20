@@ -9,16 +9,18 @@
 #import "FormularioRegistoContaRundlr.h"
 #import "WebServiceSender.h"
 #import "User.h"
+#import "AKSegmentedControl.h"
 
 @interface FormularioRegistoContaRundlr ()
 {
     WebServiceSender * enviaForm;
-
+    AKSegmentedControl *segmentedControl3;
 }
 
 @end
 
 @implementation FormularioRegistoContaRundlr
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +29,25 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)CarregarLingua
+{
+    self.labelTitulo.text = [Language textForIndex:@"Registar_Menu_Guru"];
+    self.textNome.placeholder = [Language textForIndex:@"Primeiro_Nome"];
+    self.textUltimoNome.placeholder = [Language textForIndex:@"Ultimo_Nome"];
+    [self.pickerSexo setTitle:[Language textForIndex:@"Homem"] forSegmentAtIndex:0];
+    [self.pickerSexo setTitle:[Language textForIndex:@"Mulher"] forSegmentAtIndex:1];
+    self.textCidade.placeholder = [Language textForIndex:@"Cidade"];
+    [self.dataNascimento setTitle:[Language textForIndex:@"Data_Nascimento"] forState:UIControlStateNormal];
+    self.textEmail.placeholder = [Language textForIndex:@"Email_LR"];
+    self.textPassword.placeholder = [Language textForIndex:@"Password"];
+    self.textPassword2.placeholder = [Language textForIndex:@"Repita_password"];
+    self.labelTermos.text = [Language textForIndex:@"Termos_e_condicoes_registar"];
+    [self.buttonCriarRegisto setTitle:[Language textForIndex:@"Criar_Registo"] forState:UIControlStateNormal];
+    
+    
+
 }
 
 -(void)enviarFormulario
@@ -54,14 +75,26 @@
     
     [dict setObject:dateString forKey:@"data_nasc"];
     
+    
+    // este era antigo mas foi alterado para algo mais foleiro
+    
     NSString * sexo;
-    if(self.pickerSexo.selectedSegmentIndex == 0)
+//    if(self.pickerSexo.selectedSegmentIndex == 0)
+//    {
+//        sexo = @"homem";
+//    }else
+//    {
+//        sexo = @"mulher";
+//    }
+
+    if([[segmentedControl3 selectedIndexes] containsIndex:0])
     {
-        sexo = @"homem";
+                sexo = @"homem";
     }else
     {
-        sexo = @"mulher";
+                sexo = @"mulher";
     }
+
     
     NSString * faceID = @"1";
     
@@ -164,15 +197,47 @@
     NSLog(@"%@",checkInDate);
 }
 
+- (void)segmentedViewController:(id)sender
+{
+    AKSegmentedControl *segmentedControl = (AKSegmentedControl *)sender;
+    
+    // na realidade não preciso disto para nada
+   
+    if([[segmentedControl3 selectedIndexes] containsIndex:0])
+    {
+       // sexo = @"homem";
+         NSLog(@"SegmentedControl #3 : Selected Index Homem");
+    }else
+    {
+        //sexo = @"mulher";
+         NSLog(@"SegmentedControl #3 : Selected Index mulher");
+    }
+
+    
+        //NSLog(@"SegmentedControl #3 : Selected Index %@", [segmentedControl selectedIndexes]);
+}
+
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self CarregarLingua];
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.scroolView addGestureRecognizer:singleTap];
   
+    
+    segmentedControl3 = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(0.0,0, 300.0, 37.0)];
+    [segmentedControl3 addTarget:self action:@selector(segmentedViewController:) forControlEvents:UIControlEventValueChanged];
+    [segmentedControl3 setSegmentedControlMode:AKSegmentedControlModeSticky];
+    [segmentedControl3 setSelectedIndexes:[NSIndexSet indexSetWithIndex:0] byExpandingSelection:YES];
+    [segmentedControl3 setSelectedIndexes:[NSIndexSet indexSetWithIndex:2] byExpandingSelection:YES];
+    
+    [segmentedControl3 setSelectedIndex:0];
+    
+    [self setupSegmentedControl3];
     
 //    float sizeOfContent = 700;
 //    UIView *lLast = [self.scroolView.subviews lastObject];
@@ -329,6 +394,66 @@
 }
 
 
+- (void)setupSegmentedControl3
+{
+    [segmentedControl3 removeFromSuperview];
+    
+    UIImage *backgroundImage = [[UIImage imageNamed:@"segmented-bg9.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
+    [segmentedControl3 setBackgroundImage:backgroundImage];
+    [segmentedControl3 setContentEdgeInsets:UIEdgeInsetsMake(2.0, 2.0, 3.0, 2.0)];
+    [segmentedControl3 setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+    
+    //[segmentedControl3 setSeparatorImage:[UIImage imageNamed:@"segmented-separator.png"]];
+    
+    UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"segmented-bg-pressed-left8.png"]
+                                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
+    
+    UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"segmented-bg-pressed-right8.png"]
+                                                  resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
+    
+    // Button 1
+    UIButton *buttonSocial = [[UIButton alloc] init];
+    [buttonSocial setTitle:[Language textForIndex:@"Recomendados"] forState:UIControlStateNormal];
+    [buttonSocial setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[buttonSocial setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[buttonSocial.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [buttonSocial.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Regular" size:15.0]];
+    //[buttonSocial setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    //UIImage *buttonSocialImageNormal = [UIImage imageNamed:@"social-icon.png"];
+    [buttonSocial setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    [buttonSocial setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
+    [buttonSocial setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    [buttonSocial setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [buttonSocial setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    
+    
+    
+    // Button 3
+    UIButton *buttonSettings = [[UIButton alloc] init];
+    
+    [buttonSettings setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[buttonSettings setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[buttonSettings.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [buttonSettings.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Regular" size:15.0]];
+    //[buttonSettings setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    //UIImage *buttonSettingsImageNormal = [UIImage imageNamed:@"settings-icon.png"];
+    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
+    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
+    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedRight forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    [buttonSettings setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [buttonSettings setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    
+    [segmentedControl3 setButtonsArray:@[buttonSocial/*, buttonStar*/, buttonSettings]];
+    [self.viewParaSegment addSubview:segmentedControl3];
+}
+
+
 - (IBAction)clickEnviarForm:(id)sender {
     NSString  *possoenviar = @"";
     
@@ -336,13 +461,16 @@
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
     NSPredicate *emailTest =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     BOOL myStringMatchesRegEx=[emailTest evaluateWithObject:emailid];
+    
+   
+    
     if (!myStringMatchesRegEx ) {
-        possoenviar = @"Email invalido\n";
+        possoenviar = [NSString stringWithFormat:@"%@ \n", [Language textForIndex:@"Email_invalido"]];
     }
     
     if(self.textPassword.text.length <5)
     {
-        possoenviar =[NSString stringWithFormat:@"%@ Password tem de ter no minimo 6 caracteres\n",possoenviar];
+        possoenviar =[NSString stringWithFormat:@"%@ %@\n",possoenviar,[Language textForIndex:@"Minimo_pass"]];
     }
 
     
@@ -350,10 +478,20 @@
     {
         possoenviar =[NSString stringWithFormat:@"%@ Password tem de ser igual",possoenviar];
     }
+    
+    if(self.textNome.text.length ==0 )
+    {
+        
+    }
+
+    
+    
     if (possoenviar.length ==0 )
     {
         [self enviarFormulario];
-    }else{
+    }
+    
+    else{
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:possoenviar delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
     }

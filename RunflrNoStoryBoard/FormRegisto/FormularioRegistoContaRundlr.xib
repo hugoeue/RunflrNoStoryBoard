@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FormularioRegistoContaRundlr">
             <connections>
+                <outlet property="buttonCriarRegisto" destination="zVX-Qb-Yeo" id="6bm-1L-lS6"/>
                 <outlet property="dataNascimento" destination="Fqe-W1-Bb7" id="9gw-nd-2aI"/>
+                <outlet property="labelTermos" destination="l7x-rR-sdl" id="m2m-Jc-cxz"/>
+                <outlet property="labelTitulo" destination="hg5-2e-f79" id="nBf-PA-8VN"/>
                 <outlet property="pickerSexo" destination="qhl-lk-K8x" id="hkc-R7-zP4"/>
                 <outlet property="scroolView" destination="cCl-ax-oOi" id="NCM-5J-jXB"/>
                 <outlet property="textCidade" destination="Gb6-Iu-8cA" id="Ixb-Rs-t7o"/>
@@ -17,6 +20,7 @@
                 <outlet property="textPassword2" destination="RWc-mA-6XE" id="w14-fX-QBw"/>
                 <outlet property="textUltimoNome" destination="2D7-JB-AKq" id="RhQ-xc-ljD"/>
                 <outlet property="view" destination="1" id="3"/>
+                <outlet property="viewParaSegment" destination="Esz-2f-vq7" id="IrS-vh-f3u"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -89,16 +93,6 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                         </textField>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="qhl-lk-K8x">
-                                            <rect key="frame" x="10" y="63" width="300" height="29"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <segments>
-                                                <segment title="Homem"/>
-                                                <segment title="Mulher"/>
-                                            </segments>
-                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </segmentedControl>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zVX-Qb-Yeo">
                                             <rect key="frame" x="10" y="315" width="300" height="28"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -111,6 +105,11 @@
                                                 <action selector="clickEnviarForm:" destination="-1" eventType="touchUpInside" id="YVO-Da-gsh"/>
                                             </connections>
                                         </button>
+                                        <view contentMode="scaleToFill" id="Esz-2f-vq7">
+                                            <rect key="frame" x="10" y="59" width="300" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -146,10 +145,10 @@
                     </subviews>
                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao registar a sua conta está a concordar com               os nossos Termos &amp; Condições e Politica de Privacidade" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l7x-rR-sdl">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao registar a sua conta está a concordar com                   os nossos Termos &amp; Condições e Politica de Privacidade" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l7x-rR-sdl">
                     <rect key="frame" x="17" y="527" width="285" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -157,6 +156,16 @@
             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="qhl-lk-K8x">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="29"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <segments>
+                <segment title="Homem"/>
+                <segment title="Mulher"/>
+            </segments>
+            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+        </segmentedControl>
     </objects>
     <resources>
         <image name="registro.png" width="2504" height="3342"/>

@@ -24,4 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelEmail;
 
 
+- (IBAction)clickClassifica:(id)sender;
+- (IBAction)clickEmailAmigos:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
+
 @end

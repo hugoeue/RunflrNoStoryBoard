@@ -281,6 +281,7 @@
     NSString* notifications = [defaults objectForKey:@"notifications"];
     NSString* newsletter = [defaults objectForKey:@"newsletter"];
     
+    self.imagemTopo.image = [Globals getImagemGenerica];
     
    if([Globals user].faceId )
    {

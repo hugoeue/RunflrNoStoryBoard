@@ -19,6 +19,7 @@
 @implementation AppDelegate{
 
     WebServiceSender * pushNotification;
+    WebServiceSender * imagemDaApp;
 }
 
 @synthesize window = _window;
@@ -31,6 +32,17 @@
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:self.session];
 }
 
+-(void)CarregarImagem
+{
+    imagemDaApp = [[WebServiceSender alloc]initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_imagem_guru.php" method:@"" tag:2];
+    imagemDaApp.delegate = self;
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    
+    
+    [imagemDaApp sendDict:dict];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
    // textar depois para ver se fixe
@@ -40,6 +52,8 @@
 //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
 //    [testObject setObject:@"bar" forKey:@"foo"];
 //    [testObject save];
+    
+    [self CarregarImagem];
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
      (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
@@ -244,6 +258,20 @@
                 NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 [defaults setObject:@"YES" forKey:@"notifications"];
                 [defaults synchronize];
+                
+                break;
+            }
+            case 2:
+            {
+                NSLog(@"resultado da imagem =>%@", result.description);
+                
+                
+                NSData* data = [[NSData alloc] initWithBase64Encoding:[result objectForKey:@"imagem"] ];
+                UIImage* image = [UIImage imageWithData:data];
+                
+                
+                [Globals setImagemGenerica:image];
+                
                 
                 break;
             }

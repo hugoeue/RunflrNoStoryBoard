@@ -52,6 +52,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self carregarLingua];
+    
+    self.imagemTopo.image = [Globals getImagemGenerica];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,6 +102,19 @@
     [self presentViewController:mc animated:YES completion:NULL];
 }
 
+-(void)chamaremailAmigos
+{
+    NSArray *toRecipents = [NSArray arrayWithObject:@" "];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:@""];
+    [mc setMessageBody:[Language textForIndex:@"MsgEmail"] isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     switch (result)
@@ -134,5 +149,16 @@
             NSLog(@"Message sent");
             else
                 NSLog(@"Message failed");
+}
+- (IBAction)clickClassifica:(id)sender {
+    
+    NSString* launchUrl = @"http://www.google.com";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: launchUrl]];
+}
+
+- (IBAction)clickEmailAmigos:(id)sender {
+    
+    [self chamaremailAmigos];
+    
 }
 @end

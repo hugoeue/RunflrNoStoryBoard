@@ -24,12 +24,15 @@
 #import "SemDados.h"
 #import "AnimationController.h"
 #import "DemoRootViewController.h"
+#import "AKSegmentedControl.h"
 
 
 
 @interface MainPage ()
 {
     
+    
+    AKSegmentedControl *segmentedControl3;
     bool showFacebook;
     NSString * tipo;
     
@@ -143,6 +146,105 @@ int num = 0;
     
 }
 
+
+- (void)setupSegmentedControl3
+{
+    [segmentedControl3 removeFromSuperview];
+    
+    UIImage *backgroundImage = [[UIImage imageNamed:@"segmented-bg9.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
+    [segmentedControl3 setBackgroundImage:backgroundImage];
+    [segmentedControl3 setContentEdgeInsets:UIEdgeInsetsMake(2.0, 2.0, 3.0, 2.0)];
+    [segmentedControl3 setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+    
+    //[segmentedControl3 setSeparatorImage:[UIImage imageNamed:@"segmented-separator.png"]];
+    
+    UIImage *buttonBackgroundImagePressedLeft = [[UIImage imageNamed:@"segmented-bg-pressed-left8.png"]
+                                                 resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 4.0, 0.0, 1.0)];
+    
+    UIImage *buttonBackgroundImagePressedRight = [[UIImage imageNamed:@"segmented-bg-pressed-right8.png"]
+                                                  resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 1.0, 0.0, 4.0)];
+    
+    // Button 1
+    UIButton *buttonSocial = [[UIButton alloc] init];
+    [buttonSocial setTitle:[Language textForIndex:@"Recomendados"] forState:UIControlStateNormal];
+    [buttonSocial setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[buttonSocial setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[buttonSocial.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [buttonSocial.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
+    //[buttonSocial setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    //UIImage *buttonSocialImageNormal = [UIImage imageNamed:@"social-icon.png"];
+    [buttonSocial setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    [buttonSocial setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
+    [buttonSocial setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
+
+    [buttonSocial setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [buttonSocial setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+
+    
+ 
+    // Button 3
+    UIButton *buttonSettings = [[UIButton alloc] init];
+    
+    [buttonSettings setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[buttonSettings setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[buttonSettings.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [buttonSettings.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
+    //[buttonSettings setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    //UIImage *buttonSettingsImageNormal = [UIImage imageNamed:@"settings-icon.png"];
+    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateHighlighted];
+    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedRight forState:UIControlStateSelected];
+    [buttonSettings setBackgroundImage:buttonBackgroundImagePressedRight forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    [buttonSettings setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [buttonSettings setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+
+    
+    [segmentedControl3 setButtonsArray:@[buttonSocial/*, buttonStar*/, buttonSettings]];
+    [self.viewFavoritos addSubview:segmentedControl3];
+}
+
+- (void)segmentedViewController:(id)sender
+{
+ 
+    
+    
+    if([[segmentedControl3 selectedIndexes] containsIndex:0])
+    {
+        [self lerRecomendados];
+        [self.viewContainer addSubview:animation.view];
+        
+	}
+    
+	 if([[segmentedControl3 selectedIndexes] containsIndex:1])    {
+        
+        NSLog(@"Tipo de login realisado mainpage click fav%@",[Globals user].loginType);
+        
+        if([[Globals user].loginType isEqualToString:@"facebook"])
+        {
+            [self ChamarFavoritos];
+        }
+        else if([[Globals user].loginType isEqualToString:@"guru"])
+        {
+            [self ChamarFavoritos];
+        }
+        else if (![Globals user]){
+            // tenho de por esta cena no viewdidappear
+            alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+            //  [alert show];
+            
+            [segmentedControl3 setSelectedIndex:0];
+            
+            [self chamarLogin];
+        }else{
+            [self ChamarFavoritos];
+        }
+        
+	}
+
+}
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
@@ -287,7 +389,7 @@ int num = 0;
                     vazio.labelDescricao.text = [Language textForIndex:@"Texto_Activa_Geolocalizacao"];
                     [self.viewContainer addSubview:vazio.view];
                     
-                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
                      [self.viewContainer addSubview:self.viewFavoritos];
                 }
                 }else
@@ -306,7 +408,7 @@ int num = 0;
                     vazio.labelDescricao.text = [Language textForIndex:@"Texto_Activa_Geolocalizacao"];
                     [self.viewContainer addSubview:vazio.view];
                     [animation.view removeFromSuperview];
-                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
                      [self.viewContainer addSubview:self.viewFavoritos];
                     
                 }
@@ -393,7 +495,7 @@ int num = 0;
                     vazio.labelTitulo.text = [Language textForIndex:@"Adicione_Favoritos"];
                     vazio.labelMenssagem.text =[Language textForIndex:@"Adicionar_lista_favoritos"];
                     vazio.labelDescricao.text = @"";
-                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
                     [vazio.view addSubview:self.viewFavoritos];
 
                 }else
@@ -409,7 +511,7 @@ int num = 0;
                     [self.viewContainer addSubview:colececaoFavoritos.view];
                     [vazio removeFromParentViewController];
                     [colececaoRecomendados removeFromParentViewController];
-                    self.viewFavoritos.frame = CGRectMake(0, -40, 320, 40);
+                    self.viewFavoritos.frame = CGRectMake(0, -40, 320, 30);
                     [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
                     [colececaoFavoritos.collectionView addSubview: self.viewFavoritos];
 
@@ -609,10 +711,12 @@ int num = 0;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
    
-     [self.buttonPesquisa setUserInteractionEnabled:YES];
-     self.labelCidade.text =[Language textForIndex:@"Cidade"];
+    [self.buttonPesquisa setUserInteractionEnabled:YES];
+    self.labelCidade.text =[Language textForIndex:@"Cidade"];
     self.labelRestaurante.text =[Language textForIndex:@"Restaurante"];
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
+    
+    [self setupSegmentedControl3];
     
     // tenho de fazer um if para recarregar as cenas na coleçao
     if (isFavOpen)
@@ -713,6 +817,18 @@ int num = 0;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
+    segmentedControl3 = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(10.0,6, 300.0, 37.0)];
+    [segmentedControl3 addTarget:self action:@selector(segmentedViewController:) forControlEvents:UIControlEventValueChanged];
+    [segmentedControl3 setSegmentedControlMode:AKSegmentedControlModeSticky];
+    [segmentedControl3 setSelectedIndexes:[NSIndexSet indexSetWithIndex:0] byExpandingSelection:YES];
+    [segmentedControl3 setSelectedIndexes:[NSIndexSet indexSetWithIndex:2] byExpandingSelection:YES];
+    
+    [segmentedControl3 setSelectedIndex:0];
+    
+    [self setupSegmentedControl3];
+
     
 
     animation = [AnimationController new];
@@ -833,6 +949,8 @@ int num = 0;
         [self.uiviewTransparent setAlpha:alpha];
         [self.labelCidade setAlpha:alpha2];
         [self.labelRestaurante setAlpha:alpha2];
+
+        [self.ImagemMenuGuru setAlpha:1-alpha2];
         
            }];
         
@@ -1044,7 +1162,7 @@ int num = 0;
     self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
     
     [UIView animateWithDuration:0.5 animations:^{
-        [self.imageBico setFrame:CGRectMake(170,
+        [self.imageBico setFrame:CGRectMake(145,
                                             self.imageBico.frame.origin.y,
                                             self.imageBico.frame.size.width,
                                             self.imageBico.frame.size.height
@@ -1068,7 +1186,7 @@ int num = 0;
     
  
         [UIView animateWithDuration:0.5 animations:^{
-            [self.imageBico setFrame:CGRectMake(250,
+            [self.imageBico setFrame:CGRectMake(240,
                                                 self.imageBico.frame.origin.y,
                                                 self.imageBico.frame.size.width,
                                                 self.imageBico.frame.size.height
@@ -1313,7 +1431,7 @@ int num = 0;
     isFavOpen = YES;
     
     [UIView animateWithDuration:0.5 animations:^{
-        [self.viewFavoritos setBackgroundColor:[UIColor darkGrayColor]];
+        //[self.viewFavoritos setBackgroundColor:[UIColor darkGrayColor]];
         [self.viewRecomendamos setBackgroundColor:[UIColor blackColor]];
         [self.viewRecomendamos setFrame:CGRectMake(self.viewRecomendamos.frame.origin.x,
                                                 self.viewRecomendamos.frame.origin.y,
@@ -1370,7 +1488,7 @@ int num = 0;
 
 - (IBAction)clickRecomendados:(id)sender {
     [UIView animateWithDuration:0.5 animations:^{
-        [self.viewFavoritos setBackgroundColor:[UIColor blackColor]];
+        //[self.viewFavoritos setBackgroundColor:[UIColor blackColor]];
         [self.viewRecomendamos setBackgroundColor:[UIColor darkGrayColor]];
         [self.viewRecomendamos setFrame:CGRectMake(self.viewRecomendamos.frame.origin.x,
                                                 self.viewRecomendamos.frame.origin.y,

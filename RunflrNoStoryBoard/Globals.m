@@ -8,6 +8,7 @@
 
 #import "Globals.h"
 
+
 static NSString *_lang = nil;
 
 static NSMutableArray *_newsDay = nil;
@@ -38,8 +39,24 @@ static NSMutableArray *_daySpecials = nil;
 
 static NSMutableArray *_options = nil;
 static NSMutableArray *_cuisines = nil;
+static UIImage *_imagemGenerica = nil;
+
 
 @implementation Globals
+
+
++ (void)setImagemGenerica:(UIImage *)img
+{
+    
+    _imagemGenerica = img;
+}
+
++ (UIImage *)getImagemGenerica
+{
+    return _imagemGenerica;
+}
+
+
 
 + (void)setLang:(NSString *)lang
 {

@@ -50,7 +50,9 @@
     // [self setFontFamily:@"DKCrayonCrumble" forView:self.view andSubViews:YES];
     self.scrollview.contentSize = CGSizeMake(320, 409);
     [self carregarLingua];
+    self.imagemTopo.image = [Globals getImagemGenerica];
 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 -(void)resetBotoes
 {

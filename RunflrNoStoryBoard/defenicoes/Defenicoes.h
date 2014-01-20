@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIView *viewPretaGrande;
 @property (weak, nonatomic) IBOutlet UIButton *buttonMenu;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
 
 @end

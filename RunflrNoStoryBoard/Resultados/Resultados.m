@@ -285,9 +285,15 @@
 
     
     if ([tipo isEqualToString:@"Restaurants"]) {
+        //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_teste2.php" method:@"" tag:1];
         webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:1];
         webResultado.delegate = self;
         
+        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
         
         [dict setObject:result forKey:@"nomeparte"];
         [dict setObject:[Globals lang] forKey:@"lang"];
@@ -296,10 +302,17 @@
     }
     else
     {
+        //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:2];
         webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome2.php" method:@"" tag:2];
         webResultado.delegate = self;
         
    
+        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
+       
         
         
         [dict setObject:result forKey:@"nomeparte"];
@@ -323,6 +336,12 @@
         
         NSMutableDictionary * dict = [NSMutableDictionary new];
         
+        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
+        
         
         [dict setObject:result forKey:@"nomeparte"];
         [dict setObject:[Globals lang] forKey:@"lang"];
@@ -335,6 +354,12 @@
         webResultado.delegate = self;
         
         NSMutableDictionary * dict = [NSMutableDictionary new];
+        
+        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
         
         
         [dict setObject:result forKey:@"nomeparte"];

@@ -7,7 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Login">
             <connections>
+                <outlet property="buttonIniciar" destination="QAX-Bm-rfO" id="nGG-bw-2eI"/>
                 <outlet property="buttonLogin" destination="qep-VU-rOK" id="p08-Ye-ZcG"/>
+                <outlet property="buttonRecuperar" destination="1PF-b8-t7a" id="idq-kb-6wC"/>
+                <outlet property="buttonRegisto" destination="LCb-G7-1ZU" id="vaD-um-K5E"/>
+                <outlet property="fieldEmail" destination="O5v-kW-ZdH" id="eY6-Za-xtL"/>
+                <outlet property="fieldPass" destination="KzV-G3-WIh" id="TxJ-EA-V8j"/>
+                <outlet property="labelOu" destination="W7k-St-c2Q" id="tYT-Ex-0oz"/>
+                <outlet property="labelSubTitulo" destination="Je6-Zd-Xrl" id="HmS-ow-zmx"/>
+                <outlet property="labelTitulo" destination="H5W-Xt-w4a" id="Ept-aS-M5L"/>
                 <outlet property="textFieldPassword" destination="KzV-G3-WIh" id="R01-ry-O9A"/>
                 <outlet property="textFieldemail" destination="O5v-kW-ZdH" id="Plw-5g-VyG"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -100,7 +108,7 @@
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="para ter acesso ao melhor do Menu Guru" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Je6-Zd-Xrl">
                             <rect key="frame" x="64" y="51" width="231" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -136,33 +144,6 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jcK-T5-ITD">
-            <rect key="frame" x="0.0" y="0.0" width="101" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <state key="normal" title="Login Google">
-                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-            </state>
-        </button>
-        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entrar no Menu Guru" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nQz-aT-oJF">
-            <rect key="frame" x="0.0" y="0.0" width="236" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="21"/>
-            <nil key="highlightedColor"/>
-        </label>
-        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ou" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fsk-aD-1po">
-            <rect key="frame" x="0.0" y="0.0" width="20" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="15"/>
-            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-            <nil key="highlightedColor"/>
-        </label>
-        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registe-se" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TZI-pB-KCg">
-            <rect key="frame" x="0.0" y="0.0" width="111" height="21"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-            <nil key="highlightedColor"/>
-        </label>
     </objects>
     <resources>
         <image name="facebook_tira.png" width="600" height="80"/>

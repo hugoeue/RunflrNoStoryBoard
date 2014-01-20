@@ -77,5 +77,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *selectionView;
 - (IBAction)clicksegmentControl:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *ImagemMenuGuru;
+
+
 
 @end

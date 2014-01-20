@@ -105,7 +105,7 @@ langPT = @{
 				@"Desculpe_pesquisa_desc": @"Não conseguimos encontrar nenhum resultado. Por favor tente com outra palavra chave.",
 				
 				//Página de Login|Registo
-				@"Entre_titulo": @"Entre|Registe-se",
+				@"Entre_titulo": @"Entre | Registe-se",
 				@"Entre_registar": @"para ter acesso ao melhor do Menu Guru.",
 				@"Login_facebook": @"Entrar com Facebook",
 				@"OU": @"ou",
@@ -146,7 +146,9 @@ langPT = @{
 				@"Galeria": @"Galeria",
 				@"Camera": @"Camêra",
 				@"Cancel_imagem": @"Cancelar",
-				
+				@"cartao_diaria": @"Menu do dia",
+                @"cartao_ementa": @"Ementa",
+                @"cartao_especial": @"Menus especiais",
                };
 
     langEN = @{
@@ -231,7 +233,7 @@ langPT = @{
 				@"Desculpe_pesquisa_desc": @"There are no results for your search. Please try different keywords.",
 
 				//Página de Login|Registo
-				@"Entre_titulo": @"Log in|Register",
+				@"Entre_titulo": @"Log in | Register",
 				@"Entre_registar": @"to access the best of Menu Guru.",
 				@"Login_facebook": @"Log in with Facebook",
 				@"OU": @"Or",
@@ -272,6 +274,9 @@ langPT = @{
 				@"Galeria": @"Gallery",
 				@"Camera": @"Camera",
 				@"Cancel_imagem": @"Cancel",
+               @"cartao_diaria": @"Daily menu",
+               @"cartao_ementa": @"Menu",
+               @"cartao_especial": @"Special Menus",
                
                };
     
@@ -384,7 +389,7 @@ langPT = @{
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Mostrar interés",
-				@"Procurar_menu_clique_mostre_interesse_descr": @"Este restaurante no proporciona esta información todavía. ¿Le gustaría mostrar su interés?",
+				@"Procurar_menu_clique_mostre_interesse_descr": @"Este restaurante no proporciona esta información. ¿Le gustaría mostrar su interés?",
 				
 				//popups sem net
 				@"Erro_de_ligacao": @"Error de conexión",
@@ -399,6 +404,9 @@ langPT = @{
 				@"Galeria": @"Galería",
 				@"Camera": @"Cámara",
 				@"Cancel_imagem": @"Cancelar",
+               @"cartao_diaria": @"Menu del día",
+               @"cartao_ementa": @"Menú",
+               @"cartao_especial": @"Menús especiales",
 				
                };
     
@@ -438,7 +446,7 @@ langPT = @{
 				//2ª PÁGINA DE REFÚGIO/MINHA CONTA
 				@"Ola": @"Salut",
 				@"Conectado": @"Connecté",
-				@"Receber_Notificacoes": @"recevoir des notifications",
+				@"Receber_Notificacoes": @"Recevoir des notifications",
 				@"Conectar_Facebook": @"Connectez-vous avec Facebook",
 				@"Receber_Newsletter": @"Recevoir la newsletter",
 				@"Mudar_foto": @"Changer votre photo",
@@ -510,7 +518,7 @@ langPT = @{
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Montrer l'intérêt",
-				@"Procurar_menu_clique_mostre_interesse_descr": @"Ce restaurant ne fournit pas ces informations encore. Vous souhaitez montrer votre intérêt?",
+				@"Procurar_menu_clique_mostre_interesse_descr": @"Ce restaurant ne fournit pas ces informations. Souhaitez-vous montrer votre intérêt?",
 				
 				//popups sem net
 				@"Erro_de_ligacao": @"Erreur de connexion",
@@ -525,6 +533,9 @@ langPT = @{
 				@"Galeria": @"Galeria",
 				@"Camera": @"Appareil photographique",
 				@"Cancel_imagem": @"Annuler",
+               @"cartao_diaria": @"Plat du jour",
+               @"cartao_ementa": @"Menu",
+               @"cartao_especial": @"Menus spéciaux",
                };
 
     langIT = @{
@@ -635,7 +646,7 @@ langPT = @{
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Mostrare interesse",
-				@"Procurar_menu_clique_mostre_interesse_descr": @"Questo ristorante non fornisce queste informazioni ancora.",
+				@"Procurar_menu_clique_mostre_interesse_descr": @"Questo ristorante non fornisce queste informazioni. Volete mostrare il vostro interesse?",
 				
 				//popups sem net
 				@"Erro_de_ligacao": @"Errore di connessione",
@@ -650,6 +661,9 @@ langPT = @{
 				@"Galeria": @"Galerie",
 				@"Camera": @"Fotocamera",
 				@"Cancel_imagem": @"Annulla",
+               @"cartao_diaria": @"Menù del giorno",
+               @"cartao_ementa": @"Menu",
+               @"cartao_especial": @"Menus speciales",
                };
     
  
@@ -761,7 +775,7 @@ langPT = @{
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte parte tania no json_m_rest.php
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Zeigen Interesse",
-				@"Procurar_menu_clique_mostre_interesse_descr": @"Dieses Restaurant bietet diese Informationen noch keinen. Möchten Sie Ihr Interesse zu zeigen?",
+				@"Procurar_menu_clique_mostre_interesse_descr": @"Dieses restaurant bietet diese informationen noch keinen. Möchten Sie Ihr interesse zu zeigen?",
 				
 				//popups sem net
 				@"Erro_de_ligacao": @"Verbindungsfehle",
@@ -776,6 +790,9 @@ langPT = @{
 				@"Galeria": @"Galerie",
 				@"Camera": @"Fotografische Kamera",
 				@"Cancel_imagem": @"Abbrechen",
+               @"cartao_diaria": @"Tagesmenü",
+               @"cartao_ementa": @"Menü",
+               @"cartao_especial": @"Menüs spezial",
 				
                };
 

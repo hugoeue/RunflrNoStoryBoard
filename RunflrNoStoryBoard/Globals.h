@@ -13,6 +13,9 @@
 
 @interface Globals : NSObject
 
++ (void)setImagemGenerica:(UIImage *)img;
++ (UIImage *)getImagemGenerica;
+
 + (void)setLang:(NSString *)lang;
 + (NSString *)lang;
 

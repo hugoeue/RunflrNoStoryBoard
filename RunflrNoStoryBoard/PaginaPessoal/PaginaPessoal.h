@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelReceberNotificacoes;
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
 
 
 

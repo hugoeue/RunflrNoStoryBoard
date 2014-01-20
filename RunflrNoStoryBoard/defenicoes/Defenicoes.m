@@ -40,6 +40,10 @@
     self.labelSobre.text =[Language textForIndex:@"Sobre_Menu_Guru"];
     self.labelTermos.text =[Language textForIndex:@"Termos_condicoes"];
     self.labelFeedBack.text =[Language textForIndex:@"Feedback"];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    self.imagemTopo.image = [Globals getImagemGenerica];
 }
 
 - (void)didReceiveMemoryWarning

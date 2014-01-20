@@ -36,6 +36,8 @@
         self.labelTitulo.text = self.titulo;
     
     self.textArea.text = self.conteudo;
+    
+    self.imagemTopo.image = [Globals getImagemGenerica];
         
 }
 
