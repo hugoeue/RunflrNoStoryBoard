@@ -8,6 +8,7 @@
 
 #import "FeedBack.h"
 #import "WebServiceSender.h"
+#import "ShareViewController.h"
 
 @interface FeedBack ()
 {
@@ -161,4 +162,109 @@
     [self chamaremailAmigos];
     
 }
+- (IBAction)clickFacebook:(id)sender {
+    
+    [FBSettings setLoggingBehavior:[NSSet setWithObjects:FBLoggingBehaviorFBRequests, FBLoggingBehaviorFBURLConnections, nil]];
+    
+    
+    
+    [self shareFacebookClicked:self];
+
+}
+
+- (IBAction)shareFacebookClicked:(id)sender
+{
+    if (![FBSession activeSession].isOpen) {
+        [self loginButton:self];
+        return;
+    }
+    
+    
+    ShareViewController *viewController = [[ShareViewController alloc]
+                                           initWithNibName:@"ShareViewController"
+                                           bundle:nil];
+    
+    //    if ([Globals restaurant].images.count > 0) {
+    //        NSString *imagePath = [[Globals restaurant].images objectAtIndex:0];
+    //        viewController.imagePath = [NSString stringWithFormat:@"http://cms.citychef.pt%@", imagePath ];
+    //    }
+    
+    viewController.imagePath = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",[Globals getImagemFeedBack]];
+    
+    viewController.restName = [Language textForIndex:@"MsgFace"];
+    viewController.restAddress = @"titulo 2";
+    //viewController.rest = @"titulo 3";
+    
+    //[self presentViewController:viewController animated:YES completion:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+// minhas cenas
+- (IBAction)loginButton:(id)sender
+{
+    if (![FBSession activeSession].isOpen) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        if (appDelegate.session.state != FBSessionStateCreated) {
+            // Create a new, logged out session.
+            appDelegate.session = [[FBSession alloc] init];
+            
+        }
+        [appDelegate.session openWithCompletionHandler:^(FBSession *session,
+                                                         FBSessionState status,
+                                                         NSError *error) {
+            
+            
+            
+            [FBSession setActiveSession:session];
+            [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+                if (!error) {
+                    
+                    [NSThread detachNewThreadSelector:@selector(upUser:) toTarget:self withObject:user];
+                    
+                }
+            }];
+            
+            
+            // [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }else{
+        //[self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
+}
+
+- (void)upUser:(NSDictionary<FBGraphUser> *)user
+{
+    NSString *userId = user.id;
+    NSString *userName = user.name;
+    NSString *userEmail = [user objectForKey:@"email"];
+    
+    NSLog(@"USERID: %@", userId);
+    NSLog(@"USER: %@", userName);
+    NSLog(@"mail: %@", userEmail);
+    
+    if (![Globals user]) {
+        [Globals setUser:[[User alloc] init]];
+    }
+    
+    
+    
+    //             NSLog(@"USER DATA:::%@  -  %@", user.id, user.name);
+    
+    [Globals user].email = [user objectForKey:@"email"];
+    
+    [Globals user].faceId = user.id;
+    [Globals user].name = user.name;
+    if(![Globals user].dbId)
+        [Globals user].loginType = @"facebook";
+    
+    
+//    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    
+}
+
+
 @end

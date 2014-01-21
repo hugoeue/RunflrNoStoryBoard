@@ -40,10 +40,20 @@ static NSMutableArray *_daySpecials = nil;
 static NSMutableArray *_options = nil;
 static NSMutableArray *_cuisines = nil;
 static UIImage *_imagemGenerica = nil;
+static NSString * _imagemParaFeedBack = nil;
 
 
 @implementation Globals
 
++ (void)setImagemFeedBack:(NSString *)img
+{
+    _imagemParaFeedBack = img;
+}
+
++ (NSString *)getImagemFeedBack
+{
+    return _imagemParaFeedBack;
+}
 
 + (void)setImagemGenerica:(UIImage *)img
 {

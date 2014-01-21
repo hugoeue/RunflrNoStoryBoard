@@ -43,6 +43,15 @@
     [imagemDaApp sendDict:dict];
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag ==1) {
+         exit(0);
+    }
+    
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions: (NSDictionary *)launchOptions
 {
    // textar depois para ver se fixe
@@ -53,6 +62,21 @@
 //    [testObject setObject:@"bar" forKey:@"foo"];
 //    [testObject save];
     
+    // LANG STUFF
+    [Language createLanguage];
+    
+    if(![Utils connectedToInternet])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[Language textForIndex:@"Erro_de_ligacao"] message:[Language textForIndex:@"Ocorre_erro_internet"] delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        alert.tag = 1;
+        [alert show];
+    }
+
+    
+       
+       
+       
+       
     [self CarregarImagem];
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
@@ -80,9 +104,6 @@
     }
     
     // Override point for customization after application launch.
-    
-    // LANG STUFF
-    [Language createLanguage];
     
     
     NSString *language;
@@ -271,7 +292,7 @@
                 
                 
                 [Globals setImagemGenerica:image];
-                
+                [Globals setImagemFeedBack:[result objectForKey:@"imagemfacebook"]];
                 
                 break;
             }

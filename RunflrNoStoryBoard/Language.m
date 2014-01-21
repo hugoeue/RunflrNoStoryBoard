@@ -128,6 +128,7 @@ langPT = @{
 				@"Repita_password": @"Repita password",
 				@"Criar_Registo": @"Criar Registo",
 				@"Deve_Preencher_todos_campos.": @"Deve preencher todos os campos.",
+                @"password_igual": @"A password não coincide.",
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte parte tania json_m_rest.php
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Mostrar interesse",
@@ -149,6 +150,8 @@ langPT = @{
 				@"cartao_diaria": @"Menu do dia",
                 @"cartao_ementa": @"Ementa",
                 @"cartao_especial": @"Menus especiais",
+               @"erro": @"Erro",
+               
                };
 
     langEN = @{
@@ -256,6 +259,7 @@ langPT = @{
 				@"Repita_password": @"Repeat password",
 				@"Criar_Registo": @"Sign up",
 				@"Deve_Preencher_todos_campos.": @"You must complete all fields.",
+                @"password_igual": @"The password does not match.",
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Show interest",
@@ -277,6 +281,7 @@ langPT = @{
                @"cartao_diaria": @"Daily menu",
                @"cartao_ementa": @"Menu",
                @"cartao_especial": @"Special Menus",
+                @"erro": @"Error",
                
                };
     
@@ -386,6 +391,7 @@ langPT = @{
 				@"Repita_password": @"Repetir contraseña",
 				@"Criar_Registo": @"Registrate",
 				@"Deve_Preencher_todos_campos.": @"Debes completar todos los campos.",
+                @"password_igual": @"La contraseña no coincide.",
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Mostrar interés",
@@ -407,6 +413,7 @@ langPT = @{
                @"cartao_diaria": @"Menu del día",
                @"cartao_ementa": @"Menú",
                @"cartao_especial": @"Menús especiales",
+               @"erro": @"Error",
 				
                };
     
@@ -515,6 +522,7 @@ langPT = @{
 				@"Repita_password": @"Repeter mot de passe",
 				@"Criar_Registo": @"Inscription",
 				@"Deve_Preencher_todos_campos.": @"Vous devez compléter tous les champs.",
+                @"password_igual": @"Le mot de passe ne correspond pas.",
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Montrer l'intérêt",
@@ -536,6 +544,7 @@ langPT = @{
                @"cartao_diaria": @"Plat du jour",
                @"cartao_ementa": @"Menu",
                @"cartao_especial": @"Menus spéciaux",
+                @"erro": @"Erreur",
                };
 
     langIT = @{
@@ -643,6 +652,7 @@ langPT = @{
 				@"Repita_password": @"Ripeti password",
 				@"Criar_Registo": @"Registrazione",
 				@"Deve_Preencher_todos_campos.": @"È necessario compilare tutti i campi.",
+                @"password_igual": @"La password non corrisponde.",
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Mostrare interesse",
@@ -664,6 +674,8 @@ langPT = @{
                @"cartao_diaria": @"Menù del giorno",
                @"cartao_ementa": @"Menu",
                @"cartao_especial": @"Menus speciales",
+                 @"erro": @"Errore",
+               
                };
     
  
@@ -772,6 +784,7 @@ langPT = @{
 				@"Repita_password": @"Passwort wiederholen",
 				@"Criar_Registo": @"Registrieren",
 				@"Deve_Preencher_todos_campos.": @"Bitte alle Felder ausfüllen.",
+                @"password_igual": @"Das Passwort stimmt nicht überein.",
 				
 				//popups menus são sempre iguais qualquer seja o cartão que falte parte tania no json_m_rest.php
 				@"Procurar_menu_clique_mostre_interesse_titulo": @"Zeigen Interesse",
@@ -793,6 +806,7 @@ langPT = @{
                @"cartao_diaria": @"Tagesmenü",
                @"cartao_ementa": @"Menü",
                @"cartao_especial": @"Menüs spezial",
+               @"erro": @"Fehler",
 				
                };
 

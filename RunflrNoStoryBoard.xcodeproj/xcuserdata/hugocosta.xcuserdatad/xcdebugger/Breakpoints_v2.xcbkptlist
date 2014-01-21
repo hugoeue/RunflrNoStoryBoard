@@ -64,16 +64,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RunflrNoStoryBoard/PaginaPessoal/PaginaPessoal.m"
-            timestampString = "411664807.288116"
+            timestampString = "411995613.085225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-sendCompleteWithResult:withError:"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "-receberNotifi:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,29 +83,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/PaginaPessoal/PaginaPessoal.m"
-            timestampString = "411664807.288116"
+            filePath = "RunflrNoStoryBoard/FeedBack.m"
+            timestampString = "411997356.391123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "-sendCompleteWithResult:withError:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RunflrNoStoryBoard/PaginaPessoal/PaginaPessoal.m"
-            timestampString = "411935172.144555"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "757"
-            endingLineNumber = "757"
-            landmarkName = "-clickNewsLetter:"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "-shareFacebookClicked:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

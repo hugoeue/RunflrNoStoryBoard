@@ -135,6 +135,8 @@
     
     self.imagemRestaurante.asynchronous = YES;
     
+    
+    [self.buttonLigar setTitle:[Language textForIndex:@"Ligar"] forState:UIControlStateNormal];
 
    // [self verificaSeguir];
     
@@ -386,7 +388,7 @@
                 if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"inserido com sucesso"]) {
                     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"res"] objectForKey:@"titulo"] message:[[result objectForKey:@"res"] objectForKey:@"msg"] delegate:nil cancelButtonTitle:[[result objectForKey:@"res"] objectForKey:@"botao"] otherButtonTitles:nil, nil];
                     [alert show];
-                    [self.buttonSeguir setTitle:@"Remover dos favoritos" forState:UIControlStateNormal];
+                    [self.buttonSeguir setTitle:[Language textForIndex:@"Remover_favoritos"] forState:UIControlStateNormal];
                     restaurante.fav = 0;
                     [self.buttonSeguir setEnabled:YES];
                     
@@ -404,7 +406,7 @@
                     toRecipents = [NSArray arrayWithObject:[[result objectForKey:@"res"] objectForKey:@"email"]];
                     
                     [alert show];
-                    [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
+                    [self.buttonSeguir setTitle:[Language textForIndex:@"Add_favoritos"] forState:UIControlStateNormal];
                     restaurante.fav = 1;
                     [self.buttonSeguir setEnabled:YES];
                     
@@ -412,7 +414,7 @@
                 
                 if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"eliminado com sucesso"]) {
                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"res"] objectForKey:@"titulo"] message:[[result objectForKey:@"res"] objectForKey:@"msg"] delegate:nil cancelButtonTitle:[[result objectForKey:@"res"] objectForKey:@"botao"] otherButtonTitles:nil, nil];                    [alert show];
-                    [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
+                    [self.buttonSeguir setTitle:[Language textForIndex:@"Add_favoritos"] forState:UIControlStateNormal];
                     restaurante.fav = 1;
                     [self.buttonSeguir setEnabled:YES];
                 }
@@ -428,11 +430,11 @@
                 //res = "inserido com sucesso";
                 
                 if ([[result objectForKey:@"resp"] isEqualToString:@"nao"]) {
-                    [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
+                    [self.buttonSeguir setTitle:[Language textForIndex:@"Add_favoritos"] forState:UIControlStateNormal];
                     restaurante.fav = 1;
                 }else
                 {
-                    [self.buttonSeguir setTitle:@"Remover dos favoritos" forState:UIControlStateNormal];
+                    [self.buttonSeguir setTitle:[Language textForIndex:@"Remover_favoritos"] forState:UIControlStateNormal];
                     restaurante.fav = 0;
                 }
                 
@@ -452,11 +454,11 @@
 -(void)setSeguir:(BOOL) seguir
 {
     if (!seguir) {
-        [self.buttonSeguir setTitle:@"Adicionar favorito" forState:UIControlStateNormal];
+        [self.buttonSeguir setTitle:[Language textForIndex:@"Add_favoritos"] forState:UIControlStateNormal];
         restaurante.fav = 1;
     }else
     {
-        [self.buttonSeguir setTitle:@"Remover dos favoritos" forState:UIControlStateNormal];
+        [self.buttonSeguir setTitle:[Language textForIndex:@"Remover_favoritos"] forState:UIControlStateNormal];
         restaurante.fav = 0;
     }
 

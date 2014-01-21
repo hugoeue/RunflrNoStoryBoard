@@ -114,7 +114,7 @@
         }
     }
 
-    
+    [dict setObject:[Globals lang] forKey:@"lang"];
     
     
     [notif sendDict:dict];
@@ -133,6 +133,10 @@
             case 1:
             {
                 NSLog(@"resultado do envio do token =>%@", result.description);
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msgbox"] delegate:nil cancelButtonTitle:[result objectForKey:@"botaook"] otherButtonTitles:nil, nil];
+                
+                [alert show];
+                 [self.buttonNotificacoes setEnabled:YES];
                 
                 break;
             }
@@ -192,7 +196,8 @@
                     [alert show];
                 }
                 
-                
+                [self.buttonNewsletter setEnabled:YES];
+
                 break;
             }
             case 4:
@@ -543,6 +548,8 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
 
+    [self.buttonNotificacoes setEnabled:NO];
+    
      NSString* notifications = [defaults objectForKey:@"notifications"];
     if(notifications && [notifications isEqualToString:@"YES"])
     {
@@ -726,6 +733,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     newsLetter = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_add_rem_news.php" method:@"" tag:3];
     newsLetter.delegate = self;
    
+    [self.buttonNewsletter setEnabled:NO];
+    
     NSString * publica;
     if([Globals user].isPublish)
         publica = @"0";

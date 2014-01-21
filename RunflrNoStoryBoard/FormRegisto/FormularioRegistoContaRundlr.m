@@ -413,7 +413,7 @@
     
     // Button 1
     UIButton *buttonSocial = [[UIButton alloc] init];
-    [buttonSocial setTitle:[Language textForIndex:@"Recomendados"] forState:UIControlStateNormal];
+    [buttonSocial setTitle:[Language textForIndex:@"Homem"] forState:UIControlStateNormal];
     [buttonSocial setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //[buttonSocial setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //[buttonSocial.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
@@ -434,7 +434,7 @@
     // Button 3
     UIButton *buttonSettings = [[UIButton alloc] init];
     
-    [buttonSettings setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonSettings setTitle:[Language textForIndex:@"Mulher"] forState:UIControlStateNormal];
     [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //[buttonSettings setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //[buttonSettings.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
@@ -476,12 +476,12 @@
     
     if(![self.textPassword.text isEqualToString:self.textPassword2.text])
     {
-        possoenviar =[NSString stringWithFormat:@"%@ Password tem de ser igual",possoenviar];
+        possoenviar =[NSString stringWithFormat:@"%@ %@\n",[Language textForIndex:@"password_igual"],possoenviar];
     }
     
     if(self.textNome.text.length ==0 )
     {
-        
+        possoenviar =[NSString stringWithFormat:@"%@ %@\n",[Language textForIndex:@"Deve_Preencher_todos_campos."],possoenviar];
     }
 
     
@@ -492,7 +492,7 @@
     }
     
     else{
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erro" message:possoenviar delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[Language textForIndex:@"erro"] message:possoenviar delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alert show];
     }
     

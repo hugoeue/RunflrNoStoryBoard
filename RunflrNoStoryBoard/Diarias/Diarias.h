@@ -46,5 +46,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *viewButoes;
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonLigar;
 
 @end

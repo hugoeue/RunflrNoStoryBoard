@@ -198,6 +198,7 @@
 		BA9BB0351859FCE3009ED843 /* FormularioRegistoContaRundlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB0331859FCE3009ED843 /* FormularioRegistoContaRundlr.xib */; };
 		BA9BB03B185A047B009ED843 /* LoginRundlr.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB039185A047B009ED843 /* LoginRundlr.m */; };
 		BA9BB03C185A047B009ED843 /* LoginRundlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB03A185A047B009ED843 /* LoginRundlr.xib */; };
+		BAAEB821188E982A0067382A /* globo.png in Resources */ = {isa = PBXBuildFile; fileRef = BAAEB820188E982A0067382A /* globo.png */; };
 		BADE124E188455E10075B0E9 /* LogoGuru.png in Resources */ = {isa = PBXBuildFile; fileRef = BADE124D188455E10075B0E9 /* LogoGuru.png */; };
 		BADE125018845E230075B0E9 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = BADE124F18845E230075B0E9 /* 3.png */; };
 		BAFADFF01885364A00AD7BEE /* AnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFADFEE1885364A00AD7BEE /* AnimationController.m */; };
@@ -550,6 +551,7 @@
 		BA9BB038185A047B009ED843 /* LoginRundlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRundlr.h; path = NovoLogin/LoginRundlr.h; sourceTree = "<group>"; };
 		BA9BB039185A047B009ED843 /* LoginRundlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginRundlr.m; path = NovoLogin/LoginRundlr.m; sourceTree = "<group>"; };
 		BA9BB03A185A047B009ED843 /* LoginRundlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginRundlr.xib; path = NovoLogin/LoginRundlr.xib; sourceTree = "<group>"; };
+		BAAEB820188E982A0067382A /* globo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = globo.png; sourceTree = "<group>"; };
 		BADE124D188455E10075B0E9 /* LogoGuru.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoGuru.png; sourceTree = "<group>"; };
 		BADE124F18845E230075B0E9 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		BAFADFED1885364A00AD7BEE /* AnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationController.h; path = "Animaçáo/AnimationController.h"; sourceTree = "<group>"; };
@@ -1014,6 +1016,7 @@
 		BA54BBF818510153006446D6 /* imgsFinal */ = {
 			isa = PBXGroup;
 			children = (
+				BAAEB820188E982A0067382A /* globo.png */,
 				BA449C54188DA8D400919A29 /* bico.png */,
 				BA449C35188D89C500919A29 /* ultima do segment */,
 				BA449BC9188D6D8500919A29 /* segment Control */,
@@ -1428,6 +1431,7 @@
 				BA889B4E1859CA7E00C473D3 /* RootViewController.xib in Resources */,
 				BA65F16118623FAC00BF914A /* tira_dividir_ementa_restaurante.png in Resources */,
 				BAFAE0651885380400AD7BEE /* campanula00054.png in Resources */,
+				BAAEB821188E982A0067382A /* globo.png in Resources */,
 				BA65F16518623FAC00BF914A /* trespontos.png in Resources */,
 				BAFAE03F1885380400AD7BEE /* campanula00016.png in Resources */,
 				BA05ABC8187AD01000AA2057 /* SemDados.xib in Resources */,

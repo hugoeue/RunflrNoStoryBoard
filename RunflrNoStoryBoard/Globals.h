@@ -13,6 +13,9 @@
 
 @interface Globals : NSObject
 
++ (void)setImagemFeedBack:(NSString *)img;
++ (NSString *)getImagemFeedBack;
+
 + (void)setImagemGenerica:(UIImage *)img;
 + (UIImage *)getImagemGenerica;
 

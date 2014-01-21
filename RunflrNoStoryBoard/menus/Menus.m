@@ -518,29 +518,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)clickPartilhar:(id)sender {
-    
-    // tenho de verificar se é para twitter ou facebook
-    // usar uma alert daquelas que vem de baixo
 
-    
-    // este funciona mas manda pelas defeniçoes do tlm
-    //[self postImageToFB];
-    
-    // agr estou a  testar outro diferente
     [FBSettings setLoggingBehavior:[NSSet setWithObjects:FBLoggingBehaviorFBRequests, FBLoggingBehaviorFBURLConnections, nil]];
     
-    // nao funcionou
-    //[self postWithText:[NSString stringWithFormat:@"Vejam o cartao %@", restaurante.name] ImageName:@"foto" URL:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString] Caption:@"foto menu" Name:@"the name" andDescription:@"some descriºtion"];
-    
-    // mais outra tentativa
-//    NSURL *imageurl = [NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString]];
-//    
-//    NSData *imagedata = [[NSData alloc]initWithContentsOfURL:imageurl];
-//    
-//    UIImage *image = [UIImage imageWithData: imagedata];
-//    [self postImageToFB:image];
-    
-    // agora com cenas da rundlr
+
     
     [self shareFacebookClicked:self];
 }
@@ -681,6 +662,7 @@
 // cenas da rundlr para postar no facebook
 
 
+
 - (IBAction)shareFacebookClicked:(id)sender
 {
     if (![FBSession activeSession].isOpen) {
@@ -700,13 +682,14 @@
     
     viewController.imagePath = [NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString];
     
-    viewController.restName = restaurante.name;
+    viewController.restName = [NSString stringWithFormat:@"%@ ", restaurante.name];
     viewController.restAddress = restaurante.address;
     viewController.rest = self.verdadeiroRestaurante;
     
     //[self presentViewController:viewController animated:YES completion:nil];
     [self.navigationController pushViewController:viewController animated:YES];
 }
+
 
 // minhas cenas
 - (IBAction)loginButton:(id)sender
@@ -743,6 +726,7 @@
     }
 }
 
+
 - (void)upUser:(NSDictionary<FBGraphUser> *)user
 {
     NSString *userId = user.id;
@@ -765,7 +749,8 @@
     
     [Globals user].faceId = user.id;
     [Globals user].name = user.name;
-    [Globals user].loginType = @"facebook";
+    if(![Globals user].dbId)
+        [Globals user].loginType = @"facebook";
     
     
     [self dismissViewControllerAnimated:YES completion:nil];

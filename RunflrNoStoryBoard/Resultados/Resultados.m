@@ -204,9 +204,9 @@
                                           self.viewContainer.frame.size.height);
             [self.viewContainer addSubview:vazio.view];
             vazio.imagem.image = [UIImage imageNamed:@"cry-50.png"];
-            vazio.labelTitulo.text = @"Não encontrado";
+            vazio.labelTitulo.text = [Language textForIndex:@"Desculpe_pesquisa_titulo"];
             vazio.labelMenssagem.text = @"";
-            vazio.labelDescricao.text = @"Não conseguimos encontrar nenhum resultado, por favor tente com outra palavra chave. ";
+            vazio.labelDescricao.text = [Language textForIndex:@"Desculpe_pesquisa_desc"];
 
 
         }

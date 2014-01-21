@@ -133,7 +133,7 @@ UIAlertViewDelegate>
                        @"picture" : image,
                        @"name" : @"Menu Guru",
                        @"caption" : @"discovering lovely restaurants",
-                       @"description" :[NSString stringWithFormat:@"Acabei de descobrir este menu do %@.\nPodes fazer o download gratuito da Menu Guru aqui:",rest.name]  //[Language textForIndex:@"FaceText"]
+                       @"description" :self.restName  
                        } mutableCopy];
     
     

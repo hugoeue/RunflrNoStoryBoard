@@ -57,7 +57,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonNotificacoes;
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonNewsletter;
 
 
 @end

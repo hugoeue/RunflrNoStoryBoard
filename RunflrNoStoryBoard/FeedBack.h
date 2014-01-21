@@ -29,4 +29,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
 
+- (IBAction)clickFacebook:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *buttonFacebook;
+
+
+
 @end

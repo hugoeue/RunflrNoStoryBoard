@@ -13,6 +13,8 @@
                 <outlet property="buttonJuntarContas" destination="1xG-HN-xsl" id="EfA-A4-VOv"/>
                 <outlet property="buttonLogin" destination="S5p-Q8-gPz" id="2IT-E8-feo"/>
                 <outlet property="buttonMenu" destination="Ls9-qs-UKf" id="vmI-X1-vx9"/>
+                <outlet property="buttonNewsletter" destination="hxF-lU-IX6" id="4qD-CR-YPy"/>
+                <outlet property="buttonNotificacoes" destination="ilP-qQ-kxa" id="RXD-SK-iGQ"/>
                 <outlet property="buttonSelecionarImagem" destination="IAB-Uq-Oxa" id="0rJ-vh-M7K"/>
                 <outlet property="imagemTopo" destination="2O7-Tj-kBk" id="sqv-GI-4xr"/>
                 <outlet property="imgUser" destination="sTX-zM-iqY" id="DOG-Qx-jg1"/>
