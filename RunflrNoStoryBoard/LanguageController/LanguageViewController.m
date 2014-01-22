@@ -52,7 +52,9 @@
     [self carregarLingua];
     self.imagemTopo.image = [Globals getImagemGenerica];
 
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];
+   // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 -(void)resetBotoes
 {

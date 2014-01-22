@@ -41,7 +41,9 @@
     self.labelTermos.text =[Language textForIndex:@"Termos_condicoes"];
     self.labelFeedBack.text =[Language textForIndex:@"Feedback"];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     self.imagemTopo.image = [Globals getImagemGenerica];
 }

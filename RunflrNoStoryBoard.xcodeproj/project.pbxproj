@@ -191,6 +191,10 @@
 		BA93FDC5184D3C3F004001E4 /* RunflrNoStoryBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FDC4184D3C3F004001E4 /* RunflrNoStoryBoardTests.m */; };
 		BA93FDD1184D3CFC004001E4 /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FDCF184D3CFC004001E4 /* MainPage.m */; };
 		BA93FDD2184D3CFC004001E4 /* MainPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA93FDD0184D3CFC004001E4 /* MainPage.xib */; };
+		BA940EA5188FC33E00A615C3 /* botao-mundo.png in Resources */ = {isa = PBXBuildFile; fileRef = BA940EA4188FC33E00A615C3 /* botao-mundo.png */; };
+		BA940EA8188FCA8200A615C3 /* botao_select_branco.png in Resources */ = {isa = PBXBuildFile; fileRef = BA940EA6188FCA8200A615C3 /* botao_select_branco.png */; };
+		BA940EA9188FCA8200A615C3 /* botao_no_select_branco.png in Resources */ = {isa = PBXBuildFile; fileRef = BA940EA7188FCA8200A615C3 /* botao_no_select_branco.png */; };
+		BA940EAB188FCEF000A615C3 /* botao-partilhar.png in Resources */ = {isa = PBXBuildFile; fileRef = BA940EAA188FCEF000A615C3 /* botao-partilhar.png */; };
 		BA9BB0221859CF1D009ED843 /* PaperFoldResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BA9BB0191859CF1D009ED843 /* PaperFoldResources.bundle */; };
 		BA9BB0231859CF1D009ED843 /* PaperFoldSwipeHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB01B1859CF1D009ED843 /* PaperFoldSwipeHintView.m */; };
 		BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9BB02F1859DEBA009ED843 /* DemoRootViewController.m */; };
@@ -540,6 +544,10 @@
 		BA93FDCE184D3CFC004001E4 /* MainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainPage.h; path = MainPage/MainPage.h; sourceTree = "<group>"; };
 		BA93FDCF184D3CFC004001E4 /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainPage.m; path = MainPage/MainPage.m; sourceTree = "<group>"; };
 		BA93FDD0184D3CFC004001E4 /* MainPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainPage.xib; path = MainPage/MainPage.xib; sourceTree = "<group>"; };
+		BA940EA4188FC33E00A615C3 /* botao-mundo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botao-mundo.png"; sourceTree = "<group>"; };
+		BA940EA6188FCA8200A615C3 /* botao_select_branco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_select_branco.png; sourceTree = "<group>"; };
+		BA940EA7188FCA8200A615C3 /* botao_no_select_branco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_no_select_branco.png; sourceTree = "<group>"; };
+		BA940EAA188FCEF000A615C3 /* botao-partilhar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "botao-partilhar.png"; sourceTree = "<group>"; };
 		BA9BB0191859CF1D009ED843 /* PaperFoldResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PaperFoldResources.bundle; sourceTree = "<group>"; };
 		BA9BB01A1859CF1D009ED843 /* PaperFoldSwipeHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldSwipeHintView.h; sourceTree = "<group>"; };
 		BA9BB01B1859CF1D009ED843 /* PaperFoldSwipeHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldSwipeHintView.m; sourceTree = "<group>"; };
@@ -1016,6 +1024,10 @@
 		BA54BBF818510153006446D6 /* imgsFinal */ = {
 			isa = PBXGroup;
 			children = (
+				BA940EAA188FCEF000A615C3 /* botao-partilhar.png */,
+				BA940EA6188FCA8200A615C3 /* botao_select_branco.png */,
+				BA940EA7188FCA8200A615C3 /* botao_no_select_branco.png */,
+				BA940EA4188FC33E00A615C3 /* botao-mundo.png */,
 				BAAEB820188E982A0067382A /* globo.png */,
 				BA449C54188DA8D400919A29 /* bico.png */,
 				BA449C35188D89C500919A29 /* ultima do segment */,
@@ -1447,6 +1459,7 @@
 				BA65F14A18623FAC00BF914A /* login_2.png in Resources */,
 				BA449C4B188D8DAA00919A29 /* segmented-bg-pressed-left8.png in Resources */,
 				BA65F15818623FAC00BF914A /* point_mapa.png in Resources */,
+				BA940EA9188FCA8200A615C3 /* botao_no_select_branco.png in Resources */,
 				BA1AD5F6187C466600B79548 /* compas-25.png in Resources */,
 				BAFAE0631885380400AD7BEE /* campanula00052.png in Resources */,
 				BA05ABD0187B1B7300AA2057 /* cry-50.png in Resources */,
@@ -1500,6 +1513,7 @@
 				BAFAE0311885380400AD7BEE /* campanula00002.png in Resources */,
 				BA9BB0221859CF1D009ED843 /* PaperFoldResources.bundle in Resources */,
 				BAFAE03B1885380400AD7BEE /* campanula00012.png in Resources */,
+				BA940EA8188FCA8200A615C3 /* botao_select_branco.png in Resources */,
 				BA51C6221853BCE80080BD9F /* MenuDoDia.xib in Resources */,
 				BAFAE0381885380400AD7BEE /* campanula00009.png in Resources */,
 				BA51C62E1853D4FC0080BD9F /* MenuGeral.xib in Resources */,
@@ -1527,6 +1541,7 @@
 				BA449C4A188D8DAA00919A29 /* segmented-bg-pressed-left8@2x.png in Resources */,
 				BA53085618709A6C00540691 /* Termos e condiçõesPT.txt in Resources */,
 				BADE124E188455E10075B0E9 /* LogoGuru.png in Resources */,
+				BA940EA5188FC33E00A615C3 /* botao-mundo.png in Resources */,
 				BAFAE0301885380400AD7BEE /* campanula00001.png in Resources */,
 				BA1D88D11878523E006AB77A /* Menus.xib in Resources */,
 				BA449C41188D89D300919A29 /* segmented-bg-pressed-right6.png in Resources */,
@@ -1556,6 +1571,7 @@
 				BA2C6DB91864A94B008F8DF2 /* 120x120.png in Resources */,
 				BAFAE05E1885380400AD7BEE /* campanula00047.png in Resources */,
 				BA449C40188D89D300919A29 /* segmented-bg6.png in Resources */,
+				BA940EAB188FCEF000A615C3 /* botao-partilhar.png in Resources */,
 				BAFAE06A1885380400AD7BEE /* campanula00059.png in Resources */,
 				BAFAE0361885380400AD7BEE /* campanula00007.png in Resources */,
 				BAFAE02F1885380400AD7BEE /* campanula00000.png in Resources */,

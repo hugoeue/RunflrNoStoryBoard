@@ -303,7 +303,9 @@ static DemoRootViewController * demoRoot;
 
 -(void)chamarOutroTopo
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];
+   // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [_menu carregarLingua];
     
@@ -317,7 +319,8 @@ static DemoRootViewController * demoRoot;
 }
 
 -(void)chamarTopo{
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+     [Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [_main escurecer];
     if ([self.paperFoldView state] == PaperFoldStateTopUnfolded)
     {
@@ -325,7 +328,8 @@ static DemoRootViewController * demoRoot;
         [self.paperFoldView setPaperFoldState:PaperFoldStateDefault];
         [_main.buttonPesquisa setUserInteractionEnabled:YES];
         [_main.navigationController popToRootViewControllerAnimated:NO];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+         [Utils mudaBarraParaSeIos7:UIStatusBarStyleDefault];
+        //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
       
     }
     else{
@@ -333,7 +337,8 @@ static DemoRootViewController * demoRoot;
         [self.paperFoldView setPaperFoldState:PaperFoldStateTopUnfolded];
         [_main.buttonPesquisa setUserInteractionEnabled:NO];
         [_menu carregarLingua];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];
+        //[[U[Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];UIStatusBarStyleLightContent];
     }
 }
 

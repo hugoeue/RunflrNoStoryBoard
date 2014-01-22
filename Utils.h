@@ -48,5 +48,7 @@ typedef void (^hasInternetBlock)(BOOL hasInternet);
 +(BOOL)isIphone5;
 +(NSData*)downloadFileFromUrl:(NSString*)url;
 +(NSString *)GetDeviceToken;
++(BOOL)isiOS7;
++(void)mudaBarraParaSeIos7:(UIStatusBarStyle)style;
 
 @end

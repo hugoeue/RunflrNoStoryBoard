@@ -13,6 +13,13 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 @implementation Utils
 
 +(void)asyncImageLoadByName:(NSString*) image toImageView:(UIImageView*)imageView withQuality:(float)quality
@@ -88,9 +95,9 @@
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     //UIGraphicsBeginImageContext(newSize);
     
-    CGSize size = image.size;
+    //CGSize size = image.size;
     
-    float height = (image.size.height / image.size.width) * newSize.width;
+   // float height = (image.size.height / image.size.width) * newSize.width;
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -691,6 +698,27 @@
         return @"";
     else
         return newToken;
+}
+
++(BOOL)isiOS7
+{
+ 
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        // code here
+        return YES;
+    }
+    
+    return NO;
+    
+}
+
++(void)mudaBarraParaSeIos7:(UIStatusBarStyle)style
+{
+    if([self isiOS7])
+    {
+        [[UIApplication sharedApplication] setStatusBarStyle:style];
+    }
 }
 
 

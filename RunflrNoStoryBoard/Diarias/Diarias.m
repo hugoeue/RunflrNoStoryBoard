@@ -32,6 +32,7 @@
     WebServiceSender *webser;
     WebServiceSender *addRemoveFav;
     WebServiceSender *verifica;
+    WebServiceSender *mudarLingua;
 
     MenuDoDia * menuDia;
     MenuGeral * menuG;
@@ -59,8 +60,14 @@
     
     UIAlertView * alertCartao;
     
+  
+    
     AnimationController * animation;
     
+    NSMutableArray * siglas;
+    
+    
+    NSString *linguaDoCartao;
 }
 
 @end
@@ -68,6 +75,24 @@
 @implementation Diarias
 
 @synthesize locationManager;
+
+
+-(void)popUpMudarLingua
+{
+    mudarLingua = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_popup_troca_lingua_cartao.php" method:@"" tag:4];
+    
+    mudarLingua.delegate = self;
+    
+    NSString * restauranteId = [NSString stringWithFormat:@"%d",restaurante.dbId];
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:restauranteId forKey:@"rest_id"];
+    
+    
+    [mudarLingua sendDict:dict];
+    
+}
 
 -(void)dealloc{
     NSLog(@"objecto foi deallocado");
@@ -82,6 +107,10 @@
         [addRemoveFav cancel];
     if (verifica)
         [verifica cancel];
+    if (mudarLingua)
+        [mudarLingua cancel];
+    
+    mudarLingua = nil;
     
     webser = nil;
     addRemoveFav = nil;
@@ -119,6 +148,7 @@
     animation = [AnimationController new];
     
     animation.view.frame = CGRectMake(0, 0, 320,self.container.frame.size.height );
+    [animation.viewFundo setBackgroundColor:[UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:229.0/255.0 alpha:1]];
     
     [self.container addSubview:animation.view];
     
@@ -140,21 +170,23 @@
 
    // [self verificaSeguir];
     
+    [self carregarCartoes:@""];
+    
        
 }
 
 
-
--(void)viewDidAppear:(BOOL)animated
+-(void)carregarCartoes:(NSString *)lingua
 {
-    [self.imagemRestaurante setImageWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString ]]];
+    linguaDoCartao = lingua;
+    
     if(webser)
         [webser cancel];
     webser = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_m_rest.php" method:@"" tag:1];
     webser.delegate = self;
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
-    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:lingua forKey:@"lang"];
     
     NSString * numeroRestaurante = [NSString stringWithFormat:@"%d", restaurante.dbId];
     
@@ -163,7 +195,15 @@
     [dict setObject:numeroRestaurante forKey:@"rest_id"];
     
     [webser sendDict:dict];
+
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.imagemRestaurante setImageWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled/%@",restaurante.featuredImageString ]]];
     
+    //[self carregarCartoes:@"ott"];
     
     ///////////////
     
@@ -226,9 +266,18 @@
             {
                 NSLog(@"resultado da tania para todos os cartoes  %@", result.description);
                 
-
-
-                cartoes = [NSMutableArray new];
+                
+                 diaria = NO;
+                 especial = NO ;
+                 ementa = NO;
+               
+                
+                if(!cartoes)
+                     cartoes = [NSMutableArray new];
+                
+//                [colececaoFavoritos removeFromParentViewController];
+                  [cartoes removeAllObjects];
+//                [vazio removeFromParentViewController];
                 
                 
                 emailTitleCart = [[result objectForKey:@"msgdummy"] objectForKey:@"assunto"];
@@ -301,13 +350,18 @@
                 
                 if(cartoes.count != 0)
                 {
+                    [colececaoFavoritos removeFromParentViewController];
+                    colececaoFavoritos = nil;
+                    
                     if (!colececaoFavoritos){
                
                         colececaoFavoritos = [CollectionGuru new];
+                        
                         colececaoFavoritos.delegate = self;
                         colececaoFavoritos.mostrarGPS = NO;
                 
                         colececaoFavoritos.view.frame = self.container.frame;
+                        
                 
                         [self.view addSubview:colececaoFavoritos.view];
                     }
@@ -322,7 +376,7 @@
                         if (!diaria)
                         {
                             Restaurant * restDummy = [Restaurant new];
-                            restDummy.name = @"Menu Diaria";
+                            restDummy.name = [Language textForIndex:@"menu_dia"];
                             restDummy.dbId = -1;
                             restDummy.cuisinesResultText = @"descriçao Diaria dummy";
                             restDummy.city = @"";
@@ -332,7 +386,7 @@
                         if (!ementa)
                         {
                             Restaurant * restDummy = [Restaurant new];
-                            restDummy.name = @"Ementa";
+                            restDummy.name = [Language textForIndex:@"menu_ementa"];
                             restDummy.dbId = -2;
                             restDummy.cuisinesResultText = @"descriçao Ementa dummy";
                             restDummy.city = @"";
@@ -341,7 +395,7 @@
                         if (!especial)
                         {
                             Restaurant * restDummy = [Restaurant new];
-                            restDummy.name = @"Especial";
+                            restDummy.name = [Language textForIndex:@"menu_especial"];
                             restDummy.dbId = -3;
                             restDummy.cuisinesResultText = @"descriçao Especial dummy";
                             restDummy.city = @"";
@@ -349,6 +403,7 @@
                         }
 
                     }
+                 
                     [colececaoFavoritos CarregarRestaurantes:cartoes];
                     [colececaoFavoritos.collectionView reloadData];
                     
@@ -359,6 +414,13 @@
                 }else
                 {
                     
+                    [colececaoFavoritos removeFromParentViewController];
+                    [colececaoFavoritos.collectionView removeFromSuperview];
+                    colececaoFavoritos = nil;
+
+                    
+                    
+                    
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
                                                   38,
@@ -367,12 +429,13 @@
                     [self.container addSubview:vazio.view];
                     vazio.imagem.image = [UIImage imageNamed:@"cry-50.png"];
                     vazio.labelTitulo.text = [Language textForIndex:@"Procurar_menu_clique_mostre_interesse_titulo"];
-                    vazio.labelMenssagem.text = [Language textForIndex:@"Procurar_menu_clique_mostre_interesse_descr"];
-                    vazio.labelDescricao.text = @"";
+                    vazio.labelMenssagem.text = @"";
+                    vazio.labelDescricao.text =  [Language textForIndex:@"Procurar_menu_clique_mostre_interesse_descr"];
                     
                     self.viewButoes.frame = CGRectMake(0, 0, 320, 44);
                     [self.container addSubview:self.viewButoes];
-                }
+                    
+                                    }
                 
                // self.viewButoes.frame = CGRectMake(0, 0, 320, 44);
                 //self.viewButoes.frame = CGRectMake(0, -44, 320, 44);
@@ -440,15 +503,74 @@
                 
                 break;
             }
+            case 4:
+            {
+                NSLog(@"resultado das linguas para popup %@", result.description);
+               
+                NSMutableArray * arrayLinguas = [NSMutableArray new];
+                
+                siglas = [NSMutableArray new];
+                [siglas removeAllObjects];
+                
+                for (NSMutableDictionary * lingua in [result objectForKey:@"res"]) {
+                    
+                    [arrayLinguas addObject:[lingua objectForKey:@"lingua"]];
+                    [siglas addObject:[lingua objectForKey:@"sigla"]];
+                }
+                
+                
+                
+                //[alert show];
+                
+                NSString * titulo;
+                if (siglas.count <=1) {
+                    titulo = @"Sem traduçoes";
+                    [arrayLinguas removeAllObjects];
+                }
+                else
+                {
+                    titulo = @"Escolha uma lingua";
+                }
+                
+                UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:titulo
+                                                                         delegate:self
+                                                                cancelButtonTitle:nil
+                                                           destructiveButtonTitle:nil
+                                                                otherButtonTitles:nil];
+                
+                
+                
+                // ObjC Fast Enumeration
+                for (NSString *title in arrayLinguas) {
+                    [actionSheet addButtonWithTitle:title];
+                }
+                
+                [actionSheet addButtonWithTitle:@"Cancel"];
+                actionSheet.cancelButtonIndex = [arrayLinguas count];
+                
+                [actionSheet showInView:self.view];
+                
+                break;
+            }
+
                 
         }
     }else
     {
         NSLog(@"error Tanita foofa %@",error);
-        
     }
     
     
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"clicou no indice %d", buttonIndex);
+    
+    if (buttonIndex != [siglas count]) {
+        [self carregarCartoes:[siglas objectAtIndex:buttonIndex]];
+        
+    }
 }
 
 -(void)setSeguir:(BOOL) seguir
@@ -520,6 +642,7 @@
         menu.restaurante = rest;
         menu.restaurante.dbId = restaurante.dbId;
     
+        menu.linguaCartao = linguaDoCartao;
     
         [self.navigationController pushViewController:menu animated:YES];
     }
@@ -765,7 +888,10 @@
    }
 
 
-// cenas da rundlr
 
 
+
+- (IBAction)clickDiarias:(id)sender {
+    [self popUpMudarLingua];
+}
 @end

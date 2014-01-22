@@ -44,7 +44,8 @@ langPT = @{
 			    @"Obter_melhor_Menu_guru": @"para obter o melhor do Menu Guru",
 				@"Texto_Activa_Geolocalizacao": @"Vá a definições, privacidade, serviços de localização e active este serviço para que possamos determinar a sua localização aproximada e sugerir-lhe os menus dos melhores restaurantes perto de si.",
 				@"Adicione_Favoritos": @"Adicione Favoritos",
-				@"Adicionar_lista_favoritos": @"Adicione restaurantes à sua lista de favoritos",
+				@"Adicionar_lista_favoritos": @"para obter o melhor do Menu Guru",
+                @"Adicionar_lista_fundo": @"Pesquise pela cidade ou nome do restaurante. Selecione o restaurante que pretende e adicione-o aos favoritos.",
 				
 				//2ªpagina resultados
 				@"Todos": @"Todos",
@@ -151,6 +152,9 @@ langPT = @{
                 @"cartao_ementa": @"Ementa",
                 @"cartao_especial": @"Menus especiais",
                @"erro": @"Erro",
+               @"menu_dia": @"Menu do dia",
+               @"menu_especial": @"Menus especiais",
+               @"menu_ementa": @"Ementa",
                
                };
 
@@ -175,7 +179,8 @@ langPT = @{
 			    @"Obter_melhor_Menu_guru": @"to get the best of Menu Guru.",
 				@"Texto_Activa_Geolocalizacao": @"Go to settings, privacy, location services and activate this service so we can determine your approximate location and suggest the menus of the best restaurants around you.",
 				@"Adicione_Favoritos": @"Add Favorites",
-				@"Adicionar_lista_favoritos": @"Add restaurants to your favorite's list",
+				@"Adicionar_lista_favoritos": @"to get the best of Menu Guru.",
+               @"Adicionar_lista_fundo": @"Search by city or restaurant's name. Select the restaurant you want and add it to your favorites.",
 				
 				//2ªpagina resultados
 				@"Todos": @"All",
@@ -283,6 +288,10 @@ langPT = @{
                @"cartao_especial": @"Special Menus",
                 @"erro": @"Error",
                
+               @"menu_dia": @"Daily menu",
+               @"menu_especial": @"Menu",
+               @"menu_ementa": @"Ementa",
+               
                };
     
     
@@ -307,7 +316,8 @@ langPT = @{
 			    @"Obter_melhor_Menu_guru": @"para sacar lo mejor de Menú Guru",
 				@"Texto_Activa_Geolocalizacao": @"Ir a ajustes, privacidad, servicios de localización y activar este servicio para que podamos determinar su ubicación aproximada y sugerir los menús de los mejores restaurantes alrededor.",
 				@"Adicione_Favoritos": @"Añadir Favoritos",
-				@"Adicionar_lista_favoritos": @"Añadir a la lista de los restaurantes de su favorito",
+				@"Adicionar_lista_favoritos": @"para sacar lo mejor de Menú Guru",
+                 @"Adicionar_lista_fundo": @"Busque por ciudad o nombre del restaurante. Seleccione el restaurante que desea y añádalo a sus favoritos.",
 				
 				//2ªpagina resultados
 				@"Todos": @"Todos",
@@ -415,6 +425,10 @@ langPT = @{
                @"cartao_especial": @"Menús especiales",
                @"erro": @"Error",
 				
+               @"menu_dia": @"Menu del día",
+               @"menu_especial": @"Menús especiales",
+               @"menu_ementa": @"Menú",
+               
                };
     
     langFR = @{
@@ -437,8 +451,9 @@ langPT = @{
 			    @"Geolocalizacao": @"activer la géolocalisation",
 			    @"Obter_melhor_Menu_guru": @"pour obtenir le meilleur de Menu Guru",
 				@"Texto_Activa_Geolocalizacao": @"Allez dans paramètres, vie privée, les services de localisation et activer ce service afin que nous puissions déterminer votre position approximative et suggèrent les menus des meilleurs restaurants autour de vous.",
-				@"Adicione_Favoritos": @"Ajouter favoris",
-				@"Adicionar_lista_favoritos": @"Ajouter à la liste des restaurants de votre favori",
+				@"Adicione_Favoritos": @"Ajouter Favoris",
+				@"Adicionar_lista_favoritos": @"pour obtenir le meilleur de Menu Guru",
+                 @"Adicionar_lista_fundo": @"Recherche par ville ou nom du restaurant. Sélectionnez le restaurant que vous voulez et ajoutez à vos favoris.",
 				
 				//2ªpagina resultados
 				@"Todos": @"Tout",
@@ -545,6 +560,10 @@ langPT = @{
                @"cartao_ementa": @"Menu",
                @"cartao_especial": @"Menus spéciaux",
                 @"erro": @"Erreur",
+               
+               @"menu_dia": @"Plat du jour",
+               @"menu_especial": @"Menus spéciaux",
+               @"menu_ementa": @"Menu",
                };
 
     langIT = @{
@@ -568,7 +587,8 @@ langPT = @{
 			    @"Obter_melhor_Menu_guru": @"ad avere la meglio di Menu Guru",
 				@"Texto_Activa_Geolocalizacao": @"Andare in impostazioni, privacy, servizi di localizzazione e attivare questo servizio in modo che possiamo determinare la vostra posizione approssimativa e suggerire i menù dei migliori ristoranti intorno a te.",
 				@"Adicione_Favoritos": @"Aggiungi Preferiti",
-				@"Adicionar_lista_favoritos": @"Aggiungi ristoranti alla lista dei tuoi preferiti",
+				@"Adicionar_lista_favoritos": @"ad avere la meglio di Menu Guru",
+                @"Adicionar_lista_fundo": @"Cerchi per città o nome del ristorante. Seleziona il ristorante desiderato e aggiungI ai tuoi preferiti.",
 				
 				//2ªpagina resultados
 				@"Todos": @"Tutti",
@@ -676,6 +696,10 @@ langPT = @{
                @"cartao_especial": @"Menus speciales",
                  @"erro": @"Errore",
                
+               @"menu_dia": @"Menù del giorno",
+               @"menu_especial": @"Menus speciales",
+               @"menu_ementa": @"Menu",
+               
                };
     
  
@@ -699,8 +723,9 @@ langPT = @{
 			    @"Geolocalizacao": @"Geolocation aktivieren",
 			    @"Obter_melhor_Menu_guru": @"um das beste Menü der Guru bekommen",
 				@"Texto_Activa_Geolocalizacao": @"Gehen Sie zu Einstellungen, Privatsphäre, Ortungsdienste und aktivieren Sie diesen Dienst zu, so können wir Ihren ungefähren Standort zu bestimmen und schlagen Sie die Menüs der besten Restaurants um dich herum.",
-				@"Adicione_Favoritos": @"Favoriten hinzufügen",
-				@"Adicionar_lista_favoritos": @"In Restaurants, die Ihrem Lieblingsliste",
+				@"Adicione_Favoritos": @"Favoriten Hinzufügen",
+				@"Adicionar_lista_favoritos": @"um das beste Menü der Guru bekommen",
+               @"Adicionar_lista_fundo": @"Suche nach Stadt oder Restaurants. Wählen Sie das Restaurant, das Sie wollen und zu Ihren Favoriten hinzufügen.",
 				
 				//2ªpagina resultados
 				@"Todos": @"Alle",
@@ -808,6 +833,12 @@ langPT = @{
                @"cartao_especial": @"Menüs spezial",
                @"erro": @"Fehler",
 				
+               @"menu_dia": @"Tagesmenü",
+               @"menu_especial": @"Menüs Spezial",
+               @"menu_ementa": @"Menü",
+
+               
+               
                };
 
 }

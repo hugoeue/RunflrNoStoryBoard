@@ -35,7 +35,7 @@
 
 @implementation Menus
 
-@synthesize restaurante;
+@synthesize restaurante,linguaCartao;
 
 -(void)menuDia
 {
@@ -47,7 +47,7 @@
      NSString * restID = [NSString stringWithFormat:@"%d",restaurante.dbId];
     
     
-    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:linguaCartao forKey:@"lang"];
     [dict setObject:restID forKey:@"rest_id"];
     
     
@@ -77,7 +77,7 @@
     $body['nome_cat_em'];
 */
     
-    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:linguaCartao forKey:@"lang"];
     [dict setObject:restID forKey:@"rest_id"];
     [dict setObject:restaurante.bestChoices forKey:@"nome_cat_em"];
     
@@ -105,7 +105,7 @@
      
      */
     
-    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:linguaCartao forKey:@"lang"];
     [dict setObject:restID forKey:@"rest_id"];
     [dict setObject:restaurante.chef forKey:@"rest_cartao_id"];
     
@@ -344,8 +344,6 @@
     [self.viewPreco addSubview:viewUnderline];
     
     
-  
-    
     items = [[NSMutableArray alloc] init];
     itemsPrice = [[NSMutableArray alloc] init];
     
@@ -375,6 +373,13 @@
 
 #pragma mark -
 #pragma mark UITableView Delegaates
+
+
+// este codigo serve para remover os separadores no fim da tabela
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    // This will create a "invisible" footer
+    return 0.01f;
+}
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -754,7 +759,7 @@
     
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+   // [self.navigationController popToRootViewControllerAnimated:YES];
     
     
 }

@@ -63,12 +63,12 @@
                                             <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Fqe-W1-Bb7">
-                                            <rect key="frame" x="20" y="148" width="280" height="23"/>
+                                            <rect key="frame" x="20" y="151" width="280" height="23"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                             <state key="normal" title="Data de Nascimento">
-                                                <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                <color key="titleColor" red="0.84018255739795922" green="0.84018255739795922" blue="0.84018255739795922" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <connections>
@@ -94,10 +94,10 @@
                                             <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zVX-Qb-Yeo">
-                                            <rect key="frame" x="10" y="315" width="300" height="28"/>
+                                            <rect key="frame" x="10" y="311.5" width="300" height="45"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                                            <state key="normal" title="Criar registo">
+                                            <state key="normal" title="Criar registo" backgroundImage="login_2.png">
                                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -113,6 +113,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="-10" maxX="0.0" maxY="10"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
@@ -146,7 +147,7 @@
                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao registar a sua conta está a concordar com                   os nossos Termos &amp; Condições e Politica de Privacidade" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="l7x-rR-sdl">
-                    <rect key="frame" x="17" y="527" width="285" height="32"/>
+                    <rect key="frame" x="17" y="533" width="285" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="11"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -168,6 +169,7 @@
         </segmentedControl>
     </objects>
     <resources>
+        <image name="login_2.png" width="602" height="81"/>
         <image name="registro.png" width="2504" height="3342"/>
         <image name="retroceder.png" width="82" height="82"/>
     </resources>

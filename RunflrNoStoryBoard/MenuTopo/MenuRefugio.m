@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     
     //[self changeFont:self.view];
@@ -41,6 +42,8 @@
     self.labelDfenicoes.text =[Language textForIndex:@"Definicoes"];
     self.labelLingua.text = [Language textForIndex:@"Idioma"];
     self.labelMinhaCont.text = [Language textForIndex:@"Minha_conta"];
+    
+    [self.view setUserInteractionEnabled:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -72,6 +75,7 @@
 }
 
 - (IBAction)buttonFacebookLogin:(id)sender {
+     [self.view setUserInteractionEnabled:NO];
     
     Login *c = [[Login alloc] init];
     [self.navigationController pushViewController:c animated:YES];
@@ -79,6 +83,7 @@
 }
 
 - (IBAction)buttonLingua:(id)sender {
+     [self.view setUserInteractionEnabled:NO];
 //    LanguageViewController *linguas =[LanguageViewController new];
 //    linguas.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 //    //[self.revealSideViewController presentViewController:linguas animated:YES completion:nil];
@@ -88,6 +93,7 @@
 }
 
 - (IBAction)buttonPaginaPessoal:(id)sender {
+     [self.view setUserInteractionEnabled:NO];
     
 //    if([Globals user]){
 //    
@@ -106,16 +112,20 @@
 }
 
 - (IBAction)clickMenu:(id)sender {
+    [self.view setUserInteractionEnabled:NO];
+
     [self.delegate performSelector:@selector(chamarOutroTopo) ];
 }
 
 
 
 - (IBAction)clickInicio:(id)sender {
+     [self.view setUserInteractionEnabled:NO];
     [self.delegate performSelector:@selector(chamarTopo) withObject:nil];
 }
 
 - (IBAction)clickDefenicoes:(id)sender {
+     [self.view setUserInteractionEnabled:NO];
     [self.delegate performSelector:@selector(chamarDefenicoes) withObject:nil];
 }
 @end

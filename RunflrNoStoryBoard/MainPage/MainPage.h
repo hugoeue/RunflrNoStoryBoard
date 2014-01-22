@@ -79,6 +79,11 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *ImagemMenuGuru;
 
+@property (weak, nonatomic) IBOutlet UILabel *labelTituloPesquisa;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageCidade;
+@property (weak, nonatomic) IBOutlet UIImageView *imageRestaurant;
+
 
 
 @end

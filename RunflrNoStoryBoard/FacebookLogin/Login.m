@@ -51,7 +51,8 @@
     [super viewDidLoad];
     [self CarregarLingua];
     
-     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [Utils mudaBarraParaSeIos7:UIStatusBarStyleDefault];
+     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     // Do any additional setup after loading the view from its nib.
 //    if (![FBSession activeSession].isOpen) {

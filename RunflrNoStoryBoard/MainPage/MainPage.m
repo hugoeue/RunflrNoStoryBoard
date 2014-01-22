@@ -69,7 +69,13 @@ int num = 0;
 @implementation MainPage
 
 
-
+-(void)dealloc
+{
+    colececaoRecomendados.delegate = nil;
+    colececaoRecomendados = nil;
+    colececaoFavoritos.delegate = nil;
+    colececaoFavoritos = nil;
+}
 
 -(void)lerRecomendados
 {
@@ -289,7 +295,7 @@ int num = 0;
                 NSString * lat = [result objectForKey:@"lat"];
                 NSString * lon = [result objectForKey:@"lon"];
                 
-                CLLocation * localOriginal = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
+                //CLLocation * localOriginal = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
                 
                 restaurantesRecomendados = [NSMutableArray new];
                
@@ -321,7 +327,7 @@ int num = 0;
                     }
                     
                     
-                    CLLocation * localRest = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:[longi doubleValue]];
+                    //CLLocation * localRest = [[CLLocation alloc] initWithLatitude:[lati doubleValue] longitude:[longi doubleValue]];
                     
                     
                   
@@ -380,9 +386,9 @@ int num = 0;
                     // quando vem com 0 restaurantes recomendados
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
-                                                  0,
+                                                  30,
                                                   self.viewContainer.frame.size.width,
-                                                  self.viewContainer.frame.size.height);
+                                                  self.viewContainer.frame.size.height-30);
                     vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
                     vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
                     vazio.labelMenssagem.text =[Language textForIndex:@"Obter_melhor_Menu_guru"];
@@ -399,9 +405,9 @@ int num = 0;
                     [colececaoFavoritos removeFromParentViewController];
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
-                                                  0,
+                                                  30,
                                                   self.viewContainer.frame.size.width,
-                                                  self.viewContainer.frame.size.height);
+                                                  self.viewContainer.frame.size.height-30);
                     vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
                     vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
                     vazio.labelMenssagem.text =[Language textForIndex:@"Obter_melhor_Menu_guru"];
@@ -487,14 +493,14 @@ int num = 0;
                 {
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
-                                                  0,
+                                                  30,
                                                   self.viewContainer.frame.size.width,
-                                                  self.viewContainer.frame.size.height);
+                                                  self.viewContainer.frame.size.height-30);
                     [self.viewContainer addSubview:vazio.view];
                     vazio.imagem.image = [UIImage imageNamed:@"star-50.png"];
                     vazio.labelTitulo.text = [Language textForIndex:@"Adicione_Favoritos"];
                     vazio.labelMenssagem.text =[Language textForIndex:@"Adicionar_lista_favoritos"];
-                    vazio.labelDescricao.text = @"";
+                    vazio.labelDescricao.text = [Language textForIndex:@"Adicionar_lista_fundo"];
                     self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
                     [vazio.view addSubview:self.viewFavoritos];
 
@@ -549,7 +555,7 @@ int num = 0;
                 
                 //self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
                 
-                self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
+                self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeRest;
 
                 
                 break;
@@ -580,7 +586,7 @@ int num = 0;
                 
                 //self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
                 
-                self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
+                self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeRest;
             
                 break;
             }
@@ -709,7 +715,9 @@ int num = 0;
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:YES];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
+     [Utils mudaBarraParaSeIos7:UIStatusBarStyleDefault];
+   // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
    
     [self.buttonPesquisa setUserInteractionEnabled:YES];
     self.labelCidade.text =[Language textForIndex:@"Cidade"];
@@ -725,6 +733,9 @@ int num = 0;
     }
     else{
         // senao ainda nao faz nada
+        
+        
+        [self lerRecomendados];
     }
 }
 
@@ -735,6 +746,8 @@ int num = 0;
     [super viewWillDisappear:animated];
     //[self.scrollView setContentOffset: CGPointMake( 0, 90) animated:NO];
      [colececaoFavoritos removeFromParentViewController];
+    
+    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -781,9 +794,7 @@ int num = 0;
     [self.selectionView setTitle:[Language textForIndex:@"Favoritos"] forSegmentAtIndex:1];
     //[vazio.view removeFromSuperview];
     
-    if(!isFavOpen)
-    [self lerRecomendados];
-  
+    
 }
 
 -(void)loadButtonLogin
@@ -849,11 +860,11 @@ int num = 0;
     self.texfFieldPesquisa.delegate = self;
     
     [self.buttonCities setSelected:YES];
-    tipo = @"Cities";
+   
 
     
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+     [Utils mudaBarraParaSeIos7:UIStatusBarStyleDefault];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     
    
@@ -879,6 +890,17 @@ int num = 0;
     
     [self carragarCidades];
     [self carregaRestaurantes];
+    
+    // para ficar selecionada a cidade
+
+    // agora mudou para ser o restaurante selecionado
+    
+    //tipo = @"Cities";
+    tipo = @"Restaurants";
+    
+    [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
+    [self.imageCidade setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
+    
     
     
     [self gps];
@@ -946,9 +968,12 @@ int num = 0;
     }
         
     [UIView animateWithDuration:0.5 animations:^{
+        
+        [self.topView setAlpha:alpha2];
+        
         [self.uiviewTransparent setAlpha:alpha];
-        [self.labelCidade setAlpha:alpha2];
-        [self.labelRestaurante setAlpha:alpha2];
+//        [self.labelCidade setAlpha:alpha2];
+//        [self.labelRestaurante setAlpha:alpha2];
 
         [self.ImagemMenuGuru setAlpha:1-alpha2];
         
@@ -990,11 +1015,17 @@ int num = 0;
                 // can reset this for all apps by going to Settings > General > Reset > Reset Location Warnings.
             case kCLErrorDenied:
             {
+                
+                if(!isFavOpen){
+                
                 vazio = [SemDados new];
                 vazio.view.frame = CGRectMake(0,
-                                              0,
+                                              30,
                                               self.viewContainer.frame.size.width,
-                                              self.viewContainer.frame.size.height);
+                                              self.viewContainer.frame.size.height-30);
+                
+        
+                
                 
                 vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
                 vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
@@ -1003,7 +1034,7 @@ int num = 0;
                 [self.viewContainer addSubview:vazio.view];
                 [colececaoRecomendados removeFromParentViewController];
                 [colececaoFavoritos removeFromParentViewController];
-                
+                }
                
                 
                 break;
@@ -1167,6 +1198,8 @@ int num = 0;
                                             self.imageBico.frame.size.width,
                                             self.imageBico.frame.size.height
                                             )];
+        [self.imageCidade setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
+        [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
         
         
     }];
@@ -1191,6 +1224,9 @@ int num = 0;
                                                 self.imageBico.frame.size.width,
                                                 self.imageBico.frame.size.height
                                                 )];
+            
+            [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
+            [self.imageCidade setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
 
         }];
     
@@ -1291,6 +1327,7 @@ int num = 0;
     }
     else if (![Globals user]){
         // tenho de por esta cena no viewdidappear
+        // esta alert desapareceu
             alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
           //  [alert show];
         
@@ -1359,8 +1396,8 @@ int num = 0;
              [Globals user].name = user.name;
              [Globals user].loginType = @"facebook";
 
-             
-             [self lerRecomendados ];
+             if(!isFavOpen)
+                 [self lerRecomendados];
 
                 }];
     }
@@ -1427,7 +1464,7 @@ int num = 0;
 {
     
     [self.viewContainer addSubview:animation.view];
-    [animation.viewFundo setBackgroundColor:[UIColor blackColor]];
+    [animation.viewFundo setBackgroundColor:[UIColor colorWithRed:229.0/255.0 green:229.0/255.0 blue:229.0/255.0 alpha:1]];
     isFavOpen = YES;
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -1451,7 +1488,7 @@ int num = 0;
     //        $user_id=$body['user_id'];
     //        $face_id=$body['face_id'];
     
-    User * cenas = [Globals user];
+    //User * cenas = [Globals user];
     
     if([Globals user].faceId)
     {

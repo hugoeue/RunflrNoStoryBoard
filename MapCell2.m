@@ -142,7 +142,7 @@
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    UIView *btnView = [anim valueForKey:@"BtnAni"];
+   // UIView *btnView = [anim valueForKey:@"BtnAni"];
     
   /*  if (flag && btnView) {
         CGPoint currentRect = [[btnView.layer presentationLayer]position];

@@ -22,6 +22,7 @@
     WebServiceSender * newsLetter;
     WebServiceSender * enviarFoto;
     WebServiceSender * popUpWeb;
+    WebServiceSender * receboNotific;
     
     NSString * fotobase;
 }
@@ -33,6 +34,8 @@
 @implementation PaginaPessoal
 
 @synthesize picker;
+
+
 
 -(void)dealloc
 {
@@ -53,6 +56,46 @@
     newsLetter = nil;
     enviarFoto = nil;
     popUpWeb = nil;
+}
+
+-(void)receboNotificacoes
+{
+    if (receboNotific) {
+        [receboNotific cancel];
+    }
+    receboNotific = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_get_notificacao_newsletter.php" method:@"" tag:6];
+    receboNotific.delegate = self;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * token = [defaults objectForKey:@"token"];
+
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+   
+   
+    // por causa do simulador
+    if(token != nil)
+        [dict setObject:token forKey:@"not"];
+    else
+        [dict setObject:@"token vindo do simulador" forKey:@"token"];
+    
+    if([[Globals user].loginType isEqualToString:@"facebook"])
+    {
+        //
+        NSString * userID = [NSString stringWithFormat:@"%@",[Globals user].faceId];
+        [dict setObject:userID forKey:@"face_id"];
+    }
+    else if([[Globals user].loginType isEqualToString:@"guru"])
+    {
+        //
+        NSString * userID = [NSString stringWithFormat:@"%d",[Globals user].dbId];
+        [dict setObject:userID forKey:@"user_id"];
+
+    }
+   
+    
+    [receboNotific sendDict:dict];
+
 }
 
 -(void)carregarLingua
@@ -153,6 +196,12 @@
                 }
                 [Globals user].faceId = nil;
                 [Globals user].loginType = @"guru";
+                
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[result objectForKey:@"titulo"] message:[result objectForKey:@"msgbox"] delegate:nil cancelButtonTitle:[result objectForKey:@"butao"] otherButtonTitles:nil, nil];
+                
+                [alert show];
+                
+                
                 [self viewDidLoad];
                 break;
             }
@@ -251,6 +300,30 @@
                 
                 break;
             }
+            case 6:
+            {
+                NSLog(@"resultado dos tokens =>%@", result.description);
+                if([[result objectForKey:@"notificacao"] isEqualToString:@"sim"])
+                {
+                    [self.botaoSelectNoti setImage:[UIImage imageNamed:@"botao_select.png"]];
+                }
+                    
+                if([[result objectForKey:@"news"] isEqualToString:@"sim"])
+                {
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:@"YES" forKey:@"newsletter"];
+                    [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_select.png"]];
+                    [Globals user].isPublish = YES;
+                }else
+                {
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [self.botaoSelectNews setImage:[UIImage imageNamed:@"botao_no_select.png"]];
+                    [defaults setObject:@"NO" forKey:@"newsletter"];
+                    [Globals user].isPublish = NO;
+                }
+                    
+                break;
+            }
                 
                 
         }
@@ -277,14 +350,16 @@
 {
     [super viewDidLoad];
     
+    [self receboNotificacoes];
     [self carregarLingua];
     // Do any additional setup after loading the view from its nib.
     //self.navigationController.navigationBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+     [Utils mudaBarraParaSeIos7:UIStatusBarStyleLightContent];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString* notifications = [defaults objectForKey:@"notifications"];
-    NSString* newsletter = [defaults objectForKey:@"newsletter"];
+   // NSString* newsletter = [defaults objectForKey:@"newsletter"];
     
     self.imagemTopo.image = [Globals getImagemGenerica];
     
@@ -826,7 +901,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [dict setObject:[Globals user].faceId forKey:@"face_id"];
     [dict setObject:userID forKey:@"user_id"];
     
-    
+    [dict setObject:[Globals lang] forKey:@"lang"];
     
     
     [juntarContas sendDict:dict];

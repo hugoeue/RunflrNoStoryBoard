@@ -170,6 +170,45 @@
     
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+  
+    CGFloat ponto = 30;
+    
+    if (textField == self.textNome) {
+        //[textField resignFirstResponder];
+        //[self.textUltimoNome becomeFirstResponder];
+        //[self.scroolView setContentOffset:CGPointMake(0, ponto+30) animated:YES];
+    }
+    else if (textField == self.textUltimoNome) {
+        //[textField resignFirstResponder];
+        //[self.textCidade becomeFirstResponder];
+        //[self.scroolView setContentOffset:CGPointMake(0, ponto+30) animated:YES];
+    }else if (textField == self.textCidade) {
+        //[textField resignFirstResponder];
+        //[self.textEmail becomeFirstResponder];
+        //[self.scroolView setContentOffset:CGPointMake(0, ponto+104) animated:YES];
+        [self.scroolView setContentOffset:CGPointMake(0, ponto+30) animated:YES];
+       // [self checkInAction:self.dataNascimento];
+    }else if (textField == self.textEmail) {
+        //[textField resignFirstResponder];
+        //[self.textPassword becomeFirstResponder];
+        [self.scroolView setContentOffset:CGPointMake(0, ponto+190) animated:YES];
+    }else if (textField == self.textPassword) {
+        //[textField resignFirstResponder];
+        //[self.textPassword2 becomeFirstResponder];
+        [self.scroolView setContentOffset:CGPointMake(0, ponto+190) animated:YES];
+    }else if (textField == self.textPassword2) {
+        //[textField resignFirstResponder];
+        // [self.textPassword2 becomeFirstResponder];
+        [self.scroolView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    
+    
+    
+    return YES;
+}
+
 
 - (IBAction)checkInAction:(UIButton *)sender {
     NSString *title;
@@ -180,6 +219,7 @@
         NSLog(@"%@",title);
         
         [currentBt setTitle:title forState:UIControlStateNormal];
+        
     } else {
         
         [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -288,6 +328,8 @@
 - (void)addDate:(UIBarButtonItem *)_sender {
     
     
+    [self.view becomeFirstResponder];
+    
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect pickerFrame = _dateView.frame;
         pickerFrame.origin.y += 256;
@@ -298,7 +340,7 @@
     df.dateStyle = NSDateFormatterMediumStyle;
     NSString *title = [df stringFromDate:_datePicker.date];
     [currentBt setTitle:title forState:UIControlStateNormal];
-    
+    [currentBt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -316,6 +358,7 @@
     dateUp = NO;
     
     [self handleSingleTap:nil];
+    
     [self.textEmail becomeFirstResponder];
     [self.scroolView setContentOffset:CGPointMake(0, 30+104) animated:YES];
 }

@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelPrecoNovo;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPartilhar;
 
+@property NSString * linguaCartao;
+
 - (IBAction)clickPartilhar:(id)sender;
 
 

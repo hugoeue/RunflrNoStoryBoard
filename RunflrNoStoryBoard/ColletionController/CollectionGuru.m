@@ -533,6 +533,8 @@
 {
     
 int num = 0;
+    [restaurantes removeAllObjects];
+    [self.numbers removeAllObjects];
     
     restaurantes = restaurantesC;
     // para a colecçao

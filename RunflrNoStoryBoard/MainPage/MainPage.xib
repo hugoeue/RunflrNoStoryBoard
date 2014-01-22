@@ -9,18 +9,19 @@
             <connections>
                 <outlet property="ImagemMenuGuru" destination="8xL-z8-79A" id="x2y-TL-qWt"/>
                 <outlet property="buttonCities" destination="iPh-uF-F1k" id="x2l-wQ-CZM"/>
-                <outlet property="buttonGo" destination="J3A-E7-u6s" id="Mbb-qG-MwJ"/>
                 <outlet property="buttonMenu" destination="Pn4-MJ-qOh" id="pAS-ET-9dH"/>
                 <outlet property="buttonPesquisa" destination="QrR-cl-Wne" id="atZ-Sx-aKY"/>
                 <outlet property="buttonRestaurant" destination="Eh7-fS-2fO" id="84G-8U-xYw"/>
                 <outlet property="imageBico" destination="M58-a8-GtC" id="eqy-2P-Ta0"/>
+                <outlet property="imageCidade" destination="lrW-2C-NIh" id="B8c-F6-wst"/>
                 <outlet property="imageFacebook" destination="X80-y5-cCc" id="T7D-3Y-F3Q"/>
                 <outlet property="imageHeader" destination="hCL-7B-pSE" id="Bwe-VT-o4D"/>
+                <outlet property="imageRestaurant" destination="fPv-em-2tj" id="Cnw-P5-8Yw"/>
                 <outlet property="imgSelectcidate" destination="zwz-Hv-omN" id="IRP-DQ-LSJ"/>
                 <outlet property="imgSetectRest" destination="cEi-EJ-kL0" id="qqQ-Pc-y6s"/>
                 <outlet property="labelCidade" destination="B6h-5I-uLU" id="Xbn-xH-iQW"/>
-                <outlet property="labelOsMeusMenus" destination="LH3-t9-ZGn" id="JIh-rR-LZ2"/>
                 <outlet property="labelRestaurante" destination="ZYU-em-Ogo" id="AHy-T7-S6b"/>
+                <outlet property="labelTituloPesquisa" destination="AJZ-b6-72l" id="NXf-1e-BZC"/>
                 <outlet property="labelUsername" destination="nu5-fY-0VX" id="1hQ-5k-Mts"/>
                 <outlet property="scrollView" destination="u65-bH-R86" id="w8d-Io-5n4"/>
                 <outlet property="selectionView" destination="YEM-E2-g4z" id="r8X-Vb-I9h"/>
@@ -39,30 +40,10 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Os meus menus" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LH3-t9-ZGn">
-                    <rect key="frame" x="60" y="501.5" width="200" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="QUADRADO SUBMETER.png" id="X80-y5-cCc">
                     <rect key="frame" x="129.5" y="185.5" width="61" height="61"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J3A-E7-u6s">
-                    <rect key="frame" x="129" y="197" width="61" height="45"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="Login">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="pushNav:" destination="-1" eventType="touchUpInside" id="9zL-wk-MJc"/>
-                    </connections>
-                </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="u65-bH-R86">
                     <rect key="frame" x="0.0" y="-90" width="320" height="658"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,71 +57,6 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="34"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
                         </textField>
-                        <view contentMode="scaleToFill" id="qsb-WA-67H">
-                            <rect key="frame" x="0.0" y="90" width="320" height="90"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QrR-cl-Wne">
-                                    <rect key="frame" x="60" y="31.5" width="45" height="45"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" backgroundImage="on_click_lupa.png">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="clickPesquisa:" destination="-1" eventType="touchUpInside" id="8L8-jm-ej2"/>
-                                    </connections>
-                                </button>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cidade" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B6h-5I-uLU">
-                                    <rect key="frame" x="105" y="42" width="100" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurante" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZYU-em-Ogo">
-                                    <rect key="frame" x="205" y="42" width="100" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="iPh-uF-F1k">
-                                    <rect key="frame" x="118" y="37" width="84" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="ClickCitie:" destination="-1" eventType="touchUpInside" id="Dpn-TG-G2R"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Eh7-fS-2fO">
-                                    <rect key="frame" x="205" y="37" width="109" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <state key="normal">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="ClickRestaurant:" destination="-1" eventType="touchUpInside" id="JPK-lu-JMm"/>
-                                    </connections>
-                                </button>
-                                <view contentMode="scaleToFill" id="oTn-kb-Rfv">
-                                    <rect key="frame" x="0.0" y="-6" width="320" height="6"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bico.png" id="M58-a8-GtC">
-                                    <rect key="frame" x="145" y="-16" width="20" height="10"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
                         <view contentMode="scaleToFill" id="4ya-wn-MWj">
                             <rect key="frame" x="0.0" y="180" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -151,11 +67,16 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
-                        <view alpha="0.0" contentMode="scaleToFill" id="ARc-0b-SaH">
-                            <rect key="frame" x="0.0" y="180" width="320" height="478"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QrR-cl-Wne">
+                            <rect key="frame" x="59" y="122" width="45" height="45"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="on_click_lupa.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="clickPesquisa:" destination="-1" eventType="touchUpInside" id="8L8-jm-ej2"/>
+                            </connections>
+                        </button>
                         <view alpha="0.0" contentMode="scaleToFill" id="gvx-jQ-tEf">
                             <rect key="frame" x="0.0" y="90" width="320" height="568"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -171,10 +92,88 @@
                                 <action selector="pushMenu:" destination="-1" eventType="touchUpInside" id="dw4-q8-8iy"/>
                             </connections>
                         </button>
+                        <view alpha="0.0" contentMode="scaleToFill" id="ARc-0b-SaH">
+                            <rect key="frame" x="0.0" y="90" width="320" height="568"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoGuru.png" id="8xL-z8-79A">
                             <rect key="frame" x="173" y="122" width="136" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
+                        <view alpha="0.0" contentMode="scaleToFill" id="qsb-WA-67H">
+                            <rect key="frame" x="0.0" y="90" width="320" height="180"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cot-sB-Amc">
+                                    <rect key="frame" x="59" y="32" width="45" height="45"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" backgroundImage="on_click_lupa.png">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="clickPesquisa:" destination="-1" eventType="touchUpInside" id="Nfr-rZ-0bT"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cidade" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B6h-5I-uLU">
+                                    <rect key="frame" x="204" y="132" width="100" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurante" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZYU-em-Ogo">
+                                    <rect key="frame" x="59" y="132" width="100" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="iPh-uF-F1k">
+                                    <rect key="frame" x="174" y="132" width="119" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="ClickCitie:" destination="-1" eventType="touchUpInside" id="Dpn-TG-G2R"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Eh7-fS-2fO">
+                                    <rect key="frame" x="17" y="132" width="153" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="ClickRestaurant:" destination="-1" eventType="touchUpInside" id="JPK-lu-JMm"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ainda por traduzir" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AJZ-b6-72l">
+                                    <rect key="frame" x="55" y="90" width="200" height="35"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botao_select_branco.png" id="lrW-2C-NIh">
+                                    <rect key="frame" x="175" y="140" width="23" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botao_select_branco.png" id="fPv-em-2tj">
+                                    <rect key="frame" x="27" y="140" width="23" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -184,10 +183,14 @@
                     </connections>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bico.png" id="M58-a8-GtC">
+            <rect key="frame" x="0.0" y="0.0" width="20" height="10"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lousa_grande.png" id="znP-Ff-BUq">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -280,9 +283,10 @@
     </objects>
     <resources>
         <image name="LogoGuru.png" width="285" height="84"/>
-        <image name="QUADRADO SUBMETER.png" width="300" height="40"/>
+        <image name="QUADRADO SUBMETER.png" width="2504" height="3342"/>
         <image name="Tira_grande.png" width="561" height="7"/>
         <image name="bico.png" width="38" height="19"/>
+        <image name="botao_select_branco.png" width="36" height="36"/>
         <image name="fundo_pequeno.png" width="639" height="258"/>
         <image name="lousa_grande.png" width="821" height="640"/>
         <image name="madeira.png" width="650" height="50"/>

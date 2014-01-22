@@ -43,7 +43,7 @@
                         <action selector="back:" destination="-1" eventType="touchUpInside" id="gJm-DS-Zmw"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="Ysi-Lu-6Vv">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" id="Ysi-Lu-6Vv">
                     <rect key="frame" x="10" y="178" width="301" height="384"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

@@ -65,9 +65,12 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" image="globo.png">
+                    <state key="normal" backgroundImage="botao-mundo.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="clickDiarias:" destination="-1" eventType="touchUpInside" id="H4T-ZX-J1Y"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="DGL-ua-fFG">
                     <rect key="frame" x="13" y="102" width="297" height="37"/>
@@ -143,8 +146,8 @@
         </view>
     </objects>
     <resources>
+        <image name="botao-mundo.png" width="87" height="86"/>
         <image name="fade00000.png" width="640" height="320"/>
-        <image name="globo.png" width="128" height="128"/>
         <image name="ligar_restarante.png" width="186" height="60"/>
         <image name="nao_seguir.png" width="404" height="61"/>
         <image name="point_mapa.png" width="82" height="82"/>

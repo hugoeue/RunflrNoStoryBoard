@@ -71,18 +71,18 @@ UIAlertViewDelegate>
      completionHandler:^(FBRequestConnection *connection,
                          id result,
                          NSError *error) {
-         NSString *alertText;
-         if (error) {
-             alertText = [NSString stringWithFormat:
-                          @"error: domain = %@, code = %d",
-                          error.domain, error.code];
-         } else {
-             alertText = [NSString stringWithFormat:
-                          @"Posted action, id: %@",
-                          result[@"id"]];
-             
-             [self.navigationController popViewControllerAnimated:YES];
-         }
+//         NSString *alertText;
+//         if (error) {
+//             alertText = [NSString stringWithFormat:
+//                          @"error: domain = %@, code = %d",
+//                          error.domain, error.code];
+//         } else {
+//             alertText = [NSString stringWithFormat:
+//                          @"Posted action, id: %@",
+//                          result[@"id"]];
+//             
+//             [self.navigationController popViewControllerAnimated:YES];
+//         }
          // Show the result in an alert
 //         [[[UIAlertView alloc] initWithTitle:@"Result"
 //                                     message:alertText
