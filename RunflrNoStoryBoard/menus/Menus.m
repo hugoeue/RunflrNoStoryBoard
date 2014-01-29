@@ -18,7 +18,7 @@
 
 #define FONT_SIZE_TITULO 20.0f
 #define FONT_SIZE 16.0f
-#define FONT_SIZE2 10.0f
+#define FONT_SIZE2 14.0f
 #define CELL_CONTENT_WIDTH 260.0f
 #define CELL_CONTENT_MARGIN 10.0f
 

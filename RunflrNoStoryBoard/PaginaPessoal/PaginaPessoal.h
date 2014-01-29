@@ -27,7 +27,7 @@
 - (IBAction)clickReceberNotifacoes:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *botaoSelectNoti;
 
-- (IBAction)clickReceberNewsletter:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UIImageView *botaoSelectNews;
 @property (weak, nonatomic) IBOutlet UIImageView *butaoSelectJuntar;
 

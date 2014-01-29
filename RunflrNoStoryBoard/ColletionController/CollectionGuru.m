@@ -50,6 +50,7 @@
     layout.direction = UICollectionViewScrollDirectionVertical;
     layout.blockPixels = CGSizeMake(155, 50);
 
+    
 
 }
 
@@ -194,6 +195,8 @@
                                    lineBreakMode:UILineBreakModeWordWrap];
     CGFloat labelHeight2 = labelSize2.height;
     
+ 
+    
     if (rest.tamanhoImagem.height == 290 && labelHeight + labelHeight2< 38) {
         labelHeight2 = 40;
     }
@@ -203,7 +206,7 @@
         return  labelHeight + [self tamanhoDaImagemCorrecto:rest.tamanhoImagem ] + labelHeight2 +80;
     }
     else{
-        return  labelHeight*0.8 + labelHeight2*1.3  +80;
+        return  labelHeight + labelHeight2 + 65;
     }
     
 }
@@ -412,7 +415,7 @@
     }
     
     
-    label4 = [[UILabel alloc] initWithFrame:CGRectMake(10, label.frame.origin.y+label.frame.size.height -0, cell.frame.size.width -15, 10)];
+    label4 = [[UILabel alloc] initWithFrame:CGRectMake(10, label.frame.origin.y+label.frame.size.height -4, cell.frame.size.width -15, 14)];
     
     label4.numberOfLines = 1;
     label4.textColor = [UIColor colorWithRed:101.0f/255.0f green:101.0f/255.0f blue:101.0f/255.0f alpha:1];
@@ -425,7 +428,7 @@
     
     [ass4 addAttribute:NSKernAttributeName
                  value:[NSNumber numberWithFloat:0.3]
-                 range:NSMakeRange(0, [restaurante.city length]) ];
+                 range:NSMakeRange(0, [restaurante.city length])];
     
     [ass4 addAttribute:NSFontAttributeName
                  value:[UIFont fontWithName:@"HelveticaNeue" size:10]
@@ -444,11 +447,11 @@
     
     //label.text = [NSString stringWithFormat:@"%@", restaurante.name];
     label.backgroundColor = [UIColor clearColor];
+    
+
+    
+    
     [cell addSubview:label];
-    
-    
-    
-    
     [cell addSubview:label2];
     [cell addSubview:label3];
     [cell addSubview:label4];
@@ -480,7 +483,15 @@
 
 
 
-
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+    if(self.scroolDelegate)
+    {
+        [self.scroolDelegate performSelector:@selector(fezScrool:) withObject:[NSNumber numberWithFloat:scrollView.contentOffset.y]];
+    }
+    
+}
 
 
 #pragma mark collection view cell paddings

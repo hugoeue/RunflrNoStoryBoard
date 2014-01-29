@@ -277,8 +277,7 @@ UIAlertViewDelegate>
 - (void) alertView:(UIAlertView *)alertView
 didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [[self presentingViewController]
-     dismissModalViewControllerAnimated:YES];
+    [[self presentingViewController]dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

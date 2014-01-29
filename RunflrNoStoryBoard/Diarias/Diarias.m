@@ -22,6 +22,7 @@
 #import "MapViewController.h"
 #import "DemoRootViewController.h"
 #import "AnimationController.h"
+#import "QueroMais.h"
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -68,6 +69,10 @@
     
     
     NSString *linguaDoCartao;
+    
+    // posicao inicial da imagem
+    CGFloat posicaoImg;
+    CGFloat isIOS7;
 }
 
 @end
@@ -145,6 +150,14 @@
     [super viewDidLoad];
     [self setSeguir:restaurante.isUserFav];
     
+    if (![Utils isiOS7]) {
+        isIOS7 = -40;
+    }else
+    {
+        isIOS7 = 0;
+    }
+    
+    
     animation = [AnimationController new];
     
     animation.view.frame = CGRectMake(0, 0, 320,self.container.frame.size.height );
@@ -171,6 +184,8 @@
    // [self verificaSeguir];
     
     [self carregarCartoes:@""];
+    
+    posicaoImg = self.viewImagemRest.frame.origin.y;
     
        
 }
@@ -266,7 +281,7 @@
             {
                 NSLog(@"resultado da tania para todos os cartoes  %@", result.description);
                 
-                
+                [animation.view removeFromSuperview];
                  diaria = NO;
                  especial = NO ;
                  ementa = NO;
@@ -350,13 +365,17 @@
                 
                 if(cartoes.count != 0)
                 {
-                    [colececaoFavoritos removeFromParentViewController];
+                    //[colececaoFavoritos removeFromParentViewController];
+                    [colececaoFavoritos.view removeFromSuperview];
                     colececaoFavoritos = nil;
                     
                     if (!colececaoFavoritos){
                
                         colececaoFavoritos = [CollectionGuru new];
-                        
+                        colececaoFavoritos.collectionView.backgroundColor = [UIColor clearColor];
+                        colececaoFavoritos.view.backgroundColor = [UIColor clearColor];
+                        colececaoFavoritos.collectionView.clipsToBounds = YES;
+                        colececaoFavoritos.scroolDelegate = self;
                         colececaoFavoritos.delegate = self;
                         colececaoFavoritos.mostrarGPS = NO;
                 
@@ -407,9 +426,9 @@
                     [colececaoFavoritos CarregarRestaurantes:cartoes];
                     [colececaoFavoritos.collectionView reloadData];
                     
-                    self.viewButoes.frame = CGRectMake(0, -38, 320, 44);
-                    [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
-                    [colececaoFavoritos.collectionView addSubview: self.viewButoes];
+                    self.viewBotoes.frame = CGRectMake(0, -160, 320, 44);
+                    [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(160, 0, 0, 0)];
+                    [colececaoFavoritos.collectionView addSubview: self.viewBotoes];
                     
                 }else
                 {
@@ -432,8 +451,8 @@
                     vazio.labelMenssagem.text = @"";
                     vazio.labelDescricao.text =  [Language textForIndex:@"Procurar_menu_clique_mostre_interesse_descr"];
                     
-                    self.viewButoes.frame = CGRectMake(0, 0, 320, 44);
-                    [self.container addSubview:self.viewButoes];
+                    self.viewBotoes.frame = CGRectMake(0, 0, 320, 44);
+                    [self.container addSubview:self.viewBotoes];
                     
                                     }
                 
@@ -539,13 +558,13 @@
                                                                 otherButtonTitles:nil];
                 
                 
-                
+                actionSheet.tag = 1;
                 // ObjC Fast Enumeration
                 for (NSString *title in arrayLinguas) {
                     [actionSheet addButtonWithTitle:title];
                 }
                 
-                [actionSheet addButtonWithTitle:@"Cancel"];
+                [actionSheet addButtonWithTitle:[Language textForIndex:@"Cancel_imagem"]];
                 actionSheet.cancelButtonIndex = [arrayLinguas count];
                 
                 [actionSheet showInView:self.view];
@@ -567,10 +586,27 @@
 {
     NSLog(@"clicou no indice %d", buttonIndex);
     
-    if (buttonIndex != [siglas count]) {
-        [self carregarCartoes:[siglas objectAtIndex:buttonIndex]];
-        
+    if (actionSheet.tag==1) {
+        if (buttonIndex != [siglas count]) {
+            [self carregarCartoes:[siglas objectAtIndex:buttonIndex]];
+            
+        }
     }
+    else if (actionSheet.tag==2)
+    {
+        if (buttonIndex == 1) {
+            [self clickAddFavorito:self];
+        }else if( buttonIndex == 0)
+        {
+            [self clickLigar:self];
+        }
+        else if (buttonIndex == 2) {
+            [self abrirSelectorTania];
+        }
+        
+            
+    }
+   
 }
 
 -(void)setSeguir:(BOOL) seguir
@@ -654,18 +690,7 @@
     restaurante = rest;
 }
 
-- (IBAction)selecteSegControl:(id)sender {
-    if(self.segControl.selectedSegmentIndex ==1){
-        // adicionar o outro
-        [self.container addSubview:menuG.view];
-        [menuDia.view removeFromSuperview];
-    }else{
-        
-        [menuG.view removeFromSuperview];
-        [self.container addSubview: menuDia.view];
-    }
-    
-}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -735,7 +760,7 @@
        // [addRemoveFav sendDict:dict];
        // tenho de lançar uma popup a perguntar se quer fazer login ao utilisador
         
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora?" delegate:self   cancelButtonTitle:@"Não" otherButtonTitles:@"Sim", nil];
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Aviso" message:@"Para ter acesso a esta funcionalidade tem de ter login \ndeseja fazer agora? APT" delegate:self   cancelButtonTitle:[Language textForIndex:@"Nao"] otherButtonTitles:[Language textForIndex:@"Sim"], nil];
         alert.tag = 2 ;
         
       //  [alert show];
@@ -793,10 +818,16 @@
             [self chamarEmailCart];
 
         }
-
-        
-       
     }
+    if(alertView.tag == 5)
+    {
+        if(buttonIndex == 1)//OK button pressed
+        {
+            [self fazerChamada];
+            
+        }
+    }
+
 }
 
 
@@ -829,14 +860,32 @@
     [self presentViewController:mc animated:YES completion:NULL];
 }
 
+
+-(void)abrirSelectorTania
+{
+    QueroMais * mais = [[QueroMais alloc] initWithRestaurant:restaurante];
+     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mais];
+    
+    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
+        //não preciso de fazer nada
+    }];
+}
+
 -(void)chamarLogin{
     Login *log = [Login new];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
-    [self presentViewController:nav animated:YES completion:^{
+    //[self presentViewController:nav animated:YES completion:nil];
+    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
         [self.buttonSeguir setEnabled:YES];
     }];
+    
+    
+    //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+//    [self presentViewController:nav animated:YES completion:^{
+//        [self.buttonSeguir setEnabled:YES];
+//    }];
     
     
 }
@@ -882,7 +931,7 @@
 - (IBAction)clickLigar:(id)sender {
     
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ %d",[Language textForIndex:@"Marcar"],restaurante.phone ] message:@"" delegate:self cancelButtonTitle:[Language textForIndex:@"Nao"] otherButtonTitles:[Language textForIndex:@"Sim"], nil];
-    alert.tag = 4;
+    alert.tag = 5;
     [alert show];
     
    }
@@ -891,7 +940,71 @@
 
 
 
-- (IBAction)clickDiarias:(id)sender {
+- (IBAction)clickDiarias:(id)sender
+{
     [self popUpMudarLingua];
 }
+
+- (IBAction)clickMainPopup:(id)sender {
+    
+  
+        
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+                                                             delegate:self
+                                                    cancelButtonTitle:[Language textForIndex:@"Cancel_imagem"]
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:[Language textForIndex:@"Ligar"],self.buttonSeguir.titleLabel.text,@"Quero mais APT",nil];
+    
+    actionSheet.tag = 2;
+    
+    
+    
+    // ObjC Fast Enumeration
+  
+    //[actionSheet addButtonWithTitle:[Language textForIndex:@"Cancel_imagem"]];
+    //actionSheet.cancelButtonIndex = 2;
+    
+    [actionSheet showInView:self.view];
+
+    
+}
+
+-(void)fazerChamada
+{
+    NSString *phoneNumber = [@"tel://" stringByAppendingFormat:@"%d",restaurante.phone];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
+}
+
+-(void)fezScrool:(NSNumber *)mexeu
+{
+    CGFloat percentagem = 0.5f;
+    
+    
+    // NSLog(@"colecção mexeu %f",mexeu.floatValue);
+    [UIView animateWithDuration:0.5 animations:^{
+        
+      
+        [self.imagemRestaurante setFrame:CGRectMake(0,
+                                            (posicaoImg -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*percentagem)) -60,
+                                            self.viewImagemRest.frame.size.width,
+                                            300
+                                            )];
+     
+        [self.imgFade setFrame:CGRectMake(0,
+                                            (posicaoImg -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*percentagem)) -60,
+                                            self.viewImagemRest.frame.size.width,
+                                            300
+                                            )];
+     
+        [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+                                          (colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40 -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*1)) -19,
+                                          self.viewImagemRest.frame.size.width,
+                                          posicaoImg + mexeu.floatValue +600
+                                          )];
+    }];
+
+    
+}
+
 @end

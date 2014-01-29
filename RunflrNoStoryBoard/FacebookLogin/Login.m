@@ -206,6 +206,11 @@
 }
 
 
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
+
 - (IBAction)clickSubmeter:(id)sender {
     
     webservi = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_login_confirm.php" method:@"" tag:1];

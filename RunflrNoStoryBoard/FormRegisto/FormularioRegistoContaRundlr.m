@@ -239,7 +239,7 @@
 
 - (void)segmentedViewController:(id)sender
 {
-    AKSegmentedControl *segmentedControl = (AKSegmentedControl *)sender;
+    //AKSegmentedControl *segmentedControl = (AKSegmentedControl *)sender;
     
     // na realidade não preciso disto para nada
    

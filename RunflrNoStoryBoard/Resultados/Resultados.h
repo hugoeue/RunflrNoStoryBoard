@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-@interface Resultados : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface Resultados : UIViewController 
 @property (weak, nonatomic) IBOutlet UILabel *labelResultado;
 
 

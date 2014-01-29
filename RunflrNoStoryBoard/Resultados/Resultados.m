@@ -300,7 +300,7 @@
         
         [webResultado sendDict:dict];
     }
-    else
+    else if([tipo isEqualToString:@"Cities"])
     {
         //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:2];
         webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome2.php" method:@"" tag:2];
@@ -316,6 +316,25 @@
         
         
         [dict setObject:result forKey:@"nomeparte"];
+        [dict setObject:[Globals lang] forKey:@"lang"];
+        
+        [webResultado sendDict:dict];
+    }else
+    {
+        // ainda tenho de mudar para o webservice novo da tania que tem os tais pratos
+        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome_prato2.php" method:@"" tag:2];
+        webResultado.delegate = self;
+        
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+        
+        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
+        
+        
+        [dict setObject:result forKey:@"prato"];
         [dict setObject:[Globals lang] forKey:@"lang"];
         
         [webResultado sendDict:dict];
@@ -348,7 +367,7 @@
         
         [webResultado sendDict:dict];
     }
-    else
+    else if([tipo isEqualToString:@"Cities"])
     {
         webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome.php" method:@"" tag:2];
         webResultado.delegate = self;
@@ -363,6 +382,25 @@
         
         
         [dict setObject:result forKey:@"nomeparte"];
+        [dict setObject:[Globals lang] forKey:@"lang"];
+        
+        [webResultado sendDict:dict];
+    }else
+    {
+        // ainda tenho de mudar para o webservice novo da tania que tem os tais pratos
+        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome_prato.php" method:@"" tag:2];
+        webResultado.delegate = self;
+        
+        NSMutableDictionary * dict = [NSMutableDictionary new];
+        
+        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+        
+        [dict setObject:latitude forKey:@"lat"];
+        [dict setObject:longitude forKey:@"lon"];
+        
+        
+        [dict setObject:result forKey:@"prato"];
         [dict setObject:[Globals lang] forKey:@"lang"];
         
         [webResultado sendDict:dict];

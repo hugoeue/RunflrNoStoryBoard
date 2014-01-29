@@ -61,15 +61,15 @@ langPT = @{
 				@"Ola": @"Olá",
 				@"Conectado": @"Conectado",
 				@"Receber_Notificacoes": @"Receber Notificações",
-				@"Conectar_Facebook": @"Conectar conta do Facebook",
-				@"Receber_Newsletter": @"Receber newsletter",
+				@"Conectar_Facebook": @"Conectar Conta do Facebook",
+				@"Receber_Newsletter": @"Receber Newsletter",
 				@"Mudar_foto": @"Mudar fotografia",
 				
 				//3ª PÁGINA DE REFÚGIO/DEFINIÇÕES
 				@"Sobre_Menu_Guru": @"Sobre o Menu Guru",
 				@"Feedback": @"Feedback",
-				@"Termos_condicoes": @"Termos e condições",
-				@"Politica_privacidade": @"Política de privacidade",
+				@"Termos_condicoes": @"Termos e Condições",
+				@"Politica_privacidade": @"Política de Privacidade",
 				
 				//4ª PÁGINA DE REFÚGIO/DEFINIÇÕES/FEEDBACK
 				@"Diz_que_pensas": @"Diz-nos o que pensas",
@@ -146,7 +146,7 @@ langPT = @{
 				//popups nova imagem
 				@"Escolha_uma_foto": @"Escolha uma fotografia",
 				@"Galeria": @"Galeria",
-				@"Camera": @"Camêra",
+				@"Camera": @"Câmera",
 				@"Cancel_imagem": @"Cancelar",
 				@"cartao_diaria": @"Menu do dia",
                 @"cartao_ementa": @"Ementa",
@@ -195,16 +195,16 @@ langPT = @{
 				//2ª PÁGINA DE REFÚGIO/MINHA CONTA
 				@"Ola": @"Hello",
 				@"Conectado": @"Connected",
-				@"Receber_Notificacoes": @"Receive notifications",
-				@"Conectar_Facebook": @"Connect with Facebook",
-				@"Receber_Newsletter": @"Receive newsletter",
+				@"Receber_Notificacoes": @"Receive Notifications",
+				@"Conectar_Facebook": @"Connect With Facebook",
+				@"Receber_Newsletter": @"Receive Newsletter",
 				@"Mudar_foto": @"Change photo",
 				
 				//3ª PÁGINA DE REFÚGIO/DEFINIÇÕES
 				@"Sobre_Menu_Guru": @"About Menu Guru",
 				@"Feedback": @"Feedback",
-				@"Termos_condicoes": @"Terms and conditions",
-				@"Politica_privacidade": @"Privacy policy",
+				@"Termos_condicoes": @"Terms and Conditions",
+				@"Politica_privacidade": @"Privacy Policy",
 				
 				//4ª PÁGINA DE REFÚGIO/DEFINIÇÕES/FEEDBACK
 				@"Diz_que_pensas": @"Tell us what you think about us",
@@ -332,16 +332,16 @@ langPT = @{
 				//2ª PÁGINA DE REFÚGIO/MINHA CONTA
 				@"Ola": @"Hola",
 				@"Conectado": @"Conectado",
-				@"Receber_Notificacoes": @"Recibe notificaciones",
+				@"Receber_Notificacoes": @"Recibe Notificaciones",
 				@"Conectar_Facebook": @"Conéctate con Facebook",
-				@"Receber_Newsletter": @"Recibir boletín de noticias",
+				@"Receber_Newsletter": @"Recibir Boletín de Noticias",
 				@"Mudar_foto": @"Cambiar tu foto",
 				
 				//3ª PÁGINA DE REFÚGIO/DEFINIÇÕES
 				@"Sobre_Menu_Guru": @"Quién es Menu Guru",
 				@"Feedback": @"Feedback",
-				@"Termos_condicoes": @"Terminos y condiciones",
-				@"Politica_privacidade": @"Politica de privacidad",
+				@"Termos_condicoes": @"Terminos y Condiciones",
+				@"Politica_privacidade": @"Politica de Privacidad",
 				
 				//4ª PÁGINA DE REFÚGIO/DEFINIÇÕES/FEEDBACK
 				@"Diz_que_pensas": @"Dinos lo que piensas",
@@ -468,16 +468,16 @@ langPT = @{
 				//2ª PÁGINA DE REFÚGIO/MINHA CONTA
 				@"Ola": @"Salut",
 				@"Conectado": @"Connecté",
-				@"Receber_Notificacoes": @"Recevoir des notifications",
+				@"Receber_Notificacoes": @"Recevoir des Notifications",
 				@"Conectar_Facebook": @"Connectez-vous avec Facebook",
-				@"Receber_Newsletter": @"Recevoir la newsletter",
+				@"Receber_Newsletter": @"Recevoir la Newsletter",
 				@"Mudar_foto": @"Changer votre photo",
 				
 				//3ª PÁGINA DE REFÚGIO/DEFINIÇÕES
 				@"Sobre_Menu_Guru": @"Qui est Menu Guru",
 				@"Feedback": @"Feedback",
-				@"Termos_condicoes": @"Térmes et conditions",
-				@"Politica_privacidade": @"Politique de privacité",
+				@"Termos_condicoes": @"Térmes et Conditions",
+				@"Politica_privacidade": @"Politique de Privacité",
 				
 				//4ª PÁGINA DE REFÚGIO/DEFINIÇÕES/FEEDBACK
 				@"Diz_que_pensas": @"Dites-nous ce que vous pensez",
@@ -603,16 +603,16 @@ langPT = @{
 				//2ª PÁGINA DE REFÚGIO/MINHA CONTA
 				@"Ola": @"Ciao",
 				@"Conectado": @"Collegato",
-				@"Receber_Notificacoes": @"Ricevi notifiche",
+				@"Receber_Notificacoes": @"Ricevi Notifiche",
 				@"Conectar_Facebook": @"Connettiti con Facebook",
-				@"Receber_Newsletter": @"Ricevi newsletter",
+				@"Receber_Newsletter": @"Ricevi Newsletter",
 				@"Mudar_foto": @"Cambiare la tua foto",
 				
 				//3ª PÁGINA DE REFÚGIO/DEFINIÇÕES
 				@"Sobre_Menu_Guru": @"A proposito di Guru Menu",
 				@"Feedback": @"Feedback",
-				@"Termos_condicoes": @"Termini e condizioni",
-				@"Politica_privacidade": @"Informativa sulla privacy",
+				@"Termos_condicoes": @"Termini e Condizioni",
+				@"Politica_privacidade": @"Informativa sulla Privacy",
 				
 				//4ª PÁGINA DE REFÚGIO/DEFINIÇÕES/FEEDBACK
 				@"Diz_que_pensas": @"Dicci cosa ne pensi",
@@ -742,7 +742,7 @@ langPT = @{
 				@"Conectado": @"Verbunden",
 				@"Receber_Notificacoes": @"Erhalten Sie Benachrichtigungen",
 				@"Conectar_Facebook": @"Mit Facebook verbinden",
-				@"Receber_Newsletter": @"Erhalten Sie newsletter",
+				@"Receber_Newsletter": @"Erhalten Sie Newsletter",
 				@"Mudar_foto": @"Ihr Foto ändern",
 				
 				//3ª PÁGINA DE REFÚGIO/DEFINIÇÕES

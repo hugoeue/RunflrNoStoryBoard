@@ -85,5 +85,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageRestaurant;
 
 
+- (IBAction)clickTipoPrato:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *imgTipoPrato;
+
 
 @end

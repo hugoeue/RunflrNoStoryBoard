@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
-#import <FacebookSDK/FacebookSDK.h>
+
 
 
 @interface Utils : NSObject

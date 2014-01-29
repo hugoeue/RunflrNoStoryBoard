@@ -285,15 +285,15 @@ int num = 0;
         {
             case 1:
             {
-                NSLog(@"resultado dalista dos recomendados =>%@", result.description);
+                //NSLog(@"resultado dalista dos recomendados =>%@", result.description);
                 
                 if(![[result objectForKey:@"resp"] isEqualToString:@"sem geolocalizacao"]){
                
                // distancia emtre 2 pontos;
                // CLLocationDistance distance = [aCLLocationA distanceFromLocation:aCLLocationB];
                 
-                NSString * lat = [result objectForKey:@"lat"];
-                NSString * lon = [result objectForKey:@"lon"];
+                //NSString * lat = [result objectForKey:@"lat"];
+                //NSString * lon = [result objectForKey:@"lon"];
                 
                 //CLLocation * localOriginal = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
                 
@@ -366,7 +366,14 @@ int num = 0;
                     rest.featuredImageString = imagem;
                     //rest.name =   @"fabrica das verdadeiras queijadas da sapa";
                     
-                    [restaurantesRecomendados addObject:rest];
+                    
+                    // tenho de por aqui a validação da tania para apenas adicionar os restaurantes com menus ( menu e ementa )
+                    
+                    if (![[dict objectForKey:@"menu"] isEqualToString:@"0"] || ![[dict objectForKey:@"ementa"] isEqualToString:@"0"] ) {
+                         [restaurantesRecomendados addObject:rest];
+                    }
+                    
+                   
                     [vazio removeFromParentViewController];
                     [colececaoFavoritos removeFromParentViewController];
                     
@@ -493,9 +500,9 @@ int num = 0;
                 {
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
-                                                  30,
+                                                  0,
                                                   self.viewContainer.frame.size.width,
-                                                  self.viewContainer.frame.size.height-30);
+                                                  self.viewContainer.frame.size.height-0);
                     [self.viewContainer addSubview:vazio.view];
                     vazio.imagem.image = [UIImage imageNamed:@"star-50.png"];
                     vazio.labelTitulo.text = [Language textForIndex:@"Adicione_Favoritos"];
@@ -573,7 +580,7 @@ int num = 0;
                 }
                 [Globals setSearchResult:array];
                 
-                NSLog(@"success loaded cities");
+                NSLog(@"success loaded restaurantes");
                 
                  /*
                  for (City * vitie in [Globals cities]) {
@@ -889,7 +896,7 @@ int num = 0;
     
     
     [self carragarCidades];
-    [self carregaRestaurantes];
+    //[self carregaRestaurantes];
     
     // para ficar selecionada a cidade
 
@@ -900,7 +907,7 @@ int num = 0;
     
     [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
     [self.imageCidade setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
-    
+    [self.imgTipoPrato setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
     
     
     [self gps];
@@ -1184,12 +1191,11 @@ int num = 0;
     [self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionNone animated:YES];
 }
 
+
+
 - (IBAction)ClickCitie:(id)sender {
-    //[((UIButton *)sender) setSelected:YES];
-    //[self.buttonRestaurant setSelected:NO];
-    [self.imgSetectRest setImage:[UIImage imageNamed:@"noselect.png"]];
-    [self.imgSelectcidate setImage:[UIImage imageNamed:@"select.png"]];
-   
+
+    
     self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -1200,6 +1206,7 @@ int num = 0;
                                             )];
         [self.imageCidade setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
         [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
+        [self.imgTipoPrato setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
         
         
     }];
@@ -1209,12 +1216,9 @@ int num = 0;
 }
 
 - (IBAction)ClickRestaurant:(id)sender {
-    //[((UIButton *)sender) setSelected:YES];
-    //[self.buttonCities setSelected:NO];
-    [self.imgSetectRest setImage:[UIImage imageNamed:@"select.png"]];
-    [self.imgSelectcidate setImage:[UIImage imageNamed:@"noselect.png"]];
 
-    self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeRest;
+
+    self.texfFieldPesquisa.autocompleteType = nil;
    
     
  
@@ -1227,12 +1231,39 @@ int num = 0;
             
             [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
             [self.imageCidade setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
+            [self.imgTipoPrato setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
 
         }];
     
     
     tipo = @"Restaurants";
 }
+
+
+- (IBAction)clickTipoPrato:(id)sender
+{
+    
+
+    
+    self.texfFieldPesquisa.autocompleteType = HTAutocompleteTypeColor;
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.imageBico setFrame:CGRectMake(145,
+                                            self.imageBico.frame.origin.y,
+                                            self.imageBico.frame.size.width,
+                                            self.imageBico.frame.size.height
+                                            )];
+        [self.imageCidade setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
+        [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_no_select_branco.png"]];
+        [self.imgTipoPrato setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
+        
+    }];
+    
+    
+    tipo = @"Prato";
+    
+}
+
 
 - (IBAction)clickPesquisa:(id)sender {
 

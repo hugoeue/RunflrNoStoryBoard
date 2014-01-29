@@ -10,7 +10,7 @@
 #import "RFQuiltLayout.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface CollectionGuru : UIViewController <RFQuiltLayoutDelegate,UICollectionViewDelegate>{
+@interface CollectionGuru : UIViewController <RFQuiltLayoutDelegate,UICollectionViewDelegate, UIScrollViewDelegate>{
    
 }
 
@@ -23,6 +23,7 @@
 -(void)CarregarRestaurantes:(NSMutableArray *)restaurantesC;
 
 @property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id scroolDelegate;
 
 @property BOOL mostrarGPS;
 

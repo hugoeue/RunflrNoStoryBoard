@@ -116,6 +116,9 @@
 		BA449C52188D921800919A29 /* segmented-bg9.png in Resources */ = {isa = PBXBuildFile; fileRef = BA449C50188D921800919A29 /* segmented-bg9.png */; };
 		BA449C53188D921800919A29 /* segmented-bg9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA449C51188D921800919A29 /* segmented-bg9@2x.png */; };
 		BA449C55188DA8D400919A29 /* bico.png in Resources */ = {isa = PBXBuildFile; fileRef = BA449C54188DA8D400919A29 /* bico.png */; };
+		BA4AC255189927460009BFFA /* QueroMais.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AC253189927460009BFFA /* QueroMais.m */; };
+		BA4AC256189927460009BFFA /* QueroMais.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4AC254189927460009BFFA /* QueroMais.xib */; };
+		BA4AC258189968990009BFFA /* Georeferencia.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AC257189968990009BFFA /* Georeferencia.png */; };
 		BA4F59D3186DD59400AB2C41 /* CollectionGuru.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4F59D1186DD59400AB2C41 /* CollectionGuru.m */; };
 		BA4F59D4186DD59400AB2C41 /* CollectionGuru.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4F59D2186DD59400AB2C41 /* CollectionGuru.xib */; };
 		BA51C5FB185335470080BD9F /* HTAutocompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BA51C5FA185335470080BD9F /* HTAutocompleteManager.m */; };
@@ -442,6 +445,10 @@
 		BA449C50188D921800919A29 /* segmented-bg9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg9.png"; sourceTree = "<group>"; };
 		BA449C51188D921800919A29 /* segmented-bg9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg9@2x.png"; sourceTree = "<group>"; };
 		BA449C54188DA8D400919A29 /* bico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bico.png; sourceTree = "<group>"; };
+		BA4AC252189927460009BFFA /* QueroMais.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QueroMais.h; path = "Quero mais/QueroMais.h"; sourceTree = "<group>"; };
+		BA4AC253189927460009BFFA /* QueroMais.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QueroMais.m; path = "Quero mais/QueroMais.m"; sourceTree = "<group>"; };
+		BA4AC254189927460009BFFA /* QueroMais.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QueroMais.xib; path = "Quero mais/QueroMais.xib"; sourceTree = "<group>"; };
+		BA4AC257189968990009BFFA /* Georeferencia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Georeferencia.png; sourceTree = "<group>"; };
 		BA4F59D0186DD59400AB2C41 /* CollectionGuru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CollectionGuru.h; path = ColletionController/CollectionGuru.h; sourceTree = "<group>"; };
 		BA4F59D1186DD59400AB2C41 /* CollectionGuru.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CollectionGuru.m; path = ColletionController/CollectionGuru.m; sourceTree = "<group>"; };
 		BA4F59D2186DD59400AB2C41 /* CollectionGuru.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionGuru.xib; path = ColletionController/CollectionGuru.xib; sourceTree = "<group>"; };
@@ -707,6 +714,7 @@
 		BA0B9678184E644100182E0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA4AC2511899271A0009BFFA /* Quero Mais */,
 				BAFAE06B1885A76100AD7BEE /* ShareViewController */,
 				BAFADFEC1885362000AD7BEE /* Animação */,
 				BA05ABC3187ACFE600AA2057 /* Sem dados */,
@@ -936,6 +944,16 @@
 			name = "ultima do segment";
 			sourceTree = "<group>";
 		};
+		BA4AC2511899271A0009BFFA /* Quero Mais */ = {
+			isa = PBXGroup;
+			children = (
+				BA4AC252189927460009BFFA /* QueroMais.h */,
+				BA4AC253189927460009BFFA /* QueroMais.m */,
+				BA4AC254189927460009BFFA /* QueroMais.xib */,
+			);
+			name = "Quero Mais";
+			sourceTree = "<group>";
+		};
 		BA4F59CA186DD14E00AB2C41 /* CollectionController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1039,6 +1057,7 @@
 				BA2E048F1887F73A00D51A4D /* botao_no_select.png */,
 				BAFADFF2188537D400AD7BEE /* ImagensPanela */,
 				BADE124F18845E230075B0E9 /* 3.png */,
+				BA4AC257189968990009BFFA /* Georeferencia.png */,
 				BADE124D188455E10075B0E9 /* LogoGuru.png */,
 				BA262E4D187EF0D300CB851C /* registro.png */,
 				BA1AD5F9187C67A700B79548 /* fade00000.png */,
@@ -1497,6 +1516,7 @@
 				BA65F15C18623FAC00BF914A /* seguir_restaurante.png in Resources */,
 				BAFAE0601885380400AD7BEE /* campanula00049.png in Resources */,
 				BAFAE0691885380400AD7BEE /* campanula00058.png in Resources */,
+				BA4AC256189927460009BFFA /* QueroMais.xib in Resources */,
 				BA262E84187F1C2300CB851C /* pin.png in Resources */,
 				BA65F14618623FAC00BF914A /* grande_login.png in Resources */,
 				BAFAE0551885380400AD7BEE /* campanula00038.png in Resources */,
@@ -1582,6 +1602,7 @@
 				BA02E8E1184FAC96006A611B /* Login.xib in Resources */,
 				BAFAE0341885380400AD7BEE /* campanula00005.png in Resources */,
 				BA65F15318623FAC00BF914A /* nao_seguir.png in Resources */,
+				BA4AC258189968990009BFFA /* Georeferencia.png in Resources */,
 				BA53085C18709C6600540691 /* Terms and Conditions.txt in Resources */,
 				BA65F13D18623FAC00BF914A /* face_conectado.png in Resources */,
 				BAFAE0561885380400AD7BEE /* campanula00039.png in Resources */,
@@ -1622,6 +1643,7 @@
 				BA262E77187F18F300CB851C /* DealHelper.m in Sources */,
 				BA51C601185339500080BD9F /* HTAutocompleteTextField.m in Sources */,
 				BA0B9676184E62F700182E0A /* PPRevealSideViewController.m in Sources */,
+				BA4AC255189927460009BFFA /* QueroMais.m in Sources */,
 				BAFB92E71886B3CB001B6F01 /* Utils.m in Sources */,
 				BA51C61418539B150080BD9F /* CommentsParser.m in Sources */,
 				BA51C6281853C9450080BD9F /* TableCell.m in Sources */,

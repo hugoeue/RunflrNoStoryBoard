@@ -13,19 +13,19 @@
 
 
 
-@interface Diarias : UIViewController <MFMailComposeViewControllerDelegate>
+@interface Diarias : UIViewController <MFMailComposeViewControllerDelegate,UIActionSheetDelegate,UIScrollViewDelegate>
 
 @property CLLocationManager * locationManager;
 
 - (IBAction)clickBack:(id)sender;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segControl;
+
 @property (weak, nonatomic) IBOutlet UILabel *labelTitleRestaurnat;
 @property (weak, nonatomic) IBOutlet UILabel *labelLocalisacao;
 
 
 -(void)loadRestaurant:(Restaurant *)rest;
 
-- (IBAction)selecteSegControl:(id)sender;
+
 
 @property (weak, nonatomic) IBOutlet UIView *container;
 - (IBAction)clickAddFavorito:(id)sender;
@@ -44,9 +44,17 @@
 
 -(void)setSeguir:(BOOL) seguir;
 
-@property (weak, nonatomic) IBOutlet UIView *viewButoes;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonLigar;
 - (IBAction)clickDiarias:(id)sender;
+
+- (IBAction)clickMainPopup:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *viewImagemRest;
+
+@property (weak, nonatomic) IBOutlet UIView *viewBotoes;
+@property (weak, nonatomic) IBOutlet UIView *imgFade;
+@property (weak, nonatomic) IBOutlet UIView *viewParaTaparOlhos;
 
 @end

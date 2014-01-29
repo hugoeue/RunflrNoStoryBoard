@@ -478,56 +478,6 @@
 
 
 
-+(void) getFBPlacesAt:(NSNumber*)lat Lat:(NSNumber*)lon withBlock:(finishLoadingPlaces) block
-{
-    NSString *latitude = [NSString stringWithFormat:@"%f",lat.doubleValue];
-    NSString *longitude= [NSString stringWithFormat:@"%f", lon.doubleValue];
-    
-    if(lat==0 && lon==0)
-    {
-        block([NSArray new]);
-    }
-    else{
-        NSString * query=[@"SELECT name, page_id, categories,location,page_url, description,type, general_info FROM page WHERE page_id IN"
-                          @"(SELECT page_id FROM place WHERE distance(latitude, longitude, \"" stringByAppendingString: latitude];
-        
-        query=[query stringByAppendingString:@"\",\""];
-        query=[query stringByAppendingString:longitude];
-        query=[query stringByAppendingString:@"\") < 5000)"];
-        
-        
-        // Set up the query parameter
-        NSDictionary *queryParam =
-        [NSDictionary dictionaryWithObjectsAndKeys:query, @"q", nil];
-        // Make the API request that uses FQL
-        [FBRequestConnection startWithGraphPath:@"/fql" parameters:queryParam HTTPMethod:@"GET" completionHandler:^(FBRequestConnection *connection, id result, NSError *error)
-        {
-            if (error)
-            {
-                block([NSArray new]);
-            }
-            else
-            {
-                if(result==Nil)
-                {
-                    block([NSArray new]);
-                }
-                else
-                {
-                    if([[result objectForKey:@"data"] count]==0)
-                    {
-                        block([NSArray new]);
-                    }
-                else
-                {
-                    // não preciso de nada disto
-                   // block([self readPlaces:result]);
-                }
-              }
-          }
-      }];
-    }
-}
 
 +(NSData*)downloadFileFromUrl:(NSString*)url
 {
