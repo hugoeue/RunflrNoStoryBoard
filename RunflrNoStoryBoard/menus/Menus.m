@@ -14,6 +14,8 @@
 #import "AnimationController.h"
 #import "ShareViewController.h"
 #import "Login.h"
+#import "Voucher.h"
+#import "DemoRootViewController.h"
 
 
 #define FONT_SIZE_TITULO 20.0f
@@ -49,6 +51,13 @@
     
     [dict setObject:linguaCartao forKey:@"lang"];
     [dict setObject:restID forKey:@"rest_id"];
+    [dict setObject:restaurante.dummy forKey:@"dummy"];
+    
+    /*
+    $body['lang'];
+    $body['dummy'];
+    $body['rest_id'];
+    */
     
     
     [envio sendDict:dict];
@@ -87,6 +96,8 @@
 
 -(void)menuEspecial
 {
+    
+    [self.butaoOfertas setAlpha:1];
     envio = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_menu_especial.php" method:@"" tag:3];
     envio.delegate = self;
     
@@ -761,6 +772,26 @@
     [self dismissViewControllerAnimated:YES completion:nil];
    // [self.navigationController popToRootViewControllerAnimated:YES];
     
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
+{
+ //fazer scroll da tabela
+    
+    NSLog(@" scroll da tabela %f ",aScrollView.contentOffset.y);
+}
+- (IBAction)clickObterOferta:(id)sender {
+    
+    Voucher *vou = [[Voucher alloc] initWithRestaurant:restaurante];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vou];
+    
+    //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+    //[self presentViewController:nav animated:YES completion:nil];
+    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
+        // nao preciso fazer nada aqui
+    }];
+
     
 }
 

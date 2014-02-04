@@ -23,6 +23,7 @@
 #import "DemoRootViewController.h"
 #import "AnimationController.h"
 #import "QueroMais.h"
+#import "AsyncImageView.h"
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -34,6 +35,7 @@
     WebServiceSender *addRemoveFav;
     WebServiceSender *verifica;
     WebServiceSender *mudarLingua;
+    WebServiceSender *receberFotos;
 
     MenuDoDia * menuDia;
     MenuGeral * menuG;
@@ -73,14 +75,33 @@
     // posicao inicial da imagem
     CGFloat posicaoImg;
     CGFloat isIOS7;
+    
+    BOOL openCarousel;
+    
 }
 
 @end
 
 @implementation Diarias
 
-@synthesize locationManager;
+@synthesize locationManager,items,carousel;
 
+
+-(void)receberFotosJson
+{
+    receberFotos = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_galeria_rest.php" method:@"" tag:5];
+    
+    receberFotos.delegate = self;
+    
+    NSString * restauranteId = [NSString stringWithFormat:@"%d",restaurante.dbId];
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:restauranteId forKey:@"rest_id"];
+    
+    
+    [receberFotos sendDict:dict];
+}
 
 -(void)popUpMudarLingua
 {
@@ -114,7 +135,11 @@
         [verifica cancel];
     if (mudarLingua)
         [mudarLingua cancel];
+    if (receberFotos)
+        [receberFotos cancel];
     
+    
+    receberFotos= nil;
     mudarLingua = nil;
     
     webser = nil;
@@ -129,9 +154,20 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
+
+- (void)setUp
+{
+    //set up data
+
+    self.items = [NSMutableArray array];
+    [self.items addObject:restaurante.featuredImageString];
+    
+}
+
 
 - (void) moveAllSubviewsDown{
     float barHeight = -40.0;
@@ -187,7 +223,12 @@
     
     posicaoImg = self.viewImagemRest.frame.origin.y;
     
-       
+    
+    //configure carousel
+    carousel.type = iCarouselTypeLinear;
+
+    [self setUp];
+    [self receberFotosJson];
 }
 
 
@@ -294,13 +335,13 @@
                   [cartoes removeAllObjects];
 //                [vazio removeFromParentViewController];
                 
-                
+               /*
                 emailTitleCart = [[result objectForKey:@"msgdummy"] objectForKey:@"assunto"];
                 // Email Content
                 messageBodyCart = [[result objectForKey:@"msgdummy"] objectForKey:@"message"];
                 // To address
                 toRecipentsCart = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
-        
+               
                 
                
              
@@ -317,7 +358,7 @@
                 
                 alertCartao = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"titulo"] message:utf8string  delegate:self cancelButtonTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"butaoc"] otherButtonTitles:[[result objectForKey:@"msgdummy"] objectForKey:@"butao"], nil];
                 alertCartao.tag = 4;
-
+                 */
                 
                 for(NSMutableDictionary * dict in [result objectForKey:@"res"]){
                     Restaurant * rest = [Restaurant new];
@@ -339,6 +380,8 @@
                     rest.bestChoices = [dict objectForKey:@"nome_cat"];
                     rest.chef = [dict objectForKey:@"menu_esp_id"];
                     rest.featuredImageString = [dict objectForKey:@"imagem"];
+                    rest.dummy = [dict objectForKey:@"dummy"];
+                    rest.pai = [dict objectForKey:@"pai_id"];
                     
                     rest.city = @"";
                     
@@ -389,7 +432,7 @@
                     
                     // quando faltam cartoes ele faz coisas aqui
                     
-                    
+                    /*
                     if (!restaurante.destaque)
                     {
                         if (!diaria)
@@ -422,6 +465,7 @@
                         }
 
                     }
+                    */
                  
                     [colececaoFavoritos CarregarRestaurantes:cartoes];
                     [colececaoFavoritos.collectionView reloadData];
@@ -571,6 +615,23 @@
                 
                 break;
             }
+            case 5:
+            {
+                NSLog(@"resultado das fotos para a galeria %@", result.description);
+            
+                //items = [NSMutableArray new];
+                
+                for (NSMutableDictionary * dict in [result objectForKey:@"rest"]) {
+                    
+                    [items addObject:[dict objectForKey:@"foto"]];
+
+                }
+                
+                [carousel reloadData];
+                
+                break;
+            }
+
 
                 
         }
@@ -990,6 +1051,8 @@
                                             self.viewImagemRest.frame.size.width,
                                             300
                                             )];
+        
+       
      
         [self.imgFade setFrame:CGRectMake(0,
                                             (posicaoImg -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*percentagem)) -60,
@@ -997,14 +1060,193 @@
                                             300
                                             )];
      
-        [self.viewParaTaparOlhos setFrame:CGRectMake(0,
-                                          (colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40 -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*1)) -19,
-                                          self.viewImagemRest.frame.size.width,
-                                          posicaoImg + mexeu.floatValue +600
-                                          )];
+        if (!openCarousel) {
+            
+             [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+             (colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40 -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*1)) -19,
+             self.viewImagemRest.frame.size.width,
+             posicaoImg + mexeu.floatValue +600
+             )];
+            
+            [self.carousel setFrame:CGRectMake(0,
+                                               (posicaoImg -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*percentagem)) -60,
+                                               self.viewImagemRest.frame.size.width,
+                                               300
+                                               )];
+            
+        }
     }];
+    
+    
+    if (mexeu.floatValue <= -300){
+        
+        openCarousel = YES;
+        [UIView animateWithDuration:0.5 animations:^{
+        
+            
+            [self.container setAlpha:1];
+            [self.viewImagemRest setAlpha:0];
+            
+            [self.viewImagemRest setFrame:CGRectMake(0,
+                                                     0,
+                                                     self.view.frame.size.width,
+                                                     self.view.frame.size.height
+                                                     )];
+            
+           
+            [self.carousel setFrame:CGRectMake(0,
+                                               self.view.frame.size.height/2 -150,
+                                               self.viewImagemRest.frame.size.width,
+                                               300
+                                               )];
+            
+        
+            [colececaoFavoritos.view setFrame:CGRectMake(0,
+                                                         568,
+                                                         colececaoFavoritos.view.frame.size.width,
+                                                         colececaoFavoritos.view.frame.size.height
+                                                         )];
+        
+        
+            [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+                                                         568,
+                                                         self.viewImagemRest.frame.size.width,
+                                                         posicaoImg + mexeu.floatValue +600
+                                                         )];
+
+            
+         }];
+    }
 
     
 }
+
+- (IBAction)fecharGaleria:(id)sender {
+    
+    
+    openCarousel = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        [self.container setAlpha:0];
+        [self.viewImagemRest setAlpha:1];
+        
+        [self.viewImagemRest setFrame:CGRectMake(0,
+                                                 0,
+                                                 self.view.frame.size.width,
+                                                 self.view.frame.size.height
+                                                 )];
+        
+       
+        [self.carousel setFrame:CGRectMake(0,
+                                           self.view.frame.size.height/2 -150,
+                                           self.viewImagemRest.frame.size.width,
+                                           300
+                                           )];
+        
+        
+        [colececaoFavoritos.view setFrame:CGRectMake(0,
+                                                     20,
+                                                     colececaoFavoritos.view.frame.size.width,
+                                                     colececaoFavoritos.view.frame.size.height
+                                                     )];
+        
+        
+        [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+                                                     colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40  -19,
+                                                     self.viewImagemRest.frame.size.width,
+                                                     600
+                                                     )];
+
+        
+    }];
+
+    
+    
+}
+
+
+#pragma mark -
+#pragma mark iCarousel methods
+
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return [items count];
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
+{
+    //create new view if no view is available for recycling
+    if (view == nil)
+    {
+        view = [[[AsyncImageView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 480.0f)] autorelease];
+        view.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+    //cancel any previously loading images for this view
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:view];
+    
+    //set image URL. AsyncImageView class will then dynamically load the image
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled%@",[items objectAtIndex:index]] ];
+    ((AsyncImageView *)view).imageURL = url ;
+    
+    return view;
+}
+
+- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
+{
+    //note: placeholder views are only displayed on some carousels if wrapping is disabled
+    return 0;
+}
+
+
+- (CATransform3D)carousel:(iCarousel *)_carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
+{
+    //implement 'flip3D' style carousel
+    transform = CATransform3DRotate(transform, M_PI / 8.0f, 0.0f, 1.0f, 0.0f);
+    return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
+}
+
+- (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    //customize carousel display
+    switch (option)
+    {
+        case iCarouselOptionWrap:
+        {
+            //normally you would hard-code this to YES or NO
+            return YES;
+        }
+        case iCarouselOptionSpacing:
+        {
+            //add a bit of spacing between the item views
+            return value * 1.05f;
+        }
+        case iCarouselOptionFadeMax:
+        {
+            if (carousel.type == iCarouselTypeCustom)
+            {
+                //set opacity based on distance from camera
+                return 0.0f;
+            }
+            return value;
+        }
+        default:
+        {
+            return value;
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark iCarousel taps
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    NSNumber *item = (self.items)[index];
+    NSLog(@"Tapped view number: %@", item);
+}
+
+
 
 @end

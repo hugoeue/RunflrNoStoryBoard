@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pesquiseCell" rowHeight="200" id="I02-7o-P3x" customClass="pesquiseCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I02-7o-P3x" id="FrI-we-fcQ">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="149"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paginarestaurante_Parte_do_Centro_Filtros.png" id="MUS-9n-JeW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="DWE-i2-moc">
+                        <rect key="frame" x="20" y="106" width="286" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="selectedTexfield:" destination="I02-7o-P3x" eventType="editingDidEnd" id="5zb-5J-Z92"/>
+                        </connections>
+                    </textField>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="kn2-qi-yzZ">
+                        <rect key="frame" x="173" y="61" width="133" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <segments>
+                            <segment title="Restaurante" width="76"/>
+                            <segment title="Prato"/>
+                        </segments>
+                        <color key="tintColor" red="0.34117648010000001" green="0.76862752440000004" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                        <connections>
+                            <action selector="selectorSelected:" destination="I02-7o-P3x" eventType="valueChanged" id="drd-gL-OnL"/>
+                        </connections>
+                    </segmentedControl>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pesquise por" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gMv-NZ-360">
+                        <rect key="frame" x="20" y="52" width="151" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restourante ou pelo prato" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S4i-eU-BDf">
+                        <rect key="frame" x="20" y="70" width="151" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="3" id="eOZ-I5-0PF">
+                        <rect key="frame" x="18" y="11" width="237" height="34"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" red="0.34117648005485535" green="0.76862752437591553" blue="0.82745105028152466" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="minimumTrackTintColor" red="1" green="0.059260627119999999" blue="0.047730627710000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="maximumTrackTintColor" red="0.34117648010000001" green="0.76862752440000004" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                        <connections>
+                            <action selector="sliederMoved:" destination="I02-7o-P3x" eventType="valueChanged" id="wef-Hm-iTW"/>
+                        </connections>
+                    </slider>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todos" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Yvy-wU-rXY">
+                        <rect key="frame" x="261" y="17" width="51" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="labelSlider" destination="Yvy-wU-rXY" id="zjj-hb-hvN"/>
+                <outlet property="selector" destination="kn2-qi-yzZ" id="gR0-g1-30I"/>
+                <outlet property="slider" destination="eOZ-I5-0PF" id="Ijr-gk-zli"/>
+                <outlet property="textField" destination="DWE-i2-moc" id="Tdx-e8-Mh1"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="paginarestaurante_Parte_do_Centro_Filtros.png" width="640" height="160"/>
+    </resources>
+</document>

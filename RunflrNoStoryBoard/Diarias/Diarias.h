@@ -10,6 +10,7 @@
 #import "FXImageView.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MessageUI/MessageUI.h> 
+#import "iCarousel.h"
 
 
 
@@ -56,5 +57,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewBotoes;
 @property (weak, nonatomic) IBOutlet UIView *imgFade;
 @property (weak, nonatomic) IBOutlet UIView *viewParaTaparOlhos;
+
+@property (weak, nonatomic) IBOutlet iCarousel *carousel;
+@property (nonatomic, strong) NSMutableArray *items;
 
 @end

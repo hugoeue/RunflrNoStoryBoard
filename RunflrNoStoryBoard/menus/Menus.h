@@ -37,5 +37,6 @@
 
 - (IBAction)clickPartilhar:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIButton *butaoOfertas;
 
 @end

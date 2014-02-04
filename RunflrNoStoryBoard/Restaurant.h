@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSString *city;
 @property (strong, nonatomic) NSString *parish;
 @property (strong, nonatomic) NSString *price;
+@property (strong, nonatomic) NSString *dummy;
+@property (strong, nonatomic) NSString *pai;
 @property (nonatomic) CGSize tamanhoImagem;
 @property ( nonatomic) BOOL destaque;
 @property (nonatomic) int priceId;

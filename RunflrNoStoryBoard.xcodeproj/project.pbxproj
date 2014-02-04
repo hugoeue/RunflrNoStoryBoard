@@ -116,6 +116,22 @@
 		BA449C52188D921800919A29 /* segmented-bg9.png in Resources */ = {isa = PBXBuildFile; fileRef = BA449C50188D921800919A29 /* segmented-bg9.png */; };
 		BA449C53188D921800919A29 /* segmented-bg9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA449C51188D921800919A29 /* segmented-bg9@2x.png */; };
 		BA449C55188DA8D400919A29 /* bico.png in Resources */ = {isa = PBXBuildFile; fileRef = BA449C54188DA8D400919A29 /* bico.png */; };
+		BA44C2D1189BA2530028FB2E /* AsyncImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA44C2D0189BA2530028FB2E /* AsyncImageView.m */; };
+		BA44C2D3189BB54D0028FB2E /* botao_x.png in Resources */ = {isa = PBXBuildFile; fileRef = BA44C2D2189BB54D0028FB2E /* botao_x.png */; };
+		BA44C34F189C0C200028FB2E /* paginarestaurante_Parte_de_baixo_Filtros.png in Resources */ = {isa = PBXBuildFile; fileRef = BA44C33C189C0C200028FB2E /* paginarestaurante_Parte_de_baixo_Filtros.png */; };
+		BA44C350189C0C200028FB2E /* paginarestaurante_Parte_de_Cima_Filtros.png in Resources */ = {isa = PBXBuildFile; fileRef = BA44C33D189C0C200028FB2E /* paginarestaurante_Parte_de_Cima_Filtros.png */; };
+		BA44C351189C0C200028FB2E /* paginarestaurante_Parte_do_Centro_Filtros.png in Resources */ = {isa = PBXBuildFile; fileRef = BA44C33E189C0C200028FB2E /* paginarestaurante_Parte_do_Centro_Filtros.png */; };
+		BA44C352189C0C200028FB2E /* paginarestaurante_botao_mais.png in Resources */ = {isa = PBXBuildFile; fileRef = BA44C33F189C0C200028FB2E /* paginarestaurante_botao_mais.png */; };
+		BA44C353189C0C200028FB2E /* Filtros.m in Sources */ = {isa = PBXBuildFile; fileRef = BA44C341189C0C200028FB2E /* Filtros.m */; };
+		BA44C354189C0C200028FB2E /* Filtros.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA44C342189C0C200028FB2E /* Filtros.xib */; };
+		BA44C355189C0C200028FB2E /* Pesquise0.m in Sources */ = {isa = PBXBuildFile; fileRef = BA44C344189C0C200028FB2E /* Pesquise0.m */; };
+		BA44C356189C0C200028FB2E /* Pesquise0.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA44C345189C0C200028FB2E /* Pesquise0.xib */; };
+		BA44C357189C0C200028FB2E /* Pesquise1.m in Sources */ = {isa = PBXBuildFile; fileRef = BA44C347189C0C200028FB2E /* Pesquise1.m */; };
+		BA44C358189C0C200028FB2E /* Pesquise1.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA44C348189C0C200028FB2E /* Pesquise1.xib */; };
+		BA44C359189C0C200028FB2E /* Pesquise2.m in Sources */ = {isa = PBXBuildFile; fileRef = BA44C34A189C0C200028FB2E /* Pesquise2.m */; };
+		BA44C35A189C0C200028FB2E /* Pesquise2.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA44C34B189C0C200028FB2E /* Pesquise2.xib */; };
+		BA44C35B189C0C200028FB2E /* pesquiseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA44C34D189C0C200028FB2E /* pesquiseCell.m */; };
+		BA44C35C189C0C200028FB2E /* pesquiseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA44C34E189C0C200028FB2E /* pesquiseCell.xib */; };
 		BA4AC255189927460009BFFA /* QueroMais.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AC253189927460009BFFA /* QueroMais.m */; };
 		BA4AC256189927460009BFFA /* QueroMais.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4AC254189927460009BFFA /* QueroMais.xib */; };
 		BA4AC258189968990009BFFA /* Georeferencia.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AC257189968990009BFFA /* Georeferencia.png */; };
@@ -275,6 +291,11 @@
 		BAFB92E318868ACD001B6F01 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFB92E218868ACD001B6F01 /* Base64.m */; };
 		BAFB92E71886B3CB001B6F01 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFB92E61886B3CB001B6F01 /* Utils.m */; };
 		BAFB92F01886B63F001B6F01 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFB92EF1886B63F001B6F01 /* Reachability.m */; };
+		BAFE88D6189A568200C1A11A /* Voucher.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFE88D4189A568200C1A11A /* Voucher.m */; };
+		BAFE88D7189A568200C1A11A /* Voucher.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFE88D5189A568200C1A11A /* Voucher.xib */; };
+		BAFE88DB189AB36800C1A11A /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFE88DA189AB36800C1A11A /* iCarousel.m */; };
+		BAFE88DE189AB61D00C1A11A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFE88DC189AB61D00C1A11A /* background.png */; };
+		BAFE88DF189AB61D00C1A11A /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFE88DD189AB61D00C1A11A /* page.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -445,6 +466,28 @@
 		BA449C50188D921800919A29 /* segmented-bg9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg9.png"; sourceTree = "<group>"; };
 		BA449C51188D921800919A29 /* segmented-bg9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg9@2x.png"; sourceTree = "<group>"; };
 		BA449C54188DA8D400919A29 /* bico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bico.png; sourceTree = "<group>"; };
+		BA44C2CF189BA2530028FB2E /* AsyncImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncImageView.h; sourceTree = "<group>"; };
+		BA44C2D0189BA2530028FB2E /* AsyncImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncImageView.m; sourceTree = "<group>"; };
+		BA44C2D2189BB54D0028FB2E /* botao_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = botao_x.png; sourceTree = "<group>"; };
+		BA44C33C189C0C200028FB2E /* paginarestaurante_Parte_de_baixo_Filtros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paginarestaurante_Parte_de_baixo_Filtros.png; sourceTree = "<group>"; };
+		BA44C33D189C0C200028FB2E /* paginarestaurante_Parte_de_Cima_Filtros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paginarestaurante_Parte_de_Cima_Filtros.png; sourceTree = "<group>"; };
+		BA44C33E189C0C200028FB2E /* paginarestaurante_Parte_do_Centro_Filtros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paginarestaurante_Parte_do_Centro_Filtros.png; sourceTree = "<group>"; };
+		BA44C33F189C0C200028FB2E /* paginarestaurante_botao_mais.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paginarestaurante_botao_mais.png; sourceTree = "<group>"; };
+		BA44C340189C0C200028FB2E /* Filtros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filtros.h; sourceTree = "<group>"; };
+		BA44C341189C0C200028FB2E /* Filtros.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filtros.m; sourceTree = "<group>"; };
+		BA44C342189C0C200028FB2E /* Filtros.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Filtros.xib; sourceTree = "<group>"; };
+		BA44C343189C0C200028FB2E /* Pesquise0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pesquise0.h; sourceTree = "<group>"; };
+		BA44C344189C0C200028FB2E /* Pesquise0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pesquise0.m; sourceTree = "<group>"; };
+		BA44C345189C0C200028FB2E /* Pesquise0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Pesquise0.xib; sourceTree = "<group>"; };
+		BA44C346189C0C200028FB2E /* Pesquise1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pesquise1.h; sourceTree = "<group>"; };
+		BA44C347189C0C200028FB2E /* Pesquise1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pesquise1.m; sourceTree = "<group>"; };
+		BA44C348189C0C200028FB2E /* Pesquise1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Pesquise1.xib; sourceTree = "<group>"; };
+		BA44C349189C0C200028FB2E /* Pesquise2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pesquise2.h; sourceTree = "<group>"; };
+		BA44C34A189C0C200028FB2E /* Pesquise2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pesquise2.m; sourceTree = "<group>"; };
+		BA44C34B189C0C200028FB2E /* Pesquise2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Pesquise2.xib; sourceTree = "<group>"; };
+		BA44C34C189C0C200028FB2E /* pesquiseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pesquiseCell.h; sourceTree = "<group>"; };
+		BA44C34D189C0C200028FB2E /* pesquiseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pesquiseCell.m; sourceTree = "<group>"; };
+		BA44C34E189C0C200028FB2E /* pesquiseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = pesquiseCell.xib; sourceTree = "<group>"; };
 		BA4AC252189927460009BFFA /* QueroMais.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QueroMais.h; path = "Quero mais/QueroMais.h"; sourceTree = "<group>"; };
 		BA4AC253189927460009BFFA /* QueroMais.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QueroMais.m; path = "Quero mais/QueroMais.m"; sourceTree = "<group>"; };
 		BA4AC254189927460009BFFA /* QueroMais.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QueroMais.xib; path = "Quero mais/QueroMais.xib"; sourceTree = "<group>"; };
@@ -641,6 +684,13 @@
 		BAFB92E61886B3CB001B6F01 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		BAFB92EE1886B63F001B6F01 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		BAFB92EF1886B63F001B6F01 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		BAFE88D3189A568200C1A11A /* Voucher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voucher.h; sourceTree = "<group>"; };
+		BAFE88D4189A568200C1A11A /* Voucher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Voucher.m; sourceTree = "<group>"; };
+		BAFE88D5189A568200C1A11A /* Voucher.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Voucher.xib; sourceTree = "<group>"; };
+		BAFE88D9189AB36800C1A11A /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		BAFE88DA189AB36800C1A11A /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		BAFE88DC189AB61D00C1A11A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		BAFE88DD189AB61D00C1A11A /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -714,6 +764,8 @@
 		BA0B9678184E644100182E0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BA44C2D4189BBEBA0028FB2E /* filtros */,
+				BAFE88D2189A53FE00C1A11A /* Voucher */,
 				BA4AC2511899271A0009BFFA /* Quero Mais */,
 				BAFAE06B1885A76100AD7BEE /* ShareViewController */,
 				BAFADFEC1885362000AD7BEE /* Animação */,
@@ -944,6 +996,41 @@
 			name = "ultima do segment";
 			sourceTree = "<group>";
 		};
+		BA44C2CE189BA23C0028FB2E /* asyncImageView */ = {
+			isa = PBXGroup;
+			children = (
+				BA44C2CF189BA2530028FB2E /* AsyncImageView.h */,
+				BA44C2D0189BA2530028FB2E /* AsyncImageView.m */,
+			);
+			name = asyncImageView;
+			sourceTree = "<group>";
+		};
+		BA44C2D4189BBEBA0028FB2E /* filtros */ = {
+			isa = PBXGroup;
+			children = (
+				BA44C33C189C0C200028FB2E /* paginarestaurante_Parte_de_baixo_Filtros.png */,
+				BA44C33D189C0C200028FB2E /* paginarestaurante_Parte_de_Cima_Filtros.png */,
+				BA44C33E189C0C200028FB2E /* paginarestaurante_Parte_do_Centro_Filtros.png */,
+				BA44C33F189C0C200028FB2E /* paginarestaurante_botao_mais.png */,
+				BA44C340189C0C200028FB2E /* Filtros.h */,
+				BA44C341189C0C200028FB2E /* Filtros.m */,
+				BA44C342189C0C200028FB2E /* Filtros.xib */,
+				BA44C343189C0C200028FB2E /* Pesquise0.h */,
+				BA44C344189C0C200028FB2E /* Pesquise0.m */,
+				BA44C345189C0C200028FB2E /* Pesquise0.xib */,
+				BA44C346189C0C200028FB2E /* Pesquise1.h */,
+				BA44C347189C0C200028FB2E /* Pesquise1.m */,
+				BA44C348189C0C200028FB2E /* Pesquise1.xib */,
+				BA44C349189C0C200028FB2E /* Pesquise2.h */,
+				BA44C34A189C0C200028FB2E /* Pesquise2.m */,
+				BA44C34B189C0C200028FB2E /* Pesquise2.xib */,
+				BA44C34C189C0C200028FB2E /* pesquiseCell.h */,
+				BA44C34D189C0C200028FB2E /* pesquiseCell.m */,
+				BA44C34E189C0C200028FB2E /* pesquiseCell.xib */,
+			);
+			name = filtros;
+			sourceTree = "<group>";
+		};
 		BA4AC2511899271A0009BFFA /* Quero Mais */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,6 +1129,7 @@
 		BA54BBF818510153006446D6 /* imgsFinal */ = {
 			isa = PBXGroup;
 			children = (
+				BA44C2D2189BB54D0028FB2E /* botao_x.png */,
 				BA940EAA188FCEF000A615C3 /* botao-partilhar.png */,
 				BA940EA6188FCA8200A615C3 /* botao_select_branco.png */,
 				BA940EA7188FCA8200A615C3 /* botao_no_select_branco.png */,
@@ -1136,6 +1224,7 @@
 		BA93FD8A184D3C3F004001E4 = {
 			isa = PBXGroup;
 			children = (
+				BAFE88D8189AB35F00C1A11A /* icarousel */,
 				BA449BDE188D6DAA00919A29 /* SegmentControll */,
 				BAFB92E41886B3B0001B6F01 /* Utils */,
 				BAFB92E018868ABF001B6F01 /* EncodeBase64 */,
@@ -1368,6 +1457,28 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		BAFE88D2189A53FE00C1A11A /* Voucher */ = {
+			isa = PBXGroup;
+			children = (
+				BAFE88D3189A568200C1A11A /* Voucher.h */,
+				BAFE88D4189A568200C1A11A /* Voucher.m */,
+				BAFE88D5189A568200C1A11A /* Voucher.xib */,
+			);
+			name = Voucher;
+			sourceTree = "<group>";
+		};
+		BAFE88D8189AB35F00C1A11A /* icarousel */ = {
+			isa = PBXGroup;
+			children = (
+				BA44C2CE189BA23C0028FB2E /* asyncImageView */,
+				BAFE88DC189AB61D00C1A11A /* background.png */,
+				BAFE88DD189AB61D00C1A11A /* page.png */,
+				BAFE88D9189AB36800C1A11A /* iCarousel.h */,
+				BAFE88DA189AB36800C1A11A /* iCarousel.m */,
+			);
+			name = icarousel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1483,10 +1594,13 @@
 				BAFAE0631885380400AD7BEE /* campanula00052.png in Resources */,
 				BA05ABD0187B1B7300AA2057 /* cry-50.png in Resources */,
 				BA65F15B18623FAC00BF914A /* retroceder.png in Resources */,
+				BA44C352189C0C200028FB2E /* paginarestaurante_botao_mais.png in Resources */,
 				BAFAE03E1885380400AD7BEE /* campanula00015.png in Resources */,
+				BAFE88D7189A568200C1A11A /* Voucher.xib in Resources */,
 				BAFAE03A1885380400AD7BEE /* campanula00011.png in Resources */,
 				BAFAE04D1885380400AD7BEE /* campanula00030.png in Resources */,
 				BA53085B18709C6600540691 /* Privacy Policy.txt in Resources */,
+				BAFE88DF189AB61D00C1A11A /* page.png in Resources */,
 				BAFAE03C1885380400AD7BEE /* campanula00013.png in Resources */,
 				BAFAE0351885380400AD7BEE /* campanula00006.png in Resources */,
 				BA02E8DA184F68C2006A611B /* Diarias.xib in Resources */,
@@ -1498,11 +1612,13 @@
 				BA65F14B18623FAC00BF914A /* login.png in Resources */,
 				BAFAE0581885380400AD7BEE /* campanula00041.png in Resources */,
 				BA93FDA1184D3C3F004001E4 /* InfoPlist.strings in Resources */,
+				BA44C34F189C0C200028FB2E /* paginarestaurante_Parte_de_baixo_Filtros.png in Resources */,
 				BAFAE0451885380400AD7BEE /* campanula00022.png in Resources */,
 				BA53084318708D6600540691 /* SobreMenuGuru.xib in Resources */,
 				BA449C3E188D89D300919A29 /* segmented-bg-pressed-right6@2x.png in Resources */,
 				BA262E7A187F18F300CB851C /* MapCell.xib in Resources */,
 				BA65F15218623FAC00BF914A /* menu.png in Resources */,
+				BA44C354189C0C200028FB2E /* Filtros.xib in Resources */,
 				BA449C3C188D89D300919A29 /* segmented-bg-pressed-left6.png in Resources */,
 				BA449BC7188D53F400919A29 /* icon_mail.png in Resources */,
 				BAFAE04E1885380400AD7BEE /* campanula00031.png in Resources */,
@@ -1526,6 +1642,7 @@
 				BAFAE04B1885380400AD7BEE /* campanula00028.png in Resources */,
 				BA65F13E18623FAC00BF914A /* face_icon.png in Resources */,
 				BA449C53188D921800919A29 /* segmented-bg9@2x.png in Resources */,
+				BA44C350189C0C200028FB2E /* paginarestaurante_Parte_de_Cima_Filtros.png in Resources */,
 				BAFAE0461885380400AD7BEE /* campanula00023.png in Resources */,
 				BA262E71187F18F300CB851C /* xq_icon_more.png in Resources */,
 				BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */,
@@ -1542,6 +1659,7 @@
 				BA65F13818623FAC00BF914A /* botao_no_select.png in Resources */,
 				BAFAE0481885380400AD7BEE /* campanula00025.png in Resources */,
 				BA449C4F188D905800919A29 /* texte.png in Resources */,
+				BA44C351189C0C200028FB2E /* paginarestaurante_Parte_do_Centro_Filtros.png in Resources */,
 				BA65F14918623FAC00BF914A /* ligar_restarante.png in Resources */,
 				BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */,
 				BA7A9413187C1B05001ECB4A /* Default-568h@2x..png in Resources */,
@@ -1557,7 +1675,9 @@
 				BAFAE0671885380400AD7BEE /* campanula00056.png in Resources */,
 				BA5CBF95186B46CD0022A5CF /* Defenicoes.xib in Resources */,
 				BA2E04901887F73A00D51A4D /* botao_select.png in Resources */,
+				BA44C358189C0C200028FB2E /* Pesquise1.xib in Resources */,
 				BAFAE0491885380400AD7BEE /* campanula00026.png in Resources */,
+				BA44C35C189C0C200028FB2E /* pesquiseCell.xib in Resources */,
 				BA449C4A188D8DAA00919A29 /* segmented-bg-pressed-left8@2x.png in Resources */,
 				BA53085618709A6C00540691 /* Termos e condiçõesPT.txt in Resources */,
 				BADE124E188455E10075B0E9 /* LogoGuru.png in Resources */,
@@ -1565,8 +1685,11 @@
 				BAFAE0301885380400AD7BEE /* campanula00001.png in Resources */,
 				BA1D88D11878523E006AB77A /* Menus.xib in Resources */,
 				BA449C41188D89D300919A29 /* segmented-bg-pressed-right6.png in Resources */,
+				BA44C356189C0C200028FB2E /* Pesquise0.xib in Resources */,
+				BA44C35A189C0C200028FB2E /* Pesquise2.xib in Resources */,
 				BAFAE0511885380400AD7BEE /* campanula00034.png in Resources */,
 				BAFAE0471885380400AD7BEE /* campanula00024.png in Resources */,
+				BAFE88DE189AB61D00C1A11A /* background.png in Resources */,
 				BA65F13F18623FAC00BF914A /* facebook_tira.png in Resources */,
 				BAFADFF11885364A00AD7BEE /* AnimationController.xib in Resources */,
 				BA65F14718623FAC00BF914A /* icon_criar.png in Resources */,
@@ -1592,6 +1715,7 @@
 				BAFAE05E1885380400AD7BEE /* campanula00047.png in Resources */,
 				BA449C40188D89D300919A29 /* segmented-bg6.png in Resources */,
 				BA940EAB188FCEF000A615C3 /* botao-partilhar.png in Resources */,
+				BA44C2D3189BB54D0028FB2E /* botao_x.png in Resources */,
 				BAFAE06A1885380400AD7BEE /* campanula00059.png in Resources */,
 				BAFAE0361885380400AD7BEE /* campanula00007.png in Resources */,
 				BAFAE02F1885380400AD7BEE /* campanula00000.png in Resources */,
@@ -1633,12 +1757,14 @@
 			files = (
 				BA07F0FA18548E1D00591C6F /* Recent.m in Sources */,
 				BA324BC21862FAEE001688CC /* UIView+Screenshot.m in Sources */,
+				BAFE88D6189A568200C1A11A /* Voucher.m in Sources */,
 				BA262E79187F18F300CB851C /* MapCell.m in Sources */,
 				BAFB92F01886B63F001B6F01 /* Reachability.m in Sources */,
 				BA889B4D1859CA7E00C473D3 /* RootViewController.m in Sources */,
 				BA51C6311853D6480080BD9F /* Tipo.m in Sources */,
 				BA51C62D1853D4FC0080BD9F /* MenuGeral.m in Sources */,
 				BA262E80187F18F300CB851C /* ViewControllerCell.m in Sources */,
+				BA44C359189C0C200028FB2E /* Pesquise2.m in Sources */,
 				BA9BB0341859FCE3009ED843 /* FormularioRegistoContaRundlr.m in Sources */,
 				BA262E77187F18F300CB851C /* DealHelper.m in Sources */,
 				BA51C601185339500080BD9F /* HTAutocompleteTextField.m in Sources */,
@@ -1657,6 +1783,7 @@
 				BA2E8E69185EF82700CA31AF /* PaginaPessoal.m in Sources */,
 				BAFAE06F1885A77A00AD7BEE /* ShareViewController.m in Sources */,
 				BA51C60B18537E9E0080BD9F /* WebServiceSender.m in Sources */,
+				BA44C355189C0C200028FB2E /* Pesquise0.m in Sources */,
 				BA4F59D3186DD59400AB2C41 /* CollectionGuru.m in Sources */,
 				BA2E049418882A6200D51A4D /* RecipeCollectionHeaderView.m in Sources */,
 				BA02E8D2184F4DB6006A611B /* Option.m in Sources */,
@@ -1665,6 +1792,7 @@
 				BA262E6F187F18F300CB851C /* MapCell2.m in Sources */,
 				BA262E78187F18F300CB851C /* UIImageView+DispatchLoad.m in Sources */,
 				BA0B9686184E889B00182E0A /* CitiesParser.m in Sources */,
+				BAFE88DB189AB36800C1A11A /* iCarousel.m in Sources */,
 				BA93FDD1184D3CFC004001E4 /* MainPage.m in Sources */,
 				BA93FDA7184D3C3F004001E4 /* AppDelegate.m in Sources */,
 				BA51C61A18539BDA0080BD9F /* Comments.m in Sources */,
@@ -1677,6 +1805,7 @@
 				BA262E74187F18F300CB851C /* DetailsAnnotationView.m in Sources */,
 				BA324BC9186308D8001688CC /* FXImageView.m in Sources */,
 				BA9BB0231859CF1D009ED843 /* PaperFoldSwipeHintView.m in Sources */,
+				BA44C2D1189BA2530028FB2E /* AsyncImageView.m in Sources */,
 				BA324BBA1862FAD0001688CC /* FacingView.m in Sources */,
 				BA5CBF94186B46CD0022A5CF /* Defenicoes.m in Sources */,
 				BA371E9F18607AF600B2353E /* RFQuiltLayout.m in Sources */,
@@ -1695,7 +1824,9 @@
 				BA02E8D9184F68C2006A611B /* Diarias.m in Sources */,
 				BA51C61118539AEC0080BD9F /* RestaurantParser.m in Sources */,
 				BA53084218708D6600540691 /* SobreMenuGuru.m in Sources */,
+				BA44C353189C0C200028FB2E /* Filtros.m in Sources */,
 				BA324BBD1862FAD0001688CC /* PaperFoldView.m in Sources */,
+				BA44C357189C0C200028FB2E /* Pesquise1.m in Sources */,
 				BAFB92E318868ACD001B6F01 /* Base64.m in Sources */,
 				BA51C600185339500080BD9F /* HTEmailAutocompleteTextField.m in Sources */,
 				BA324BC51862FAFE001688CC /* TouchThroughUIView.m in Sources */,
@@ -1704,6 +1835,7 @@
 				BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */,
 				BA262E7E187F18F300CB851C /* MapViewController.m in Sources */,
 				BA262E75187F18F300CB851C /* CalloutAnnotation.m in Sources */,
+				BA44C35B189C0C200028FB2E /* pesquiseCell.m in Sources */,
 				BA02E8D5184F4DFB006A611B /* Cuisine.m in Sources */,
 				BA51C605185364160080BD9F /* LanguageViewController.m in Sources */,
 				BA449BE1188D6DBC00919A29 /* AKSegmentedControl.m in Sources */,

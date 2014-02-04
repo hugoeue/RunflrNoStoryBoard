@@ -25,6 +25,7 @@
 #import "AnimationController.h"
 #import "DemoRootViewController.h"
 #import "AKSegmentedControl.h"
+#import "Filtros.h"
 
 
 
@@ -33,6 +34,11 @@
     
     
     AKSegmentedControl *segmentedControl3;
+    UISegmentedControl *segmentControl;
+    
+    // para os filtros de pesquisa
+    Filtros * filtros;
+    
     bool showFacebook;
     NSString * tipo;
     
@@ -155,6 +161,8 @@ int num = 0;
 
 - (void)setupSegmentedControl3
 {
+    
+    
     [segmentedControl3 removeFromSuperview];
     
     UIImage *backgroundImage = [[UIImage imageNamed:@"segmented-bg9.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
@@ -187,13 +195,30 @@ int num = 0;
     [buttonSocial setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [buttonSocial setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
     
+    
+    // Button 2
+    UIButton *buttonStar = [[UIButton alloc] init];
+    [buttonStar setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonStar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[buttonSocial setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[buttonSocial.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [buttonStar.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
+    //[buttonSocial setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    //UIImage *buttonSocialImageNormal = [UIImage imageNamed:@"social-icon.png"];
+    [buttonStar setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    [buttonStar setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
+    [buttonStar setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    [buttonStar setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [buttonStar setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
 
     
  
     // Button 3
     UIButton *buttonSettings = [[UIButton alloc] init];
     
-    [buttonSettings setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonSettings setTitle:@"Filtros" forState:UIControlStateNormal];
     [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //[buttonSettings setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //[buttonSettings.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
@@ -208,9 +233,23 @@ int num = 0;
     [buttonSettings setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
 
     
-    [segmentedControl3 setButtonsArray:@[buttonSocial/*, buttonStar*/, buttonSettings]];
+    [segmentedControl3 setButtonsArray:@[buttonSocial, buttonStar, buttonSettings]];
+    
+    
     [self.viewFavoritos addSubview:segmentedControl3];
+    
+    
+    /*
+    NSArray *itemArray = [NSArray arrayWithObjects: @"One", [Language textForIndex:@"Recomendados"], [Language textForIndex:@"Favoritos"], nil];
+    
+    
+    segmentControl = [[UISegmentedControl alloc]initWithItems:itemArray];
+    
+    [segmentControl setFrame:CGRectMake(10.0,6, 300.0, 37.0)];
+    [self.viewFavoritos addSubview:segmentControl];
+    */
 }
+
 
 - (void)segmentedViewController:(id)sender
 {
@@ -224,7 +263,8 @@ int num = 0;
         
 	}
     
-	 if([[segmentedControl3 selectedIndexes] containsIndex:1])    {
+	 if([[segmentedControl3 selectedIndexes] containsIndex:1])
+     {
         
         NSLog(@"Tipo de login realisado mainpage click fav%@",[Globals user].loginType);
         
@@ -249,8 +289,14 @@ int num = 0;
         }
         
 	}
+    
+    if([[segmentedControl3 selectedIndexes] containsIndex:2])
+    {
+        [self chamarFiltros];
+    }
 
 }
+
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
@@ -285,7 +331,7 @@ int num = 0;
         {
             case 1:
             {
-                //NSLog(@"resultado dalista dos recomendados =>%@", result.description);
+                NSLog(@"resultado dalista dos recomendados =>%@", result.description);
                 
                 if(![[result objectForKey:@"resp"] isEqualToString:@"sem geolocalizacao"]){
                
@@ -408,8 +454,8 @@ int num = 0;
                 }else
                 {
                     // quando o servidor responde que recebeu geolocalização com coordenadas erradas...
-                    [colececaoRecomendados removeFromParentViewController];
-                    [colececaoFavoritos removeFromParentViewController];
+                    [colececaoRecomendados.view removeFromSuperview];
+                    [colececaoFavoritos.view removeFromSuperview];
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
                                                   30,
@@ -538,13 +584,13 @@ int num = 0;
             }
             case 3:
             {
-               // NSLog(@"cidades existentes %@", result);
+                NSLog(@"cidades existentes %@", result);
                 
                 NSMutableArray *array =[NSMutableArray new];
                 for (NSMutableDictionary *dict in [result objectForKey:@"resp"]) {
                     City * cit = [City new];
                     cit.name = [dict objectForKey:@"nome"];
-                    //cit.dbId = [dict objectForKey:@"id"];
+                    cit.dbId = [[dict objectForKey:@"id"] integerValue];
                     [array addObject:cit];
                 }
                 [Globals setCities:array];
@@ -844,6 +890,8 @@ int num = 0;
     [segmentedControl3 setSelectedIndexes:[NSIndexSet indexSetWithIndex:2] byExpandingSelection:YES];
     
     [segmentedControl3 setSelectedIndex:0];
+    
+     
     
     [self setupSegmentedControl3];
 
@@ -1374,6 +1422,8 @@ int num = 0;
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
     //[self presentViewController:nav animated:YES completion:nil];
+    
+    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:nil];
     
     //[self.navigationController pushViewController:log animated:YES];
@@ -1488,8 +1538,24 @@ int num = 0;
     }
 }
 
+-(void)chamarFiltros
+{
 
+    filtros = [Filtros new];
+    filtros.delegate = self;
+    [filtros.view setFrame:CGRectMake(0, 0, self.viewContainer.frame.size.width, self.viewContainer.frame.size.height)];
+    [self.viewContainer addSubview:filtros.view];
+    
 
+    
+}
+
+-(void)chamarPesquisa
+{
+    
+    
+    [self ChamarPesquisa];
+}
 
 -(void)ChamarFavoritos
 {
