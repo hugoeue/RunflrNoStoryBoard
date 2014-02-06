@@ -321,6 +321,14 @@
     [self.textPassword setDelegate:self];
     [self.textPassword2 setDelegate:self];
     
+    self.title = @"Login";
+    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 25, 25)];
+    [button addTarget:self action:@selector(Voltar:) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"b_back.png"] forState:UIControlStateNormal];
+    
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+ self.navigationItem.leftBarButtonItem = anotherButton;
+    
 }
 
 

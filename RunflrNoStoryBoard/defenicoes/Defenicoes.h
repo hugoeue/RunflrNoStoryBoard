@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMessageComposeViewController.h>
+#import <MessageUI/MessageUI.h>
 
-@interface Defenicoes : UIViewController
+@interface Defenicoes : UIViewController<MFMessageComposeViewControllerDelegate,UITextFieldDelegate,MFMailComposeViewControllerDelegate>
+
 - (IBAction)ClickAnterior:(id)sender;
 - (IBAction)clickFeedBack:(id)sender;
 
@@ -23,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *buttonMenu;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imagemTopo;
+@property (weak, nonatomic) IBOutlet UIView *container;
 
 @end

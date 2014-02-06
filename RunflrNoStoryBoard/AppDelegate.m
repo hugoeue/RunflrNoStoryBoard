@@ -170,10 +170,20 @@
     
     [self.window makeKeyAndVisible];
     
-    DemoRootViewController *paper = [[DemoRootViewController alloc] init];
+    
+    // ok tenho de mudar tudo aqui... tenho de tirar o paperfold
+#warning saiu o paperfold
+    //DemoRootViewController *paper = [[DemoRootViewController alloc] init];
     //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:paper];
     //[navController setNavigationBarHidden:YES];
-    [self.window setRootViewController:paper];
+    //[self.window setRootViewController:paper];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[MainPage new]];
+    
+    PPRevealSideViewController * sideviewController = [[PPRevealSideViewController alloc] initWithRootViewController:navController];
+    
+    [self.window setBackgroundColor:[UIColor blackColor]];
+    [self.window setRootViewController:sideviewController];
     
     
     

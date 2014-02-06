@@ -201,7 +201,7 @@
     </objects>
     <resources>
         <image name="3.png" width="640" height="300"/>
-        <image name="icon_facebook.png" width="60" height="60"/>
+        <image name="icon_facebook.png" width="66" height="66"/>
         <image name="icon_mail.png" width="60" height="60"/>
         <image name="icon_messages.png" width="60" height="60"/>
         <image name="retroceder.png" width="82" height="82"/>

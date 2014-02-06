@@ -394,9 +394,19 @@
     
     //[defaults synchronize];
 
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clarear)];
+    [self.viewPretaGrande addGestureRecognizer:singleTap];
 
 
 }
+
+
+-(void)clarear
+{
+    [self escurecer:0.5];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -584,8 +594,11 @@
 - (IBAction)clickBack:(id)sender {
     //[self dismissViewControllerAnimated:YES completion:nil];
      //[self.navigationController popToRootViewControllerAnimated:YES];
-    [[DemoRootViewController getInstance] chamarOutroTopo];
+//    [[DemoRootViewController getInstance] chamarOutroTopo];
+//    [self escurecer:0.5];
+    
     [self escurecer:0.5];
+    [self.revealSideViewController pushOldViewControllerOnDirection:PPRevealSideDirectionLeft animated:YES];
 }
 
 -(void)escurecer:(float)time

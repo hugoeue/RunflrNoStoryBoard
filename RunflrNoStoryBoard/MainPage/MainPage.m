@@ -25,6 +25,7 @@
 #import "AnimationController.h"
 #import "DemoRootViewController.h"
 #import "AKSegmentedControl.h"
+#import "Filtros.h"
 
 
 
@@ -32,7 +33,15 @@
 {
     
     
+    // isto deve estar cheio de variaveis que deixaram de fazer falta devido as alterações
+    // por falta de tempo nao vou andar a fazer limpezas de codigo
+    
     AKSegmentedControl *segmentedControl3;
+    UISegmentedControl *segmentControl;
+    
+    // para os filtros de pesquisa
+    Filtros * filtros;
+    
     bool showFacebook;
     NSString * tipo;
     
@@ -58,6 +67,8 @@
     SemDados * vazio;
     
     AnimationController * animation;
+    
+    CGFloat paraSelectorValue;
 }
 
 @property (strong, nonatomic) NSCache *imageCache;
@@ -155,6 +166,8 @@ int num = 0;
 
 - (void)setupSegmentedControl3
 {
+    
+    
     [segmentedControl3 removeFromSuperview];
     
     UIImage *backgroundImage = [[UIImage imageNamed:@"segmented-bg9.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
@@ -187,13 +200,30 @@ int num = 0;
     [buttonSocial setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [buttonSocial setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
     
+    
+    // Button 2
+    UIButton *buttonStar = [[UIButton alloc] init];
+    [buttonStar setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonStar setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    //[buttonSocial setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[buttonSocial.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+    [buttonStar.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
+    //[buttonSocial setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0)];
+    
+    //UIImage *buttonSocialImageNormal = [UIImage imageNamed:@"social-icon.png"];
+    [buttonStar setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateHighlighted];
+    [buttonStar setBackgroundImage:buttonBackgroundImagePressedLeft forState:UIControlStateSelected];
+    [buttonStar setBackgroundImage:buttonBackgroundImagePressedLeft forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    [buttonStar setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [buttonStar setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
 
     
  
     // Button 3
     UIButton *buttonSettings = [[UIButton alloc] init];
     
-    [buttonSettings setTitle:[Language textForIndex:@"Favoritos"] forState:UIControlStateNormal];
+    [buttonSettings setTitle:@"Filtros" forState:UIControlStateNormal];
     [buttonSettings setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     //[buttonSettings setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     //[buttonSettings.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
@@ -208,9 +238,23 @@ int num = 0;
     [buttonSettings setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
 
     
-    [segmentedControl3 setButtonsArray:@[buttonSocial/*, buttonStar*/, buttonSettings]];
-    [self.viewFavoritos addSubview:segmentedControl3];
+    [segmentedControl3 setButtonsArray:@[buttonSocial, buttonStar, buttonSettings]];
+    
+    
+    [self.paraSelector addSubview:segmentedControl3];
+    
+    
+    /*
+    NSArray *itemArray = [NSArray arrayWithObjects: @"One", [Language textForIndex:@"Recomendados"], [Language textForIndex:@"Favoritos"], nil];
+    
+    
+    segmentControl = [[UISegmentedControl alloc]initWithItems:itemArray];
+    
+    [segmentControl setFrame:CGRectMake(10.0,6, 300.0, 37.0)];
+    [self.viewFavoritos addSubview:segmentControl];
+    */
 }
+
 
 - (void)segmentedViewController:(id)sender
 {
@@ -224,7 +268,8 @@ int num = 0;
         
 	}
     
-	 if([[segmentedControl3 selectedIndexes] containsIndex:1])    {
+	 if([[segmentedControl3 selectedIndexes] containsIndex:1])
+     {
         
         NSLog(@"Tipo de login realisado mainpage click fav%@",[Globals user].loginType);
         
@@ -249,8 +294,14 @@ int num = 0;
         }
         
 	}
+    
+    if([[segmentedControl3 selectedIndexes] containsIndex:2])
+    {
+        [self chamarFiltros];
+    }
 
 }
+
 
 -(NSString *)imprimirDistancia:(Restaurant *)rest
 {
@@ -285,7 +336,8 @@ int num = 0;
         {
             case 1:
             {
-                //NSLog(@"resultado dalista dos recomendados =>%@", result.description);
+                NSLog(@"resultado dalista dos recomendados =>%@", result.description);
+                [segmentedControl3 setSelectedIndex:0];
                 
                 if(![[result objectForKey:@"resp"] isEqualToString:@"sem geolocalizacao"]){
                
@@ -384,9 +436,9 @@ int num = 0;
                     colececaoRecomendados.view.frame = CGRectMake(0, 0, self.viewContainer.frame.size.width, self.viewContainer.frame.size.height);
                     isFavOpen = NO;
                     
-                    self.viewFavoritos.frame = CGRectMake(0, -40, 320, 40);
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 40);
                     [colececaoRecomendados.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
-                    [colececaoRecomendados.collectionView addSubview: self.viewFavoritos];
+                    //[colececaoRecomendados.collectionView addSubview: self.viewFavoritos];
 
                 }else
                 {
@@ -403,18 +455,18 @@ int num = 0;
                     [self.viewContainer addSubview:vazio.view];
                     
                     self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
-                     [self.viewContainer addSubview:self.viewFavoritos];
+                     //[self.viewContainer addSubview:self.viewFavoritos];
                 }
                 }else
                 {
                     // quando o servidor responde que recebeu geolocalização com coordenadas erradas...
-                    [colececaoRecomendados removeFromParentViewController];
-                    [colececaoFavoritos removeFromParentViewController];
+                    [colececaoRecomendados.view removeFromSuperview];
+                    [colececaoFavoritos.view removeFromSuperview];
                     vazio = [SemDados new];
                     vazio.view.frame = CGRectMake(0,
-                                                  30,
+                                                  0,
                                                   self.viewContainer.frame.size.width,
-                                                  self.viewContainer.frame.size.height-30);
+                                                  self.viewContainer.frame.size.height-0);
                     vazio.imagem.image = [UIImage imageNamed:@"compas-50.png"];
                     vazio.labelTitulo.text = [Language textForIndex:@"Geolocalizacao"];
                     vazio.labelMenssagem.text =[Language textForIndex:@"Obter_melhor_Menu_guru"];
@@ -422,7 +474,7 @@ int num = 0;
                     [self.viewContainer addSubview:vazio.view];
                     [animation.view removeFromSuperview];
                     self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
-                     [self.viewContainer addSubview:self.viewFavoritos];
+                     //[self.viewContainer addSubview:self.viewFavoritos];
                     
                 }
                 
@@ -436,7 +488,7 @@ int num = 0;
                 NSLog(@"resultado dalista dos favoritos =>%@", result.description);
                 
                 
-                
+                [segmentedControl3 setSelectedIndex:1];
                 restaurantesRecomendados = [NSMutableArray new];
                 
                 for(NSMutableDictionary * dict in [result objectForKey:@"resp"]){
@@ -516,6 +568,7 @@ int num = 0;
                 
                     colececaoFavoritos = [CollectionGuru new];
                     colececaoFavoritos.delegate = self;
+                    colececaoFavoritos.scroolDelegate = self;
                     colececaoFavoritos.locationManager = locationManager;
                 
                     [colececaoFavoritos CarregarRestaurantes:restaurantesRecomendados];
@@ -524,7 +577,7 @@ int num = 0;
                     [self.viewContainer addSubview:colececaoFavoritos.view];
                     [vazio removeFromParentViewController];
                     [colececaoRecomendados removeFromParentViewController];
-                    self.viewFavoritos.frame = CGRectMake(0, -40, 320, 30);
+                    self.viewFavoritos.frame = CGRectMake(0, 0, 320, 30);
                     [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
                     [colececaoFavoritos.collectionView addSubview: self.viewFavoritos];
 
@@ -538,13 +591,13 @@ int num = 0;
             }
             case 3:
             {
-               // NSLog(@"cidades existentes %@", result);
+                NSLog(@"cidades existentes %@", result);
                 
                 NSMutableArray *array =[NSMutableArray new];
                 for (NSMutableDictionary *dict in [result objectForKey:@"resp"]) {
                     City * cit = [City new];
                     cit.name = [dict objectForKey:@"nome"];
-                    //cit.dbId = [dict objectForKey:@"id"];
+                    cit.dbId = [[dict objectForKey:@"id"] integerValue];
                     [array addObject:cit];
                 }
                 [Globals setCities:array];
@@ -680,6 +733,7 @@ int num = 0;
     
     colececaoRecomendados = [CollectionGuru new];
     colececaoRecomendados.delegate = self;
+    colececaoRecomendados.scroolDelegate = self;
     colececaoRecomendados.locationManager = locationManager;
     
     [colececaoRecomendados CarregarRestaurantes:restaurantesRecomendados];
@@ -721,7 +775,7 @@ int num = 0;
 
 -(void)viewWillAppear:(BOOL)animated{
      [super viewWillAppear:YES];
-    
+    self.navigationController.toolbarHidden=YES;
     
      [Utils mudaBarraParaSeIos7:UIStatusBarStyleDefault];
    // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
@@ -744,6 +798,8 @@ int num = 0;
         
         [self lerRecomendados];
     }
+    
+    
 }
 
 
@@ -845,6 +901,8 @@ int num = 0;
     
     [segmentedControl3 setSelectedIndex:0];
     
+     
+    
     [self setupSegmentedControl3];
 
     
@@ -859,7 +917,7 @@ int num = 0;
     
     
     
-    self.navigationController.navigationBarHidden = YES;
+   //self.navigationController.navigationBarHidden = YES;
     
     
     //self.labelRestaurante.text = [Language textForIndex:@"MainFrase1"];
@@ -873,15 +931,6 @@ int num = 0;
      [Utils mudaBarraParaSeIos7:UIStatusBarStyleDefault];
     //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
-    
-   
-    
-   
-    
-
-    
-    // Set a default data source for all instances.  Otherwise, you can specify the data source on individual text fields via the autocompleteDataSource property
-    
 
     [self setTextPadding:self.texfFieldPesquisa];
     
@@ -889,20 +938,11 @@ int num = 0;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.topView addGestureRecognizer:singleTap];
 
-   // [self makeLogin];
-    //[self loadUser];
-   
-    //self.scrollView.contentOffset = CGPointMake( 0, 90);
+
     
     
     [self carragarCidades];
-    //[self carregaRestaurantes];
-    
-    // para ficar selecionada a cidade
 
-    // agora mudou para ser o restaurante selecionado
-    
-    //tipo = @"Cities";
     tipo = @"Restaurants";
     
     [self.imageRestaurant setImage:[UIImage imageNamed:@"botao_select_branco.png"]];
@@ -912,14 +952,38 @@ int num = 0;
     
     [self gps];
     
- 
-    
-   
     
     self.collectionView.delegate = self;
     
-
+    
+    self.title = [Language textForIndex:@"Inicio"];
+    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 25, 25)];
+    [button addTarget:self action:@selector(pushMenu:) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"b_menu.png"] forState:UIControlStateNormal];
+    
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    //[anotherButton setImage:[UIImage imageNamed:@"b_back.png"]];
+    
+    
+    self.navigationItem.leftBarButtonItem = anotherButton;
+    
+    
+    CGRect frame = CGRectMake(110, 0, 100, 44);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:101.0/255.0 green:112.0/255.0 blue:122.0/255.0 alpha:1];
+    //label.text = @"Login";
+    self.navigationItem.titleView = label;
+    
+    
+    paraSelectorValue = self.paraSelector.frame.origin.y;
+    
 }
+
+
+
 
 -(void)carregaRestaurantes
 {
@@ -944,9 +1008,7 @@ int num = 0;
     rests.delegate = self;
     
     NSMutableDictionary * dict = [NSMutableDictionary new];
-    //
-    //        $body['lang'];
-    //        $body['nomeparte'];
+
     
     
     [dict setObject:[Globals lang] forKey:@"lang"];
@@ -1110,21 +1172,38 @@ int num = 0;
     
 }
 
+-(void)PesquisaFiltros:(NSMutableDictionary *)dict
+{
+    Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
+    
+   
+    [c setFiltros:dict];
+    
+    c.locationManager = locationManager;
+    c.delegate = self.delegate;
+    //[c setTipo:tipo];
+    [self.navigationController pushViewController:c animated:YES];
+    PP_RELEASE(c);
+
+}
+
 -(void)ChamarPesquisa
 {
     // bug
     
     Resultados *c = [[Resultados alloc] initWithNibName:@"Resultados" bundle:nil];
     
-    if(self.texfFieldPesquisa.text)
+    if(self.texfFieldPesquisa.text){
     
-        [c setResultado:self.texfFieldPesquisa.text];
-    else
-        [c setResultado:@""];
+       // [c setResultado:self.texfFieldPesquisa.text];
+    }
+    else{
+       // [c setResultado:@""];
+    }
     
     c.locationManager = locationManager;
     c.delegate = self.delegate;
-    [c setTipo:tipo];
+    //[c setTipo:tipo];
     [self.navigationController pushViewController:c animated:YES];
     PP_RELEASE(c);
 }
@@ -1162,26 +1241,26 @@ int num = 0;
 
 - (IBAction)pushMenu:(id)sender {
     
-//    MenuRefugio *t = [[MenuRefugio alloc] init];
-//    t.delegate = self;
-//    //UINavigationController *n = [[UINavigationController alloc] initWithRootViewController:t];
-//    
-//    [self.revealSideViewController pushViewController:t onDirection:PPRevealSideDirectionTop withOffset:t.view.frame.size.height animated:YES];
-//    PP_RELEASE(t);
-//    //PP_RELEASE(n);
-    //[self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
-    if (self.delegate)
-    {
-        [self.delegate performSelector:@selector(chamarTopo) ];
-        
-     
-        
-        
-    }
+    MenuRefugio *t = [[MenuRefugio alloc] init];
+    t.delegate = self;
+    //UINavigationController *n = [[UINavigationController alloc] initWithRootViewController:t];
     
-
-    [self.texfFieldPesquisa resignFirstResponder];
-    [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
+    [self.revealSideViewController pushViewController:t onDirection:PPRevealSideDirectionLeft withOffset:100 animated:YES];
+    PP_RELEASE(t);
+    //PP_RELEASE(n);
+    //[self.scrollView setContentOffset:CGPointMake( 0, 90) animated:YES];
+//    if (self.delegate)
+//    {
+//        [self.delegate performSelector:@selector(chamarTopo) ];
+//        
+//     
+//        
+//        
+//    }
+//    
+//
+//    [self.texfFieldPesquisa resignFirstResponder];
+//    [self.scrollView setContentOffset:CGPointMake( 0, 0) animated:YES];
 }
 
 
@@ -1365,19 +1444,26 @@ int num = 0;
          [self chamarLogin];
     }else{
         [self ChamarFavoritos];
-        }
+        
+    }
 }
 
 -(void)chamarLogin{
-    Login *log = [Login new];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
+//    Login *log = [Login new];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:log];
+//    
+//    //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+//    //[self presentViewController:nav animated:YES completion:nil];
+//    
+//    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:nil];
     
-    //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
-    //[self presentViewController:nav animated:YES completion:nil];
-    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:nil];
+//[self.navigationController pushViewController:log animated:YES];
     
-    //[self.navigationController pushViewController:log animated:YES];
-
+    
+    Login *login =[Login new];
+    login.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:login] animated:YES completion:nil];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1488,8 +1574,25 @@ int num = 0;
     }
 }
 
+-(void)chamarFiltros
+{
 
+    filtros = [Filtros new];
+    filtros.delegate = self;
+    filtros.scroolDelegate = self;
+    [filtros.view setFrame:CGRectMake(0, 0, self.viewContainer.frame.size.width, self.viewContainer.frame.size.height)];
+    [self.viewContainer addSubview:filtros.view];
+    
 
+    
+}
+
+-(void)chamarPesquisa
+{
+    
+    
+    [self ChamarPesquisa];
+}
 
 -(void)ChamarFavoritos
 {
@@ -1603,4 +1706,68 @@ int num = 0;
 	}
     
 }
+
+
+
+-(void)fezScrool:(NSNumber *)mexeu
+{
+    
+    
+     //NSLog(@"colecção mexeu %f",mexeu.floatValue);
+  
+    
+    
+    if (mexeu.floatValue > -40){
+        
+       
+        //[UIView animateWithDuration:0.5 animations:^{  }];
+        
+        [self.paraSelector setFrame:CGRectMake(0 ,
+                                               paraSelectorValue - mexeu.floatValue -40,
+                                               self.paraSelector.frame.size.width,
+                                               self.paraSelector.frame.size.height) ];
+    }else{
+    
+        [self.paraSelector setFrame:CGRectMake(0 ,
+                                               paraSelectorValue,
+                                               self.paraSelector.frame.size.width,
+                                               self.paraSelector.frame.size.height) ];
+        
+        
+    }
+    
+    
+}
+
+
+-(void)fezScroolTabela:(NSNumber *)mexeu
+{
+    
+    
+    //NSLog(@"colecção mexeu %f",mexeu.floatValue);
+    
+    
+    
+    if (mexeu.floatValue > 0){
+        
+        
+        //[UIView animateWithDuration:0.5 animations:^{  }];
+        
+        [self.paraSelector setFrame:CGRectMake(0 ,
+                                               paraSelectorValue - mexeu.floatValue ,
+                                               self.paraSelector.frame.size.width,
+                                               self.paraSelector.frame.size.height) ];
+    }else{
+        
+        [self.paraSelector setFrame:CGRectMake(0 ,
+                                               paraSelectorValue,
+                                               self.paraSelector.frame.size.width,
+                                               self.paraSelector.frame.size.height) ];
+        
+        
+    }
+    
+    
+}
+
 @end

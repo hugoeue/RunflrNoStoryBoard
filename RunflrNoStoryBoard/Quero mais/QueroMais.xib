@@ -10,6 +10,7 @@
                 <outlet property="imgDia" destination="o0d-lS-9Nv" id="HVd-W0-156"/>
                 <outlet property="imgEme" destination="7Sb-9F-0Jg" id="9gN-u5-e3g"/>
                 <outlet property="imgEsp" destination="qSj-87-1fd" id="VGg-1N-p4q"/>
+                <outlet property="textArea" destination="GDW-YX-QT9" id="97p-7p-2Pp"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -19,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="t5t-ft-Cpy">
-                    <rect key="frame" x="0.0" y="80" width="320" height="60"/>
+                    <rect key="frame" x="0.0" y="223" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botao_no_select.png" id="o0d-lS-9Nv">
@@ -51,7 +52,7 @@
                     <color key="backgroundColor" white="0.66666666669999997" alpha="0.33000000000000002" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="Drd-tF-Fxi">
-                    <rect key="frame" x="0.0" y="140" width="320" height="60"/>
+                    <rect key="frame" x="0.0" y="283" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botao_no_select.png" id="qSj-87-1fd">
@@ -83,7 +84,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="Xwl-GL-Ak8">
-                    <rect key="frame" x="0.0" y="200" width="320" height="60"/>
+                    <rect key="frame" x="0.0" y="343" width="320" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="botao_no_select.png" id="7Sb-9F-0Jg">
@@ -157,6 +158,19 @@
                         <action selector="ClickSubmeter:" destination="-1" eventType="touchUpInside" id="LCx-UJ-EFY"/>
                     </connections>
                 </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GDW-YX-QT9">
+                    <rect key="frame" x="10" y="107" width="300" height="108"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diz o que pensas APT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9k7-cO-nTp">
+                    <rect key="frame" x="60" y="80" width="200" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

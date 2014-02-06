@@ -20,6 +20,7 @@
 - (IBAction)clickEsp:(id)sender;
 - (IBAction)clickEme:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UITextView *textArea;
 
 
 @end

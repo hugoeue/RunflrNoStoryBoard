@@ -20,6 +20,10 @@
 
 @interface Resultados ()
 {
+    // esquece tudo o que sabes... agora vamos ter um filtro muito mais complexo
+    NSMutableDictionary * dictionary;
+    
+    
     NSString *result;
     NSString *tipo;
     
@@ -71,15 +75,20 @@
     return self;
 }
 
--(void)setResultado:(NSString *)resultado
+-(void)setFiltros:(NSMutableDictionary *)dict
 {
-    result = resultado;
+    dictionary = dict;
 }
 
--(void)setTipo:(NSString *)tip
-{
-    tipo = tip;
-}
+//-(void)setResultado:(NSString *)resultado
+//{
+//    result = resultado;
+//}
+//
+//-(void)setTipo:(NSString *)tip
+//{
+//    tipo = tip;
+//}
 
 - (void)viewDidLoad
 {
@@ -101,13 +110,169 @@
     
     self.labelResultado.text=txt;
  
-    [self preperarPesquisa];
+    //[self preperarPesquisa];
+    [self PrepararPesquisaFiltrada];
     
     if(result.length == 0)
     {
         self.labelResultado.text=[Language textForIndex:@"Todos"];
     }
   
+}
+
+-(void)PrepararPesquisaFiltrada
+{
+    
+//    [dict setObject:especial forKey:@"especial"];
+//    [dict setObject:preco forKey:@"preco"];
+//    [dict setObject:abertoString  forKey:@"aberto"];
+//    [dict setObject:restauranteOuPrato  forKey:@"restauranteouprato"];
+//    [dict setObject:texto  forKey:@"texto"];
+    if([[dictionary objectForKey:@"especial"] isEqualToString:@"com especial"])
+    {
+        [self JsonPesquisaEspecial];
+    }
+    else if ([[dictionary objectForKey:@"restauranteouprato"] isEqualToString:@"Prato"])
+    {
+        [self jsonPesquisaPrato];
+    }else if ([[dictionary objectForKey:@"restauranteouprato"] isEqualToString:@"Restaurante"])
+    {
+         [self jsonPesquisaRestaurante];
+    }
+   
+
+}
+
+
+-(void)JsonPesquisaEspecial
+{
+    
+    NSLog(@"json_pesquisa_especial.php");
+    
+    webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/versao3/json_pesquisa_especial.php" method:@"" tag:1];
+    webResultado.delegate = self;
+    
+    //    $body['lang'];
+    //    $body['lat'];//
+    //    $body['lon'];//
+    //    $body['aberto'];//1 se aberto 0 se fechado
+    //    $body['prato']
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    
+    
+    NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+    NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+    [dict setObject:latitude forKey:@"lat"];
+    [dict setObject:longitude forKey:@"lon"];
+    [dict setObject:[dictionary objectForKey:@"preco"] forKey:@"preco_id"];
+    
+    
+    if([[dictionary objectForKey:@"aberto"] isEqualToString:@"Aberto"]){
+        [dict setObject:@"1" forKey:@"aberto"];
+    }else
+    {
+        [dict setObject:@"0" forKey:@"aberto"];
+    }
+    
+    if([[dictionary objectForKey:@"texto"] isEqualToString:@""])
+    {
+        [dict setObject:@" " forKey:@"prato"];
+    }else
+    {
+        
+        [dict setObject:[dictionary objectForKey:@"texto"] forKey:@"prato"];
+        
+    }
+    [webResultado sendDict:dict];
+
+}
+
+-(void)jsonPesquisaPrato
+{
+      NSLog(@"json_pesquisa_prato.php");
+    
+    webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/versao3/json_pesquisa_prato_preco.php" method:@"" tag:1];
+    webResultado.delegate = self;
+    
+//    $body['lang'];
+//    $body['lat'];//
+//    $body['lon'];//
+//    $body['aberto'];//1 se aberto 0 se fechado
+//    $body['prato']
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+ 
+    
+    NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+    NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+    [dict setObject:latitude forKey:@"lat"];
+    [dict setObject:longitude forKey:@"lon"];
+    [dict setObject:[dictionary objectForKey:@"preco"] forKey:@"preco_id"];
+    
+    
+    if([[dictionary objectForKey:@"aberto"] isEqualToString:@"Aberto"]){
+        [dict setObject:@"1" forKey:@"aberto"];
+    }else
+    {
+        [dict setObject:@"0" forKey:@"aberto"];
+    }
+    
+    if([[dictionary objectForKey:@"texto"] isEqualToString:@""])
+    {
+        [dict setObject:@" " forKey:@"prato"];
+    }else
+    {
+    
+        [dict setObject:[dictionary objectForKey:@"texto"] forKey:@"prato"];
+    
+    }
+    [webResultado sendDict:dict];
+    
+}
+
+-(void)jsonPesquisaRestaurante
+{
+    NSLog(@"json_pesquisa_restaurante.php");
+    webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/versao3/json_pesquisa_restaurante_preco.php" method:@"" tag:1];
+    webResultado.delegate = self;
+    
+    //    $body['lang'];
+    //    $body['lat'];//
+    //    $body['lon'];//
+    //    $body['aberto'];//1 se aberto 0 se fechado
+    //    $body['prato']
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    
+    
+    NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+    NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+    [dict setObject:latitude forKey:@"lat"];
+    [dict setObject:longitude forKey:@"lon"];
+    [dict setObject:[dictionary objectForKey:@"preco"] forKey:@"preco_id"];
+    
+    if([[dictionary objectForKey:@"aberto"] isEqualToString:@"Aberto"]){
+        [dict setObject:@"1" forKey:@"aberto"];
+    }else
+    {
+        [dict setObject:@"0" forKey:@"aberto"];
+    }
+    
+    if([[dictionary objectForKey:@"texto"] isEqualToString:@""])
+    {
+        [dict setObject:@" " forKey:@"prato"];
+    }else
+    {
+        
+        [dict setObject:[dictionary objectForKey:@"texto"] forKey:@"prato"];
+        
+    }
+    [webResultado sendDict:dict];
+
 }
 
 -(void)sendCompleteWithResult:(NSDictionary*)resulti withError:(NSError*)error{
@@ -140,7 +305,7 @@
                     NSString * telefone = [dict objectForKey:@"telefone"];
                     NSString * cidade = [dict objectForKey:@"cidade"];
                     NSString * freguesia = [dict objectForKey:@"freg_nome"];
-                    NSNumber * seguir = [dict objectForKey:@"seguidores"];
+                    NSString * seguir = [dict objectForKey:@"seguidores"];
                     NSString * pagante = [dict objectForKey:@"pag"];
                     
                     rest.cuisinesResultText = @"";
@@ -154,7 +319,7 @@
                     
                     
                     
-                    if ([seguir isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                    if ([seguir isEqualToString:@"0"]) {
                         rest.isUserFav = NO;
                     }else {
                         rest.isUserFav = YES;
@@ -225,7 +390,18 @@
 }
 
 
-
+-(void)chamarRestaurante:(Restaurant *)rest
+{
+    // chamar restaurante
+    NSLog(@"restaurante chamado chamase %@", rest.name);
+    
+    Diarias * details = [Diarias new];
+    details.delegate = self.delegate;
+    details.locationManager = locationManager;
+    [details loadRestaurant:rest];
+    
+    [self.navigationController pushViewController:details animated:YES];
+}
 
 
 
@@ -244,185 +420,174 @@
 
 
 
--(void)preperarPesquisa
-{
-    
-    
-    if([[Globals user].loginType isEqualToString:@"facebook"])
-    {
-        [self prepararPesquisaLogin];
-    }
-    else if([[Globals user].loginType isEqualToString:@"guru"])
-    {
-        [self prepararPesquisaLogin];
-    }
-    else if ([FBSession activeSession].isOpen && ![Globals user]){
-        [self prepararPesquisaLogin];
-    }else{
-        [self prepararPesquisaLogOut];
-    }
+//-(void)preperarPesquisa
+//{
+//    
+//    
+//    if([[Globals user].loginType isEqualToString:@"facebook"])
+//    {
+//        [self prepararPesquisaLogin];
+//    }
+//    else if([[Globals user].loginType isEqualToString:@"guru"])
+//    {
+//        [self prepararPesquisaLogin];
+//    }
+//    else if ([FBSession activeSession].isOpen && ![Globals user]){
+//        [self prepararPesquisaLogin];
+//    }else{
+//        [self prepararPesquisaLogOut];
+//    }
+//
+//
+//}
+
+//-(void)prepararPesquisaLogin
+//{
+//    doneSearch = NO;
+//    
+//    NSMutableDictionary * dict = [NSMutableDictionary new];
+//    
+//    if([Globals user].faceId)
+//    {
+//        [dict setObject: [Globals user].faceId forKey:@"face_id"];
+//        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
+//    }else
+//    {
+//        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
+//        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
+//    }
+//    
+//    
+//
+//    
+//    if ([tipo isEqualToString:@"Restaurants"]) {
+//        //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_teste2.php" method:@"" tag:1];
+//        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:1];
+//        webResultado.delegate = self;
+//        
+//        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+//        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+//        
+//        [dict setObject:latitude forKey:@"lat"];
+//        [dict setObject:longitude forKey:@"lon"];
+//        
+//        [dict setObject:result forKey:@"nomeparte"];
+//        [dict setObject:[Globals lang] forKey:@"lang"];
+//        
+//        [webResultado sendDict:dict];
+//    }
+//    else if([tipo isEqualToString:@"Cities"])
+//    {
+//        //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:2];
+//        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome2.php" method:@"" tag:2];
+//        webResultado.delegate = self;
+//        
+//   
+//        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+//        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+//        
+//        [dict setObject:latitude forKey:@"lat"];
+//        [dict setObject:longitude forKey:@"lon"];
+//       
+//        
+//        
+//        [dict setObject:result forKey:@"nomeparte"];
+//        [dict setObject:[Globals lang] forKey:@"lang"];
+//        
+//        [webResultado sendDict:dict];
+//    }else
+//    {
+//        // ainda tenho de mudar para o webservice novo da tania que tem os tais pratos
+//        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome_prato2.php" method:@"" tag:2];
+//        webResultado.delegate = self;
+//        
+//        NSMutableDictionary * dict = [NSMutableDictionary new];
+//        
+//        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+//        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+//        
+//        [dict setObject:latitude forKey:@"lat"];
+//        [dict setObject:longitude forKey:@"lon"];
+//        
+//        
+//        [dict setObject:result forKey:@"prato"];
+//        [dict setObject:[Globals lang] forKey:@"lang"];
+//        
+//        [webResultado sendDict:dict];
+//    }
+//
+//    
+//}
+//
+//-(void)prepararPesquisaLogOut
+//{
+//    doneSearch = NO;
+//    
+//    
+//    
+//    if ([tipo isEqualToString:@"Restaurants"]) {
+//        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome.php" method:@"" tag:1];
+//        webResultado.delegate = self;
+//        
+//        NSMutableDictionary * dict = [NSMutableDictionary new];
+//        
+//        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+//        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+//        
+//        [dict setObject:latitude forKey:@"lat"];
+//        [dict setObject:longitude forKey:@"lon"];
+//        
+//        
+//        [dict setObject:result forKey:@"nomeparte"];
+//        [dict setObject:[Globals lang] forKey:@"lang"];
+//        
+//        [webResultado sendDict:dict];
+//    }
+//    else if([tipo isEqualToString:@"Cities"])
+//    {
+//        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome.php" method:@"" tag:2];
+//        webResultado.delegate = self;
+//        
+//        NSMutableDictionary * dict = [NSMutableDictionary new];
+//        
+//        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+//        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+//        
+//        [dict setObject:latitude forKey:@"lat"];
+//        [dict setObject:longitude forKey:@"lon"];
+//        
+//        
+//        [dict setObject:result forKey:@"nomeparte"];
+//        [dict setObject:[Globals lang] forKey:@"lang"];
+//        
+//        [webResultado sendDict:dict];
+//    }else
+//    {
+//        // ainda tenho de mudar para o webservice novo da tania que tem os tais pratos
+//        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome_prato.php" method:@"" tag:2];
+//        webResultado.delegate = self;
+//        
+//        NSMutableDictionary * dict = [NSMutableDictionary new];
+//        
+//        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
+//        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
+//        
+//        [dict setObject:latitude forKey:@"lat"];
+//        [dict setObject:longitude forKey:@"lon"];
+//        
+//        
+//        [dict setObject:result forKey:@"prato"];
+//        [dict setObject:[Globals lang] forKey:@"lang"];
+//        
+//        [webResultado sendDict:dict];
+//    }
+//
+//}
 
 
-}
-
--(void)prepararPesquisaLogin
-{
-    doneSearch = NO;
-    
-    NSMutableDictionary * dict = [NSMutableDictionary new];
-    
-    if([Globals user].faceId)
-    {
-        [dict setObject: [Globals user].faceId forKey:@"face_id"];
-        [dict setObject: [NSString stringWithFormat:@"%d", 0] forKey:@"user_id"];
-    }else
-    {
-        [dict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"face_id"];
-        [dict setObject: [NSString stringWithFormat:@"%d", [Globals user].dbId] forKey:@"user_id"];
-    }
-    
-    
-
-    
-    if ([tipo isEqualToString:@"Restaurants"]) {
-        //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_teste2.php" method:@"" tag:1];
-        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:1];
-        webResultado.delegate = self;
-        
-        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
-        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
-        
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
-        
-        [dict setObject:result forKey:@"nomeparte"];
-        [dict setObject:[Globals lang] forKey:@"lang"];
-        
-        [webResultado sendDict:dict];
-    }
-    else if([tipo isEqualToString:@"Cities"])
-    {
-        //webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome2.php" method:@"" tag:2];
-        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome2.php" method:@"" tag:2];
-        webResultado.delegate = self;
-        
-   
-        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
-        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
-        
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
-       
-        
-        
-        [dict setObject:result forKey:@"nomeparte"];
-        [dict setObject:[Globals lang] forKey:@"lang"];
-        
-        [webResultado sendDict:dict];
-    }else
-    {
-        // ainda tenho de mudar para o webservice novo da tania que tem os tais pratos
-        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome_prato2.php" method:@"" tag:2];
-        webResultado.delegate = self;
-        
-        NSMutableDictionary * dict = [NSMutableDictionary new];
-        
-        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
-        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
-        
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
-        
-        
-        [dict setObject:result forKey:@"prato"];
-        [dict setObject:[Globals lang] forKey:@"lang"];
-        
-        [webResultado sendDict:dict];
-    }
-
-    
-}
-
--(void)prepararPesquisaLogOut
-{
-    doneSearch = NO;
-    
-    
-    
-    if ([tipo isEqualToString:@"Restaurants"]) {
-        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome.php" method:@"" tag:1];
-        webResultado.delegate = self;
-        
-        NSMutableDictionary * dict = [NSMutableDictionary new];
-        
-        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
-        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
-        
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
-        
-        
-        [dict setObject:result forKey:@"nomeparte"];
-        [dict setObject:[Globals lang] forKey:@"lang"];
-        
-        [webResultado sendDict:dict];
-    }
-    else if([tipo isEqualToString:@"Cities"])
-    {
-        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_cidade_nome.php" method:@"" tag:2];
-        webResultado.delegate = self;
-        
-        NSMutableDictionary * dict = [NSMutableDictionary new];
-        
-        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
-        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
-        
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
-        
-        
-        [dict setObject:result forKey:@"nomeparte"];
-        [dict setObject:[Globals lang] forKey:@"lang"];
-        
-        [webResultado sendDict:dict];
-    }else
-    {
-        // ainda tenho de mudar para o webservice novo da tania que tem os tais pratos
-        webResultado = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_rest_nome_prato.php" method:@"" tag:2];
-        webResultado.delegate = self;
-        
-        NSMutableDictionary * dict = [NSMutableDictionary new];
-        
-        NSString * latitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.latitude] ;
-        NSString * longitude = [NSString stringWithFormat:@"%f", locationManager.location.coordinate.longitude] ;
-        
-        [dict setObject:latitude forKey:@"lat"];
-        [dict setObject:longitude forKey:@"lon"];
-        
-        
-        [dict setObject:result forKey:@"prato"];
-        [dict setObject:[Globals lang] forKey:@"lang"];
-        
-        [webResultado sendDict:dict];
-    }
-
-}
 
 
 
-
--(void)chamarRestaurante:(Restaurant *)rest
-{
-    // chamar restaurante
-    NSLog(@"restaurante chamado chamase %@", rest.name);
-    
-    Diarias * details = [Diarias new];
-    details.delegate = self.delegate;
-    details.locationManager = locationManager;
-    [details loadRestaurant:rest];
-    
-    [self.navigationController pushViewController:details animated:YES];
-}
 
 
 

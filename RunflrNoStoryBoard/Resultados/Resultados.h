@@ -16,8 +16,11 @@
 
 
 @property CLLocationManager * locationManager;
--(void)setResultado:(NSString *)resultado;
--(void)setTipo:(NSString *)tip;
+//-(void)setResultado:(NSString *)resultado;
+//-(void)setTipo:(NSString *)tip;
+
+// as invençoes
+-(void)setFiltros:(NSMutableDictionary *)dict;
 
 @property (weak, nonatomic) IBOutlet UIView *viewContainer;
 

@@ -37,7 +37,17 @@
     
     self.textArea.text = self.conteudo;
     
-    self.imagemTopo.image = [Globals getImagemGenerica];
+    //self.imagemTopo.image = [Globals getImagemGenerica];
+    
+    CGRect frame = CGRectMake(0, 0, 100, 44);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:101.0/255.0 green:112.0/255.0 blue:122.0/255.0 alpha:1];
+    label.text = self.titulo;
+    self.navigationItem.titleView = label;
+
         
 }
 

@@ -20,9 +20,13 @@
 #import "Menus.h"
 #import "SemDados.h"
 #import "MapViewController.h"
-#import "DemoRootViewController.h"
+// tem de sair o paperfold
+#import "PPRevealSideViewController.h"
+//#import "DemoRootViewController.h"
 #import "AnimationController.h"
 #import "QueroMais.h"
+#import "AsyncImageView.h"
+
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -34,6 +38,7 @@
     WebServiceSender *addRemoveFav;
     WebServiceSender *verifica;
     WebServiceSender *mudarLingua;
+    WebServiceSender *receberFotos;
 
     MenuDoDia * menuDia;
     MenuGeral * menuG;
@@ -73,14 +78,35 @@
     // posicao inicial da imagem
     CGFloat posicaoImg;
     CGFloat isIOS7;
+    
+    BOOL openCarousel;
+    
+    UIButton *settingsView1 ;
+    
 }
 
 @end
 
 @implementation Diarias
 
-@synthesize locationManager;
+@synthesize locationManager,items,carousel;
 
+
+-(void)receberFotosJson
+{
+    receberFotos = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_galeria_rest.php" method:@"" tag:5];
+    
+    receberFotos.delegate = self;
+    
+    NSString * restauranteId = [NSString stringWithFormat:@"%d",restaurante.dbId];
+    
+    NSMutableDictionary * dict = [NSMutableDictionary new];
+    [dict setObject:[Globals lang] forKey:@"lang"];
+    [dict setObject:restauranteId forKey:@"rest_id"];
+    
+    
+    [receberFotos sendDict:dict];
+}
 
 -(void)popUpMudarLingua
 {
@@ -114,7 +140,11 @@
         [verifica cancel];
     if (mudarLingua)
         [mudarLingua cancel];
+    if (receberFotos)
+        [receberFotos cancel];
     
+    
+    receberFotos= nil;
     mudarLingua = nil;
     
     webser = nil;
@@ -129,9 +159,20 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
+
+- (void)setUp
+{
+    //set up data
+
+    self.items = [NSMutableArray array];
+    [self.items addObject:restaurante.featuredImageString];
+    
+}
+
 
 - (void) moveAllSubviewsDown{
     float barHeight = -40.0;
@@ -187,7 +228,96 @@
     
     posicaoImg = self.viewImagemRest.frame.origin.y;
     
-       
+    
+    //configure carousel
+    carousel.type = iCarouselTypeLinear;
+
+    [self setUp];
+    [self receberFotosJson];
+    
+    
+    
+    
+    
+    // tenho de criar todos os botoes programaticamente porque as imagens foram dadas com os tamanho errados
+    
+    // tenho de criar a porcaria de uma label para poder dar espaçamento entre os botoes :(
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 44)];
+    label.backgroundColor = [UIColor clearColor];
+    UIBarButtonItem *divider = [[UIBarButtonItem alloc] initWithCustomView:label];
+    label.text = @"";
+    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 5, 44)];
+    label1.backgroundColor = [UIColor clearColor];
+    UIBarButtonItem *divider1 = [[UIBarButtonItem alloc] initWithCustomView:label1];
+    label1.text = @"";
+
+    
+    // para as linguas
+    UIButton *settingsView0 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [settingsView0 addTarget:self action:@selector(clickDiarias:) forControlEvents:UIControlEventTouchUpInside];
+    [settingsView0 setBackgroundImage:[UIImage imageNamed:@"b_idioma.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *buttonLinguas = [[UIBarButtonItem alloc] initWithCustomView:settingsView0];
+    
+    
+    // para os favoritos
+    // ainda tenho de fazer um if para verificar se este restuarante é favorito ou nao
+    
+    settingsView1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [settingsView1 addTarget:self action:@selector(clickAddFavorito:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if(restaurante.isUserFav)
+        [settingsView1 setBackgroundImage:[UIImage imageNamed:@"b_favoritos_acionado.png"] forState:UIControlStateNormal];
+    else
+        [settingsView1 setBackgroundImage:[UIImage imageNamed:@"b_favoritos.png"] forState:UIControlStateNormal];
+    
+    
+    UIBarButtonItem *buttonFavoritos = [[UIBarButtonItem alloc] initWithCustomView:settingsView1];
+    
+    
+    
+    // para Fazer chamada
+    UIButton *settingsView2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [settingsView2 addTarget:self action:@selector(clickLigar:) forControlEvents:UIControlEventTouchUpInside];
+    [settingsView2 setBackgroundImage:[UIImage imageNamed:@"b_telefonar.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *buttonChamada = [[UIBarButtonItem alloc] initWithCustomView:settingsView2];
+    
+    // para paratinhar que ainda nao existia aqte agora
+    UIButton *settingsView3 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [settingsView3 addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [settingsView3 setBackgroundImage:[UIImage imageNamed:@"b_partilhar.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *buttonPartinhar = [[UIBarButtonItem alloc] initWithCustomView:settingsView3];
+    
+    
+    // para o quero mais
+    UIButton *settingsView4 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [settingsView4 addTarget:self action:@selector(abrirSelectorTania)  forControlEvents:UIControlEventTouchUpInside];
+    [settingsView4 setBackgroundImage:[UIImage imageNamed:@"b_mais.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *buttonMais = [[UIBarButtonItem alloc] initWithCustomView:settingsView4];
+
+    
+    
+    
+    NSArray * array =[NSArray arrayWithObjects:divider1,buttonLinguas, divider ,buttonFavoritos ,divider ,buttonChamada, divider ,buttonPartinhar,divider,buttonMais, nil];
+    
+    
+    
+    
+    UIImage * image = [UIImage imageNamed:@"Base_Baixo_Top-Line.png"];
+    
+    [self.navigationController.toolbar setBackgroundImage:image forToolbarPosition:0 barMetrics:UIBarMetricsDefault ];
+    
+   // [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    self.toolbarItems = array;
+    
+ 
+//    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.toolbarHidden = NO;
+    self.navigationController.navigationBarHidden = NO;
 }
 
 
@@ -294,13 +424,13 @@
                   [cartoes removeAllObjects];
 //                [vazio removeFromParentViewController];
                 
-                
+               /*
                 emailTitleCart = [[result objectForKey:@"msgdummy"] objectForKey:@"assunto"];
                 // Email Content
                 messageBodyCart = [[result objectForKey:@"msgdummy"] objectForKey:@"message"];
                 // To address
                 toRecipentsCart = [NSArray arrayWithObject:[[result objectForKey:@"msgdummy"] objectForKey:@"email"]];
-        
+               
                 
                
              
@@ -317,7 +447,7 @@
                 
                 alertCartao = [[UIAlertView alloc] initWithTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"titulo"] message:utf8string  delegate:self cancelButtonTitle:[[result objectForKey:@"msgdummy"] objectForKey:@"butaoc"] otherButtonTitles:[[result objectForKey:@"msgdummy"] objectForKey:@"butao"], nil];
                 alertCartao.tag = 4;
-
+                 */
                 
                 for(NSMutableDictionary * dict in [result objectForKey:@"res"]){
                     Restaurant * rest = [Restaurant new];
@@ -339,6 +469,8 @@
                     rest.bestChoices = [dict objectForKey:@"nome_cat"];
                     rest.chef = [dict objectForKey:@"menu_esp_id"];
                     rest.featuredImageString = [dict objectForKey:@"imagem"];
+                    rest.dummy = [dict objectForKey:@"dummy"];
+                    rest.pai = [dict objectForKey:@"pai_id"];
                     
                     rest.city = @"";
                     
@@ -389,7 +521,7 @@
                     
                     // quando faltam cartoes ele faz coisas aqui
                     
-                    
+                    /*
                     if (!restaurante.destaque)
                     {
                         if (!diaria)
@@ -422,12 +554,13 @@
                         }
 
                     }
+                    */
                  
                     [colececaoFavoritos CarregarRestaurantes:cartoes];
                     [colececaoFavoritos.collectionView reloadData];
                     
                     self.viewBotoes.frame = CGRectMake(0, -160, 320, 44);
-                    [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(160, 0, 0, 0)];
+                    [colececaoFavoritos.collectionView setContentInset:UIEdgeInsetsMake(265, 0, 50, 0)];
                     [colececaoFavoritos.collectionView addSubview: self.viewBotoes];
                     
                 }else
@@ -474,6 +607,11 @@
                     restaurante.fav = 0;
                     [self.buttonSeguir setEnabled:YES];
                     
+                    
+                    // agora para a tollbar
+                    [settingsView1 setBackgroundImage:[UIImage imageNamed:@"b_favoritos_acionado.png"] forState:UIControlStateNormal];
+
+                    
                 }
                 
                 if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"demasiados utilizadores"]) {
@@ -492,6 +630,8 @@
                     restaurante.fav = 1;
                     [self.buttonSeguir setEnabled:YES];
                     
+                    [settingsView1 setBackgroundImage:[UIImage imageNamed:@"b_favoritos.png"] forState:UIControlStateNormal];
+                    
                 }
                 
                 if ([[[result objectForKey:@"res"] objectForKey:@"envio"] isEqualToString:@"eliminado com sucesso"]) {
@@ -499,6 +639,8 @@
                     [self.buttonSeguir setTitle:[Language textForIndex:@"Add_favoritos"] forState:UIControlStateNormal];
                     restaurante.fav = 1;
                     [self.buttonSeguir setEnabled:YES];
+                    
+                    [settingsView1 setBackgroundImage:[UIImage imageNamed:@"b_favoritos.png"] forState:UIControlStateNormal];
                 }
                 
                 // tenho de fazer cenas com os botoes
@@ -571,6 +713,23 @@
                 
                 break;
             }
+            case 5:
+            {
+                NSLog(@"resultado das fotos para a galeria %@", result.description);
+            
+                //items = [NSMutableArray new];
+                
+                for (NSMutableDictionary * dict in [result objectForKey:@"rest"]) {
+                    
+                    [items addObject:[dict objectForKey:@"foto"]];
+
+                }
+                
+                [carousel reloadData];
+                
+                break;
+            }
+
 
                 
         }
@@ -705,12 +864,10 @@
 
 - (IBAction)clickAddFavorito:(id)sender {
     [self.buttonSeguir setEnabled:NO];
-//    json_cratefav.php
-//    serve para apagar ou criar favoritos
-//    $body['user_id'];
-//	$body['face_id'];
-//	$body['favSend'];//se for 1 é para criar se for zero é para apagar
-//    $body['rest_id'];
+
+    
+
+    
     addRemoveFav = [[WebServiceSender alloc] initWithUrl:@"http://80.172.235.34/~tecnoled/menuguru/rundlrweb/data/json_createfav2.php" method:@"" tag:2];
     addRemoveFav.delegate = self;
     
@@ -784,7 +941,8 @@
    if(buttonIndex == 1)//Annul button pressed.
     {
 
-        [[DemoRootViewController getInstance] chamarMapa:restaurante];
+        // saiu o papperfold
+        //[[DemoRootViewController getInstance] chamarMapa:restaurante];
 
     }
         
@@ -865,10 +1023,12 @@
 {
     QueroMais * mais = [[QueroMais alloc] initWithRestaurant:restaurante];
      UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mais];
+    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     
-    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
-        //não preciso de fazer nada
-    }];
+    [self presentViewController:nav animated:YES completion:nil];
+//    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
+//        //não preciso de fazer nada
+//    }];
 }
 
 -(void)chamarLogin{
@@ -877,9 +1037,12 @@
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
     //[self presentViewController:nav animated:YES completion:nil];
-    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
-        [self.buttonSeguir setEnabled:YES];
-    }];
+    
+#warning saiu o paperfold
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
+    //[[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{ [self.buttonSeguir setEnabled:YES]; }];
     
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
@@ -990,6 +1153,8 @@
                                             self.viewImagemRest.frame.size.width,
                                             300
                                             )];
+        
+       
      
         [self.imgFade setFrame:CGRectMake(0,
                                             (posicaoImg -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*percentagem)) -60,
@@ -997,14 +1162,196 @@
                                             300
                                             )];
      
-        [self.viewParaTaparOlhos setFrame:CGRectMake(0,
-                                          (colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40 -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*1)) -19,
-                                          self.viewImagemRest.frame.size.width,
-                                          posicaoImg + mexeu.floatValue +600
-                                          )];
+        if (!openCarousel)
+        {
+            
+             [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+             (colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40 -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*1)) -19,
+             self.viewImagemRest.frame.size.width,
+             posicaoImg + mexeu.floatValue +600
+             )];
+            
+            [self.carousel setFrame:CGRectMake(0,
+                                               (posicaoImg -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*percentagem)) -60,
+                                               self.viewImagemRest.frame.size.width,
+                                               300
+                                               )];
+            
+        }
+        
     }];
+    
+    
+    if (mexeu.floatValue <= -400){
+        
+        openCarousel = YES;
+        [UIView animateWithDuration:0.5 animations:^{
+        
+            
+            [self.container setAlpha:1];
+            [self.viewImagemRest setAlpha:0];
+            
+            [self.viewImagemRest setFrame:CGRectMake(0,
+                                                     0,
+                                                     self.view.frame.size.width,
+                                                     self.view.frame.size.height
+                                                     )];
+            
+           
+            [self.carousel setFrame:CGRectMake(0,
+                                               self.view.frame.size.height/2 -150,
+                                               self.viewImagemRest.frame.size.width,
+                                               300
+                                               )];
+            
+        
+            [colececaoFavoritos.view setFrame:CGRectMake(0,
+                                                         568,
+                                                         colececaoFavoritos.view.frame.size.width,
+                                                         colececaoFavoritos.view.frame.size.height
+                                                         )];
+        
+        
+            [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+                                                         568,
+                                                         self.viewImagemRest.frame.size.width,
+                                                         posicaoImg + mexeu.floatValue +600
+                                                         )];
+
+            self.navigationController.toolbarHidden=YES;
+            
+         }];
+    }
 
     
 }
+
+- (IBAction)fecharGaleria:(id)sender {
+    
+    self.navigationController.toolbarHidden=NO;
+    openCarousel = NO;
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        
+        [self.container setAlpha:0];
+        [self.viewImagemRest setAlpha:1];
+        
+        [self.viewImagemRest setFrame:CGRectMake(0,
+                                                 posicaoImg,
+                                                 self.view.frame.size.width,
+                                                 self.view.frame.size.height
+                                                 )];
+        
+       
+        [self.carousel setFrame:CGRectMake(0,
+                                           self.view.frame.size.height/2 -150,
+                                           self.viewImagemRest.frame.size.width,
+                                           300
+                                           )];
+        
+        
+        [colececaoFavoritos.view setFrame:CGRectMake(0,
+                                                     20,
+                                                     colececaoFavoritos.view.frame.size.width,
+                                                     colececaoFavoritos.view.frame.size.height
+                                                     )];
+        
+        
+        [self.viewParaTaparOlhos setFrame:CGRectMake(0,
+                                                     colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40  -19,
+                                                     self.viewImagemRest.frame.size.width,
+                                                     600
+                                                     )];
+
+        
+    }];
+
+    
+    
+}
+
+
+#pragma mark -
+#pragma mark iCarousel methods
+
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return [items count];
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
+{
+    //create new view if no view is available for recycling
+    if (view == nil)
+    {
+        view = [[[AsyncImageView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 480.0f)] autorelease];
+        view.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+    //cancel any previously loading images for this view
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:view];
+    
+    //set image URL. AsyncImageView class will then dynamically load the image
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled%@",[items objectAtIndex:index]] ];
+    ((AsyncImageView *)view).imageURL = url ;
+    
+    return view;
+}
+
+- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
+{
+    //note: placeholder views are only displayed on some carousels if wrapping is disabled
+    return 0;
+}
+
+
+- (CATransform3D)carousel:(iCarousel *)_carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
+{
+    //implement 'flip3D' style carousel
+    transform = CATransform3DRotate(transform, M_PI / 8.0f, 0.0f, 1.0f, 0.0f);
+    return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
+}
+
+- (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    //customize carousel display
+    switch (option)
+    {
+        case iCarouselOptionWrap:
+        {
+            //normally you would hard-code this to YES or NO
+            return YES;
+        }
+        case iCarouselOptionSpacing:
+        {
+            //add a bit of spacing between the item views
+            return value * 1.05f;
+        }
+        case iCarouselOptionFadeMax:
+        {
+            if (carousel.type == iCarouselTypeCustom)
+            {
+                //set opacity based on distance from camera
+                return 0.0f;
+            }
+            return value;
+        }
+        default:
+        {
+            return value;
+        }
+    }
+}
+
+#pragma mark -
+#pragma mark iCarousel taps
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    NSNumber *item = (self.items)[index];
+    NSLog(@"Tapped view number: %@", item);
+}
+
+
 
 @end

@@ -49,6 +49,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
      self.navigationController.navigationBarHidden = YES;
+    
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonDidPressed:)];
+    UIBarButtonItem *flexableItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:NULL];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [toolbar setItems:[NSArray arrayWithObjects:flexableItem,doneItem, nil]];
+    self.textArea.inputAccessoryView = toolbar;
+}
+
+
+- (void)doneButtonDidPressed:(id)sender {
+    [self.textArea resignFirstResponder];
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +97,7 @@
      $body['user_id'];//"Felgueiras";//
      $body['user_nome'];//"Felgueiras";//
      $body['menus'];//"menu especial, menu do dia";//
+     $body['sugestao']
      
      */
     
@@ -100,11 +113,12 @@
         interessado = [NSString stringWithFormat:@"%@menu ementa, ",interessado];
     }
     
-    [dict setObject:restaurante.city forKey:@"rest_name"];
-    [dict setObject:restaurante.name forKey:@"rest_cidade"];
+    [dict setObject:restaurante.name forKey:@"rest_name"];
+    [dict setObject:restaurante.city forKey:@"rest_cidade"];
 
     [dict setObject: [Globals user].name forKey:@"user_nome"];
     [dict setObject:restaurante.name forKey:@"menus"];
+    [dict setObject: self.textArea.text forKey:@"sugestao"];
     
     if([Globals user].faceId)
     {
@@ -117,6 +131,8 @@
     }
 
     [dict setObject: interessado forKey:@"menus"];
+    
+   
     
     [enviar sendDict:dict];
     

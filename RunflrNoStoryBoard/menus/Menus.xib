@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Menus">
             <connections>
+                <outlet property="butaoOfertas" destination="naL-mO-2ZE" id="EyY-Do-gbM"/>
                 <outlet property="buttonPartilhar" destination="Rlg-Fa-Ndt" id="iVo-5a-jia"/>
                 <outlet property="dataTableView" destination="G3W-nP-RGN" id="PBa-9r-zUT"/>
                 <outlet property="imageMenu" destination="mSf-1E-nQA" id="X4y-El-RRO"/>
@@ -82,6 +83,19 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
                 </view>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="naL-mO-2ZE">
+                    <rect key="frame" x="173" y="47" width="134" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="40" maxX="0.0" maxY="-40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Obter Oferta APT">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clickObterOferta:" destination="-1" eventType="touchUpInside" id="Jkf-Ks-PsA"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -89,7 +103,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_facebook.png" width="60" height="60"/>
+        <image name="icon_facebook.png" width="66" height="66"/>
         <image name="retroceder.png" width="82" height="82"/>
     </resources>
 </document>

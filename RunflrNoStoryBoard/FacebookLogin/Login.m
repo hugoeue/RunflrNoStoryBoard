@@ -14,7 +14,7 @@
 #import "WebServiceSender.h"
 #import "DemoRootViewController.h"
 
-@interface Login ()
+@interface Login () <UINavigationBarDelegate>
 {
     WebServiceSender * webservi;
     WebServiceSender * recuperarPass;
@@ -46,6 +46,34 @@
     [self.textFieldPassword setPlaceholder:[Language textForIndex:@"Password"]];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    self.title = @"Login";
+    UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 25, 25)];
+    [button addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:[UIImage imageNamed:@"b_back.png"] forState:UIControlStateNormal];
+    
+    UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    //[anotherButton setImage:[UIImage imageNamed:@"b_back.png"]];
+    
+    
+    self.navigationItem.leftBarButtonItem = anotherButton;
+    
+    
+    CGRect frame = CGRectMake(0, 0, 100, 44);
+    UILabel *label = [[UILabel alloc] initWithFrame:frame] ;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:101.0/255.0 green:112.0/255.0 blue:122.0/255.0 alpha:1];
+    label.text = @"Login";
+    self.navigationItem.titleView = label;
+    
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -61,10 +89,26 @@
 //    {
 //        [self.buttonLogin setTitle:@"Logout" forState:UIControlStateNormal];
 //    }
-    self.navigationController.navigationBarHidden = YES;
+    
+    //[self.navigationController setTitle:@"Login APT"];
+    //self.navigationController.navigationBarHidden = NO;
     
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
     [self.view addGestureRecognizer:singleTap];
+    
+    
+    [UIView animateWithDuration:0.0 animations:^{
+        self.navigationController.view.frame = CGRectMake(0.0, 0.0, 320.0, self.view.frame.size.height);
+        self.navigationController.navigationBar.frame = CGRectMake(0.0, 0.0, 320.0, 64.0);
+    }];
+    
+    
+   
+}
+
+- (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar
+{
+    return UIBarPositionTopAttached;
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender

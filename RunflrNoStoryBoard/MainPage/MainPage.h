@@ -88,5 +88,6 @@
 - (IBAction)clickTipoPrato:(id)sender;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTipoPrato;
 
+@property (weak, nonatomic) IBOutlet UIView *paraSelector;
 
 @end
