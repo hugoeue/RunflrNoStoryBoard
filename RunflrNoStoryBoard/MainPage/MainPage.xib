@@ -7,9 +7,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainPage">
             <connections>
+<<<<<<< HEAD
                 <outlet property="imageFacebook" destination="X80-y5-cCc" id="T7D-3Y-F3Q"/>
                 <outlet property="paraSelector" destination="wWw-qc-Fkt" id="b58-dD-g8H"/>
                 <outlet property="scrollView" destination="u65-bH-R86" id="w8d-Io-5n4"/>
+=======
+                <outlet property="ImagemMenuGuru" destination="8xL-z8-79A" id="x2y-TL-qWt"/>
+                <outlet property="buttonCities" destination="iPh-uF-F1k" id="x2l-wQ-CZM"/>
+                <outlet property="buttonMenu" destination="Pn4-MJ-qOh" id="pAS-ET-9dH"/>
+                <outlet property="buttonPesquisa" destination="QrR-cl-Wne" id="atZ-Sx-aKY"/>
+                <outlet property="buttonRestaurant" destination="Eh7-fS-2fO" id="84G-8U-xYw"/>
+                <outlet property="imageCidade" destination="lrW-2C-NIh" id="B8c-F6-wst"/>
+                <outlet property="imageFacebook" destination="X80-y5-cCc" id="T7D-3Y-F3Q"/>
+                <outlet property="imageRestaurant" destination="fPv-em-2tj" id="Cnw-P5-8Yw"/>
+                <outlet property="imgTipoPrato" destination="R3g-u0-Oio" id="Kag-Y6-5tb"/>
+                <outlet property="labelCidade" destination="B6h-5I-uLU" id="Xbn-xH-iQW"/>
+                <outlet property="labelRestaurante" destination="ZYU-em-Ogo" id="AHy-T7-S6b"/>
+                <outlet property="labelTituloPesquisa" destination="AJZ-b6-72l" id="NXf-1e-BZC"/>
+                <outlet property="scrollView" destination="u65-bH-R86" id="w8d-Io-5n4"/>
+                <outlet property="texfFieldPesquisa" destination="QsL-Bs-oj4" id="37N-br-wgb"/>
+                <outlet property="topView" destination="qsb-WA-67H" id="AY5-lD-1Pf"/>
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
                 <outlet property="uiviewTransparent" destination="ARc-0b-SaH" id="LZo-hk-0tH"/>
                 <outlet property="view" destination="1" id="3"/>
                 <outlet property="viewContainer" destination="slZ-Qr-ULw" id="QKk-oP-lOc"/>
@@ -65,6 +83,14 @@
         </view>
     </objects>
     <resources>
+<<<<<<< HEAD
         <image name="QUADRADO SUBMETER.png" width="640" height="320"/>
+=======
+        <image name="LogoGuru.png" width="285" height="84"/>
+        <image name="QUADRADO SUBMETER.png" width="561" height="7"/>
+        <image name="botao_select_branco.png" width="36" height="36"/>
+        <image name="menu.png" width="82" height="82"/>
+        <image name="on_click_lupa.png" width="98" height="98"/>
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     </resources>
 </document>

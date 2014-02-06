@@ -24,11 +24,14 @@
                     <color key="separatorColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                     <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+<<<<<<< HEAD
                     <view key="tableHeaderView" contentMode="scaleToFill" id="FqG-Jr-8nk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
                     <connections>
                         <outlet property="dataSource" destination="-1" id="KOy-0n-R1L"/>
                         <outlet property="delegate" destination="-1" id="9xs-xJ-V7i"/>

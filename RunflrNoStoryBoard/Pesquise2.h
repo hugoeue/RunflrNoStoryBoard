@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface Pesquise2 : UIViewController
+<<<<<<< HEAD
 @property (weak, nonatomic) IBOutlet UISwitch *AbertoFechado;
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 
 @end

@@ -35,7 +35,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+<<<<<<< HEAD
 - (IBAction)clickEscolhaCIdade:(id)sender {
     NSLog(@"mandou abrir cidades");
 }
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 @end

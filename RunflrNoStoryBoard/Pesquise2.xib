@@ -7,7 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Pesquise2">
             <connections>
+<<<<<<< HEAD
                 <outlet property="AbertoFechado" destination="Qcj-8d-wfK" id="5PV-7B-B0u"/>
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

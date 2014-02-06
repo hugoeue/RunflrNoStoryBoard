@@ -22,7 +22,10 @@
     Pesquise0 * headerView0;
     Pesquise1 * headerView1;
     Pesquise2 * headerView2;
+<<<<<<< HEAD
     pesquiseCell *cell;
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 }
 
 @end
@@ -67,9 +70,12 @@
         NSArray *array5     = [NSArray arrayWithObjects:@"Ei", @"kanone", nil];
         [sectionContentDict setValue:array5 forKey:[sectionTitleArray objectAtIndex:4]];
     }
+<<<<<<< HEAD
     
     //[self.tableView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
     
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 
 }
 
@@ -151,7 +157,11 @@
     
     static NSString *simpleTableIdentifier = @"pesquiseCell";
     
+<<<<<<< HEAD
     cell = (pesquiseCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+=======
+    pesquiseCell *cell = (pesquiseCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     if (cell == nil)
     {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"pesquiseCell" owner:self options:nil];
@@ -219,6 +229,10 @@
         
         [self.tableView reloadSections:sectionToReload withRowAnimation:UITableViewRowAnimationFade];
         
+<<<<<<< HEAD
+=======
+        
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     }
     
     
@@ -227,6 +241,7 @@
 
 
 - (IBAction)clickFiltros:(id)sender {
+<<<<<<< HEAD
     // tenho de mandar cenas aqui por causa da pesquisa
     BOOL collapsed  = [[arrayForBool objectAtIndex:1] boolValue];
     
@@ -300,4 +315,11 @@
     }
 }
 
+=======
+    if (self.delegate) {
+        [self.delegate performSelector:@selector(chamarPesquisa) withObject:nil];
+    }
+    
+}
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 @end

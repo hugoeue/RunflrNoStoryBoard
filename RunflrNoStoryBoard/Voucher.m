@@ -52,9 +52,12 @@
     [toolbar setItems:[NSArray arrayWithObjects:flexableItem,doneItem, nil]];
     self.textField.inputAccessoryView = toolbar;
     
+<<<<<<< HEAD
     self.navigationController.toolbarHidden = YES;
     self.navigationController.navigationBarHidden = YES;
     
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     [self pedirVoucher];
 }
 

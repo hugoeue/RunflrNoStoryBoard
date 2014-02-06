@@ -14,6 +14,9 @@
 - (IBAction)clickFiltros:(id)sender;
 
 @property (nonatomic, assign) id delegate;
+<<<<<<< HEAD
 @property (nonatomic, assign) id scroolDelegate;
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 
 @end

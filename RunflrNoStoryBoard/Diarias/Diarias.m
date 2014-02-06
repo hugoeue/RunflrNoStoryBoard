@@ -26,7 +26,10 @@
 #import "AnimationController.h"
 #import "QueroMais.h"
 #import "AsyncImageView.h"
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
@@ -81,8 +84,11 @@
     
     BOOL openCarousel;
     
+<<<<<<< HEAD
     UIButton *settingsView1 ;
     
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 }
 
 @end
@@ -142,8 +148,13 @@
         [mudarLingua cancel];
     if (receberFotos)
         [receberFotos cancel];
+<<<<<<< HEAD
     
     
+=======
+    
+    
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     receberFotos= nil;
     mudarLingua = nil;
     
@@ -234,6 +245,7 @@
 
     [self setUp];
     [self receberFotosJson];
+<<<<<<< HEAD
     
     
     
@@ -318,6 +330,8 @@
 {
     self.navigationController.toolbarHidden = NO;
     self.navigationController.navigationBarHidden = NO;
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 }
 
 
@@ -1162,8 +1176,12 @@
                                             300
                                             )];
      
+<<<<<<< HEAD
         if (!openCarousel)
         {
+=======
+        if (!openCarousel) {
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
             
              [self.viewParaTaparOlhos setFrame:CGRectMake(0,
              (colececaoFavoritos.collectionView.contentInset.top + isIOS7 + 40 -((mexeu.floatValue+colececaoFavoritos.collectionView.contentInset.top)*1)) -19,
@@ -1178,11 +1196,18 @@
                                                )];
             
         }
+<<<<<<< HEAD
         
     }];
     
     
     if (mexeu.floatValue <= -400){
+=======
+    }];
+    
+    
+    if (mexeu.floatValue <= -300){
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
         
         openCarousel = YES;
         [UIView animateWithDuration:0.5 animations:^{
@@ -1218,7 +1243,10 @@
                                                          posicaoImg + mexeu.floatValue +600
                                                          )];
 
+<<<<<<< HEAD
             self.navigationController.toolbarHidden=YES;
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
             
          }];
     }
@@ -1228,7 +1256,11 @@
 
 - (IBAction)fecharGaleria:(id)sender {
     
+<<<<<<< HEAD
     self.navigationController.toolbarHidden=NO;
+=======
+    
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     openCarousel = NO;
     [UIView animateWithDuration:0.5 animations:^{
         
@@ -1237,7 +1269,11 @@
         [self.viewImagemRest setAlpha:1];
         
         [self.viewImagemRest setFrame:CGRectMake(0,
+<<<<<<< HEAD
                                                  posicaoImg,
+=======
+                                                 0,
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
                                                  self.view.frame.size.width,
                                                  self.view.frame.size.height
                                                  )];
@@ -1277,6 +1313,7 @@
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
     return [items count];
+<<<<<<< HEAD
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
@@ -1312,6 +1349,43 @@
     return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
 }
 
+=======
+}
+
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
+{
+    //create new view if no view is available for recycling
+    if (view == nil)
+    {
+        view = [[[AsyncImageView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 480.0f)] autorelease];
+        view.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+    //cancel any previously loading images for this view
+    [[AsyncImageLoader sharedLoader] cancelLoadingImagesForTarget:view];
+    
+    //set image URL. AsyncImageView class will then dynamically load the image
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://80.172.235.34/~tecnoled%@",[items objectAtIndex:index]] ];
+    ((AsyncImageView *)view).imageURL = url ;
+    
+    return view;
+}
+
+- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
+{
+    //note: placeholder views are only displayed on some carousels if wrapping is disabled
+    return 0;
+}
+
+
+- (CATransform3D)carousel:(iCarousel *)_carousel itemTransformForOffset:(CGFloat)offset baseTransform:(CATransform3D)transform
+{
+    //implement 'flip3D' style carousel
+    transform = CATransform3DRotate(transform, M_PI / 8.0f, 0.0f, 1.0f, 0.0f);
+    return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
+}
+
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 - (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
 {
     //customize carousel display

@@ -241,7 +241,11 @@ int num = 0;
     [segmentedControl3 setButtonsArray:@[buttonSocial, buttonStar, buttonSettings]];
     
     
+<<<<<<< HEAD
     [self.paraSelector addSubview:segmentedControl3];
+=======
+    [self.viewFavoritos addSubview:segmentedControl3];
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     
     
     /*
@@ -337,7 +341,10 @@ int num = 0;
             case 1:
             {
                 NSLog(@"resultado dalista dos recomendados =>%@", result.description);
+<<<<<<< HEAD
                 [segmentedControl3 setSelectedIndex:0];
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
                 
                 if(![[result objectForKey:@"resp"] isEqualToString:@"sem geolocalizacao"]){
                
@@ -1458,7 +1465,15 @@ int num = 0;
 //    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 //    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:nil];
     
+<<<<<<< HEAD
 //[self.navigationController pushViewController:log animated:YES];
+=======
+    //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
+    //[self presentViewController:nav animated:YES completion:nil];
+    
+    nav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:nil];
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     
     
     Login *login =[Login new];
@@ -1576,6 +1591,7 @@ int num = 0;
 
 -(void)chamarFiltros
 {
+<<<<<<< HEAD
 
     filtros = [Filtros new];
     filtros.delegate = self;
@@ -1587,6 +1603,18 @@ int num = 0;
     
 }
 
+=======
+
+    filtros = [Filtros new];
+    filtros.delegate = self;
+    [filtros.view setFrame:CGRectMake(0, 0, self.viewContainer.frame.size.width, self.viewContainer.frame.size.height)];
+    [self.viewContainer addSubview:filtros.view];
+    
+
+    
+}
+
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 -(void)chamarPesquisa
 {
     

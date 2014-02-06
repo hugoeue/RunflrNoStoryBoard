@@ -338,6 +338,7 @@
 		BAFE88DB189AB36800C1A11A /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = BAFE88DA189AB36800C1A11A /* iCarousel.m */; };
 		BAFE88DE189AB61D00C1A11A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFE88DC189AB61D00C1A11A /* background.png */; };
 		BAFE88DF189AB61D00C1A11A /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFE88DD189AB61D00C1A11A /* page.png */; };
+<<<<<<< HEAD
 		BAFF675B189FC2D700B3613C /* b_definicoes.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF6754189FC2D700B3613C /* b_definicoes.png */; };
 		BAFF675C189FC2D700B3613C /* b_idiomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF6755189FC2D700B3613C /* b_idiomas.png */; };
 		BAFF675D189FC2D700B3613C /* b_Power.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF6756189FC2D700B3613C /* b_Power.png */; };
@@ -353,6 +354,8 @@
 		BAFF6773189FF19800B3613C /* base_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF6772189FF19800B3613C /* base_facebook.png */; };
 		BAFF6777189FF50C00B3613C /* b_linha2.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF6776189FF50C00B3613C /* b_linha2.png */; };
 		BAFF6779189FF73A00B3613C /* b_login2.png in Resources */ = {isa = PBXBuildFile; fileRef = BAFF6778189FF73A00B3613C /* b_login2.png */; };
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -797,6 +800,7 @@
 		BAFE88DA189AB36800C1A11A /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		BAFE88DC189AB61D00C1A11A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		BAFE88DD189AB61D00C1A11A /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		BAFF6754189FC2D700B3613C /* b_definicoes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_definicoes.png; sourceTree = "<group>"; };
 		BAFF6755189FC2D700B3613C /* b_idiomas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_idiomas.png; sourceTree = "<group>"; };
 		BAFF6756189FC2D700B3613C /* b_Power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_Power.png; sourceTree = "<group>"; };
@@ -812,6 +816,8 @@
 		BAFF6772189FF19800B3613C /* base_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base_facebook.png; sourceTree = "<group>"; };
 		BAFF6776189FF50C00B3613C /* b_linha2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_linha2.png; sourceTree = "<group>"; };
 		BAFF6778189FF73A00B3613C /* b_login2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = b_login2.png; sourceTree = "<group>"; };
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -885,7 +891,10 @@
 		BA0B9678184E644100182E0A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				BA316FA818A263B100055BCD /* Defenicoes */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BA44C2D4189BBEBA0028FB2E /* filtros */,
 				BAFE88D2189A53FE00C1A11A /* Voucher */,
 				BA4AC2511899271A0009BFFA /* Quero Mais */,
@@ -1446,8 +1455,11 @@
 		BA93FD8A184D3C3F004001E4 = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				BA2905D918A1485400238537 /* CollapseClick */,
 				BAFF6753189FC2C800B3613C /* Novas Imagens */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BAFE88D8189AB35F00C1A11A /* icarousel */,
 				BA449BDE188D6DAA00919A29 /* SegmentControll */,
 				BAFB92E41886B3B0001B6F01 /* Utils */,
@@ -1703,6 +1715,7 @@
 			name = icarousel;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		BAFF6753189FC2C800B3613C /* Novas Imagens */ = {
 			isa = PBXGroup;
 			children = (
@@ -1744,6 +1757,8 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1905,9 +1920,13 @@
 				BA2905E718A153AA00238537 /* b_menu.png in Resources */,
 				BA262E7A187F18F300CB851C /* MapCell.xib in Resources */,
 				BA65F15218623FAC00BF914A /* menu.png in Resources */,
+<<<<<<< HEAD
 				BA2905CE18A1003B00238537 /* b_favoritos_acionado.png in Resources */,
 				BA44C354189C0C200028FB2E /* Filtros.xib in Resources */,
 				BA2905D318A1003B00238537 /* b_localizacao.png in Resources */,
+=======
+				BA44C354189C0C200028FB2E /* Filtros.xib in Resources */,
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BA449C3C188D89D300919A29 /* segmented-bg-pressed-left6.png in Resources */,
 				BA449BC7188D53F400919A29 /* icon_mail.png in Resources */,
 				BAFF6761189FC2D700B3613C /* Top-Line.png in Resources */,
@@ -1935,7 +1954,10 @@
 				BA65F13E18623FAC00BF914A /* face_icon.png in Resources */,
 				BA449C53188D921800919A29 /* segmented-bg9@2x.png in Resources */,
 				BA44C350189C0C200028FB2E /* paginarestaurante_Parte_de_Cima_Filtros.png in Resources */,
+<<<<<<< HEAD
 				BA2905D618A1003B00238537 /* b_telefonar.png in Resources */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BAFAE0461885380400AD7BEE /* campanula00023.png in Resources */,
 				BA262E71187F18F300CB851C /* xq_icon_more.png in Resources */,
 				BA2C6DB71864A8C7008F8DF2 /* 80x80-1.png in Resources */,
@@ -1955,8 +1977,11 @@
 				BAFAE0481885380400AD7BEE /* campanula00025.png in Resources */,
 				BA449C4F188D905800919A29 /* texte.png in Resources */,
 				BA44C351189C0C200028FB2E /* paginarestaurante_Parte_do_Centro_Filtros.png in Resources */,
+<<<<<<< HEAD
 				BAFF6767189FDE6900B3613C /* b_ligado.png in Resources */,
 				BAFF675E189FC2D700B3613C /* b_utilizador.png in Resources */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BA65F14918623FAC00BF914A /* ligar_restarante.png in Resources */,
 				BA316FDD18A2657D00055BCD /* base_botao.png in Resources */,
 				BA2C6DB51864A861008F8DF2 /* 58x58-1.png in Resources */,
@@ -1977,9 +2002,12 @@
 				BAFAE0671885380400AD7BEE /* campanula00056.png in Resources */,
 				BA5CBF95186B46CD0022A5CF /* Defenicoes.xib in Resources */,
 				BA2E04901887F73A00D51A4D /* botao_select.png in Resources */,
+<<<<<<< HEAD
 				BAFF676F189FF0C200B3613C /* base2.png in Resources */,
 				BA2905D518A1003B00238537 /* b_partilhar.png in Resources */,
 				BA316FEA18A2A6DF00055BCD /* paginarestaurante_0006_VISTO_CHECK.png in Resources */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BA44C358189C0C200028FB2E /* Pesquise1.xib in Resources */,
 				BAFAE0491885380400AD7BEE /* campanula00026.png in Resources */,
 				BA44C35C189C0C200028FB2E /* pesquiseCell.xib in Resources */,
@@ -1992,7 +2020,10 @@
 				BA449C41188D89D300919A29 /* segmented-bg-pressed-right6.png in Resources */,
 				BA44C356189C0C200028FB2E /* Pesquise0.xib in Resources */,
 				BA44C35A189C0C200028FB2E /* Pesquise2.xib in Resources */,
+<<<<<<< HEAD
 				BA316FD518A2657D00055BCD /* Menu_Refugio_0000_Line-Top.png in Resources */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BAFAE0511885380400AD7BEE /* campanula00034.png in Resources */,
 				BA316FBE18A2643000055BCD /* DefenicosHeader.xib in Resources */,
 				BAFAE0471885380400AD7BEE /* campanula00024.png in Resources */,
@@ -2026,7 +2057,10 @@
 				BAFAE05E1885380400AD7BEE /* campanula00047.png in Resources */,
 				BA449C40188D89D300919A29 /* segmented-bg6.png in Resources */,
 				BA940EAB188FCEF000A615C3 /* botao-partilhar.png in Resources */,
+<<<<<<< HEAD
 				BA316FDB18A2657D00055BCD /* b_seta.png in Resources */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BA44C2D3189BB54D0028FB2E /* botao_x.png in Resources */,
 				BAFAE06A1885380400AD7BEE /* campanula00059.png in Resources */,
 				BAFAE0361885380400AD7BEE /* campanula00007.png in Resources */,
@@ -2156,7 +2190,10 @@
 				BA9BB0301859DEBA009ED843 /* DemoRootViewController.m in Sources */,
 				BA262E7E187F18F300CB851C /* MapViewController.m in Sources */,
 				BA262E75187F18F300CB851C /* CalloutAnnotation.m in Sources */,
+<<<<<<< HEAD
 				BA2905E418A148BD00238537 /* CollapseClickArrow.m in Sources */,
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 				BA44C35B189C0C200028FB2E /* pesquiseCell.m in Sources */,
 				BA02E8D5184F4DFB006A611B /* Cuisine.m in Sources */,
 				BA51C605185364160080BD9F /* LanguageViewController.m in Sources */,

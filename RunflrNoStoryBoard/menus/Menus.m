@@ -788,11 +788,18 @@
     
     //[self.revealSideViewController presentViewController:nav animated:YES completion:nil];
     //[self presentViewController:nav animated:YES completion:nil];
+<<<<<<< HEAD
 //    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
 //        // nao preciso fazer nada aqui
 //    }];
 
     [self presentViewController:nav animated:YES completion:nil];
+=======
+    [[DemoRootViewController getInstance] presentViewController:nav animated:YES completion:^{
+        // nao preciso fazer nada aqui
+    }];
+
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     
 }
 

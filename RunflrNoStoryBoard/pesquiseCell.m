@@ -16,7 +16,11 @@
     if (self) {
         // Initialization code
         
+<<<<<<< HEAD
        self.preco = @"0";
+=======
+       
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     }
     return self;
 }
@@ -40,6 +44,7 @@
     
     if (self.slider.value == 0) {
         self.labelSlider.text = @"Todos";
+<<<<<<< HEAD
         self.preco = @"0";
     }else if(self.slider.value <=1)
     {
@@ -57,12 +62,32 @@
     {
         self.labelSlider.text = @"> 50";
         self.preco = @"4";
+=======
+    }else if(self.slider.value <=1)
+    {
+        self.labelSlider.text = @"< 15";
+    }else if(self.slider.value <=2)
+    {
+        self.labelSlider.text = @"< 30";
+    }else if(self.slider.value <3)
+    {
+        self.labelSlider.text = @"< 50";
+    }else if(self.slider.value == 3)
+    {
+        self.labelSlider.text = @"> 50";
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
     }
     
 }
 
 - (IBAction)selectorSelected:(id)sender {
     
+<<<<<<< HEAD
+=======
+   
+    
+    
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 }
 
 - (IBAction)selectedTexfield:(id)sender {

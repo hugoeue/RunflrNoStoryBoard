@@ -60,6 +60,7 @@
 
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
 @property (nonatomic, strong) NSMutableArray *items;
+<<<<<<< HEAD
 @property (weak, nonatomic) IBOutlet UIToolbar *navBarBotton;
 
 // para os botoes da barra de baixo
@@ -67,5 +68,7 @@
 
 
 
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 
 @end

@@ -14,8 +14,11 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *selector;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
+<<<<<<< HEAD
 @property (nonatomic , assign) id delegate;
 
 @property NSString *preco;
 
+=======
+>>>>>>> a2bd55e3ef196190c15586c92915654ad041e6fe
 @end
